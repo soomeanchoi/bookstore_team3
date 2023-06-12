@@ -15,14 +15,10 @@
 	</select>
 	
 	<!-- 총액조회??? -->
-	<select id="border_price" parameterType="String" resultType="int">
-		SELECT sum(book_price*cart_qty)
-		FROM (
-			  SELECT c.isbn, book_price, cart_qty, member_id
-			  FROM (cart c JOIN book b 
-			  ON c.isbn=b.isbn)
-			  ) AA
-		WHERE AA.member_id =#{s_id}
+	<select id="totalamount" parameterType="String" resultType="int">
+		SELECT sum(border_price*qty)
+		FROM cart
+		WHERE id=#{s_id}
 	</select>
 	
 	<insert id="insert" parameterType="java.util.HashMap">		
@@ -30,7 +26,7 @@
 		VALUES(#{deliv_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg});
 	</insert>
 	
-	<insert id="orderlistinsert" parameterType="java.util.HashMap">
+	<insert id="insertdetail" parameterType="java.util.HashMap">
 		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
 		VALUES(#{isbn}, #{border_no}, #{orderlist_cnt});
 	</insert>

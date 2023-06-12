@@ -24,18 +24,18 @@ public class BorderDAO {
 		return sqlSession.selectOne("border.border_date", border_date);
 	}//dateno() end
 	
-	//totalamount(총가격)
-	public int totalamount(String s_id) {
-		return sqlSession.selectOne("order.totalamount", s_id);
-	}//totalamount() end
+	//border_price(상품총가격)
+	public int border_price(String s_id) {
+		return sqlSession.selectOne("border.border_price", s_id);
+	}//border_price() end
 	
-	public int orderlistInsert(BorderDTO dto) {
+	public int Insert(BorderDTO dto) {
 		return sqlSession.insert("border.insert" , dto);
-	}//orderUpdate() end
+	}//insert() end
 	
-	public int orderdetailInsert(HashMap<String, String> map) {
-		return sqlSession.insert("border.insertdetail", map);
-	}//orderdetialInsert() end
+	public int orderlistInsert(HashMap<String, String> map) {
+		return sqlSession.insert("border.orderlistinsert", map);
+	}//orderlistInsert() end
 	
 	public void cartdelete(String s_id) {
 		sqlSession.delete("border.cartdelete", s_id);

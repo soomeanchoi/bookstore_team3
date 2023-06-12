@@ -46,44 +46,40 @@ public class BorderCont {
 	
 	
 	@RequestMapping("/insert")
-	public ModelAndView orderInsert(@ModelAttribute BorderDTO dto, HttpSession session) {
+	public ModelAndView Insert(BorderDTO dto, HttpSession session) {
 		
 		ModelAndView mav=new ModelAndView();
 		
 		//String s_id = session.getAttribute("s_id"); 로그인기능 구현했다면
-		String s_id = "test";
-
 		String border_no = dateno();//생성한 주문번호 변수넣기
 		
-		
-		int totalamount=borderDao.totalamount(s_id);
-		//System.out.println(totalamount);
+		int border_price=borderDao.border_price(s_id);
+		//System.out.println(border_price);
 		
 		//dto에 주문서번호, 총결제금액, 세션아이디 추가로 담기(수령인, 주소, 결제방법 등은 이미 dto에 담겨있음)
 		dto.setBorder_no(border_no);
-		dto.setTotalamount(totalamount);
+		dto.setBorder_price(border_price);
 		dto.setMember_id(s_id);
 		
 		//border테이블에 행추가
-		int cnt= borderDao.orderlistInsert(dto);
+		int cnt= borderDao.Insert(dto);
 		System.out.println("행추가결과" + cnt);
 		
 		if(cnt==1) {//결제된 상품 상세내역에 주문내역이 추가되었다면
-			//cart테이블에 있는 주문상품을 orderdetail테이블에 옮겨닮기
+			//cart테이블에 있는 주문상품을 orderlist테이블에 옮겨닮기
 			HashMap<String, String> map = new HashMap<>();
 			map.put("border_no", border_no);
 			map.put("s_id", s_id);
 			
 			int result = 0;
 			result = borderDao.orderlistInsert(map);
-			System.out.println("orderdetail행추가결과: " + result);
+			System.out.println("orderlist행추가결과: " + result);
 			
 			if(result!=0) {//주문상세내역에 추가된 내역이 있다면
 				//장바구니 목록이 주문상세내역으로 이동된 후(결제완료) 장바구니 비우기
 				borderDao.cartdelete(s_id);				
 			}//if end
 		
-			//주문내역서 메일 보내기
 			mav.addObject("msg", "주문이 완료되었습니다");
 			mav.setViewName("/border/msgView");  // /WEB-INF/views/border/msgView.jsp
 		}//if end
