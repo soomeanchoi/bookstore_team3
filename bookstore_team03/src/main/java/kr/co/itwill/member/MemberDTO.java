@@ -3,11 +3,15 @@ package kr.co.itwill.member;
 import java.sql.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.NumberFormat;
 import org.springframework.stereotype.Component;
+
+import com.google.errorprone.annotations.FormatString;
 
 @Component
 public class MemberDTO {
-
+	
+	
 	private String member_id;
 	private String member_birth;
 	private String member_gender;
@@ -19,6 +23,8 @@ public class MemberDTO {
 	private int member_rejoin;
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date member_joindate;
+	
+	
 	
 	public MemberDTO() {}
 

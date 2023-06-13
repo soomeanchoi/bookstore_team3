@@ -28,4 +28,9 @@ public class MemberDAO {
     public List<MemberDTO> cartList(String id){
         return sqlSession.selectList("member.list", id);
     }//list() end
+    
+    public int insert(MemberDTO dto) {
+    	return sqlSession.insert("member.insert", dto);
+    }
+
 }

@@ -3,10 +3,11 @@ package kr.co.itwill.member;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import kr.co.itwill.member.MemberDAO;
 
 
 
@@ -41,10 +42,47 @@ public class MemberCont {
         return mav;
     }//list() end
 	
+	@RequestMapping("/join")
+	public ModelAndView join() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/join");
+		return mav;
+	}
 	
-	
+	/*
+	@PostMapping("/joinProc")
+	public String joinProc(MemberDTO dto) {  
+	//form 에서 전송된 VO 값이 memberVo 에저장
+	 
+	int result=memberDao.insert(dto);
+	//int 로 받는 이유는 DB 에서 정상적으로
+	//회원가입이 되면 "1"행이 실행된거 알기위해서에요
+	    String viewPage = null;
+	    if(result==1) { // DB 저장 성공시실행
+	    viewPage = "member/list";
+	    }else{ // DB저장 실패시 실행
+	    viewPage = "member/join";
+	        }
+	        return viewPage;
+	    }
+	*/
 
-	
+	 @RequestMapping("/insert")
+	 public String insert(@ModelAttribute MemberDTO dto) {
+		 //MemberDTO member = new MemberDTO();
+		 //member.setMember_id(null);
+		 
+		 dto.getMember_id();
+		 dto.getMember_pw();
+		 dto.getMember_name();
+		 dto.getMember_birth();
+		 dto.getMember_gender();
+		 dto.getMember_phone();
+		 
+		 memberDao.insert(dto);
+		 
+		 return "redirect:/member/list";
+	 }
 	
 }
 	
