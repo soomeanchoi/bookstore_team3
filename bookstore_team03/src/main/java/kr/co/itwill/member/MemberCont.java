@@ -93,11 +93,11 @@ public class MemberCont {
     
     String viewPage = null;
     
-    if(memberDao.loginMember(loginInfo) == null) { // 정상적으로 로그인되면
+    if(memberDao.loginMember(loginInfo) == null) { // 로그인 실패
     	
     	viewPage = "member/loginfail";
     
-    }else{ // 로그인 실패시 다시 
+    }else{ // 로그인 성공 
         
         HttpSession session = request.getSession();
         
