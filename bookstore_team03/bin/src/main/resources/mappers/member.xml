@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- product.xml -->
+
+<mapper namespace="member">
+	
+	<select id="list" resultType="kr.co.itwill.member.MemberDTO" parameterType="String">
+		SELECT  member_id, member_birth, member_gender, member_name, member_pw, member_phone, member_jointype, member_type, member_rejoin, member_joindate
+        FROM member
+	</select>
+	
+	<insert id="insert" parameterType="kr.co.itwill.member.MemberDTO">
+		INSERT INTO member(member_id, member_pw, member_name, member_birth, member_gender, member_phone)
+		VALUES(#{member_id}, #{member_pw}, #{member_name}, CONCAT(SUBSTR(#{member_birth}, 1, 4), '-', SUBSTR(#{member_birth}, 5, 2), '-', SUBSTR(#{member_birth}, 7)), #{member_gender}, 
+		CONCAT(SUBSTR(#{member_phone}, 1, 3), '-', SUBSTR(#{member_phone}, 4, 4), '-', SUBSTR(#{member_phone}, 8)))
+	</insert>
+
+	<!-- 로그인 -->
+	<select id="logindo" resultType="java.util.Map" parameterType="String">
+		SELECT member_id, member_pw 
+		 FROM member
+		 WHERE member_id = #{member_id} AND member_pw = #{member_pw}   
+	</select>
+
+</mapper>     
+
+
+
+
