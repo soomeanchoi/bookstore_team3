@@ -1,12 +1,17 @@
 package kr.co.itwill.member;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
-import kr.co.itwill.member.MemberDAO;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+import java.util.HashMap;
 
 
 
@@ -41,11 +46,69 @@ public class MemberCont {
         return mav;
     }//list() end
 	
-	
+	@RequestMapping("/join")
+	public ModelAndView join() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/join");
+		return mav;
+	}
 	
 
+	 @RequestMapping("/insert")
+	 public String insert(@ModelAttribute MemberDTO dto) {
+		 //MemberDTO member = new MemberDTO();
+		 //member.setMember_id(null);
+		 
+		 dto.getMember_id();
+		 dto.getMember_pw();
+		 dto.getMember_name();
+		 dto.getMember_birth();
+		 dto.getMember_gender();
+		 dto.getMember_phone();
+		 
+		 memberDao.insert(dto);
+		 
+		 return "redirect:/member/list";
+	 }
+
+	@RequestMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/login");
+		return mav;
+	}
+	 
+
+	@RequestMapping("/logindo")
+	public String logindo(@RequestParam String member_id,
+            @RequestParam String member_pw,
+            HttpServletRequest request) {
 	
-	
+	HashMap<String, String> loginInfo = new HashMap<>();
+    //member_id 와 member_pw 를 map 에 담아서 한객체로 담아가기위함
+
+	loginInfo.put("member_id", member_id);
+    loginInfo.put("member_pw", member_pw);
+
+    
+    String viewPage = null;
+    
+    if(memberDao.loginMember(loginInfo) == null) { // 로그인 실패
+    	
+    	viewPage = "member/loginfail";
+    
+    }else{ // 로그인 성공 
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("member_id", loginInfo.get("member_id")); 
+        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
+        
+        viewPage = "member/loginsuccess";
+    }
+    
+    return viewPage;
+	}
 }
 	
 	
