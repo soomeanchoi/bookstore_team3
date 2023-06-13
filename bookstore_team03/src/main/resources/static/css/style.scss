@@ -1,4 +1,7 @@
 @import "variable";
+* {
+    box-sizing: border-box;
+}
 body {
     font-family: $cont_font;
     font-weight: $font_m;
@@ -56,6 +59,12 @@ body {
     font-size: 36pt;
     font-weight: $font_b;
 } // 타이틀 1번
+.p-l-50 {
+    padding-left: 50px;
+}
+.p-r-50 {
+    padding-right: 50px;
+}
 .bs_w {
     width: 250px;
 }
