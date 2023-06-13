@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   font-family: "pretendard", sans-serif;
   font-weight: 400;
@@ -62,6 +66,14 @@ body {
 .t_01 {
   font-size: 36pt;
   font-weight: 800;
+}
+
+.p-l-50 {
+  padding-left: 50px;
+}
+
+.p-r-50 {
+  padding-right: 50px;
 }
 
 .bs_w {
