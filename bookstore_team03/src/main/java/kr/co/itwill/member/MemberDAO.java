@@ -1,5 +1,6 @@
 package kr.co.itwill.member;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,12 +20,7 @@ public class MemberDAO {
 	//스프링 빈으로 생성된 객체를 가져와서 연결하기
     @Autowired
     SqlSession sqlSession;
-    
-
-    //public List<Map<String, Object>> list(){
-    ///	return sqlSession.selectList("member.list");
-    //}//list() end
-	
+   
     public List<MemberDTO> cartList(String id){
         return sqlSession.selectList("member.list", id);
     }//list() end
@@ -32,5 +28,10 @@ public class MemberDAO {
     public int insert(MemberDTO dto) {
     	return sqlSession.insert("member.insert", dto);
     }
-
+    
+    public HashMap<String, String>  loginMember(HashMap<String, String> loginInfo) {
+        return sqlSession.selectOne("member.logindo", loginInfo);
+    }
+    
+    
 }

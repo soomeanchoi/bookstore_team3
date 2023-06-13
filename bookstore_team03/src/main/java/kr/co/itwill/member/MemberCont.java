@@ -1,13 +1,17 @@
 package kr.co.itwill.member;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import java.util.HashMap;
 
 
 
@@ -49,23 +53,6 @@ public class MemberCont {
 		return mav;
 	}
 	
-	/*
-	@PostMapping("/joinProc")
-	public String joinProc(MemberDTO dto) {  
-	//form 에서 전송된 VO 값이 memberVo 에저장
-	 
-	int result=memberDao.insert(dto);
-	//int 로 받는 이유는 DB 에서 정상적으로
-	//회원가입이 되면 "1"행이 실행된거 알기위해서에요
-	    String viewPage = null;
-	    if(result==1) { // DB 저장 성공시실행
-	    viewPage = "member/list";
-	    }else{ // DB저장 실패시 실행
-	    viewPage = "member/join";
-	        }
-	        return viewPage;
-	    }
-	*/
 
 	 @RequestMapping("/insert")
 	 public String insert(@ModelAttribute MemberDTO dto) {
@@ -83,7 +70,45 @@ public class MemberCont {
 		 
 		 return "redirect:/member/list";
 	 }
+
+	@RequestMapping("/login")
+	public ModelAndView login() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/login");
+		return mav;
+	}
+	 
+
+	@RequestMapping("/logindo")
+	public String logindo(@RequestParam String member_id,
+            @RequestParam String member_pw,
+            HttpServletRequest request) {
 	
+	HashMap<String, String> loginInfo = new HashMap<>();
+    //member_id 와 member_pw 를 map 에 담아서 한객체로 담아가기위함
+
+	loginInfo.put("member_id", member_id);
+    loginInfo.put("member_pw", member_pw);
+
+    
+    String viewPage = null;
+    
+    if(memberDao.loginMember(loginInfo) == null) { // 정상적으로 로그인되면
+    	
+    	viewPage = "member/loginfail";
+    
+    }else{ // 로그인 실패시 다시 
+        
+        HttpSession session = request.getSession();
+        
+        session.setAttribute("member_id", loginInfo.get("member_id")); 
+        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
+        
+        viewPage = "member/loginsuccess";
+    }
+    
+    return viewPage;
+	}
 }
 	
 	
