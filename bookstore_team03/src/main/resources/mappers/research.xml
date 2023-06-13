@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- research.xml -->
+
+<mapper namespace="research">
+	<select id="question" resultType="String">
+		SELECT research_q
+		FROM research
+	</select>
+
+	<select id="answer_A" resultType="String">
+		SELECT research_a1text
+		FROM research
+	</select>
+
+	<select id="answer_B" resultType="String">
+		SELECT research_a2text
+		FROM research
+	</select>
+
+	<select id="result_A" resultType="String">
+		SELECT
+			CASE
+				WHEN research_a1text = #{answer} THEN research_a1
+				END AS left_val
+		FROM research
+		WHERE research_a1text = #{answer};
+	</select>
+	<select id="result_B" resultType="String">
+		SELECT
+			CASE
+				WHEN research_a2text = #{answer} THEN research_a2
+				END AS left_val
+		FROM research
+		WHERE research_a2text = #{answer};
+	</select>
+	
+	
+
+
+</mapper>     
+
+
+
+

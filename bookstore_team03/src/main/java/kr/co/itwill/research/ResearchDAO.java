@@ -1,0 +1,26 @@
+package kr.co.itwill.research;
+
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+
+@Repository
+public class ResearchDAO {
+    public ResearchDAO() {
+        System.out.println("----ResearchDAO()객체 생성됨");
+    }
+
+    @Autowired
+    SqlSession sqlSession;
+
+    public List<String> qlist(){return sqlSession.selectList("research.question");}
+    public List<String> rlist_A(){return sqlSession.selectList("research.answer_A");}
+    public List<String> rlist_B(){return sqlSession.selectList("research.answer_B");}
+
+    public String result_A(String answer){return sqlSession.selectOne("research.result_A", answer);}
+    public String result_B(String answer){return sqlSession.selectOne("research.result_B", answer);}
+
+
+}
