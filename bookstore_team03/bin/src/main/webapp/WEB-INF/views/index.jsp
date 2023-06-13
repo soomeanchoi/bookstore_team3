@@ -13,8 +13,6 @@ pageEncoding="UTF-8"%>
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
-<div class="header-back bg-c-1">
-</div>
 <div class="bs_background">
     <div class="content_header flex_j">
         <div class="logo">
