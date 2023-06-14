@@ -24,6 +24,21 @@
 		 WHERE member_id = #{member_id} AND member_pw = #{member_pw}   
 	</select>
 
+	<update id="update" parameterType="String">
+		UPDATE member
+		SET member_pw = #{member_pw},
+			member_name = #{member_name},
+			member_birth = #{member_birth},
+			member_gender = #{member_gender},
+			member_phone = #{member_phone}
+		WHERE member_id = #{member_id}
+	</update>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM member
+		WHERE member_id = #{member_id}
+		  AND member_pw = #{member_pw}
+</delete>
 </mapper>     
 
 
