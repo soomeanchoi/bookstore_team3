@@ -28,6 +28,7 @@
 		FROM research
 		WHERE research_a1text = #{answer};
 	</select>
+
 	<select id="result_B" resultType="String">
 		SELECT
 			CASE
@@ -36,7 +37,11 @@
 		FROM research
 		WHERE research_a2text = #{answer};
 	</select>
-	
+
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO research (research_q, research_a1, research_a1text, research_a2, research_a2text)
+		VALUES (#{research_q}, #{research_a1}, #{research_a1text}, #{research_a2}, #{research_a2text})
+	</insert>
 	
 
 

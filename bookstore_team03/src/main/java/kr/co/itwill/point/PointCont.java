@@ -26,7 +26,7 @@ public class PointCont {
 
         ModelAndView mav = new ModelAndView();
 
-        dto.setMember_id(s_id);
+//        dto.setMember_id(s_id);
 
         mav.setViewName("point/list"); // /WEB-INF/views/cart/list.jsp
         mav.addObject("total", pointDAO.totalPoint(s_id));

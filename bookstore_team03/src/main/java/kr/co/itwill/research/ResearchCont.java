@@ -53,7 +53,7 @@ public class ResearchCont {
 
 //            paramValue = "\'"+ paramValue +"\'";
 
-            System.out.println("paramValue = " + paramValue);
+//            System.out.println("paramValue = " + paramValue);
 //            System.out.println("paramName = " + paramName);
 
             String result = researchDAO.result_A(paramValue);
@@ -116,10 +116,53 @@ public class ResearchCont {
         System.out.println("bbti = " + bbti);
 
 
-
-
         return "result";
     }
 
+    @RequestMapping("/write")
+    public String write(){
+
+        return "research/write";
+    }
+
+    @RequestMapping("/insert")
+    public String insert(@RequestParam Map<String, Object> map){
+
+        System.out.println(map.get("research_q"));
+        System.out.println(map.get("research_a1"));
+        System.out.println(map.get("research_a1text"));
+        System.out.println(map.get("research_a2"));
+        System.out.println(map.get("research_a2text"));
+
+        int cnt = researchDAO.insert(map);
+
+        if (cnt == 1){
+            System.out.println("추가완료");
+        }else {
+            System.out.println("추가실패");
+        }
+
+        return "redirect:/research/list";
+    }
+
+    @RequestMapping("/update")
+    public ModelAndView update(@ModelAttribute ResearchDTO dto){
+        ModelAndView mav = new ModelAndView();
+
+        //설문 목록 받아오기
+        List<String> que = researchDAO.qlist();
+//        System.out.println("que = " + que);
+        List<String> choose_A = researchDAO.rlist_A();
+//        System.out.println("choose_A = " + choose_A);
+        List<String> choose_B = researchDAO.rlist_B();
+//        System.out.println("choose_B = " + choose_B);
+
+        mav.setViewName("research/update");
+        mav.addObject("que", que);
+        mav.addObject("choose_A", choose_A);
+        mav.addObject("choose_B", choose_B);
+
+        return mav;
+    }
 
 }

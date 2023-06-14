@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ResearchDAO {
@@ -22,5 +23,6 @@ public class ResearchDAO {
     public String result_A(String answer){return sqlSession.selectOne("research.result_A", answer);}
     public String result_B(String answer){return sqlSession.selectOne("research.result_B", answer);}
 
+    public int insert(Map<String, Object> map){return sqlSession.insert("research.insert", map);}
 
 }

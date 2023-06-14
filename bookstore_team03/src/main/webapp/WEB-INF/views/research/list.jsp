@@ -38,5 +38,8 @@
         </c:forEach>
         <input type="submit" value="Submit">
     </form>
+
+    <input type="button" onclick="location.href='write'" value="설문 추가">
+    <input type="button" onclick="location.href='update'" value="설문 수정/삭제">
 </body>
 </html>
