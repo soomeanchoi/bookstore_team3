@@ -21,7 +21,7 @@ public class MemberDAO {
     @Autowired
     SqlSession sqlSession;
    
-    public List<MemberDTO> cartList(String id){
+    public List<MemberDTO> List(String id){
         return sqlSession.selectList("member.list", id);
     }//list() end
     
@@ -29,8 +29,16 @@ public class MemberDAO {
     	return sqlSession.insert("member.insert", dto);
     }
     
-    public HashMap<String, String>  loginMember(HashMap<String, String> loginInfo) {
+    public HashMap<String, String> loginMember(HashMap<String, String> loginInfo) {
         return sqlSession.selectOne("member.logindo", loginInfo);
+    }
+    
+    public String update(MemberDTO dto) {
+    	return sqlSession.selectOne("member.update" , dto);
+    }
+    
+    public int delete(MemberDTO dto) {
+    	return sqlSession.delete("member.delete", dto);
     }
     
     
