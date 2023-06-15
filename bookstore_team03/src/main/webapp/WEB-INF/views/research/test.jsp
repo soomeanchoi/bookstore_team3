@@ -19,12 +19,13 @@
 <button onclick="requestPay()">결제하기</button>
 <script>
   var IMP = window.IMP; // 생략가능
-  IMP.init('imp42450485'); // <-- 본인 가맹점 식별코드 삽입
+  // IMP.init('imp42450485'); // <-- 본인 가맹점 식별코드 삽입
+  IMP.init('imp42450485');
 
   function requestPay() {
-    IMP.init('iamport'); //iamport 대신 자신의 "가맹점 식별코드"를 사용
+     //iamport 대신 자신의 "가맹점 식별코드"를 사용
     IMP.request_pay({
-      pg: "inicis",
+      pg: "html5_inicis",
       pay_method: "test",
       merchant_uid : 'merchant_'+new Date().getTime(),
       name : '3조',
