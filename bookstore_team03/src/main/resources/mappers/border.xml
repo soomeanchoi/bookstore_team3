@@ -4,17 +4,33 @@
    
 <!-- border.xml --> 
 
-<mapper namespace="order"> 
+<mapper namespace="border"> 
 
 
-	<!-- 주문번호생성위한중복조회 -->
-	<select id="dateno" parameterType="String" resultType="String">
-		SELECT COUNT(border_no)
-		FROM border
-		WHERE border_no like #{border_date}||'%'
+	<!-- 기본배송지조회 -->
+	<select id="deliveryAdd" parameterType="String" resultType="java.util.HashMap">
+		SELECT deliv_no, member_id, deliv_postno, deliv_add1, deliv_add2, deliv_defaltadd
+		FROM itwill.deliveryadd
+		WHERE member_id = #{s_id} AND deliv_defaltadd = 1
 	</select>
 	
-	<!-- 총액조회??? -->
+	<!-- 카트조회 -->
+	<select id="cart" parameterType="String" resultType="java.util.HashMap">
+		SELECT cart_no, c.isbn, book_name, book_price, cart_qty
+        FROM (cart c JOIN book b 
+        	  ON c.isbn=b.isbn)
+        WHERE member_id = #{s_id}
+        ORDER BY cart_date
+	</select>
+	
+	<!-- 보유포인트조회 -->
+	<select id="havepoint" parameterType="String" resultType="int">
+		SELECT sum(point_change) havepoint
+		FROM itwill.point
+		WHERE member_id = #{s_id}
+	</select>
+	
+	<!-- 총도서액조회 -->
 	<select id="border_price" parameterType="String" resultType="int">
 		SELECT sum(book_price*cart_qty)
 		FROM (
@@ -23,6 +39,13 @@
 			  ON c.isbn=b.isbn)
 			  ) AA
 		WHERE AA.member_id =#{s_id}
+	</select>
+
+	<!-- 주문번호생성위한중복조회 -->
+	<select id="dateno" parameterType="String" resultType="String">
+		SELECT COUNT(border_no)
+		FROM border
+		WHERE border_no like #{border_date}||'%'
 	</select>
 	
 	<insert id="insert" parameterType="java.util.HashMap">		

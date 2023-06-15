@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+
+<mapper namespace="deliveryAdd">
+	
+	<select id="list" resultType="kr.co.itwill.deliveryAdd.DeliveryAddDTO" parameterType="String">
+		SELECT deliv_no, member_id, deliv_postno, deliv_add1, deliv_add2, deliv_defaltadd
+		FROM itwill.deliveryadd
+		WHERE member_id = #{s_id}
+	</select>
+	
+	
+	<insert id="insert" parameterType="kr.co.itwill.deliveryAdd.DeliveryAddDTO">
+		INSERT INTO itwill.deliveryadd
+		(member_id, deliv_postno, deliv_add1, deliv_add2, deliv_defaltadd)
+		VALUES(#{member_id}, #{deliv_postno}, #{deliv_add1}, #{deliv_add2}, 0)		
+	</insert>	
+
+	<delete id="delete" parameterType="int">
+		DELETE FROM itwill.deliveryadd
+		WHERE deliv_no= #{deliv_no}
+	</delete>
+	
+	<select id="detail" resultType="kr.co.itwill.deliveryAdd.DeliveryAddDTO" parameterType="int">
+		SELECT deliv_no, member_id, deliv_postno, deliv_add1, deliv_add2, deliv_defaltadd
+		FROM itwill.deliveryadd
+		WHERE deliv_no = #{deliv_no}
+	</select>
+	
+	<update id="update" parameterType="kr.co.itwill.deliveryAdd.DeliveryAddDTO">
+		UPDATE itwill.deliveryadd
+		SET deliv_postno=#{deliv_postno}, deliv_add1=#{deliv_add1}, deliv_add2=#{deliv_add2}, deliv_defaltadd=0
+		WHERE deliv_no=#{deliv_no}
+	</update>
+
+	
+</mapper>     

@@ -4,128 +4,55 @@
 <%@taglib prefix="c" 	uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>orderForm</title>
-
+<title>deliveryAddForm.jsp</title>
+<script src="/js/jquery-3.6.4.min.js"></script>
+	
 <script>
-	function ordercheck(){
-		if(confirm("결제할까요?")){
-			return true;
-		}else{
-			return false;
-		}//if end
-	}//ordercheck() end
-
-	function totalPrice(){
-		//alert(document.getElementById("orderlist_cnt").value);
-		//alert(document.getElementById("book_price").innerText);
-		
-		let cnt = document.getElementById("orderlist_cnt").value;
-		let price = document.getElementById("book_price").innerText;
-		let totalPrice = cnt * price;
-		//alert(totalPrice);
-		document.getElementById("totalPrice").innerText = totalPrice;
-	}
 	
-	function 
 </script>
-
 </head>
-<body>
 
-	<form method="post" action="insert" onsubmit="return ordercheck()">
-		<table border="1" class="table table-bordered">
-    <tr>
-        <td>주문번호</td>
-        <td> <input type="text" name="border_no" id="border_no" value="${border_no}"></td>
-    </tr>
-    
-    <tr>
-        <td>수취인 성명</td>
-        <td> <input type="text" name="border_name" id="border_name" required> </td>
-    </tr>
-    <tr>
-        <td>수취인 휴대폰번호</td>
-        <td> <input type="text" name="border_phone" id="border_phone" required> </td>
-    </tr>
-    
-    <tr>
-        <td>배송메시지</td>
-        <td> <input type="text" name="border_msg" id="border_msg"> </td>
-    </tr>
-    </table>
-    
-    <table border="1">
-    <tr>
-        <td>배송지</td>
-        <td>우편번호 <input type="text" id="deliv_postno" value="${deliveryAdd.deliv_postno}" required> </td>
-        <td>주소 <input type="text" id="deliv_add1" value="${deliveryAdd.deliv_add1}" required> </td>
-        <td>상세주소 <input type="text" id="deliv_add2" value="${deliveryAdd.deliv_add2}"> </td>
-        <td><input type="button" value="배송지변경" onclick="DaumPostcode()"></td>
-    </tr>
-    </table>	
-    
-    <%--장바구니상품 불러오기 --%>
-    <table border="1" >
-    <thead>	
-    <tr>	
-    	<th>isbn</th>
-    	<th>상품이미지</th>
-    	<th>제목</th>
-    	<th>가격</th>
-    	<th>수량</th>
-    	<th>총액수</th>
-    	<!-- <th>삭제</th> -->
-    </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${cart}" var="row">
-    	<tr>
-    		<td>${row.isbn}</td>
-    		<td>추가요망</td>
-    		<td>${row.book_name}</p></td>
-    		<td><div id="book_price">${row.book_price}</div></td>
-    		<td><select id="orderlist_cnt" onchange="totalPrice()">
-    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
-    			<option value="1">1</option>
-    			<option value="2">2</option>
-    			<option value="3">3</option>
-    			<option value="4">4</option>
-    			<option value="5">5</option>
-    		</select>
-    		</td>
-    		<td id="totalPrice"><fmt:formatNumber value="" pattern="#,###"/>원</td>	
-   			<%-- <td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
-    	</tr>
-    </c:forEach>
-    
-    	<tr>
-		<td>총 결제금액</td>
-		<td><input type="number" name="border_price" id="border_price" value="" readonly></td>
-		</tr>
-	    <tr>
-		<td>적립예정 포인트</td>
-		<td><input type="number" name="addpoint" id="addpoint" value="${addpoint}" readonly></td>
-		</tr>
-    </tbody>
-	</table><%--장바구니상품끝 --%>	
+<body>
+<div class="container mt-3">
+	<h3>배송지 추가</h3>
+<hr>
+<form name="deliveryAddForm" id="deliveryAddForm" method="post" action="insert">
+	<table border='1' class="type01">
+	<tr>
+		<th>우편번호</th>
+		<td style="text-align:left">
+		<input type="text" name="deliv_postno" id="deliv_postno" size="7" readonly>
+		<input type="button" value="주소찾기" onclick="DaumPostcode()">
+		</td>
+	</tr>
 	
-	<%--보유포인트조회 --%>
-	<table border="1">
-		<tr>
-		<td>사용할 포인트</td>
-		<td><input type="number" name="usepoint" id="usepoint" min=10 max="${havepoint}" value=0></td>
-		<td>보유포인트</td>
-		<td><input type="number" name="havepoint" id="havepoint" value="${havepoint}" readonly></td>
-		</tr>
+	<tr>
+		<th>주소</th>
+		<td style="text-align:left">
+		<input type="text" name="deliv_add1" id="deliv_add1" size="45" readonly>
+		</td>
+	</tr>
+	
+	<tr>
+		<th>나머지주소</th>
+		<td style="text-align:left">
+		<input type="text" name="deliv_add2" id="deliv_add2" size="45" maxlength="45">
+		</td>
+	</tr>
 	</table>
 	
-	<input type="submit" value=" 결제하기" onclick="location.href='/border/orderlist'">
-	</form>
+	<br>
+	<div>
+		<input type="submit" value="배송지등록">
+		<input type="reset" value="취소">
+		<input type="button" value="배송지목록으로" onclick="location.href='/deliveryAdd/list'">
+	</div>
+</form>
+</div> <!-- class="container mt-3" end --> 
 
 
 <!--  DAUM 우편번호 API 시작 -->

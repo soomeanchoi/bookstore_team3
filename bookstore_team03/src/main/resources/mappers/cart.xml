@@ -12,7 +12,7 @@
 	</insert>
 	
 	<select id="list" resultType="java.util.Map" parameterType="String">
-		SELECT c.isbn, book_name, book_price, cart_qty
+		SELECT cart_no, c.isbn, book_name, book_price, cart_qty
         FROM (cart c JOIN book b 
         	  ON c.isbn=b.isbn)
         WHERE member_id = #{s_id}
