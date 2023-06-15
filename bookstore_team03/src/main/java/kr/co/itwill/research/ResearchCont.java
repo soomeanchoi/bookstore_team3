@@ -145,24 +145,59 @@ public class ResearchCont {
         return "redirect:/research/list";
     }
 
-    @RequestMapping("/update")
+    @RequestMapping("/setting")
     public ModelAndView update(@ModelAttribute ResearchDTO dto){
         ModelAndView mav = new ModelAndView();
 
-        //설문 목록 받아오기
-        List<String> que = researchDAO.qlist();
-//        System.out.println("que = " + que);
-        List<String> choose_A = researchDAO.rlist_A();
-//        System.out.println("choose_A = " + choose_A);
-        List<String> choose_B = researchDAO.rlist_B();
-//        System.out.println("choose_B = " + choose_B);
+        //설문 리스트 받기
+        List<ResearchDTO> list = researchDAO.totalList();
 
-        mav.setViewName("research/update");
-        mav.addObject("que", que);
-        mav.addObject("choose_A", choose_A);
-        mav.addObject("choose_B", choose_B);
+        mav.setViewName("research/setting");
+        mav.addObject("list", list);
 
         return mav;
+    }
+
+    @RequestMapping("delete")
+    public String delete (int research_no){
+
+        int cnt = researchDAO.delete(research_no);
+
+        if (cnt ==1 ){
+            System.out.println("삭제성공");
+        }
+
+        return "redirect:/research/setting";
+    }
+
+    @RequestMapping("/update")
+    public ModelAndView update(int research_no, @ModelAttribute ResearchDTO dto){
+
+        ModelAndView mav = new ModelAndView();
+
+        List<ResearchDTO> oneList = researchDAO.oneList(research_no);
+
+        mav.addObject("oneList", oneList);
+        mav.setViewName("research/update");
+        return mav;
+    }
+
+    @RequestMapping("/updatedo")
+    public String updatedo(@RequestParam Map<String, Object> map){
+
+//        System.out.println(map.get("research_no"));
+//        System.out.println(map.get("research_q"));
+//        System.out.println(map.get("research_a1"));
+//        System.out.println(map.get("research_a1text"));
+//        System.out.println(map.get("research_a2"));
+//        System.out.println(map.get("research_a2text"));
+        int cnt = researchDAO.update(map);
+
+        if (cnt == 1){
+            System.out.println("수정완료");
+        }
+
+        return "redirect:/research/setting";
     }
 
 }
