@@ -200,4 +200,9 @@ public class ResearchCont {
         return "redirect:/research/setting";
     }
 
+    @RequestMapping("test")
+    public String test(){
+        return "research/test";
+    }
+
 }
