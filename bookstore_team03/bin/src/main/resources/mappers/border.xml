@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+   
+<!-- border.xml --> 
+
+<mapper namespace="order"> 
+
+
+	<!-- 주문번호생성위한중복조회 -->
+	<select id="dateno" parameterType="String" resultType="String">
+		SELECT COUNT(border_no)
+		FROM border
+		WHERE border_no like #{border_date}||'%'
+	</select>
+	
+	<!-- 총액조회??? -->
+	<select id="totalamount" parameterType="String" resultType="int">
+		SELECT sum(border_price*qty)
+		FROM cart
+		WHERE id=#{s_id}
+	</select>
+	
+	<insert id="insert" parameterType="java.util.HashMap">		
+		INSERT INTO border(deliv_no, member_id, border_name, border_phone, border_price, border_paycode, border_date, border_msg)
+		VALUES(#{deliv_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg});
+	</insert>
+	
+	<insert id="insertdetail" parameterType="java.util.HashMap">
+		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
+		VALUES(#{isbn}, #{border_no}, #{orderlist_cnt});
+	</insert>
+	
+	<delete id="cartdelete" parameterType="String">
+		DELETE FROM cart
+		WHERE id=#{s_id}	
+	</delete>
+	
+</mapper>

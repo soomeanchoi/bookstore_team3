@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- cart.xml -->
+
+<mapper namespace="cart">
+	
+	<insert id="insert" parameterType="kr.co.itwill.cart.CartDTO">
+		INSERT INTO cart(isbn, member_id, cart_qty, cart_date)
+		VALUES(#{isbn}, #{s_id}, #{cart_qty}, current_timestamp());
+	</insert>
+	
+	<select id="list" resultType="java.util.Map" parameterType="String">
+		SELECT cart_no, c.isbn, book_name, book_price, cart_qty
+        FROM (cart c JOIN book b 
+        	  ON c.isbn=b.isbn)
+        WHERE member_id = #{s_id}
+        ORDER BY cart_date;
+	</select>
+
+	<delete id="delete" parameterType="java.util.HashMap">
+		DELETE FROM cart
+		WHERE member_id=#{s_id} and cart_no=#{cart_no}
+	</delete>
+	
+	<update id="update" parameterType="java.util.HashMap">
+		UPDATE cart
+		SET cart_qty=#{cart_qty}
+		WHERE member_id=#{s_id} and cart_no=#{cart_no}
+	</update>
+	
+</mapper>     
