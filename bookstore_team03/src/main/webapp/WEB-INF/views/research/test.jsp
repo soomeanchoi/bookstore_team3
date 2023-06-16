@@ -26,7 +26,7 @@
      //iamport 대신 자신의 "가맹점 식별코드"를 사용
     IMP.request_pay({
       pg: "html5_inicis",
-      pay_method: "test",
+      pay_method: "card",
       merchant_uid : 'merchant_'+new Date().getTime(),
       name : '3조',
       amount : 10,

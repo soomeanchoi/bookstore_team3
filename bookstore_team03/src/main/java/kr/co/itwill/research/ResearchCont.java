@@ -205,4 +205,9 @@ public class ResearchCont {
         return "research/test";
     }
 
+    @RequestMapping("kakao")
+    public String kakao(){
+        return "research/kakao";
+    }
+
 }
