@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- book.xml -->
+
+<mapper namespace="book">
+	
+	<select id="list" resultType="java.util.Map">
+		SELECT isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+        FROM book
+	</select>
+
+	<select id="bestList" resultType="java.util.Map">
+		SELECT isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+		FROM book
+		ORDER BY book_count DESC
+	</select>
+
+	<insert id="insert" parameterType="java.util.Map">
+		insert into book(isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, tag_no1, book_mainname, book_subname, book_content, book_imgname, book_imgsize)
+		values (#{isbn}, #{book_name}, #{book_pub}, #{book_writerno}, #{book_price}, #{book_stock}, #{book_pubdate}, #{book_page}, #{tag_no1}, #{book_mainname}, #{book_subname}, #{book_content}, #{book_imgname}, #{book_imgsize})
+	</insert>
+
+	<select id="search" parameterType="String" resultType="java.util.Map">
+		select isbn, book_name, book_pub, book_price, book_content, book_pubdate, book_mainname, book_subname, book_imgname, book_imgsize
+		from book
+		where book_name LIKE #{keyword}
+		order by book_name
+	</select>
+
+	<select id="detail" resultType="java.util.Map" parameterType="String">
+		select isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+		from book
+		where isbn = #{isbn}
+	</select>
+	
+	<select id="filename" resultType="String" parameterType="String">
+        SELECT book_imgname
+        FROM book
+        WHERE isbn=#{isbn}
+    </select>
+
+	<delete id="delete" parameterType="String">
+		delete from book
+		where isbn=#{isbn}
+	</delete>
+
+	<update id="update" parameterType="java.util.Map">
+		update book
+		set book_name=#{book_name}
+		  ,book_pub=#{book_pub}, book_writerno=#{book_writerno}
+		  ,book_price=#{book_price}, book_stock=#{book_stock}
+		  ,book_pubdate=#{book_pubdate}, book_page=#{book_page}
+		  ,tag_no1=#{tag_no1}, book_mainname=#{book_mainname}
+		  ,book_subname=#{book_subname}, book_content=#{book_content}
+		  ,book_imgname=#{book_imgname}, book_imgsize=#{book_imgsize}
+		where isbn=#{isbn}
+	</update>
+
+	<update id="count" parameterType="String">
+		update book
+		set book_count=book_count+1
+		where isbn=#{isbn}
+	</update>
+
+	<select id="score" resultType="double" parameterType="String">
+		select sum(review_score)/count(*)
+		from review
+		where isbn=#{isbn}
+	</select>
+
+</mapper>     
+
+
+
+
