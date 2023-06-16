@@ -16,23 +16,25 @@
 			<input class="button" type="button" value="sign up" onclick="location.href='agreement'">
 			<br><br>
 			<div>
-				<input class="loginform" type="text" name="member_id" id="member_id" placeholder="ID" maxlength="20" required>
+				<input class="loginform" type="text" name="member_id" id="member_id" placeholder="EMAIL" maxlength="20" required>
+				
 			</div>
 			<div>
 				<input class="loginform" type="password" name="member_pw" id="member_pw" placeholder="PASSWORD" maxlength="10" required>
 			</div>
 				<label><input type="checkbox" name="member_id" value="SAVE" style="font-size: 5px">&nbsp;&nbsp;ID memory</label>
 			<br><br><br><br>
+				
 				<input class="button" type="button" value="Find ID/Password" onclick="location.href='findID'">
 				&nbsp;&nbsp;
-				<input class="button" type="submit" value="login" class="btn btn-primary">
+				<input class="button" type="submit" value="login" class="btn btn-primary"><br><br>
+				<a href="https://kauth.kakao.com/oauth/authorize?client_id=788a4e44ddaf3b2fca76f6c08f5c2382&redirect_uri=http://localhost:9095/kakao/callback&response_type=code">
+				<img height="38px" src="/storage/kakao_login_medium_narrow.png"></a><br>
 				
 		</form>
 
 	
 </body>
-<script>
 
-</script>
 
 </html>

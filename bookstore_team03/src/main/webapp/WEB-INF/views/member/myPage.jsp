@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>    
 <!DOCTYPE html>
 <html>
@@ -17,14 +18,14 @@
 			<div id="font" style="font-size: 30px;"><h6>Profile</h6></div>
 	
 	아이디<br>
-	${profile.member_id }<br>
-	닉네임
-	${profile.profile_name }
-	<c:forEach items="${list}" var="profile">
-    	<tr>
-    		<td>${profile.member_id }</td>
-    	</tr>
-    </c:forEach>
+	${member_id}<br>
+	이름<br>
+	${member_name}<br>
+	닉네임<br>
+	${profile_name}<br>
+	자기소개<br>
+	${profile_intro}<br>
 	</form>
+	<button onclick="location.href='/profile/profileForm';">프로필 등록</button>
 </body>
 </html>

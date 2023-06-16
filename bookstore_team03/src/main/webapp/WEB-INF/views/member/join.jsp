@@ -6,23 +6,19 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="/resources/css/member/join.css">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
 <body>
 
-	<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return memberId()"><!-- myscript.js -->
+	<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
 		<table class="table" style="margin: auto;">
 		<tr>
 			<th style="text-align: left">아이디</th>
 			<td style="text-align: left">
 				<input type="text" name="member_id" id="member_id" size="20" maxlength="20">
-				<!-- <select name="member_id2">
-					<option>선택</option>
-  					<option>naver.com</option>
-  					<option>hanmail.net</option>
-  					<option>gmail.com</option>
-				</select> -->
-				<input type="button" value="EMAIL 중복확인" onclick="idCheck()"><!-- myscript.js 작성 -->
+				
+				<input type="button" value="EMAIL 중복확인" onclick="checkId()"><!-- myscript.js 작성 -->
 			</td>
 		</tr>
 <%--
@@ -67,16 +63,15 @@
 		</tr> 
 		<tr>
 			<td colspan="2" style="text-align: center">
-				<input type="submit" value="회원가입" class="btn btn-primary">
-				<input type="reset" value="취소" class="btn btn-warning">
+				
 			</td>
 		</tr> 		
 		</table>
-		</form>
+		
        <!-- 본문 끝 -->
 
 		<!-- 본문시작 agreement.jsp-->
-		<form onsubmit="return send()"><!-- JavaScript는 현재페이지에 작성 -->
+		<!-- JavaScript는 현재페이지에 작성 -->
 		
 		<br><br><br><br>
 		<table border="0" cellspacing="2" cellpadding="2" align="center">
@@ -417,34 +412,58 @@
 			<div style="text-align: center">
 			  <label><input type="checkbox" name="agree" id="agree">&nbsp;&nbsp;약관에 동의합니다</label>
 			  <br><br>
-			  <input class="button" type="submit" value="sign up"> 
-			  &nbsp;&nbsp;
-			  <input class="button" type="button" value="back" onclick="javascript:history.back()">
+			  	<input type="submit" value="회원가입" class="btn btn-primary">
+				<input type="reset" value="취소" class="btn btn-warning">
 			</div>
 			</form>
-			
-			<script>
-				function send(){
-					if(document.getElementById("agree").checked==true){
-						return true;
-					}else{
-						alert("약관에 동의한 후 회원가입이 가능합니다")
-						return false;
-					}//if end
-				}//send() end
-			</script>
-        <!-- 본문 끝 -->
-        </div>           
+			</form>
+
+
+<!-- 본문 끝 -->
+</div>           
 			            
 </body>
-<!-- <script>
-  function memberId() {
-    var member_id1 = document.getElementById("member_id1").value;
-    var member_id2 = document.getElementById("member_id2").value;
-    var member_id = member_id1 + "@" + member_id2;
-    document.getElementById("member_id").value = member_id;
-    // 나머지 필요한 데이터 저장 로직 추가
-    document.getElementById("memfrm").submit(); // 예시로 폼 전송
-  }
-</script> -->
+<script>
+	function send(){
+		if(document.getElementById("agree").checked==true){
+			return true;
+		}else{
+			alert("약관에 동의한 후 회원가입이 가능합니다")
+			return false;
+		}//if end
+	}//send() end
+
+	$(function(){
+		 
+	    
+	    
+	    $("#checkId").click(function(){
+	    
+	        let member_id = $("#member_id").val();
+	         
+	        $.ajax({
+	            type:'post', //post 형식으로 controller 에 보내기위함!!
+	            url:"/spring/checkId.do", // 컨트롤러로 가는 mapping 입력
+	            data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
+	            success: function(data){ 
+	                if(data == "N"){ // 만약 성공할시
+	                    result = "사용 가능한 아이디입니다.";
+	                    $("#result_checkId").html(result).css("color", "green");
+	                    $("#member_pw").trigger("focus");
+	                 
+	             }else{ // 만약 실패할시
+	                 result="이미 사용중인 아이디입니다.";
+	                     $("#result_checkId").html(result).css("color","red");
+	                     $("#member_id").val("").trigger("focus");
+	             }
+	                 
+	         },
+	            error : function(error){alert(error);}
+	        });
+	        
+	    });
+	    
+	});
+	
+</script>
 </html>
