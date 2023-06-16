@@ -12,7 +12,7 @@
 	</insert>
 
 
-	<select id="list" resultType="java.util.Map">
+	<select id="list" resultType="kr.co.itwill.profile.ProfileDTO">
 		SELECT profile_name, profile_intro, profile_imgname, profile_imgoriname, profile_imgpath, profile_imgsize
 		FROM profile
 		WHERE member_id = #{member_id}

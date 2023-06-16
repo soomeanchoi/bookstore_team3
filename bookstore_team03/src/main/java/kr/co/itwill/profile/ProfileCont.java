@@ -1,7 +1,7 @@
 package kr.co.itwill.profile;
 
 import java.io.File;
-
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -10,9 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 
 @Controller
@@ -22,6 +24,9 @@ public class ProfileCont {
 	public ProfileCont() {
 		System.out.println("-----ProfileCont()객체 생성됨");
 	}
+	
+	@Autowired
+	ProfileDTO profileDto;
 	
 	@Autowired
 	ProfileDAO profileDao;
@@ -66,10 +71,22 @@ public class ProfileCont {
     	return "redirect:/member/myPage";
 	}
 	
-	@RequestMapping("/list")
-	public String list() throws Exception {
+	
+	@RequestMapping("/getlist")
+	public String list(HttpSession session,
+							Model model) throws Exception {
+		
+		String member_id = (String)session.getAttribute("member_id");
+		
+		String profile_name = profileDto.getProfile_name();
+		if(profile_name != null) {
+			model.addAttribute("profile_name", profile_name);
+		}
+		
 		return "redirect:/member/myPage";
 	}
 	
+	
+
 	
 }

@@ -14,16 +14,14 @@ import kr.co.itwill.member.MemberDTO;
 public class MemberDAO {
 
 	public MemberDAO() {
-		System.out.println("------MemberDAO() 객체 생성됨");
+		System.out.println("-----MemberDAO() 객체 생성됨");
 	}
 	
 	//스프링 빈으로 생성된 객체를 가져와서 연결하기
     @Autowired
     SqlSession sqlSession;
    
-    public List<MemberDTO> List(String id){
-        return sqlSession.selectList("member.list", id);
-    }//list() end
+    
     
     public int insert(MemberDTO dto) {
     	return sqlSession.insert("member.insert", dto);
@@ -41,5 +39,8 @@ public class MemberDAO {
     	return sqlSession.delete("member.delete", dto);
     }
     
-    
+    public int checkId(String member_id) {
+    	return sqlSession.selectOne("member.checkId" , member_id);
+    }
+    public List<String> profilelist(String member_id) {return sqlSession.selectList("member.profilelist", member_id);}
 }

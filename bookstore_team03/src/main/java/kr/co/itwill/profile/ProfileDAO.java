@@ -26,7 +26,7 @@ public class ProfileDAO {
     
     
     public List<ProfileDTO> list(String member_id){
-    	return sqlSession.selectList("profile.list", member_id);
+    	return sqlSession.selectOne("profile.list", member_id);
     }//list() end
     
     

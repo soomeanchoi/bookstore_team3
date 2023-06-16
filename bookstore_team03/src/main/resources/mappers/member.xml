@@ -6,10 +6,7 @@
 
 <mapper namespace="member">
 	
-	<select id="list" resultType="kr.co.itwill.member.MemberDTO" parameterType="String">
-		SELECT  member_id, member_birth, member_gender, member_name, member_pw, member_phone, member_jointype, member_type, member_rejoin, member_joindate
-        FROM member
-	</select>
+	
 	
 	<insert id="insert" parameterType="kr.co.itwill.member.MemberDTO">
 		INSERT INTO member(member_id, member_pw, member_name, member_birth, member_gender, member_phone)
@@ -38,7 +35,18 @@
 		DELETE FROM member
 		WHERE member_id = #{member_id}
 		  AND member_pw = #{member_pw}
-</delete>
+	</delete>
+	
+	<select id="checkId" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM member WHERE member_id= #{member_id}
+	</select>
+	
+	<select id="profilelist" parameterType="String" resultType="java.util.Map">
+		SELECT profile_name, profile_intro
+		FROM profile
+		WHERE member_id = #{member_id}
+	</select>
+	
 </mapper>     
 
 

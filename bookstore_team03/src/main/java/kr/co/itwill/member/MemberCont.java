@@ -8,13 +8,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ch.qos.logback.classic.Logger;
 import kr.co.itwill.profile.ProfileDAO;
 import kr.co.itwill.profile.ProfileDTO;
 
@@ -45,18 +45,6 @@ public class MemberCont {
 	 * memberDao.list()); return mav; }//list() end
 	 */	
 	
-	@RequestMapping("/list")
-    public ModelAndView list() {
-    	   	
-    	//로그인 했다면
-    	//String s_id=session.getAttribute("s_id")
-    	String s_id="test"; //여기서는 임시 아이디 test
-    	
-        ModelAndView mav=new ModelAndView();
-        mav.setViewName("member/list"); // /WEB-INF/views/member/list.jsp
-        mav.addObject("list", memberDao.List(s_id)); 
-        return mav;
-    }//list() end
 	
 	@RequestMapping("/join")
 	public ModelAndView join() {
@@ -80,9 +68,23 @@ public class MemberCont {
 		 
 		 memberDao.insert(dto);
 		 
-		 return "redirect:/member/myPage";
+		 return "redirect:/member/login";
 	 }
 
+	 
+	//아이디 중복체크
+	 @RequestMapping("/checkId.do")
+	    //@ResponseBody ajax 값을 바로jsp 로 보내기위해 사용
+	    public String checkId(@RequestParam("member_id") String member_id) {
+	        String result="N";
+	        
+	        int flag = memberDao.checkId(member_id);
+	        
+	        if(flag == 1) result ="Y"; 
+	        //아이디가 있을시 Y 없을시 N 으로jsp view 로 보냄
+	        return result;
+	    }
+	 
 	@RequestMapping("/login")
 	public ModelAndView login() {
 		ModelAndView mav=new ModelAndView();
@@ -117,6 +119,7 @@ public class MemberCont {
         session.setAttribute("member_id", loginInfo.get("member_id")); 
         session.setAttribute("member_pw", loginInfo.get("member_pw")); 
         
+        
         viewPage = "member/myPage";
         // 추후 메인 페이지로 이동하게 
     }
@@ -133,16 +136,22 @@ public class MemberCont {
 	
 
 	@RequestMapping("/myPage")
-	public ModelAndView myPage(HttpSession session, Model model) {
+	public ModelAndView myPage(HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 
+		//안 옴
 		String member_id = (String) session.getAttribute("member_id");
-		
+		System.out.println(member_id);
 		// 프로필 정보 가져오기
 		//model.addAttribute("loginInfo", loginInfo);
-	    mav.addObject("profile.list", profileDao.list(member_id));
+	   // mav.addObject("profile.list", profileDao.list(member_id));
 		
+		
+		mav.addObject(memberDao.profilelist(member_id));
+		System.out.println(memberDao.profilelist(member_id));
 		mav.setViewName("member/myPage"); 
+//		System.out.println(profileDao.list(member_id));
+//		mav.addObject("list", profileDao.list(member_id));
 		
 		return mav;
 	}
@@ -209,6 +218,8 @@ public class MemberCont {
 		session.invalidate();
 		return "redirect:/member/login";
 	}
+	
+
 	
 }
 	
