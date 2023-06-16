@@ -91,10 +91,10 @@
 
 	<form method="post" action="insert" onsubmit="return ordercheck()">
 		<table border="1" class="table table-bordered">
-    <tr>
+  <%--   <tr>
         <td>주문번호</td>
         <td> <input type="text" name="border_no" id="border_no" value="${border_no}"></td>
-    </tr>
+    </tr> --%>
     
     <tr>
         <td>수취인 성명</td>
@@ -114,9 +114,9 @@
     <table border="1">
     <tr>
         <td>배송지</td>
-        <td>우편번호 <input type="text" id="deliv_postno" value="${deliveryAdd.deliv_postno}" required> </td>
-        <td>주소 <input type="text" id="deliv_add1" value="${deliveryAdd.deliv_add1}" required> </td>
-        <td>상세주소 <input type="text" id="deliv_add2" value="${deliveryAdd.deliv_add2}"> </td>
+        <td>우편번호 <input type="text" id="border_postno" value="${deliveryAdd.deliv_postno}" required> </td>
+        <td>주소 <input type="text" id="border_add1" value="${deliveryAdd.deliv_add1}" required> </td>
+        <td>상세주소 <input type="text" id="border_add2" value="${deliveryAdd.deliv_add2}"> </td>
         <td><input type="button" value="배송지변경" onclick="DaumPostcode()"></td>
     </tr>
     </table>	
@@ -154,7 +154,7 @@
     		</tr>
     </c:forEach>
     	<tr>
-		<td>총금액</td>
+		<td>상품총금액</td>
 		<td id="border_oprice" colspan="5"> ${border_price} </td>
 		</tr>
     </table><%--장바구니상품끝 --%>
@@ -231,17 +231,17 @@
                         extraAddr = ' (' + extraAddr + ')';
                     }
                     // 조합된 참고항목을 해당 필드에 넣는다.
-                    document.getElementById("deliv_add2").value = extraAddr;
+                    document.getElementById("border_add2").value = extraAddr;
                 
                 } else {
-                    document.getElementById("deliv_add2").value = '';
+                    document.getElementById("border_add2").value = '';
                 }
 
                 // 우편번호와 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('deliv_postno').value = data.zonecode;
-                document.getElementById("deliv_add1").value = addr;
+                document.getElementById('border_postno').value = data.zonecode;
+                document.getElementById("border_add1").value = addr;
                 // 커서를 상세주소 필드로 이동한다.
-                document.getElementById("deliv_add2").focus();
+                document.getElementById("border_add2").focus();
 
                 // iframe을 넣은 element를 안보이게 한다.
                 // (autoClose:false 기능을 이용한다면, 아래 코드를 제거해야 화면에서 사라지지 않는다.)

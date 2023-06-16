@@ -51,6 +51,7 @@ public class BorderDAO {
 		return sqlSession.insert("border.insert" , dto);
 	}//insert() end
 	
+	//주문상세테이블행추가
 	public int orderlistInsert(HashMap<String, String> map) {
 		return sqlSession.insert("border.orderlistinsert", map);
 	}//orderlistInsert() end

@@ -50,14 +50,22 @@
 	
 	<!-- 주문서테이블행추가 -->
 	<insert id="insert" parameterType="kr.co.itwill.border.BorderDTO">		
-		INSERT INTO border(deliv_no, member_id, border_name, border_phone, border_price, border_paycode, border_date, border_msg, border_usepoint)
-		VALUES(#{deliv_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg}, #{border_usepoint});
+		INSERT INTO border(border_no, member_id, border_name, border_phone, border_price, border_paycode, border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2)
+		VALUES(#{border_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
 	</insert>
 	
 	<!-- 주문상세행추가 -->
 	<insert id="orderlistinsert" parameterType="java.util.HashMap">
 		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
-		VALUES(#{isbn}, #{border_no}, #{orderlist_cnt});
+		VALUES(#{isbn}, #{border_no}, #{orderlist_cnt})
+		WHERE member_id=#{s_id}	
+	</insert>
+	
+	<insert id="insertdetail" parameterType="java.util.HashMap">
+		INSERT INTO orderdetail(ono, orderno, product_code, qty, price)
+			select orderdetail_seq.nextval, #{orderno}, product_code, qty, price 
+			from cart
+			where id=#{s_id}
 	</insert>
 	
 	<!-- 카트비우기 -->
