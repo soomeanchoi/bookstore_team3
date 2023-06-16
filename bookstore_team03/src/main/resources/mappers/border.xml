@@ -48,16 +48,19 @@
 		WHERE border_no like #{border_date}||'%'
 	</select>
 	
-	<insert id="insert" parameterType="java.util.HashMap">		
-		INSERT INTO border(deliv_no, member_id, border_name, border_phone, border_price, border_paycode, border_date, border_msg)
-		VALUES(#{deliv_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg});
+	<!-- 주문서테이블행추가 -->
+	<insert id="insert" parameterType="kr.co.itwill.border.BorderDTO">		
+		INSERT INTO border(deliv_no, member_id, border_name, border_phone, border_price, border_paycode, border_date, border_msg, border_usepoint)
+		VALUES(#{deliv_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg}, #{border_usepoint});
 	</insert>
 	
+	<!-- 주문상세행추가 -->
 	<insert id="orderlistinsert" parameterType="java.util.HashMap">
 		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
 		VALUES(#{isbn}, #{border_no}, #{orderlist_cnt});
 	</insert>
 	
+	<!-- 카트비우기 -->
 	<delete id="cartdelete" parameterType="String">
 		DELETE FROM cart
 		WHERE id=#{s_id}	

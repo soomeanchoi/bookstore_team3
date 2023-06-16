@@ -20,18 +20,70 @@
 		}//if end
 	}//ordercheck() end
 
-	function totalPrice(){
-		//alert(document.getElementById("orderlist_cnt").value);
-		//alert(document.getElementById("book_price").innerText);
-		
-		let cnt = document.getElementById("orderlist_cnt").value;
-		let price = document.getElementById("book_price").innerText;
-		let totalPrice = cnt * price;
-		//alert(totalPrice);
-		document.getElementById("totalPrice").innerText = totalPrice;
-	}
 	
-	function 
+	function book_Price(){//책 수량 수정에 따른 결제금액 변경
+		var cnt = 0;
+		var price = 0;
+		var total=0;
+		
+	 	for(var i = 0; i < orderlist_cnt.length; i++){
+			cnt = Number(orderlist_cnt.item(i).value);
+			price = Number(book_price.item(i).innerText);
+			booktot_Price.item(i).innerText = cnt*price;
+			
+			total += cnt*price;
+		}//for end
+		
+		document.getElementById("border_oprice").innerText = total;
+		document.getElementById("addpoint").innerText = parseInt(total/10);
+		
+	}//book_price() end
+	
+		
+	function pointuse(){
+		var usepoint = document.getElementById("border_usepoint").value;
+		var border_oprice = document.getElementById("border_oprice").innerText;//초기가격
+		var border_price = document.getElementById("border_price").innerText;//포인트 사용에 따라 변동되는 가격
+		var havepoint = document.getElementById("havepoint").value;
+		
+		if(usepoint > havepoint){
+			//보유포인트보다 많은 포인트 사용시도 시 
+			alert("보유 포인트보다 많이 사용할 수 없습니다");		
+			//사용포인트의 값을 0으로 변경 후 커서이동
+			document.getElementById("border_usepoint").value = 0;
+			document.getElementById("usepoint").focus();
+			
+			//결제금액초기화
+			document.getElementById("border_price").innerText = border_oprice;
+			
+		}else{
+			//보유포인트와 같거나 적은 포인트를 사용할 경우 
+			document.getElementById("border_price").innerText = (border_oprice - usepoint);
+			document.getElementById("addpoint").innerText = parseInt((border_oprice - usepoint)/10);
+		}//if end
+		
+		
+		if(usepoint > border_price){
+			//결제금액보다 많은 포인트 사용시도 시 
+			alert("총 금액보다 많이 사용할 수 없습니다");
+			//총가격으로 포인트값 변경 후 커서이동
+			document.getElementById("border_usepoint").value = border_oprice;
+			document.getElementById("border_usepoint").focus();
+			
+			//총금액 초기화
+			//Number(document.getElementById("border_price").innerText) = border_oprice - usepoint;
+			
+			//총가격에서 총가격만큼의 포인트 빼고 적립액 0으로 
+			document.getElementById("border_price").innerText = border_oprice - document.getElementById("border_usepoint").value ;
+			document.getElementById("addpoint").innerText = parseInt((border_oprice - document.getElementById("border_usepoint").value)/10);
+		}else{
+			document.getElementById("border_price").innerText = border_oprice - usepoint;
+			document.getElementById("addpoint").innerText = parseInt((border_oprice - usepoint)/10);
+		}//if end
+		
+		
+	}//pointuse() end
+	
 </script>
 
 </head>
@@ -71,7 +123,7 @@
     
     <%--장바구니상품 불러오기 --%>
     <table border="1" >
-    <thead>	
+	
     <tr>	
     	<th>isbn</th>
     	<th>상품이미지</th>
@@ -81,15 +133,14 @@
     	<th>총액수</th>
     	<!-- <th>삭제</th> -->
     </tr>
-    </thead>
-    <tbody>
-    <c:forEach items="${cart}" var="row">
+
+    <c:forEach items="${cart}" var="row" varStatus="status">
     	<tr>
     		<td>${row.isbn}</td>
     		<td>추가요망</td>
-    		<td>${row.book_name}</p></td>
-    		<td><div id="book_price">${row.book_price}</div></td>
-    		<td><select id="orderlist_cnt" onchange="totalPrice()">
+    		<td>${row.book_name}</td>
+    		<td id="book_price" class="book_price">${row.book_price}</td>
+    		<td><select id="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
     			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
     			<option value="1">1</option>
     			<option value="2">2</option>
@@ -98,31 +149,33 @@
     			<option value="5">5</option>
     		</select>
     		</td>
-    		<td id="totalPrice"><fmt:formatNumber value="" pattern="#,###"/>원</td>	
+    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${row.book_price*row.cart_qty}" pattern="#,###"/></td>	
    			<%-- <td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
-    	</tr>
+    		</tr>
     </c:forEach>
-    
     	<tr>
-		<td>총 결제금액</td>
-		<td><input type="number" name="border_price" id="border_price" value="" readonly></td>
+		<td>총금액</td>
+		<td id="border_oprice" colspan="5"> ${border_price} </td>
 		</tr>
-	    <tr>
-		<td>적립예정 포인트</td>
-		<td><input type="number" name="addpoint" id="addpoint" value="${addpoint}" readonly></td>
-		</tr>
-    </tbody>
-	</table><%--장바구니상품끝 --%>	
-	
-	<%--보유포인트조회 --%>
-	<table border="1">
-		<tr>
+    </table><%--장바구니상품끝 --%>
+    <table border="1">
+    	<tr>
 		<td>사용할 포인트</td>
-		<td><input type="number" name="usepoint" id="usepoint" min=10 max="${havepoint}" value=0></td>
+		<td><input type="number" name="border_usepoint" id="border_usepoint" min=10 max="${havepoint}" onchange="pointuse()" value=0>
+		<input type="button" value="사용" >
+		</td>
 		<td>보유포인트</td>
 		<td><input type="number" name="havepoint" id="havepoint" value="${havepoint}" readonly></td>
+		</tr>    	
+	    <tr>
+		<td>적립예정 포인트</td>
+		<td id="addpoint">${addpoint}</td>
 		</tr>
-	</table>
+		<tr>
+		<td>결제금액</td>
+		<td id="border_price"> ${border_price} </td>
+		</tr>
+	</table>	
 	
 	<input type="submit" value=" 결제하기" onclick="location.href='/border/orderlist'">
 	</form>

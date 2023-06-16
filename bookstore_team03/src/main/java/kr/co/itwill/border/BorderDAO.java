@@ -46,7 +46,8 @@ public class BorderDAO {
 		return sqlSession.selectOne("border.dateno", border_date);
 	}//dateno() end
 	
-	public int Insert(BorderDTO dto) {
+	//주문서테이블행추가
+	public int insert(BorderDTO dto) {
 		return sqlSession.insert("border.insert" , dto);
 	}//insert() end
 	
