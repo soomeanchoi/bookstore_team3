@@ -13,7 +13,7 @@
 <script>	
 	function order(){
 		if(confirm("주문 진행하시겠습니까?")){
-			location.href='../border/orderform';
+			location.href='../border/orderForm';
 		}//if end
 	}//order() end
 	

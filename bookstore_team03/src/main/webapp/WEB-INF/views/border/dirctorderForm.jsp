@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>orderForm</title>
+<title>directorderForm</title>
 
 <script>
 	function ordercheck(){
@@ -133,30 +133,24 @@
     	<th>총액수</th>
     	<!-- <th>삭제</th> -->
     </tr>
-
-    <c:forEach items="${cart}" var="row" varStatus="status">
-    	 <input type="hidden" name="status" value="${status.index}">
-    	<tr>
+	<tr>
     		<td>
-    		 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${row.isbn}">
-    		${row.isbn}
+    		 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${isbn}">
+    		${isbn}
     		</td>
     		<td>추가요망</td>
-    		<td>${row.book_name}</td>
-    		<td id="book_price" class="book_price">${row.book_price}</td>
+    		<td>${book_name}</td>
+    		<td id="book_price" class="book_price">${book_price}</td>
     		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
-    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
-    			<option value="1">1</option>
+    			<option value="1" selected>1</option>
     			<option value="2">2</option>
     			<option value="3">3</option>
     			<option value="4">4</option>
     			<option value="5">5</option>
     		</select>
     		</td>
-    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${row.book_price*row.cart_qty}" pattern="#,###"/></td>	
-   			<%-- <td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
-    		</tr>
-    </c:forEach>
+    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${book_price}" pattern="#,###"/></td>	
+    </tr>
     	<tr>
 		<td>상품총금액</td>
 		<td id="border_oprice" colspan="5"> ${border_price} </td>

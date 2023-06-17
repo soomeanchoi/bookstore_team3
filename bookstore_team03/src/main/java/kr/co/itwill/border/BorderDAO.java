@@ -52,10 +52,11 @@ public class BorderDAO {
 	}//insert() end
 	
 	//주문상세테이블행추가
-	public int orderlistInsert(HashMap<String, String> map) {
-		return sqlSession.insert("border.orderlistinsert", map);
+	public int orderlistInsert(List<HashMap<String, Object>> list) {
+		return sqlSession.insert("border.orderlistinsert", list);
 	}//orderlistInsert() end
 	
+	//카트내용 삭제
 	public void cartdelete(String s_id) {
 		sqlSession.delete("border.cartdelete", s_id);
 	}//cartdelete() end

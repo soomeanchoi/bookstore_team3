@@ -160,12 +160,12 @@
 		</dependency>
 
 <!-- 사용자 추가 라이브러리 끝 -->
-
+<!--
 		<dependency>
 			<groupId>kr.co</groupId>
 			<artifactId>maven</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>

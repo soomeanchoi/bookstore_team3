@@ -53,7 +53,7 @@ public class DeliveryAddCont {
 
 		dto.setMember_id(s_id);
 		deliveryAddDao.insert(dto);
-		System.out.println("cont" + dto.toString());
+		//System.out.println("cont" + dto.toString());
 		return "redirect:/deliveryAdd/list";
 	}//insert() end
 
