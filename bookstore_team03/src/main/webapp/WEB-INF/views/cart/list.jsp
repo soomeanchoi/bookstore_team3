@@ -16,7 +16,6 @@
 			location.href='../border/orderForm';
 		}//if end
 	}//order() end
-	
 </script>
 
 </head>
@@ -27,7 +26,8 @@
 <br><br>
 	
 	<table border=1>
-    <thead>		
+    <thead>
+    	<tr>		
     	<th>isbn</th>
     	<th>상품이미지</th>
     	<th>제목</th>
@@ -35,6 +35,7 @@
     	<th>수량</th>
     	<th>총액수</th>
     	<th>삭제</th>
+    	</tr>
     </thead>
     <tbody>
     	<c:forEach items="${list}" var="row">
@@ -43,15 +44,7 @@
     		<td>추가요망</td>
     		<td>${row.book_name}</td>
     		<td>${row.book_price}</td>
-    		<td><select>
-    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
-    			<option value="1">1</option>
-    			<option value="2">2</option>
-    			<option value="3">3</option>
-    			<option value="4">4</option>
-    			<option value="5">5</option>
-    		</select>
-    		</td>
+    		<td>${row.cart_qty}</td>
     		<td><fmt:formatNumber value="${row.book_price * row.cart_qty}" pattern="#,###"/>원</td>	
    			<td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td>
     	</tr>

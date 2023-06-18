@@ -14,13 +14,20 @@
 		WHERE member_id = #{s_id} AND deliv_defaltadd = 1
 	</select>
 	
-	<!-- 카트조회 -->
+	<!-- 카트주문시 카트조회 -->
 	<select id="cart" parameterType="String" resultType="java.util.HashMap">
-		SELECT cart_no, c.isbn, book_name, book_price, cart_qty
+		SELECT cart_no, c.isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize, cart_qty
         FROM (cart c JOIN book b 
         	  ON c.isbn=b.isbn)
         WHERE member_id = #{s_id}
         ORDER BY cart_date
+	</select>
+	
+	<!-- 직접주문시 책정보조회 -->
+	<select id="directborder" parameterType="String" resultType="java.util.HashMap" >
+		SELECT isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize
+		FROM itwill.book
+		WHERE isbn = #{isbn}
 	</select>
 	
 	<!-- 보유포인트조회 -->
@@ -54,7 +61,13 @@
 		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
 	</insert>
 	
-	<!-- 주문상세행추가 -->
+	<!-- 직접구매: 주문상세행추가 -->
+	<insert id="directorderlistInsert" parameterType="kr.co.itwill.border.BorderDTO">
+		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
+		VALUES("${isbn}", "${border_no}", "${orderlist_cnt}")
+	</insert>
+	
+	<!-- 장바구니 구매: 주문상세행추가 -->
 	<insert id="orderlistinsert" parameterType="java.util.List">
 		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
 		VALUES

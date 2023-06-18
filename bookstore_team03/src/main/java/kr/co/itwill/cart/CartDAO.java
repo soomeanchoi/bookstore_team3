@@ -29,8 +29,4 @@ public class CartDAO {
 		return sqlSession.delete("cart.delete", map);
 	}//cartDelete() end
 	
-	public int cartUpdate(HashMap<String, Object> map) {
-		return sqlSession.update("cart.update", map);
-	}//cartUpdate() end
-	
 }//class end

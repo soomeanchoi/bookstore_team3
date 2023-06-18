@@ -50,6 +50,7 @@
     <p>
         <button type="button" onclick="location.href='/book/write'">등록</button>
         <button type="button" onclick="location.href='/book/list'">리스트</button>
+        <input type ="button" value="구매" onclick="location.href='/border/directborderForm/${book.isbn}'">
         &nbsp&nbsp 조회수 : ${book.book_count} &nbsp&nbsp
         평점 : ${score}
     </p>

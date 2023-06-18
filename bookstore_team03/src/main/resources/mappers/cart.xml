@@ -19,15 +19,15 @@
         ORDER BY cart_date;
 	</select>
 
+	<update id="update" parameterType="kr.co.itwill.cart.CartDTO">
+		UPDATE itwill.cart
+		SET cart_qty=#{cart_qty}
+		WHERE cart_no=#{cart_no}
+	</update>
+	
 	<delete id="delete" parameterType="java.util.HashMap">
 		DELETE FROM cart
 		WHERE member_id=#{s_id} and cart_no=#{cart_no}
 	</delete>
-	
-	<update id="update" parameterType="java.util.HashMap">
-		UPDATE cart
-		SET cart_qty=#{cart_qty}
-		WHERE member_id=#{s_id} and cart_no=#{cart_no}
-	</update>
 	
 </mapper>     

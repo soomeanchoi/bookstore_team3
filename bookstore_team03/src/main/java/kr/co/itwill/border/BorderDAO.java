@@ -29,6 +29,11 @@ public class BorderDAO {
 	public List<HashMap<String, Object>> cart(String s_id){
 		return sqlSession.selectList("border.cart", s_id);
 	}//deliveryAdd() end
+	
+	//직접구매시 책정보 가져오기
+	public HashMap<String, Object> directborder(String isbn){
+		return sqlSession.selectOne("border.directborder", isbn);
+	}//directborder() end
 		
 	//보유포인트 가져오기
 	public int havepoint(String s_id){
@@ -37,19 +42,24 @@ public class BorderDAO {
 	}//deliveryAdd() end	
 	
 	//border_price(상품총가격)
-		public int border_price(String s_id) {
-			return sqlSession.selectOne("border.border_price", s_id);
-		}//border_price() end
+	public int border_price(String s_id) {
+		return sqlSession.selectOne("border.border_price", s_id);
+	}//border_price() end
 	
 	//주문번호생성위한중복개수조회
 	public String dateno(String border_date) {
 		return sqlSession.selectOne("border.dateno", border_date);
 	}//dateno() end
 	
-	//주문서테이블행추가
+	//장바구니구매, 직접구매: 주문서테이블행추가
 	public int insert(BorderDTO dto) {
 		return sqlSession.insert("border.insert" , dto);
 	}//insert() end
+	
+	//직접구매: 주문상세테이블행추가
+	public int directorderlistInsert(BorderDTO dto) {
+		return sqlSession.insert("border.directorderlistInsert", dto);
+	}//directorderlistInsert() end
 	
 	//주문상세테이블행추가
 	public int orderlistInsert(List<HashMap<String, Object>> list) {

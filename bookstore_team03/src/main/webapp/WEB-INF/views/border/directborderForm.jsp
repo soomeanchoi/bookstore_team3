@@ -22,21 +22,12 @@
 
 	
 	function book_Price(){//책 수량 수정에 따른 결제금액 변경
-		var cnt = 0;
-		var price = 0;
-		var total=0;
-		
-	 	for(var i = 0; i < orderlist_cnt.length; i++){
-			cnt = Number(orderlist_cnt.item(i).value);
-			price = Number(book_price.item(i).innerText);
-			booktot_Price.item(i).innerText = cnt*price;
-			
-			total += cnt*price;
-		}//for end
+		var cnt = document.getElementById("orderlist_cnt").value;
+		var price = document.getElementById("book_price").innerText;
+		var total=cnt* price;;
 		
 		document.getElementById("border_oprice").innerText = total;
 		document.getElementById("addpoint").innerText = parseInt(total/10);
-		
 	}//book_price() end
 	
 		
@@ -89,13 +80,8 @@
 </head>
 <body>
 
-	<form id="orderForm" name="orderForm" method="post" action="insert" onsubmit="return ordercheck()">
+	<form id="orderForm" name="orderForm" method="post" action="directinsert" onsubmit="return ordercheck()">
 		<table border="1" class="table table-bordered">
-  <%--   <tr>
-        <td>주문번호</td>
-        <td> <input type="text" name="border_no" id="border_no" value="${border_no}"></td>
-    </tr> --%>
-    
     <tr>
         <td>수취인 성명</td>
         <td> <input type="text" name="border_name" id="border_name" required> </td>
@@ -121,7 +107,7 @@
     </tr>
     </table>	
     
-    <%--장바구니상품 불러오기 --%>
+    <%--구매할책정보 불러오기 --%>
     <table border="1" >
 	
     <tr>	
@@ -139,8 +125,8 @@
     		${isbn}
     		</td>
     		<td>추가요망</td>
-    		<td>${book_name}</td>
-    		<td id="book_price" class="book_price">${book_price}</td>
+    		<td>${directborder.book_name}</td>
+    		<td id="book_price" class="book_price">${directborder.book_price}</td>
     		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
     			<option value="1" selected>1</option>
     			<option value="2">2</option>
@@ -149,13 +135,13 @@
     			<option value="5">5</option>
     		</select>
     		</td>
-    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${book_price}" pattern="#,###"/></td>	
+    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${directborder.book_price}" pattern="#,###"/></td>	
     </tr>
     	<tr>
 		<td>상품총금액</td>
-		<td id="border_oprice" colspan="5"> ${border_price} </td>
+		<td id="border_oprice" colspan="5"> ${directborder.book_price} </td>
 		</tr>
-    </table><%--장바구니상품끝 --%>
+    </table>
     <table border="1">
     	<tr>
 		<td>사용할 포인트</td>
@@ -167,15 +153,15 @@
 		</tr>    	
 	    <tr>
 		<td>적립예정 포인트</td>
-		<td id="addpoint">${addpoint}</td>
+		<td id="addpoint">${directborder.book_price}</td>
 		</tr>
 		<tr>
 		<td>결제금액</td>
-		<td id="border_price"> ${border_price} </td>
+		<td id="border_price"> ${directborder.book_price} </td>
 		</tr>
 	</table>	
 	
-	<input type="submit" value=" 결제하기" onclick="location.href='/border/'msgView">
+	<input type="submit" value=" 결제하기" onclick="location.href='/border/msgView'">
 	</form>
 
 

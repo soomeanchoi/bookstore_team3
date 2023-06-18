@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -46,7 +47,7 @@ public class DeliveryAddCont {
 	}//end
 
 	@RequestMapping("/insert")
-	public String insert(DeliveryAddDTO dto, HttpSession session) {
+	public String insert(@ModelAttribute DeliveryAddDTO dto, HttpSession session) {
 		//로그인했다면
 		//String s_id=session.getAttribute("s_id");		
 		String s_id = "kgukid38@naver.com";//임시아이디
@@ -58,22 +59,23 @@ public class DeliveryAddCont {
 	}//insert() end
 
 	@RequestMapping("/delete")
-	public String delete(DeliveryAddDTO dto) {
+	public String delete(@ModelAttribute DeliveryAddDTO dto) {
 		deliveryAddDao.delete(dto);//테이블 행 삭제
 		return "redirect:/deliveryAdd/list";
 	}//delete() end
 
-	@RequestMapping("/update/{deliv_no}")
-	public ModelAndView detail(DeliveryAddDTO dto) {
+	@RequestMapping("/delivUpdateForm/{deliv_no}")
+	public ModelAndView detail(@ModelAttribute DeliveryAddDTO dto) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("deliveryAdd/update");
+		mav.setViewName("deliveryAdd/delivUpdateForm");
 		mav.addObject("detail", deliveryAddDao.detail(dto.getDeliv_no()));
 
 		return mav;
 	}//detail() end
 	
 	@RequestMapping("/update")
-	public String update(DeliveryAddDTO dto) {
+	public String update(@ModelAttribute DeliveryAddDTO dto) {
+		System.out.println(dto.toString());
 		deliveryAddDao.update(dto);
 		return "redirect:/deliveryAdd/list";
 	}//update() end
