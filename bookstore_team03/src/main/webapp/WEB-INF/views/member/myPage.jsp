@@ -11,12 +11,12 @@
 </head>
 <body>
 	<h2>마이페이지</h2>
-	
+
 	<button onclick="location.href='modify';">회원정보 수정</button>
 	<button onclick="location.href='deleteView';">회원탈퇴</button>
 	<form name="profilebox" id="profilebox" style="text-align: left;"><!-- myscript.js -->
 			<div id="font" style="font-size: 30px;"><h6>Profile</h6></div>
-	
+	<button onclick="location.href='logout';">로그아웃</button>
 	아이디<br>
 	${member_id}<br>
 	이름<br>

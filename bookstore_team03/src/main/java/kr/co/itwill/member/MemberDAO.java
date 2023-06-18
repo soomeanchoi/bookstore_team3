@@ -4,9 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.itwill.member.MemberDTO;
 
@@ -21,7 +23,9 @@ public class MemberDAO {
     @Autowired
     SqlSession sqlSession;
    
-    
+    public List<MemberDTO> List(String member_id){
+        return sqlSession.selectList("member.list", member_id);
+    }//list() end
     
     public int insert(MemberDTO dto) {
     	return sqlSession.insert("member.insert", dto);
@@ -39,8 +43,24 @@ public class MemberDAO {
     	return sqlSession.delete("member.delete", dto);
     }
     
-    public int checkId(String member_id) {
-    	return sqlSession.selectOne("member.checkId" , member_id);
+    public int idCheck(String member_id) {
+    	return sqlSession.selectOne("member.idCheck" , member_id);
     }
-    public List<String> profilelist(String member_id) {return sqlSession.selectList("member.profilelist", member_id);}
+    
+    public int dropinsert(MemberDTO dto) {
+    	return sqlSession.insert("member.dropinsert", dto);
+    }
+    
+    public List<String> profilelist(String member_id) {
+    	return sqlSession.selectList("member.profilelist", member_id);
+    }
+
+    public String findId(@Param("member_name") String member_name, @Param("member_phone") String member_phone) {
+    	Map<String, String> params = new HashMap<>();
+        params.put("member_name", member_name);
+        params.put("member_phone", member_phone);
+        return sqlSession.selectOne("member.findId", params);
+    }
+
+	
 }
