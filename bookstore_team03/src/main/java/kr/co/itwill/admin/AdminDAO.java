@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.co.itwill.dropmem.DropMemberDTO;
 import kr.co.itwill.member.MemberDTO;
 
 @Repository
@@ -22,6 +23,10 @@ public class AdminDAO {
 	
 	public List<MemberDTO> List(String id){
         return sqlSession.selectList("admin.list", id);
+    }//list() end
+	
+	public List<MemberDTO> dropList(String id){
+        return sqlSession.selectList("admin.droplist", id);
     }//list() end
 	
 }
