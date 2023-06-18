@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- writer.xml -->
+
+<mapper namespace="writer">
+
+    <select id="list" resultType="java.util.Map">
+        SELECT writer_no, writer_name, writer_birth, writer_place, writer_imgname, writer_imgsize, writer_info
+        FROM writer
+    </select>
+
+    <insert id="insert" parameterType="java.util.Map">
+        insert into writer(writer_no, writer_name, writer_work, writer_birth, writer_place,writer_info, writer_imgname, writer_imgsize)
+        values (#{writer_no}, #{writer_name}, #{writer_work}, #{writer_birth}, #{writer_place}, #{writer_info}, #{writer_imgname}, #{writer_imgsize})
+    </insert>
+
+    <select id="search" parameterType="String" resultType="java.util.Map">
+        select writer_no, writer_name, writer_work, writer_birth, writer_place,writer_info, writer_imgname, writer_imgsize
+        from writer
+        where writer_name LIKE #{keyword}
+        order by writer_name
+    </select>
+
+    <select id="detail" resultType="java.util.Map" parameterType="int">
+        select writer_no, writer_name, writer_work, writer_birth, writer_place, writer_imgname, writer_imgsize, writer_info
+        from writer
+        where writer_no = #{writer_no}
+    </select>
+	
+	<select id="filename" resultType="String" parameterType="int">
+        SELECT writer_imgname
+        FROM writer
+        WHERE writer_no=#{writer_no}
+    </select>
+    
+    <delete id="delete" parameterType="int">
+        delete from writer
+        where writer_no=#{writer_no}
+    </delete>
+
+    <update id="update" parameterType="java.util.Map">
+        update writer
+        set writer_name=#{writer_name}, writer_work=#{writer_work}, writer_birth=#{writer_birth}, writer_place=#{writer_place},
+            writer_info=#{writer_info}, writer_imgname=#{writer_imgname}, writer_imgsize=#{writer_imgsize}
+        where writer_no=#{writer_no}
+    </update>
+
+</mapper>     
+
+
+
+
