@@ -6,17 +6,6 @@
 <meta charset="UTF-8">
 <title>회원가입</title>
 <link rel="stylesheet" href="/resources/css/member/join.css">
-<style>
-.id_ok{
-color:#008000;
-display: none;
-}
-
-.id_already{
-color:#e61919; 
-display: none;
-}
-</style>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 
@@ -27,34 +16,38 @@ display: none;
 		<tr>
 			<th style="text-align: left">아이디</th>
 			<td style="text-align: left">
-				<input type="text" name="member_id" id="member_id" oninput="idCheck()" size="20" maxlength="20"><br>
-				<span class="id_ok">사용 가능한 이메일입니다.</span>
- 				<span class="id_already">이미 사용 중인 이메일입니다.</span>
-			
+				<input type="text" name="member_id" id="member_id" size="20" maxlength="20">
+				
+				<input type="button" value="EMAIL 중복확인" onclick="checkId()"><!-- myscript.js 작성 -->
 			</td>
 		</tr>
+<%--
+	String member_id1 = request.getParameter("member_id1");
+	String member_id2 = request.getParameter("member_id2");
+	String member_id = member_id1 + "@" + member_id2;
+--%> 
 		<tr>
 			<th style="text-align: left">비밀번호</th>
 			<td style="text-align: left">
-				<input type="password" name="member_pw" id="member_pw" size="10" maxlength="10" required><br>
+				<input type="password" name="member_pw" id="member_pw" size="10" maxlength="10" required>
 			</td>
 		</tr> 
 		<tr>
 			<th>비밀번호 확인</th>
 			<td style="text-align: left">
-				<input type="password" name="member_pw2" id="member_pw2" size="10" maxlength="10" required><br>
+				<input type="password" name="member_pw2" id="member_pw2" size="10" maxlength="10" required>
 			</td>
 		</tr> 
 		<tr>
 			<th style="text-align: left">이름</th>
 			<td style="text-align: left">
-				<input type="text" name="member_name" id="member_name" size="5" maxlength="5" required><br>
+				<input type="text" name="member_name" id="member_name" size="5" maxlength="5" required>
 			</td>
 		</tr> 
 		<tr>
 			<th style="text-align: left">생년월일/성별</th>
 			<td style="text-align: left">
-				<input type="text" name="member_birth" id="member_birth" size="8" maxlength="8" required><br>
+				<input type="text" name="member_birth" id="member_birth" size="8" maxlength="8" required>
 				<select name="member_gender">
 					<option>선택</option>
 					<option value="male">남</option>
@@ -439,30 +432,38 @@ display: none;
 			return false;
 		}//if end
 	}//send() end
-	    
 
-// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
-function idCheck(){
-       var member_id = $('#member_id').val(); //id값이 "id"인 입력란의 값을 저장
-       $.ajax({
-           url:'./idCheck', //Controller에서 요청 받을 주소
-           type:'post', //POST 방식으로 전달
-           data:{member_id:member_id},
-           success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
-               if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
-                   $('.id_ok').css("display","inline-block"); 
-                   $('.id_already').css("display", "none");
-               } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
-                   $('.id_already').css("display","inline-block");
-                   $('.id_ok').css("display", "none");
-                   alert("아이디를 다시 입력해주세요");
-                   $('#member_id').val('');
-               }
-           },
-           error:function(){
-               alert("에러입니다");
-           }
-       });
-       };
+	$(function(){
+		 
+	    
+	    
+	    $("#checkId").click(function(){
+	    
+	        let member_id = $("#member_id").val();
+	         
+	        $.ajax({
+	            type:'post', //post 형식으로 controller 에 보내기위함!!
+	            url:"/spring/checkId.do", // 컨트롤러로 가는 mapping 입력
+	            data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
+	            success: function(data){ 
+	                if(data == "N"){ // 만약 성공할시
+	                    result = "사용 가능한 아이디입니다.";
+	                    $("#result_checkId").html(result).css("color", "green");
+	                    $("#member_pw").trigger("focus");
+	                 
+	             }else{ // 만약 실패할시
+	                 result="이미 사용중인 아이디입니다.";
+	                     $("#result_checkId").html(result).css("color","red");
+	                     $("#member_id").val("").trigger("focus");
+	             }
+	                 
+	         },
+	            error : function(error){alert(error);}
+	        });
+	        
+	    });
+	    
+	});
+	
 </script>
 </html>

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>회원 리스트</title>
+<title>데이터 띄워보기 테스트 ~ </title>
 </head>
 <body>
 	<h2>회원 리스트</h2>

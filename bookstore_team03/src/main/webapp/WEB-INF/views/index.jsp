@@ -161,10 +161,6 @@
 			</div>
 		</div>
 	</div>
-	<body>
- 
-</body>
-	
 </body>
 <script src="js/script.js"></script>
 </html>

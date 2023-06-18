@@ -203,9 +203,7 @@
 
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
-                        a += '		댓글번호:' + value.review_no + 
-                        ' / 작성자:' + value.profile_name +
-                        ' / 평점:' + value.review_score + ' ' + value.review_date;
+                        a += '		댓글번호:' + value.review_no + ' / 작성자:' + value.profile_no + ' / 평점:' + value.review_score + ' ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
                         a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
                         a += '	</div>';
