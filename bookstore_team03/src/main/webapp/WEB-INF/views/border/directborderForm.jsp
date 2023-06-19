@@ -80,7 +80,7 @@
 </head>
 <body>
 
-	<form id="orderForm" name="orderForm" method="post" action="directinsert" onsubmit="return ordercheck()">
+	<form id="directborderForm" name="directborderForm" method="post" action="directinsert" onsubmit="return ordercheck()">
 		<table border="1" class="table table-bordered">
     <tr>
         <td>수취인 성명</td>
@@ -120,22 +120,23 @@
     	<!-- <th>삭제</th> -->
     </tr>
 	<tr>
-    		<td>
-    		 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${isbn}">
-    		${isbn}
-    		</td>
-    		<td>추가요망</td>
-    		<td>${directborder.book_name}</td>
-    		<td id="book_price" class="book_price">${directborder.book_price}</td>
-    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
-    			<option value="1" selected>1</option>
-    			<option value="2">2</option>
-    			<option value="3">3</option>
-    			<option value="4">4</option>
-    			<option value="5">5</option>
-    		</select>
-    		</td>
-    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${directborder.book_price}" pattern="#,###"/></td>	
+   		<td>
+   		 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${isbn}">
+   		${isbn}
+   		</td>
+   		<td>추가요망</td>
+   		<td>${directborder.book_name}</td>
+   		<td id="book_price" class="book_price">${directborder.book_price}</td>
+   		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
+   			<option value="${orderlist_cnt}">${orderlist_cnt}</option>
+   			<option value="1">1</option>
+   			<option value="2">2</option>
+   			<option value="3">3</option>
+   			<option value="4">4</option>
+   			<option value="5">5</option>
+   		</select>
+   		</td>
+   		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${directborder.book_price}" pattern="#,###"/></td>	
     </tr>
     	<tr>
 		<td>상품총금액</td>
@@ -161,7 +162,7 @@
 		</tr>
 	</table>	
 	
-	<input type="submit" value=" 결제하기" onclick="location.href='/border/msgView'">
+	<input type="submit" value=" 결제하기">
 	</form>
 
 

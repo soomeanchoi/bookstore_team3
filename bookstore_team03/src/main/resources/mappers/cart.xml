@@ -8,7 +8,7 @@
 	
 	<insert id="insert" parameterType="kr.co.itwill.cart.CartDTO">
 		INSERT INTO cart(isbn, member_id, cart_qty, cart_date)
-		VALUES(#{isbn}, #{s_id}, #{cart_qty}, current_timestamp());
+		VALUES(#{isbn}, #{member_id}, #{cart_qty}, current_timestamp());
 	</insert>
 	
 	<select id="list" resultType="java.util.Map" parameterType="String">

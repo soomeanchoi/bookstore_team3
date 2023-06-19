@@ -51,17 +51,23 @@ public class BorderDAO {
 		return sqlSession.selectOne("border.dateno", border_date);
 	}//dateno() end
 	
-	//장바구니구매, 직접구매: 주문서테이블행추가
+	//직접구매: 주문서테이블행추가
+	public int directinsert(BorderDTO dto) {
+		return sqlSession.insert("border.insert" , dto);
+	}//insert() end
+	
+	//장바구니구매: 주문서테이블행추가
 	public int insert(BorderDTO dto) {
+		//System.out.println(sqlSession.insert("border.insert" , dto));
 		return sqlSession.insert("border.insert" , dto);
 	}//insert() end
 	
 	//직접구매: 주문상세테이블행추가
-	public int directorderlistInsert(BorderDTO dto) {
-		return sqlSession.insert("border.directorderlistInsert", dto);
+	public int directorderlistInsert(HashMap<String, Object> map) {
+		return sqlSession.insert("border.directorderlistInsert", map);
 	}//directorderlistInsert() end
 	
-	//주문상세테이블행추가
+	//장바구니구매: 주문상세테이블행추가
 	public int orderlistInsert(List<HashMap<String, Object>> list) {
 		return sqlSession.insert("border.orderlistinsert", list);
 	}//orderlistInsert() end

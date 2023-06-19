@@ -1,4 +1,4 @@
-package kr.co.itwill.admin;
+/*package kr.co.itwill.admin;
 
 import java.util.List;
 
@@ -25,3 +25,4 @@ public class AdminDAO {
     }//list() end
 	
 }
+*/

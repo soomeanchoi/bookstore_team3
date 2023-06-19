@@ -55,14 +55,20 @@
 		WHERE border_no like #{border_date}||'%'
 	</select>
 	
-	<!-- 주문서테이블행추가 -->
+	<!-- 장바구니구매: 주문서테이블행추가 -->
 	<insert id="insert" parameterType="kr.co.itwill.border.BorderDTO">		
 		INSERT INTO border(border_no, member_id, border_name, border_phone, border_price, border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2)
 		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
 	</insert>
 	
+	<!-- 직접구매:  주문서테이블행추가 -->
+	<!-- <insert id="directinsert" parameterType="kr.co.itwill.border.BorderDTO">		
+		INSERT INTO border(border_no, member_id, border_name, border_phone, border_price, border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2)
+		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
+	</insert> -->
+	
 	<!-- 직접구매: 주문상세행추가 -->
-	<insert id="directorderlistInsert" parameterType="kr.co.itwill.border.BorderDTO">
+	<insert id="directorderlistInsert" parameterType="java.util.HashMap">
 		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
 		VALUES("${isbn}", "${border_no}", "${orderlist_cnt}")
 	</insert>
