@@ -93,7 +93,7 @@ public class BookCont {
         mav.addObject("score",bookDao.reviewScore(isbn));
         return mav;
     }//detail() end
-
+        
     @RequestMapping("/delete")
     public String delete(String isbn, HttpServletRequest req) {
         System.out.println("isbn = " + isbn);
@@ -146,9 +146,5 @@ public class BookCont {
             return "redirect:/book/list";
 
         }//update() end
-
-
-
-
 
 }//BookCont end

@@ -21,16 +21,12 @@ public class CartDAO {
 		return sqlSession.insert("cart.insert", dto);
 	}//cartInsert() end
 	
-	public List<Map<String, Object>> cartList(String id){
-		return sqlSession.selectList("cart.list", id);
+	public List<Map<String, Object>> cartList(String s_id){
+		return sqlSession.selectList("cart.list", s_id);
 	}//cartList() end
 	
 	public int cartDelete(HashMap<String, Object> map) {
 		return sqlSession.delete("cart.delete", map);
 	}//cartDelete() end
-	
-	public int cartUpdate(HashMap<String, Object> map) {
-		return sqlSession.update("cart.update", map);
-	}//cartUpdate() end
 	
 }//class end

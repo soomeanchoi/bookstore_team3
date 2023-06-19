@@ -1,4 +1,4 @@
-package kr.co.itwill.admin;
+/*package kr.co.itwill.admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,3 +51,4 @@ public class AdminCont {
     }//list() end
 	
 }
+*/

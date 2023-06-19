@@ -7,13 +7,16 @@ public class BorderDTO {
     private String border_name; 
     private String border_phone; 
     private int border_price; 
-    private int border_paycode; 
     private String border_date; 
     private String border_msg;
+    private int border_usepoint;
+    private String border_postno;
+    private String border_add1;
+    private String border_add2;
     
     public BorderDTO() {
-		System.out.println("----Border() 객체생성");
-	}//end
+		System.out.println("----BorderDTO() 객체생성");
+	}// end
 
 	public String getBorder_no() {
 		return border_no;
@@ -63,14 +66,6 @@ public class BorderDTO {
 		this.border_price = border_price;
 	}
 
-	public int getBorder_paycode() {
-		return border_paycode;
-	}
-
-	public void setBorder_paycode(int border_paycode) {
-		this.border_paycode = border_paycode;
-	}
-
 	public String getBorder_date() {
 		return border_date;
 	}
@@ -87,11 +82,44 @@ public class BorderDTO {
 		this.border_msg = border_msg;
 	}
 
+	public int getBorder_usepoint() {
+		return border_usepoint;
+	}
+
+	public void setBorder_usepoint(int border_usepoint) {
+		this.border_usepoint = border_usepoint;
+	}
+
+	public String getBorder_postno() {
+		return border_postno;
+	}
+
+	public void setBorder_postno(String border_postno) {
+		this.border_postno = border_postno;
+	}
+
+	public String getBorder_add1() {
+		return border_add1;
+	}
+
+	public void setBorder_add1(String border_add1) {
+		this.border_add1 = border_add1;
+	}
+
+	public String getBorder_add2() {
+		return border_add2;
+	}
+
+	public void setBorder_add2(String border_add2) {
+		this.border_add2 = border_add2;
+	}
+
 	@Override
 	public String toString() {
 		return "BorderDTO [border_no=" + border_no + ", deliv_no=" + deliv_no + ", member_id=" + member_id
 				+ ", border_name=" + border_name + ", border_phone=" + border_phone + ", border_price=" + border_price
-				+ ", border_paycode=" + border_paycode + ", border_date=" + border_date + ", border_msg=" + border_msg
+				+ ", border_date=" + border_date + ", border_msg=" + border_msg + ", border_usepoint=" + border_usepoint
+				+ ", border_postno=" + border_postno + ", border_add1=" + border_add1 + ", border_add2=" + border_add2
 				+ "]";
 	}
     

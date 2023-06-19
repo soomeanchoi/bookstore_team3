@@ -164,6 +164,20 @@
 		    <artifactId>jetty-util-ajax</artifactId>
 		    <version>11.0.12</version>
 		</dependency>
+		
+		<!--일정 주기마다 동작하게 하는 의존성-->
+		<!-- Quartz scheduler -->
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz</artifactId>
+		    <version>2.2.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+		    <artifactId>quartz-jobs</artifactId>
+		    <version>2.2.1</version>
+		</dependency>
 
 		<!-- 메일 관련 api -->
 		<dependency>
@@ -173,12 +187,12 @@
 		</dependency>
 		
 <!-- 사용자 추가 라이브러리 끝 -->
-
+<!--
 		<dependency>
 			<groupId>kr.co</groupId>
 			<artifactId>maven</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>

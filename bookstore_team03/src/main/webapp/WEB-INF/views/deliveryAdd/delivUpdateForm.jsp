@@ -12,7 +12,10 @@
 <script src="/js/jquery-3.6.4.min.js"></script>
 	
 <script>
-	
+		function update(){
+		    document.deliveryAddForm.action="/deliveryAdd/update";
+		    document.deliveryAddForm.submit();
+		}//book_update() end
 </script>
 </head>
 
@@ -24,10 +27,10 @@
 	
 	<table border='1' class="type01">
 	<tr>
-		<th>${deliv_no}</th>
+		<td><input type="hidden"  name="deliv_no" id="deliv_no" value="${detail.deliv_no}"></td>
 		<th>우편번호</th>
 		<td style="text-align:left">
-		<input type="text" name="deliv_postno" id="deliv_postno" size="7" value="${detail.deliv_postno}" readonly>
+		<input type="text" name="deliv_postno" id="deliv_postno" size="7" value="${detail.deliv_postno}" readonly required="required">
 		<input type="button" value="주소찾기" onclick="DaumPostcode()">
 		</td>
 	</tr>
@@ -35,7 +38,7 @@
 	<tr>
 		<th>주소</th>
 		<td style="text-align:left">
-		<input type="text" name="deliv_add1" id="deliv_add1" size="45" value="${detail.deliv_add1}" readonly>
+		<input type="text" name="deliv_add1" id="deliv_add1" size="45" value="${detail.deliv_add1}" readonly required="required">
 		</td>
 	</tr>
 	
@@ -49,7 +52,7 @@
 	
 	<br>
 	<div>
-		<input type="submit" value="배송지수정">
+		<input type="button" value="배송지수정" onclick="update()">
 		<input type="reset" value="취소">
 		<input type="button" value="배송지목록으로" onclick="location.href='/deliveryAdd/list'">
 	</div>

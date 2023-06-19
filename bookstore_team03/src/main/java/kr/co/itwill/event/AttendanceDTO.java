@@ -1,12 +1,12 @@
 package kr.co.itwill.event;
 
-public class AttendenceDTO {
+public class AttendanceDTO {
 
 	private int attend_no;
 	private String member_id; 
 	private String attend_date;  
 	
-	public AttendenceDTO() {
+	public AttendanceDTO() {
 		System.out.println("----AttendenceDTO() 객체생성");
 	}// end
 
