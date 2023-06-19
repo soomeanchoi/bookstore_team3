@@ -11,9 +11,13 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.itwill.review.ReviewDTO;
 
 
 
@@ -39,22 +43,22 @@ public class ProfileCont {
 	
 	@RequestMapping("/insert")
     public String insert(@RequestParam Map<String, Object> map
-    		          ,@RequestParam MultipartFile profile_imgname
+    		          ,@RequestParam MultipartFile profile_img
     		          ,HttpServletRequest req
     		          ,HttpSession session) throws Exception{ 
 		
 		String member_id = (String) session.getAttribute("member_id");
 		
-		String filename="-";
-    	long filesize=0;
+		String profile_imgname="-";
+    	long profile_imgsize=0;
     	if(profile_imgname != null && !profile_imgname.isEmpty()) { //파일이 존재한다면
-    		filename=profile_imgname.getOriginalFilename();
-    		filesize=profile_imgname.getSize();
+    		profile_imgname=profile_img.getOriginalFilename();
+    		profile_imgsize=profile_img.getSize();
     		try {
     			
     			ServletContext application=req.getSession().getServletContext();
     			String path=application.getRealPath("/storage");  //실제 물리적인 경로
-    			profile_imgname.transferTo(new File(path + "\\" + filename)); //파일저장
+    			profile_img.transferTo(new File(path + "\\" + profile_imgname)); //파일저장
     			
     			
     		}catch (Exception e) {
@@ -63,8 +67,8 @@ public class ProfileCont {
     	}//if end
     	
     	map.put("member_id", member_id);
-    	map.put("filename", filename);
-    	map.put("filesize", filesize);
+    	map.put("profile_imgname", profile_imgname);
+    	map.put("profile_imgsize", profile_imgsize);
     	
     	profileDao.insert(map);
     	
@@ -72,7 +76,7 @@ public class ProfileCont {
 	}
 	
 	
-	@RequestMapping("/getlist")
+	@RequestMapping("/list")
 	public String list(HttpSession session,
 							Model model) throws Exception {
 		
@@ -82,11 +86,17 @@ public class ProfileCont {
 		if(profile_name != null) {
 			model.addAttribute("profile_name", profile_name);
 		}
-		
 		return "redirect:/member/myPage";
 	}
 	
-	
+	@RequestMapping("/detail/{member_id}")
+    public ModelAndView detail(@PathVariable String member_id) {
+        ModelAndView mav = new ModelAndView();
+        ProfileDTO review=new ProfileDTO();
+        mav.setViewName("profile/detail");
+        mav.addObject("profile", profileDao.detail(member_id));
+        return mav;
+    }//detail() end
 
 	
 }

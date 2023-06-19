@@ -16,7 +16,9 @@
     <title>detail.jsp</title>
     <script src="/js/jquery-3.6.4.min.js"></script>
 
-
+  <!-- Bootstrap JavaScript 포함 -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     <script>
         function book_update(){
             // alert();
@@ -43,6 +45,16 @@
     </script>
 
 </head>
+<style>
+.popover {
+    max-width: 400px; /* Popover의 최대 너비 설정 */
+    background-color: #f8f9fa; /* Popover의 배경색 설정 */
+    border: 1px solid #ced4da; /* Popover의 테두리 설정 */
+    border-radius: 5px; /* Popover의 테두리 반경 설정 */
+    padding: 10px; /* Popover의 내부 여백 설정 */
+    color: #343a40; /* Popover의 글자색 설정 */
+}
+</style>
 <body>
 
     <h3>상세보기</h3>
@@ -204,7 +216,7 @@
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
                         a += '		댓글번호:' + value.review_no + 
-                        ' / 작성자:' + value.profile_name +
+                        ' / 작성자: <a href="/profile/detail/{member_id}" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + value.profile_name + '님의 프로필 보기">' + value.profile_name + '</a>' +
                         ' / 평점:' + value.review_score + ' ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
                         a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
@@ -218,6 +230,14 @@
 
                     $(".reviewList").html(a);
 
+                 // Initialize popovers
+                    $('[data-toggle="popover"]').popover({
+                        template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>',
+                        container: 'body',
+                        placement: 'bottom',
+                        trigger: 'hover',
+                        html: true
+                    });
                 }//success end
             }); //ajax() end
         }//reviewList() end

@@ -62,5 +62,16 @@ public class MemberDAO {
         return sqlSession.selectOne("member.findId", params);
     }
 
+    public int findPw(@Param("member_name") String member_name, @Param("member_id") String member_id) {
+    	Map<String, String> params = new HashMap<>();
+        params.put("member_name", member_name);
+        params.put("member_id", member_id);
+        return sqlSession.selectOne("member.findPw", params);
+    }
+    
+	public int updatePw(MemberDTO dto) {
+		return sqlSession.update("member.updatePw", dto);
+	}
+	
 	
 }

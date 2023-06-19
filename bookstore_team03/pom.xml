@@ -56,6 +56,12 @@
 			<version>1.4.7</version>
 		</dependency>
 		
+		<!-- SpringBoot mailService -->
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-mail</artifactId>
+	    </dependency>
+		
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>jstl</artifactId>
@@ -159,6 +165,13 @@
 		    <version>11.0.12</version>
 		</dependency>
 
+		<!-- 메일 관련 api -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-email</artifactId>
+			<version>1.2</version>
+		</dependency>
+		
 <!-- 사용자 추가 라이브러리 끝 -->
 
 		<dependency>

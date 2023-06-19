@@ -17,11 +17,11 @@
 			<br><br>
 			<div>
 				<input class="loginform" type="text" name="member_id" id="member_id" placeholder="EMAIL" maxlength="20" required>
-				
 			</div>
 			<div>
 				<input class="loginform" type="password" name="member_pw" id="member_pw" placeholder="PASSWORD" maxlength="10" required>
 			</div>
+			<br>
 				<label><input type="checkbox" name="member_id" value="SAVE" style="font-size: 5px">&nbsp;&nbsp;ID memory</label>
 			<br><br><br><br>
 				
@@ -40,6 +40,15 @@
 
 	
 </body>
-
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script>
+    $(document).ready(function() {
+        let message = "[[${msg}]]";
+        if (message != "") {
+            alert(message);
+        }else {
+        }
+    })
+</script>
 
 </html>

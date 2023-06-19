@@ -69,6 +69,8 @@
 </style>
 <body>
 <%@ include file="/WEB-INF/views/member/findIdModal.jsp" %>
+<%-- <%@ include file="/WEB-INF/views/member/findPwModal.jsp" %> --%>
+
 		<form style="text-align: center;">	
 			<div class="full">
 				<div class="container">
@@ -121,7 +123,7 @@
 							</div>
 							<br><br>
 							<div class="form-group">
-								<button type="button" id='find_pw' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" onclick="findPw_click()">찾기</button>
+								<button type="button" id='checkEmail' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
 								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
 							</div>
 							</div>

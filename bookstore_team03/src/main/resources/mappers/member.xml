@@ -62,11 +62,11 @@
 	</select>
 	
 	<select id="findPw" resultType="String">
-		SELECT * FROM member WHERE member_id=#{member_id} AND member_name=#{member_name} AND member_phone=#{member_phone}
+		SELECT nvl(member_id, 0) FROM member WHERE member_id=#{member_id} AND member_phone=#{member_phone}
 	</select>
 	
 	<update id="updatePw">
-		update member SET member_pw=#{member_pw} where member_id=#{member_id}
+		UPDATE member SET member_pw=#{member_pw} where member_id=#{member_id}
 	</update>
 	
 </mapper>     
