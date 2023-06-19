@@ -102,9 +102,9 @@
         </div>
         <div>
           <!-- mypage icon -->
-         
+
             <svg
-              class="myPage"
+              class="mypage"
               xmlns="http://www.w3.org/2000/svg"
               id="Outline"
               viewBox="0 0 24 24"
@@ -119,7 +119,7 @@
                 d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z"
               />
             </svg>
-          
+
         </div>
       </div>
     </header>
