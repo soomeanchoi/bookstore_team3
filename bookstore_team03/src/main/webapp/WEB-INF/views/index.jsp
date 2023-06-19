@@ -119,57 +119,72 @@
         <h1>당신을 기다리는<br> Best Seller</h1>
         <div class="bestseller">
           <div class="bestseller-slide">
-          <div class="book-cont">
-            <div class="bestseller-book-c">book cover</div>
-            <div class="book-title">book title 책 제목</div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788937427831.jpg" alt="책 표지">
+              </div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788925576633.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788934981190.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192389073.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788901272580.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791139711189.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+        </div>
+        <!-- 반복용입니다. -->
+          <div class="bestseller-slide">
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788937427831.jpg" alt="책 표지">
+              </div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788925576633.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788934981190.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192389073.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788901272580.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
+            <div class="book-cont">
+              <div class="bestseller-book-c">
+                <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791139711189.jpg" alt="책 표지"></div>
+              <div class="book-title">book title 책 제목</div>
+            </div>
           </div>
-          <div class="book-cont">
-            <div class="bestseller-book-c">book cover</div>
-            <div class="book-title">book title 책 제목</div>
-          </div>
-          <div class="book-cont">
-            <div class="bestseller-book-c">book cover</div>
-            <div class="book-title">book title 책 제목</div>
-          </div>
-          <div class="book-cont">
-            <div class="bestseller-book-c">book cover</div>
-            <div class="book-title">book title 책 제목</div>
-          </div>
-          <div class="book-cont">
-            <div class="bestseller-book-c">book cover</div>
-            <div class="book-title">book title 책 제목</div>
-          </div>
-          <div class="book-cont">
-            <div class="bestseller-book-c">book cover</div>
-            <div class="book-title">book title 책 제목</div>
-          </div>
-        </div>
-        <div class="bestseller-slide">
-        <div class="book-cont">
-          <div class="bestseller-book-c">book cover</div>
-          <div class="book-title">book title 책 제목</div>
-        </div>
-        <div class="book-cont">
-          <div class="bestseller-book-c">book cover</div>
-          <div class="book-title">book title 책 제목</div>
-        </div>
-        <div class="book-cont">
-          <div class="bestseller-book-c">book cover</div>
-          <div class="book-title">book title 책 제목</div>
-        </div>
-        <div class="book-cont">
-          <div class="bestseller-book-c">book cover</div>
-          <div class="book-title">book title 책 제목</div>
-        </div>
-        <div class="book-cont">
-          <div class="bestseller-book-c">book cover</div>
-          <div class="book-title">book title 책 제목</div>
-        </div>
-        <div class="book-cont">
-          <div class="bestseller-book-c">book cover</div>
-          <div class="book-title">book title 책 제목</div>
-        </div>
-      </div>
       </div>
       </div>
       </section>
