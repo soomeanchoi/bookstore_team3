@@ -38,6 +38,8 @@ input {
 .id-save {
     width: 20px;
     height: 20px;
+    position: relative;
+    top: 5px;
 }
 
 .login-btn {
@@ -68,11 +70,19 @@ input {
     background-color: #808080;
 } 
 .kakao-login {
-    margin: 0 auto;
     width: 70px;
     height: 70px;
     border-radius: 50px;
     background-color: #ffe812;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.sign-up {
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: #117cd9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -85,4 +95,10 @@ input {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+.icon-flex {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
 }
