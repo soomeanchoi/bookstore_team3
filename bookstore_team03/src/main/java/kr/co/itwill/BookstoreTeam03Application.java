@@ -5,6 +5,7 @@ import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -13,13 +14,18 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import kr.co.itwill.event.Qscheduler;
+
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class BookstoreTeam03Application {
+	
+	@Autowired
+	private Qscheduler scheduler;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreTeam03Application.class, args);
-	}
-
+	}//main end
+	
 	
 	@Bean
     public DataSource dataSource() {

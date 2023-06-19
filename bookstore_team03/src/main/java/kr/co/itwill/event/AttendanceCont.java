@@ -18,6 +18,7 @@ public class AttendanceCont {
 	@Autowired
 	AttendanceDAO attendanceDao;
 	
+	//출석현황조회
 	@RequestMapping("/attendance")
 	public ModelAndView attendance(HttpSession session) {
 		
@@ -28,15 +29,17 @@ public class AttendanceCont {
 		mav.setViewName("event/attendance");// /WEB-INF/cart/list.jap
 		mav.addObject("attendance", attendanceDao.attendDate(s_id));
 		
+		//출석횟수조회
 		int attendCnt = attendanceDao.attendCnt(s_id);
+		System.out.println(mav);
 		mav.addObject("attendCnt", attendCnt);
-		
 		
 		return mav;
 	}//attendance end
 	
 	@RequestMapping("/makeAttend")
-	public ModelAndView makeAttend(HttpSession session) {
+	public String makeAttend(HttpSession session) {
+		System.out.println("makeAttend호출");
 		//String s_id=session.getAttribute("s_id");
 		String s_id="kgukid38@naver.com";
 		
@@ -53,7 +56,17 @@ public class AttendanceCont {
 			System.out.println("출첵실패");
 		}//if end
 		
-		return mav;
+		return "redirect:/event/attendance";
 	}//makeAttend()
+	
+	//월요일마다 테이블 초기화
+	public void resetAttend() {
+		int resetAttend = 0;
+		
+		//요일확인하는 주기함수
+		if(resetAttend != 0) {
+			System.out.println("출석테이블 초기화됨");
+		}
+	}//resetAttend() end
 	
 }//class end

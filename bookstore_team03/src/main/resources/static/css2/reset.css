@@ -49,9 +49,3 @@ a {
 input:focus {
 	outline: none; 
 }
-/* hr 배경 제거 */
-hr {
-	height: 1px;
-	margin: 0;
-	width: 100%;
-}

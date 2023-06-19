@@ -12,7 +12,7 @@
 <title>이벤트</title>
 
 <script>
-	let date = new Date();
+	
 </script>
 
 </head>
@@ -23,7 +23,7 @@
 		<form name="attendanceForm" id="attendanceForm">
 			<div>
 				<%-- <input type="hidden" name="member_id" id="member_id" value="${member_id}"> --%>
-				<button type="button" name="attendanceBtn" id="attendanceBtn" onclick="location.href='/event/makeAttend">출석</button>
+				<button type="button" name="attendanceBtn" id="attendanceBtn" onclick="location.href='/event/makeAttend'">출석</button>
 			</div>
 		</form>
 		
