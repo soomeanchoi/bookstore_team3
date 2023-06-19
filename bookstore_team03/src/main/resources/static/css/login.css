@@ -1,5 +1,5 @@
 .login-section {
-    height: calc(100vh - 200px);
+    height: calc(100vh - 80px);
     overflow: hidden;
 }
 .login-page-flex {
