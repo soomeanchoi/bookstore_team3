@@ -113,49 +113,66 @@
       </div>
     </header>
     <!-- header end-------------------------------------------------- -->
+    
     <section>
       <div class="content_text">
-        <h1>Best Seller</h1>
+        <h1>당신을 기다리는<br> Best Seller</h1>
         <div class="bestseller">
-          <div class="bestseller-book-c">book cover</div>
+          <div class="bestseller-slide">
           <div class="book-cont">
-            <h3>book title 책 제목</h3>
-            <div class="book-dsc">
-              <p class="author">ㅇㅇㅇ저 / ㅇㅇㅇ역 | ㅇㅇ출판사</p>
-              <p class="b-cont">
-                책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다.책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다.책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다.책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다.책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다.책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다.책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다.책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다.책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다.책에 대한 설명입니다. 책에 대한 설명입니다. 책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.책에 대한
-                설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다.책에 대한 설명입니다. 책에
-                대한 설명입니다. 책에 대한 설명입니다. 책에 대한 설명입니다.
-                책에 대한 설명입니다.
-              </p>
-            </div>
+            <div class="bestseller-book-c">book cover</div>
+            <div class="book-title">book title 책 제목</div>
+          </div>
+          <div class="book-cont">
+            <div class="bestseller-book-c">book cover</div>
+            <div class="book-title">book title 책 제목</div>
+          </div>
+          <div class="book-cont">
+            <div class="bestseller-book-c">book cover</div>
+            <div class="book-title">book title 책 제목</div>
+          </div>
+          <div class="book-cont">
+            <div class="bestseller-book-c">book cover</div>
+            <div class="book-title">book title 책 제목</div>
+          </div>
+          <div class="book-cont">
+            <div class="bestseller-book-c">book cover</div>
+            <div class="book-title">book title 책 제목</div>
+          </div>
+          <div class="book-cont">
+            <div class="bestseller-book-c">book cover</div>
+            <div class="book-title">book title 책 제목</div>
           </div>
         </div>
+        <div class="bestseller-slide">
+        <div class="book-cont">
+          <div class="bestseller-book-c">book cover</div>
+          <div class="book-title">book title 책 제목</div>
+        </div>
+        <div class="book-cont">
+          <div class="bestseller-book-c">book cover</div>
+          <div class="book-title">book title 책 제목</div>
+        </div>
+        <div class="book-cont">
+          <div class="bestseller-book-c">book cover</div>
+          <div class="book-title">book title 책 제목</div>
+        </div>
+        <div class="book-cont">
+          <div class="bestseller-book-c">book cover</div>
+          <div class="book-title">book title 책 제목</div>
+        </div>
+        <div class="book-cont">
+          <div class="bestseller-book-c">book cover</div>
+          <div class="book-title">book title 책 제목</div>
+        </div>
+        <div class="book-cont">
+          <div class="bestseller-book-c">book cover</div>
+          <div class="book-title">book title 책 제목</div>
+        </div>
       </div>
-    </section>
+      </div>
+      </div>
+      </section>
 	<!-- section end------------------------------------------------- -->
 	<hr>
 	<!-- section start----------------------------------------------- -->
