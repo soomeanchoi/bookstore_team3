@@ -1,0 +1,28 @@
+.mycart-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+.cart-box {
+    display: flex;
+    flex-direction: column;
+    padding: 50px;
+    background-color:  #117cd9;
+    border: 1px solid #808080;
+    margin-right: 80px;
+    gap: 20px;
+}
+.book-cart-box {
+    display: flex;
+    width: 800px;
+    height: auto;
+    padding: 50px;
+    background-color: #fff;
+    border: 1px solid #808080;
+}
+
+aside {
+    width: 300px;
+    background-color: #fff;
+    border: 1px solid #808080;
+}

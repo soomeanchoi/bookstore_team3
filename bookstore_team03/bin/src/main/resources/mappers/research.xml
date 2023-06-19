@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- research.xml -->
+
+<mapper namespace="research">
+	<select id="question" resultType="String">
+		SELECT research_q
+		FROM research
+	</select>
+
+	<select id="answer_A" resultType="String">
+		SELECT research_a1text
+		FROM research
+	</select>
+
+	<select id="answer_B" resultType="String">
+		SELECT research_a2text
+		FROM research
+	</select>
+
+	<select id="list" resultType="kr.co.itwill.research.ResearchDTO">
+		SELECT research_no, research_q, research_a1, research_a1text, research_a2, research_a2text
+		FROM research
+	</select>
+
+	<select id="result_A" resultType="String">
+		SELECT
+			CASE
+				WHEN research_a1text = #{answer} THEN research_a1
+				END AS left_val
+		FROM research
+		WHERE research_a1text = #{answer};
+	</select>
+
+	<select id="result_B" resultType="String">
+		SELECT
+			CASE
+				WHEN research_a2text = #{answer} THEN research_a2
+				END AS left_val
+		FROM research
+		WHERE research_a2text = #{answer};
+	</select>
+
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO research (research_q, research_a1, research_a1text, research_a2, research_a2text)
+		VALUES (#{research_q}, #{research_a1}, #{research_a1text}, #{research_a2}, #{research_a2text})
+	</insert>
+
+	<delete id="delete">
+		DELETE FROM research
+		WHERE research_no = #{research_no}
+	</delete>
+
+	<select id="one" resultType="kr.co.itwill.research.ResearchDTO">
+		SELECT research_no, research_q, research_a1, research_a1text, research_a2, research_a2text
+		FROM research
+		WHERE research_no = #{research_no}
+	</select>
+
+	<update id="update" parameterType="java.util.Map">
+		UPDATE research
+		SET research_q = #{research_q}
+		  , research_a1 = #{research_a1}
+		  , research_a1text = #{research_a1text}
+		  , research_a2 = #{research_a2}
+		  , research_a2text = #{research_a2text}
+		WHERE research_no = #{research_no}
+	</update>
+	
+
+
+</mapper>     
+
+
+
+

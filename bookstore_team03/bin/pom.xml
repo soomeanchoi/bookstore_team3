@@ -68,10 +68,104 @@
 			<artifactId>tomcat-embed-jasper</artifactId>
 		</dependency>
 
+		<dependency>
+		    <groupId>commons-fileupload</groupId>
+		    <artifactId>commons-fileupload</artifactId>
+		    <version>1.5</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
+		<dependency>
+		    <groupId>org.springframework.data</groupId>
+		    <artifactId>spring-data-jpa</artifactId>
+		    <version>2.7.6</version>
+		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/com.h2database/h2 -->
+		<dependency>
+		    <groupId>com.h2database</groupId>
+		    <artifactId>h2</artifactId>
+		    <version>1.4.200</version>
+		    <scope>test</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.24</version>
+		    <scope>provided</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
+		<dependency>
+		    <groupId>com.auth0</groupId>
+		    <artifactId>java-jwt</artifactId>
+		    <version>3.19.2</version>
+		</dependency>
+
+		<dependency> 
+			<groupId>com.google.code.gson</groupId> 
+		    <artifactId>gson</artifactId> 
+		    <version>2.8.7</version> 
+		</dependency>
+		
+		
+		<!-- https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api -->
+		<dependency>
+		    <groupId>javax.persistence</groupId>
+		    <artifactId>javax.persistence-api</artifactId>
+		    <version>2.2</version>
+		</dependency>
+
+		<!--JSON-->
+		<!-- https://mvnrepository.com/artifact/org.json/json -->
+		  <dependency>
+		      <groupId>com.fasterxml.jackson.core</groupId>
+		      <artifactId>jackson-databind</artifactId>
+		      <version>2.9.4</version>
+		  </dependency>
+		  <!-- java8 date/time -->
+		  <dependency>
+		      <groupId>com.fasterxml.jackson.datatype</groupId>
+		      <artifactId>jackson-datatype-jsr310</artifactId>
+		      <version>2.9.4</version>
+		  </dependency>
+
+		<!-- json-simple 라이브러리 -->
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>com.google.code.gson</groupId>
+		    <artifactId>gson</artifactId>
+		    <version>2.8.5</version>
+		</dependency>
+		
+	
+		<dependency>
+			<groupId>com.github.scribejava</groupId>
+			<artifactId>scribejava-core</artifactId>
+			<version>2.8.1</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-util-ajax -->
+		<dependency>
+		    <groupId>org.eclipse.jetty</groupId>
+		    <artifactId>jetty-util-ajax</artifactId>
+		    <version>11.0.12</version>
+		</dependency>
 
 <!-- 사용자 추가 라이브러리 끝 -->
-		
+
+		<dependency>
+			<groupId>kr.co</groupId>
+			<artifactId>maven</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 
 	<build>

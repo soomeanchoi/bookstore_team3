@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- tag.xml -->
+
+<mapper namespace="booktag">
+
+	<select id="list" resultType="java.util.Map">
+		SELECT tag_no, tag_name
+		FROM tag
+	</select>
+
+	<insert id="insert" parameterType="java.util.Map">
+		insert into tag(tag_no, tag_name)
+		values (#{tag_no}, #{tag_name})
+	</insert>
+
+	<select id="search" parameterType="String" resultType="java.util.Map">
+	select tag_no, tag_name
+	from tag
+	where tag_name LIKE #{keyword}
+	order by tag_name
+	</select>
+
+	<select id="detail" resultType="java.util.Map" parameterType="int">
+		select tag_no, tag_name
+		from tag
+		where tag_no = #{tag_no}
+	</select>
+
+	<delete id="delete" parameterType="int">
+		delete from tag
+		where tag_no=#{tag_no}
+	</delete>
+
+	<update id="update" parameterType="java.util.Map">
+		update tag
+		set tag_name=#{tag_name}
+		where tag_no=#{tag_no}
+	</update>
+
+</mapper>     
+
+
+
+

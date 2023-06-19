@@ -13,7 +13,7 @@
 <script>	
 	function order(){
 		if(confirm("주문 진행하시겠습니까?")){
-			location.href='../order/orderform';
+			location.href='../border/orderform';
 		}//if end
 	}//order() end
 	
@@ -44,7 +44,12 @@
     		<td>${row.book_name}</td>
     		<td>${row.book_price}</td>
     		<td><select>
-    			<option value="${row.cart_qty}">${row.cart_qty}</option>
+    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
+    			<option value="1">1</option>
+    			<option value="2">2</option>
+    			<option value="3">3</option>
+    			<option value="4">4</option>
+    			<option value="5">5</option>
     		</select>
     		</td>
     		<td><fmt:formatNumber value="${row.book_price * row.cart_qty}" pattern="#,###"/>원</td>	
