@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- choice.xml -->
+
+<mapper namespace="choice">
+
+    <insert id="insert" parameterType="kr.co.itwill.choice.ChoiceDTO" >
+        insert into choice(member_id, isbn)
+        values (#{member_id}, #{isbn})
+    </insert>
+
+    <select id="list" resultType="kr.co.itwill.choice.ChoiceDTO" parameterType="String">
+        select choice_no, member_id, isbn, choice_date
+        from choice
+        where member_id=#{member_id}
+        order by choice_no;
+    </select>
+
+    <delete id="delete" parameterType="java.util.HashMap">
+        delete from choice
+        where choice_no=#{choice_no} and member_id=#{smember_id}
+    </delete>
+
+</mapper>

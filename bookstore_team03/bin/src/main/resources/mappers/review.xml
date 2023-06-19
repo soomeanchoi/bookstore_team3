@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- review.xml -->
+
+<mapper namespace="review">
+
+    <insert id="insert" parameterType="kr.co.itwill.review.ReviewDTO">
+        INSERT INTO review(profile_no, isbn, review_content, review_score)
+        VALUES (#{profile_no}, #{isbn}, #{review_content}, #{review_score})
+    </insert>
+
+    <select id="list" resultType="kr.co.itwill.review.ReviewDTO" parameterType="String">
+        SELECT review_no, profile_no, isbn, review_content, review_date, review_score
+        FROM review
+        WHERE isbn=#{isbn}
+        ORDER BY review_date
+    </select>
+
+    <delete id="delete" parameterType="int">
+        DELETE FROM review
+        WHERE review_no=#{review_no}
+    </delete>
+
+    <update id="update" parameterType="kr.co.itwill.review.ReviewDTO">
+        UPDATE review
+        SET review_content=#{review_content}
+        WHERE review_no=#{review_no}
+    </update>
+
+
+
+</mapper>     
+
+
+
+

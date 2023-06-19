@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- point.xml -->
+
+<mapper namespace="point">
+	
+	<select id="list" resultType="kr.co.itwill.point.PointDTO" parameterType="String">
+		SELECT point_no, member_id, point_act, point_change, border_no
+		FROM point
+		WHERE member_id = #{s_id}
+	</select>
+
+	<select id="totalPoint" resultType="int" parameterType="String">
+		SELECT sum(point_change)
+		FROM point
+		WHERE member_id = #{s_id}
+	</select>
+
+	<select id="plusPoint" resultType="kr.co.itwill.point.PointDTO" parameterType="String">
+		SELECT point_no, member_id, point_act, point_change, border_no
+		FROM point
+		WHERE member_id = #{s_id} AND point_change > 0
+	</select>
+
+	<select id="minusPoint" resultType="kr.co.itwill.point.PointDTO" parameterType="String">
+		SELECT point_no, member_id, point_act, point_change, border_no
+		FROM point
+		WHERE member_id = #{s_id} AND 0 > point_change
+	</select>
+
+
+
+
+</mapper>     
+
+
+
+
