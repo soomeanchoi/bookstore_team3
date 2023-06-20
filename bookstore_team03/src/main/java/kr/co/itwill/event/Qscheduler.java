@@ -28,12 +28,10 @@ public class Qscheduler {
     	//job 지정
     	JobDetail job = JobBuilder.newJob(IntervalJab.class).withIdentity("resetJob").build();
     
-    	//trigger 생성
+    	//매주 월요일 00시 00분 00초에 동작하는 trigger 생성
     	Trigger trigger = TriggerBuilder.newTrigger().
-    			withSchedule(CronScheduleBuilder.cronSchedule("15 * * * * ?")).build();
-//    	startAt 과 endAt 을 사용해 job 스케줄의 시작, 종료 시간도 지정할 수 있다.
-//    	Trigger trigger = TriggerBuilder.newTrigger().startAt(startDateTime).endAt(EndDateTime)
-//            .withSchedule(CronScheduleBuilder.cronSchedule("*/1 * * * *")).build();
+    			withSchedule(CronScheduleBuilder.cronSchedule("0 * * ? * TUE")).build();
+
 		scheduler.scheduleJob(job, trigger);
     }//end
 }//class end

@@ -18,9 +18,6 @@ public class AttendanceCont {
 	@Autowired
 	AttendanceDAO attendanceDao;
 	
-	/*@Autowired
-	IntervalJab intervalJab;
-	*/
 	//출석현황조회
 	@RequestMapping("/attendance")
 	public ModelAndView attendance(HttpSession session) {
@@ -40,6 +37,7 @@ public class AttendanceCont {
 		return mav;
 	}//attendance end
 	
+	//출석하기 >> 출석기록 행추가
 	@RequestMapping("/makeAttend")
 	public String makeAttend(HttpSession session) {
 		System.out.println("makeAttend호출");
@@ -62,14 +60,22 @@ public class AttendanceCont {
 		return "redirect:/event/attendance";
 	}//makeAttend()
 	
+	public int check() {
+		return 1;
+	}// 
+	
 	//월요일마다 테이블 초기화
 	public void resetAttend() {
-		//int resetAttend = intervalJab
+		//System.out.println("호출됨");
+		int resetCnt = attendanceDao.resetAttend();
 		
-		//요일확인하는 주기함수
-		/*if(resetAttend != 0) {
-			System.out.println("출석테이블 초기화됨");
-		}*/
-	}//resetAttend() end
+		/*
+		if(resetCnt != 0) {
+			System.out.println("attendance 테이블 초기화됨");
+		}else {
+			System.out.println("attendance 테이블 초기화 안됨");
+		}//if end
+		*/	
+		}//resetAttend() end
 	
 }//class end
