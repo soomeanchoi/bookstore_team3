@@ -18,9 +18,9 @@ public class AttendanceCont {
 	@Autowired
 	AttendanceDAO attendanceDao;
 	
-	@Autowired
+	/*@Autowired
 	IntervalJab intervalJab;
-	
+	*/
 	//출석현황조회
 	@RequestMapping("/attendance")
 	public ModelAndView attendance(HttpSession session) {
