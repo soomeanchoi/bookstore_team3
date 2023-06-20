@@ -11,12 +11,16 @@ import org.quartz.SchedulerFactory;
 import org.quartz.Trigger;
 import org.quartz.TriggerBuilder;
 import org.quartz.impl.StdSchedulerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class Qscheduler {
 	private SchedulerFactory schedulerFactory;
     private Scheduler scheduler;
+    
+   //@Autowired 
+    //JobDetail job;
     
     @PostConstruct
     public void start() throws SchedulerException{

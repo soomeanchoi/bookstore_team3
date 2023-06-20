@@ -5,9 +5,20 @@ import java.time.LocalDate;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 
+@Component
 public class IntervalJab implements Job {
+	
+	public IntervalJab() {
+		System.out.println("=====IntervalJab()객체 생성됨");
+	}
+	
+	@Autowired
+	AttendanceDAO attendanceDao;
 	
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {
@@ -22,12 +33,17 @@ public class IntervalJab implements Job {
 	    
 	    //월요일이면
 	    if(dayOfWeekValue == 2) {
-	    	AttendanceCont cont = new AttendanceCont();
+	    	//AttendanceCont cont = new AttendanceCont();
 	    	
-	    	System.out.println(cont.check());
-	    	cont.resetAttend();
+	    	//System.out.println(cont.check());
+	    	//cont.resetAttend();
+	    	
+	    	int resetCnt = attendanceDao.resetAttend();
+	    	System.out.println("-------------------------------" + resetCnt);
 	    }//if end
 	//System.out.println("trigger test");
+	    
+	    
 	    
 	}//execute() end
 	
