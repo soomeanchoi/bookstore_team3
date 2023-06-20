@@ -37,12 +37,12 @@
      
 		<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
 		<br><br><br><br>
-		<table>
+		<table style="margin: auto;">
 		<!-- <table class="table" style="margin: auto;"> -->
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="member_id" id="member_id" oninput="idCheck()"><br>
+				<input type="text" name="member_id" id="member_id" oninput="idCheck()"><br><br>
 				<span class="id_ok" style="display: none;">사용 가능한 이메일입니다.</span>
  				<span class="id_already" style="display: none;">이미 사용 중인 이메일입니다.</span>
 			</td>
@@ -50,33 +50,33 @@
 		<tr>
           <th></th>
           <td>
-            <div class="passwd-validate"><span>아이디 조건 표시</span></div>
+           <!--  <div class="passwd-validate"><span>아이디 조건 표시</span></div> -->
           </td>
           <td></td>
         </tr>
 		<tr>
 			<th>비밀번호</th>
 			<td>
-				<input type="password" name="member_pw" id="member_pw" maxlength="10" required><br>
+				<input type="password" name="member_pw" id="member_pw" maxlength="10" required><br><br>
 			</td>
 		</tr> 
 		<tr>
           <th></th>
           <td>
-            <div class="passwd-validate"><span>비밀번호 조건 표시</span></div>
+            <!-- <div class="passwd-validate"><span>비밀번호 조건 표시</span></div> -->
           </td>
           <td></td>
         </tr>
 		<tr>
 			<th>비밀번호 확인</th>
 			<td>
-				<input type="password" name="member_pw2" id="member_pw2" maxlength="10" required><br>
+				<input type="password" name="member_pw2" id="member_pw2" maxlength="10" required><br><br>
 			</td>
 		</tr> 
 		<tr>
           <th></th>
           <td>
-            <div class="passwd-validate"><span>비밀번호 동일성 표시</span></div>
+            <!-- <div class="passwd-validate"><span>비밀번호 동일성 표시</span></div> -->
           </td>
           <td></td>
         </tr>
@@ -441,7 +441,7 @@
       <br><br><br>
       <div>
         <input type="submit" value="회원가입">
-        <input type="button" value="취소">
+        <input type="button" value="취소" onclick="location.href='login';">
       </div>
       </div>
     </section>

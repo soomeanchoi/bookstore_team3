@@ -1,0 +1,88 @@
+.find-section {
+    height: calc(100vh - 200px);
+    overflow: hidden;
+}
+.find-page-flex {
+    display: flex;
+    margin-top: 150px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.find-title {
+    margin-bottom: 50px;
+}
+input {
+    border: 0;
+}
+.id-pw {
+    display: flex;
+    flex-direction: column;
+}
+.form-group {
+    width: 500px;
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+}
+
+.user-pw {
+    width: 500px;
+    height: 50px;
+    margin-bottom: 20px;
+    border-radius: 25px;
+    
+}
+
+.id-save {
+    width: 20px;
+    height: 20px;
+}
+
+.login-btn {
+    width: 100px;
+    height: 120px;
+    margin-left: 20px;
+    background-color:  #117cd9;
+    color: #fff;
+    border-radius: 15px;
+}
+
+.login-btn-flex {
+    display: flex;
+}
+
+.flex {
+    margin: 0 auto;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    width: 620px;
+}
+.id-pw-btn {
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    background-color: #808080;
+} 
+.kakao-login {
+    margin: 0 auto;
+    width: 70px;
+    height: 70px;
+    border-radius: 50px;
+    background-color: #ffe812;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login-border {
+    width: 620px;
+    margin: 50px 0 50px 0;
+}
+.f {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}

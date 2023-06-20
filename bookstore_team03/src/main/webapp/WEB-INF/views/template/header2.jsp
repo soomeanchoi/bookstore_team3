@@ -1,34 +1,9 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Team3 - BookStore</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/section.css" />
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
-    <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
-    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css">
-	 <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
-    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-latest.js"
-    ></script>
-</head>
+
 <body>
        <header>
       <div>
         <!-- logo -->
-    	<a href="http://localhost:9095/template/index"> 
+        <a href="index.html">
           <svg
             class="logo"
             viewBox="0 0 24 24"
@@ -40,7 +15,7 @@
               fill="#fff"
             />
           </svg>
-       </a>
+        </a>
       </div>
       <!-- logo end -->
       <div>
@@ -67,8 +42,8 @@
       <div class="bbti-menu">
         <ul class="b-menu-li">
           <li><a href="best.html">Best</a></li>
-          <li><a href="">Event</a></li>
-          <li><a href="http://localhost:9095/research/list">B-BTI</a></li>
+          <li><a href="event.html">Event</a></li>
+          <li><a href="survey.html">B-BTI</a></li>
         </ul>
       </div>
       <!-- search bar -->
@@ -99,18 +74,7 @@
         </div>
         <div>
           <!-- mypage icon -->
-<%
-		if(session.getAttribute("member_id")==null){
-%>			
-			<a href="http://localhost:9095/member/login"> 
-<%		
-		}else {
-%>			
-			<a href="http://localhost:9095/member/myPage"> 
-<%			
-		}
-%>          
-          
+          <!-- <a href="mypage.html"> -->
             <svg
               class="mypage"
               xmlns="http://www.w3.org/2000/svg"
@@ -118,7 +82,7 @@
               viewBox="0 0 24 24"
               width="512"
               height="512"
-
+              onclick="location.href='myPage';"
             >
               <path
                 d="M12,12A6,6,0,1,0,6,6,6.006,6.006,0,0,0,12,12ZM12,2A4,4,0,1,1,8,6,4,4,0,0,1,12,2Z"
@@ -127,7 +91,7 @@
                 d="M12,14a9.01,9.01,0,0,0-9,9,1,1,0,0,0,2,0,7,7,0,0,1,14,0,1,1,0,0,0,2,0A9.01,9.01,0,0,0,12,14Z"
               />
             </svg>
-         </a>
+          <!-- </a> -->
         </div>
       </div>
     </header>
