@@ -4,18 +4,31 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<%@ include file="../template/header.jsp" %>
 <!DOCTYPE html>
+<<<<<<< HEAD
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+=======
+<html>
+<head>
+<meta charset="UTF-8">
+ <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+>>>>>>> sumin8
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Team3 - BookStore</title>
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="/css/mycart.css" />
+=======
+    <link rel="stylesheet" href="/css/signup.css" />
+>>>>>>> sumin8
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -29,6 +42,11 @@
       type="text/javascript"
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
+<<<<<<< HEAD
+=======
+  </head>
+<title>cartList </title>
+>>>>>>> sumin8
 
 <script>	
 	function order(){
@@ -42,6 +60,7 @@
 
 
 <body>
+<<<<<<< HEAD
  <header>
       <div>
         <!-- logo -->
@@ -136,6 +155,13 @@
       </div>
     </header>
     <!-- header end-------------------------------------------------- -->
+=======
+
+	<h2>장바구니 리스트</h2>
+	<hr>
+총상품개수 : ${fn:length(list)}
+<br><br>
+>>>>>>> sumin8
 	
 	
 	<%-- <h2>장바구니 리스트(내작업) </h2>

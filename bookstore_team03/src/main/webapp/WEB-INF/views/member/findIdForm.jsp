@@ -1,12 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+    
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ include file="../template/header.jsp" %>     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아아디/비밀번호 찾기</title>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>아아디/비밀번호 찾기</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/section.css" />
+    <link rel="stylesheet" href="/css/findId.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-latest.js"
+    ></script>
+  </head>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 </head>
 <style>
  #modal.modal-overlay {
@@ -71,13 +96,15 @@
 <%@ include file="/WEB-INF/views/member/findIdModal.jsp" %>
 <%-- <%@ include file="/WEB-INF/views/member/findPwModal.jsp" %> --%>
 
+ <section class="find-section">
+ <div class="find-page-flex">
 		<form style="text-align: center;">	
-			<div class="full">
 				<div class="container">
 					<div class="area_inputs wow fadeIn">
 						<div class="sub_title font-weight-bold text-white">
-							<h3>아이디/비밀번호 찾기</h3>
+							<h3><div class="find-title">아이디/비밀번호 찾기</div></h3>
 							<p>인증된 이메일만 정보 찾기가 가능합니다</p>
+							<br>
 						</div>
 						<div style="margin-bottom: 10px;"
 							class="custom-control custom-radio custom-control-inline">
@@ -91,18 +118,19 @@
 						<br><br>
 						<div id="searchI">
 							<div class="form-group">
-								<label class="font-weight-bold text-white" for="member_name">이름</label>
+								<label class="font-weight-bold text-white" for="member_name">이름</label><br><br>
 								<div>
-									<input type="text" class="form-control" id="member_name" name="member_name" placeholder="ex) 홍길동">
+									<input type="text" class="form-control" id="member_name" name="member_name" placeholder="ex) 홍길동"><br>
 								</div>
 							</div>
+							<br>
 							<div class="form-group">
-								<label class="font-weight-bold text-white" for="member_phone">휴대폰번호</label>
+								<label class="font-weight-bold text-white" for="member_phone">휴대폰번호</label><br><br>
 								<div>
-									<input type="text" class="form-control" id="member_phone" name="member_phone" placeholder="ex) 01012345678">
+									<input type="text" class="form-control" id="member_phone" name="member_phone" placeholder="ex) 01012345678"><br>
 								</div>
 							</div>
-							<br><br>
+							<br><br><br><br>
 							<div class="form-group">
 								<button type="button" id='find_id' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" onclick="findId_click()">찾기</button>
 								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
@@ -110,20 +138,21 @@
 						</div>
 						<div id="searchP" style="display: none;">
 							<div class="form-group">
-								<label class="font-weight-bold text-white" for="member_name2">이름</label>
+								<label class="font-weight-bold text-white" for="member_name2">이름</label><br><br>
 								<div>
-									<input type="text" class="form-control" id="member_name2" name="member_name2" placeholder="ex) 홍길동">
+									<input type="text" class="form-control" id="member_name2" name="member_name2" placeholder="ex) 홍길동"><br>
 								</div>
 							</div>
+							<br>
 							<div class="form-group">
-								<label class="font-weight-bold text-white" for="member_id">이메일</label>
+								<label class="font-weight-bold text-white" for="member_id">이메일</label><br><br>
 								<div>
-									<input type="email" class="form-control" id="member_id"	name="member_id" placeholder="ex) E-mail@gmail.com">
+									<input type="email" class="form-control" id="member_id"	name="member_id" placeholder="ex) E-mail@gmail.com"><br>
 								</div>
 							</div>
-							<br><br>
-							<div class="form-group">
-								<button type="button" id='checkEmail' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
+							<br><br><br><br>
+							<div class="login-border">
+								<button type="button" id='checkEmail' class="find-btn">찾기</button>
 								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
 							</div>
 							</div>
@@ -131,6 +160,7 @@
 					</div>
 				</div>
 		</form>	
+		</section>
 </body>
 <script>
 //체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
