@@ -18,6 +18,9 @@ public class AttendanceCont {
 	@Autowired
 	AttendanceDAO attendanceDao;
 	
+	@Autowired
+	IntervalJab intervalJab;
+	
 	//출석현황조회
 	@RequestMapping("/attendance")
 	public ModelAndView attendance(HttpSession session) {
@@ -61,12 +64,12 @@ public class AttendanceCont {
 	
 	//월요일마다 테이블 초기화
 	public void resetAttend() {
-		int resetAttend = 0;
+		//int resetAttend = intervalJab
 		
 		//요일확인하는 주기함수
-		if(resetAttend != 0) {
+		/*if(resetAttend != 0) {
 			System.out.println("출석테이블 초기화됨");
-		}
+		}*/
 	}//resetAttend() end
 	
 }//class end

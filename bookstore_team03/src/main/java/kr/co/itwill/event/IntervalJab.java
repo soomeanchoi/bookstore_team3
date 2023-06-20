@@ -17,6 +17,8 @@ public class IntervalJab implements Job {
 		
 		System.out.println("--job수행--");
 	    System.out.println(dayOfWeekValue);
+	    
+	  
 	}//execute() end
 
 }//class end
