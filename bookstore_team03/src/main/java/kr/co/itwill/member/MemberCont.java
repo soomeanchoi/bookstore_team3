@@ -162,7 +162,7 @@ public class MemberCont {
 	@RequestMapping("/logout")
 	public String logout(HttpSession session) {
 		session.invalidate();
-		String viewPage = "member/loginForm";
+		String viewPage = "member/login";
 		return viewPage;
 	}
 	
