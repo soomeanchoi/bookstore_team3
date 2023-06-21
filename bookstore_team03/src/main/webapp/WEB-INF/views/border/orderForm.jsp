@@ -11,6 +11,32 @@
 <meta charset="UTF-8">
 <title>orderForm</title>
 
+<link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+  <!--   <link rel="stylesheet" href="/css/section.css" /> -->
+    <link rel="stylesheet" href="/css/orderfrm.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
+    <!-- Latest compiled and minified CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Latest compiled JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-latest.js"
+    ></script>
+
 <script>
 	function ordercheck(){
 		if(confirm("결제할까요?")){
@@ -81,8 +107,6 @@
 			document.getElementById("border_price").innerText = border_oprice - usepoint;
 			document.getElementById("addpoint").innerText = parseInt((border_oprice - usepoint)/10);
 		}//if end
-		
-		
 	}//pointuse() end
 	
 </script>
@@ -91,98 +115,195 @@
 <body>
 
 	<form id="orderForm" name="orderForm" method="post" action="insert" onsubmit="return ordercheck()">
-		<table border="1" class="table table-bordered">
-  <%--   <tr>
-        <td>주문번호</td>
-        <td> <input type="text" name="border_no" id="border_no" value="${border_no}"></td>
-    </tr> --%>
-    
-    <tr>
-        <td>수취인 성명</td>
-        <td> <input type="text" name="border_name" id="border_name" required> </td>
-    </tr>
-    <tr>
-        <td>수취인 휴대폰번호</td>
-        <td> <input type="text" name="border_phone" id="border_phone" required> </td>
-    </tr>
-    
-    <tr>
-        <td>배송메시지</td>
-        <td> <input type="text" name="border_msg" id="border_msg"> </td>
-    </tr>
-    </table>
-    
-    <table border="1">
-    <tr>
-        <td>배송지</td>
-        <td>우편번호 <input type="text" name="border_postno" id="border_postno" value="${deliveryAdd.deliv_postno}" required> </td>
-        <td>주소 <input type="text" name="border_add1" id="border_add1" value="${deliveryAdd.deliv_add1}" required> </td>
-        <td>상세주소 <input type="text" name="border_add2" id="border_add2" value="${deliveryAdd.deliv_add2}"> </td>
-        <td><input type="button" value="배송지변경" onclick="DaumPostcode()"></td>
-    </tr>
-    </table>	
-    
-    <%--장바구니상품 불러오기 --%>
-    <table border="1" >
 	
-    <tr>	
-    	<th>isbn</th>
-    	<th>상품이미지</th>
-    	<th>제목</th>
-    	<th>가격</th>
-    	<th>수량</th>
-    	<th>총액수</th>
-    	<!-- <th>삭제</th> -->
-    </tr>
+	<section class="order-form m-4">
+	  <div class="container pt-4">
+	      <div class="row">
+	          <div class="col-12 px-4">
+	              <h1>주문하기</h1>
+	              <span></span>
+	              <hr class="mt-1" />
+	          </div>
+	          
+	          <div class="col-12">
+              <div class="row mx-4">
+                  <div class="col-12">
+                      <label class="order-form-label">수취인 성명</label>
+                  </div>
+                  <div class="col-sm-6">
+                      <div class="form-outline">
+                          <input type="text" name="border_name" id="border_name" class="form-control order-form-input" required />
+                      </div>
+                  </div>
+              </div>
 
-    <c:forEach items="${cart}" var="row" varStatus="status">
-    	 <input type="hidden" name="status" value="${status.index}">
-    	<tr>
-    		<td>
-    		 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${row.isbn}">
-    		${row.isbn}
-    		</td>
-    		<td>추가요망</td>
-    		<td>${row.book_name}</td>
-    		<td id="book_price" class="book_price">${row.book_price}</td>
-    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
-    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
-    			<option value="1">1</option>
-    			<option value="2">2</option>
-    			<option value="3">3</option>
-    			<option value="4">4</option>
-    			<option value="5">5</option>
-    		</select>
-    		</td>
-    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${row.book_price*row.cart_qty}" pattern="#,###"/></td>	
-   			<%-- <td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
-    		</tr>
-    </c:forEach>
-    	<tr>
-		<td>상품총금액</td>
-		<td id="border_oprice" colspan="5"> ${border_price} </td>
-		</tr>
-    </table><%--장바구니상품끝 --%>
-    <table border="1">
-    	<tr>
-		<td>사용할 포인트</td>
-		<td><input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0>
-		<input type="button" value="사용" >
-		</td>
-		<td>보유포인트</td>
-		<td><input type="number" name="havepoint" id="havepoint" value="${havepoint}" readonly></td>
-		</tr>    	
-	    <tr>
-		<td>적립예정 포인트</td>
-		<td id="addpoint">${addpoint}</td>
-		</tr>
-		<tr>
-		<td>결제금액</td>
-		<td id="border_price"> ${border_price} </td>
-		</tr>
-	</table>	
+              <div class="row mt-3 mx-4">
+                  <div class="col-12">
+                      <label class="order-form-label">수취인 휴대폰번호</label>
+                  </div>
+                  <div class="col-12">
+                      <div class="form-outline">
+                          <input type="text" name="border_phone" id="border_phone" class="form-control order-form-input" required/>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="row mt-3 mx-4">
+                  <div class="col-12">
+                      <label class="order-form-label">배송메시지</label>
+                  </div>
+                  <div class="col-12">
+                      <div class="form-outline">
+                          <input type="text"  name="border_msg" id="border_msg" class="form-control order-form-input" />
+                      </div>
+                  </div>
+              </div>
+
+			<div class="row mt-3 mx-4">
+                  <div class="col-12">
+                      <label class="order-form-label">배송지</label>
+                      <input type="button" value="우편번호찾기" onclick="DaumPostcode()">
+                  </div>
+                  
+                  <div class="col-12">
+                  
+                 <div class="col-sm-6 mt-2 pe-sm-2">
+                      <div class="form-outline">
+                          <input type="text" name="border_postno" id="border_postno" value="${deliveryAdd.deliv_postno}" class="form-control order-form-input" placeholder="우편번호"  required/>
+                      </div>
+                  </div>
+	              
+                 
+                  <div class="col-12 mt-2">
+                      <div class="form-outline">
+                          <input type="text" name="border_add1" id="border_add1" value="${deliveryAdd.deliv_add1}" class="form-control order-form-input" placeholder="주소" required/>
+                      </div>
+                  </div>
+                  
+                  <div class="col-12 mt-2">
+                      <div class="form-outline">
+                          <input type="text" name="border_add2" id="border_add2" value="${deliveryAdd.deliv_add2}" class="form-control order-form-input" placeholder="상세주소"/>
+                          <label class="form-label" for="form7"></label>
+                      </div>
+                  </div>
+                  
+                  <div class="container mt-3">
+                  <div class="col-12">
+                      <label class="order-form-label">주문상품</label>
+                  </div>
+					 <hr>
+					        
+					  <table class="table table-hover">
+					    <thead>
+					      <tr>
+					        <th>상품</th>
+					    	<th>제목</th>
+					    	<th>가격</th>
+					    	<th>수량</th>
+					    	<th>총액수</th>
+					      </tr>
+					    </thead>
+					    
+					    <tbody>
+					    
+					    <c:forEach items="${cart}" var="row" varStatus="status">
+				    	 <input type="hidden" name="status" value="${status.index}">
+				    	 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${row.isbn}">
+				    	<tr>
+				    		<td>
+				    		이미지
+				    		</td>
+				    		
+				    		<td>${row.book_name}</td>
+				    		<td id="book_price" class="book_price">${row.book_price}</td>
+				    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
+				    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
+				    			<option value="1">1</option>
+				    			<option value="2">2</option>
+				    			<option value="3">3</option>
+				    			<option value="4">4</option>
+				    			<option value="5">5</option>
+				    		</select>
+				    		</td>
+				    		<td id="booktot_Price" class="booktot_Price"><fmt:formatNumber value="${row.book_price*row.cart_qty}" pattern="#,###"/></td>	
+				   			<%-- <td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
+				    		</tr>
+				    </c:forEach>
+					    </tbody>
+					  </table>
+					  
+					  <div class="col-12">
+                      <label class="order-form-label">상품총금액 : ${border_price}</label>
+                 	  </div>
+					</div>   
+             <%--장바구니상품끝 --%>
+                  
+             <%--포인트 및 결제금액 --%>     
+                  </div>
+             <%--      
+                  <div class="container mt-3">
+                  <div class="col-12">
+                      <label class="order-form-label">포인트 및 결제금액</label>
+                  </div>
+				  <hr>
+				  <table class="table">
+				    <thead>
+				      <tr>
+				        <th>사용할 포인트</th>
+				        <th>보유 포인트</th>
+				       
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tr>
+				        <td> <input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0 class="form-control order-form-input" /></td>
+				        
+				       
+				      </tr>
+				     
+				    </tbody>
+				  </table>
+				</div> --%>
+                  
+                  <div class="col-12">
+                      <label class="order-form-label">포인트 및 결제금액</label>
+                  </div>
+                  <div class="col-sm-6 mt-2 pe-sm-2">
+                      <div class="form-outline">
+                          <input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0 class="form-control order-form-input" />
+                          <label class="form-label" for="form8">사용할 포인트</label>
+                      </div>
+                  </div>
+                  <div class="col-sm-6 mt-2 ps-sm-0">
+                      <div class="form-outline">
+                          <input type="number" name="havepoint" id="havepoint" value="${havepoint}" class="form-control order-form-input" readonly/>
+                          <label class="form-label" for="form8">보유포인트</label>
+                      </div>
+                  </div>
+                  <div class="col-sm-6 mt-2 pe-sm-2">
+                      <div class="form-outline">
+                          <input type="number" id="addpoint" class="form-control order-form-input" value="${addpoint}"/>
+                          <label class="form-label" for="form9">적립예정포인트</label>
+                      </div>
+                  </div>
+                  <hr>
+                  <div class="col-sm-6 mt-2 ps-sm-0">
+                      <div class="form-outline">
+                          <input type="text" id="form10" class="form-control order-form-input" value="${border_price}"/>
+                          <label id="border_price" class="form-label" for="form10">총 결제금액</label>
+                      </div>
+                  </div>
+                  <br><br>
+                  <input type="submit" value=" 결제하기" onclick="location.href='/border/'msgView">
+              </div>
+              </div>
+	          
+	      </div>
+	  </div>
+    </section>
 	
-	<input type="submit" value=" 결제하기" onclick="location.href='/border/'msgView">
+	
+	
 	</form>
 
 
