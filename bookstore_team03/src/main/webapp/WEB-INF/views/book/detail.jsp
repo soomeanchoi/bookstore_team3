@@ -16,9 +16,12 @@
     <title>detail.jsp</title>
     <script src="/js/jquery-3.6.4.min.js"></script>
 
-  <!-- Bootstrap JavaScript 포함 -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	 <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
     <script>
         function book_update(){
             // alert();
@@ -42,19 +45,24 @@
             }//if end
         }//book_choice() end
 
+        //장바구니 수량선택 유효성 검사
+		function product_cart(){
+			if(confirm("장바구니에 담으시겠습니까?")){
+				document.bookfrm.action="/cart/insert";
+				document.bookfrm.submit();
+			}//if end
+		}//product_cart() end
+		
+		//상품직접구매
+		function dirOrder(){
+		 if(confirm("구매하시겠습니까?")){
+                document.bookfrm.action="/border/directborderForm";
+                document.bookfrm.submit();
+         }//if end
+		}//dirOrder() end
     </script>
 
 </head>
-<style>
-.popover {
-    max-width: 400px; /* Popover의 최대 너비 설정 */
-    background-color: #f8f9fa; /* Popover의 배경색 설정 */
-    border: 1px solid #ced4da; /* Popover의 테두리 설정 */
-    border-radius: 5px; /* Popover의 테두리 반경 설정 */
-    padding: 10px; /* Popover의 내부 여백 설정 */
-    color: #343a40; /* Popover의 글자색 설정 */
-}
-</style>
 <body>
 
     <h3>상세보기</h3>
@@ -62,11 +70,28 @@
     <p>
         <button type="button" onclick="location.href='/book/write'">등록</button>
         <button type="button" onclick="location.href='/book/list'">리스트</button>
+        <button type="button" onclick="product_cart()">장바구니담기</button>
+        <input type ="button" value="구매" onclick="dirOrder()">
         &nbsp&nbsp 조회수 : ${book.book_count} &nbsp&nbsp
         평점 : ${score}
     </p>
+    
 
     <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">
+	   <table>
+	   <tr>
+	       <td>상품수량</td>
+	       <td> 
+			<select name="cart_qty" id="cart_qty">
+				<option value="1" selected>1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</td>
+	   </tr>
+	   </table>
         <table>
             <tr>
                 <td>isbn</td>
@@ -143,6 +168,8 @@
                 </td>
             </tr>
         </table>
+        <hr>
+        
     </form>
     <hr>
 
@@ -215,9 +242,7 @@
 
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
-                        a += '		댓글번호:' + value.review_no + 
-                        ' / 작성자: <a href="/profile/detail/{member_id}" data-toggle="popover" data-trigger="hover" data-placement="bottom" data-content="' + value.profile_name + '님의 프로필 보기">' + value.profile_name + '</a>' +
-                        ' / 평점:' + value.review_score + ' ' + value.review_date;
+                        a += '		댓글번호:' + value.review_no + ' / 작성자:' + value.profile_no + ' / 평점:' + value.review_score + ' ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
                         a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
                         a += '	</div>';
@@ -230,14 +255,6 @@
 
                     $(".reviewList").html(a);
 
-                 // Initialize popovers
-                    $('[data-toggle="popover"]').popover({
-                        template: '<div class="popover" role="tooltip"><div class="arrow"></div><div class="popover-body"></div></div>',
-                        container: 'body',
-                        placement: 'bottom',
-                        trigger: 'hover',
-                        html: true
-                    });
                 }//success end
             }); //ajax() end
         }//reviewList() end

@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -23,6 +26,27 @@
       type="text/javascript"
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
+  <script>
+  var dropdownTimeout;
+
+  function showDropdown() {
+      clearTimeout(dropdownTimeout);
+      var dropdown = document.getElementsByClassName("dropdown-content")[0];
+      dropdown.style.display = "block";
+      dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+  }
+
+  function hideDropdown() {
+      clearTimeout(dropdownTimeout);
+      var dropdown = document.getElementsByClassName("dropdown-content")[0];
+      dropdownTimeout = setTimeout(function() {
+          dropdown.style.maxHeight = "0";
+          setTimeout(function() {
+              dropdown.style.display = "none";
+          }, 700);
+      }, 200);
+  }
+  </script>
 </head>
 <body>
        <header>
@@ -43,9 +67,9 @@
        </a>
       </div>
       <!-- logo end -->
-      <div>
+      <div class="dropdown" onMouseOver="showDropdown()" onMouseOut="hideDropdown()">
         <!-- menu icon -->
-        <button class="menu-drop">
+        <button>
           <svg
             class="menu-icon"
             viewBox="0 0 20 20"
@@ -58,9 +82,17 @@
             />
           </svg>
         </button>
-        <div class="drop-cont">
-          <a href="#">책 카테고리 1</a>
-          <a href="#">책 카테고리 1</a>
+        <div class="dropdown-content">
+          <a href="http://localhost:9095/book/list">소설</a>
+          <a href="http://localhost:9095/book/list">시/에세이</a>
+          <a href="http://localhost:9095/book/list">인문</a>
+          <a href="http://localhost:9095/book/list">기술/공학</a>
+          <a href="http://localhost:9095/book/list">정치/사회</a>
+          <a href="http://localhost:9095/book/list">자기계발</a>
+          <a href="http://localhost:9095/book/list">컴퓨터/IT</a>
+          <a href="http://localhost:9095/book/list">수험서</a>
+          <a href="http://localhost:9095/book/list">역사</a>
+          <a href="http://localhost:9095/book/list">만화</a>
         </div>
       </div>
       <!-- menu icon end -->

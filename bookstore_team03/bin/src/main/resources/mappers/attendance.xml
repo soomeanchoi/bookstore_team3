@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- attendance.xml -->
+
+<mapper namespace="attendance">
+
+	<select id="attendance" resultType="java.util.HashMap" parameterType="String">
+		SELECT attend_no, member_id, attend_date
+		FROM itwill.attendance
+		WHERE member_id = #{s_id}
+	</select>
+	
+	<select id="attendCnt" resultType="int" parameterType="String">
+		SELECT count(attend_date)
+		FROM itwill.attendance
+		WHERE member_id = #{s_id}
+	</select>
+		
+	<insert id="attend" parameterType="String">
+		insert ignore into itwill.attendance (member_id, attend_date)
+ 		values(#{s_id}, CURRENT_DATE())
+	</insert>
+</mapper>
