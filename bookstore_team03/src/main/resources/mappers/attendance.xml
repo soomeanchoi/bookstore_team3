@@ -22,4 +22,8 @@
 		insert ignore into itwill.attendance (member_id, attend_date)
  		values(#{s_id}, CURRENT_DATE())
 	</insert>
+	
+	<delete id="resetAttend">
+		delete from itwill.attendance 
+	</delete>
 </mapper>
