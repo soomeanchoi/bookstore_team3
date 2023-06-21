@@ -10130,7 +10130,7 @@ textarea {
     .block-testimonial .author img {
       width: 80px;
       margin-bottom: 20px;
-      border-radius: 50%; }
+    }
     .block-testimonial .author h3, .block-testimonial .author .h3 {
       font-size: 18px;
       color: #f17945;
@@ -10365,7 +10365,6 @@ textarea {
   padding-right: 30%;
   width: 70%; }
   .image-stack__item--top img {
-    border: 10px solid #fff;
     -webkit-box-shadow: 0 15px 30px -18px rgba(0, 0, 0, 0.2);
     box-shadow: 0 15px 30px -18px rgba(0, 0, 0, 0.2); }
 

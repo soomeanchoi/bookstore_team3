@@ -12,6 +12,12 @@
 		ORDER BY book_count DESC
 	</select>
 
+	<select id="recentList" resultType="java.util.Map">
+		SELECT isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+		FROM book
+		ORDER BY book_date DESC
+	</select>
+
 	<select id="todayList" resultType="java.util.Map">
 		select isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
 		from book
@@ -24,5 +30,18 @@
 		order by rand();
 	</select>
 
+	<select id="reviewList" resultType="java.util.Map">
+		SELECT review_no, profile_no, isbn, review_content, review_date, review_score
+		FROM review
+	</select>
+
+	<select id="recentReview" resultType="java.util.Map">
+		select book_name,DD.isbn,profile_name,review_score,review_content,review_date, member_id
+		from (select isbn,profile_name,review_score,review_content,review_date,member_id
+			  from profile AA join review BB
+								   on AA.profile_no = BB.profile_no) CC join book DD
+																			 on CC.isbn=DD.isbn
+		order by review_date
+	</select>
 	
 </mapper>

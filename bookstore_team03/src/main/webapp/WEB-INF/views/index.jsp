@@ -9,7 +9,7 @@
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<%@ include file="template/header.jsp" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -35,13 +35,16 @@
 	<link rel="stylesheet" href="css/flatpickr.min.css">
 	<link rel="stylesheet" href="css/glightbox.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/header.css" />
+	<link rel="stylesheet" href="css/section.css" />
+	<link rel="stylesheet" href="css/login.css" />
 
 
 	<title>Sterial &mdash; Free Bootstrap 5 Website Template by Untree.co </title>
 </head>
 <body>
 
-	<div class="site-mobile-menu site-navbar-target">
+	<%--<div class="site-mobile-menu site-navbar-target">
 		<div class="site-mobile-menu-header">
 			<div class="site-mobile-menu-close">
 				<span class="icofont-close js-menu-toggle"></span>
@@ -56,7 +59,7 @@
 			<div class="site-navigation">
 				<div class="row">
 					<div class="col-6 col-lg-3">
-						<a href="index.html" class="logo m-0 float-start">Sterial</a>
+						<a href="/" class="logo m-0 float-start">Sterial</a>
 					</div>
 					<div class="col-lg-6 d-none d-lg-inline-block text-center nav-center-wrap">
 						<ul class="js-clone-nav  text-center site-menu p-0 m-0">
@@ -84,7 +87,8 @@
 					</div>
 					<div class="col-6 col-lg-3 text-lg-end">
 						<ul class="js-clone-nav d-none d-lg-inline-block text-end site-menu ">
-							<li class="cta-button"><a href="contact.html">Contact Us</a></li>
+							<img src="/storage/cart.png" class="cartImg">
+							<li class="cta-button"><a href="/member/login">로그인</a></li>
 						</ul>
 
 						<a href="#" class="burger ms-auto float-end site-menu-toggle js-menu-toggle d-inline-block d-lg-none light" data-toggle="collapse" data-target="#main-navbar">
@@ -93,11 +97,11 @@
 					</div>
 				</div>
 			</div>
-			
+
 		</div>
 	</nav>
 
-	
+	--%>
 
 	<div class="hero overlay">
 
@@ -128,7 +132,6 @@
 						</div>
 						<div class="image-stack__item image-stack__item--top" data-aos="fade-up" data-aos-delay="100"  data-rellax-percentage="0.5">
 							<img src="/storage/danakka.png" alt="Image" class="img-fluid">
-							작가
 						</div>
 					</div>
 				</div>
@@ -370,7 +373,7 @@
 					</div>
 					<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
 					<h2 class="heading mb-4">오늘의 작가</h2>
-					<p>${row.writer_info}</p>
+					${row.writer_info}<br><br><br>
 						출생 :${row.writer_birth} 출생지 :${row.writer_place} 대표작 :${row.writer_work}
 					<p class="my-4" data-aos="fade-up" data-aos-delay="200"><a href="#" class="btn btn-primary">사러가기</a></p>
 					</c:if>
@@ -385,16 +388,16 @@
 
 
 
-		<h2 class="heading mb-5 text-center">Testimonials</h2>
+		<h2 class="heading mb-5 text-center">따끈따끈한 리뷰</h2>
 
 		<div class="text-center mb-5">
 			<div id="prevnext-testimonial">
 				<span class="prev me-3" data-controls="prev">
-					<span class="icon-chevron-left"></span>
+					<span class="icon-chevron-left"><</span>
 
 				</span>
 				<span class="next" data-controls="next">
-					<span class="icon-chevron-right"></span>
+					<span class="icon-chevron-right">></span>
 
 				</span>
 			</div>
@@ -402,6 +405,79 @@
 
 		<div class="wide-slider-testimonial-wrap">
 			<div class="wide-slider-testimonial">
+				<c:forEach items="${recentReview}" varStatus="vs" var="row">
+				<div class="item">
+					<blockquote class="block-testimonial">
+						<div class="author">
+							<c:choose>
+								<c:when test="${row.review_score==0.5}">
+									<img src="/storage/star0_5.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==1.0}">
+									<img src="/storage/star1.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==1.5}">
+									<img src="/storage/star1_5.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==2.0}">
+									<img src="/storage/star2.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==2.5}">
+									<img src="/storage/star2_5.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==3.0}">
+									<img src="/storage/star3.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==3.5}">
+									<img src="/storage/star3_5.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==4.0}">
+									<img src="/storage/star4.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==4.5}">
+									<img src="/storage/star4_5.png" align="center">
+								</c:when>
+								<c:when test="${row.review_score==5.0}">
+									<img src="/storage/star5.png" align="center">
+								</c:when>
+							</c:choose>
+							<h3>${row.profile_name}</h3>
+							<p class="position mb-5">${row.book_name}</p>
+						</div>
+						<p>
+							<div class="quote">&ldquo;</div>
+							${row.review_content}
+					</blockquote>
+				</div>
+				</c:forEach>
+
+				<%--<div class="item">
+					<blockquote class="block-testimonial">
+						<div class="author">
+							<img src="images/person_2.jpg" alt="Free template by TemplateUX">
+							<h3>James Woodland</h3>
+							<p class="position mb-5">Designer at Facebook</p>
+						</div>
+						<p>
+							<div class="quote">&ldquo;</div>
+						&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&rdquo;</p>
+
+					</blockquote>
+				</div>
+
+				<div class="item">
+					<blockquote class="block-testimonial">
+						<div class="author">
+							<img src="images/person_3.jpg" alt="Free template by TemplateUX">
+							<h3>Rob Smith</h3>
+							<p class="position mb-5">Product Designer at Twitter</p>
+						</div>
+						<p>
+							<div class="quote">&ldquo;</div>
+						&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
+					</blockquote>
+				</div>
+
 				<div class="item">
 					<blockquote class="block-testimonial">
 						<div class="author">
@@ -440,47 +516,7 @@
 							<div class="quote">&ldquo;</div>
 						&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
 					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_1.jpg" alt="Free template by TemplateUX">
-							<h3>John Doe</h3>
-							<p class="position mb-5">CEO, Founder</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_2.jpg" alt="Free template by TemplateUX">
-							<h3>James Woodland</h3>
-							<p class="position mb-5">Designer at Facebook</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&rdquo;</p>
-
-					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_3.jpg" alt="Free template by TemplateUX">
-							<h3>Rob Smith</h3>
-							<p class="position mb-5">Product Designer at Twitter</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-					</blockquote>
-				</div>
+				</div>--%>
 			</div>
 		</div>
 
@@ -488,7 +524,7 @@
 
 	</div> <!-- /.untree_co-section -->
 
-	<div class="section">
+	<%--<div class="section">
 		<div class="container">
 			<div class="row justify-content-between align-items-center">
 				<div class="col-lg-5 mb-4 mb-lg-0">
@@ -552,7 +588,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>--%>
 
 
 	<div class="section">
@@ -637,7 +673,7 @@
 
 
 
-	<div class="py-5 bg-primary">
+	<%--<div class="py-5 bg-primary">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7 text-center mb-3 mb-lg-0 text-lg-start">
@@ -648,7 +684,7 @@
 				</div>
 			</div>		
 		</div>		
-	</div>
+	</div>--%>
 
 	<div class="site-footer">
 		<div class="container">

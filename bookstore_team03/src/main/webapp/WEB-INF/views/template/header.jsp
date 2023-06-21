@@ -4,8 +4,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team3 - BookStore</title>
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/style.css">
+    <%--<link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">--%>
     <link rel="stylesheet" href="/css/section.css" />
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
@@ -28,7 +28,7 @@
        <header>
       <div>
         <!-- logo -->
-    	<a href="http://localhost:9095/template/index"> 
+    	<a href="http://localhost:9095/">
           <svg
             class="logo"
             viewBox="0 0 24 24"

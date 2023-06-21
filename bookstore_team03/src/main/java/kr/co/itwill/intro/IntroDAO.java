@@ -1,5 +1,6 @@
 package kr.co.itwill.intro;
 
+import kr.co.itwill.review.ReviewDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -28,6 +29,14 @@ public class IntroDAO {
 
     public List<Map<String, Object>> todayWriter() {
         return sqlSession.selectList("intro.todayWriter");
+    }//todayWriter() end
+
+    public List<Map<String, Object>> reviewList(){
+        return sqlSession.selectList("intro.reviewList");
+    }//reviewList() end
+
+    public List<Map<String, Object>> recentReview() {
+        return sqlSession.selectList("intro.recentReview");
     }//todayWriter() end
 
 }
