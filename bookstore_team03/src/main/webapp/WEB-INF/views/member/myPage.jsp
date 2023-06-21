@@ -36,19 +36,37 @@
 
 <section>
       <h1>마이페이지</h1>
+      <img src="/storage/profile.png" width="200" height="280"><br>
+      <button onclick="location.href='/profile/profileForm';">프로필 등록</button>
+      <div>
+      	<br><br>
+	    <button onclick="location.href='modify';">회원정보 수정</button>
+		<button onclick="location.href='deleteView';">회원탈퇴</button>
+		<button onclick="location.href='logout';">로그아웃</button>
+      </div>
       <div class="mypage-section">
         <aside>
+        
           <div>
             <h6><span>user</span>님의 bbti</h6>
             <div>bbti 결과</div>
           </div>
           <div>
-            <h6>Profile</h6>
-            <div>프로필 사진</div>
-            <div>닉네임</div>
-            <div>아이디</div>
+            <!-- <h6>Profile</h6> -->
+            <!-- <div>프로필 사진</div> -->
+            <div>
+            닉네임
+            ${profile_name}
+            </div>
+            <div>
+            아이디
+            ${member_id}
+            </div>
             <div>나의 포인트 조회</div>
-            <div>자기소개</div>
+            <div>
+            자기소개
+            ${profile_intro}
+            </div>
           </div>
           <div>
             <div>좋아하는 태그</div>
@@ -87,24 +105,7 @@
         </div>
       </div>
     </section>
- 
 
-<table>
-	<button onclick="location.href='modify';">회원정보 수정</button>
-	<button onclick="location.href='deleteView';">회원탈퇴</button>
-	
-	<div id="font" style="font-size: 30px;"><h6>Profile</h6></div>
-	<button onclick="location.href='logout';">로그아웃</button>
-	아이디<br>
-	${member_id}<br>
-	이름<br>
-	${member_name}<br>
-	닉네임<br>
-	${profile_name}<br>
-	자기소개<br>
-	${profile_intro}<br>
-	<button onclick="location.href='/profile/profileForm';">프로필 등록</button>
-</table>
  </body>
  
 </html>

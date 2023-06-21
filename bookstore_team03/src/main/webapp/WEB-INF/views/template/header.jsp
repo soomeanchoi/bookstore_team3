@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -80,14 +83,16 @@
           </svg>
         </button>
         <div class="dropdown-content">
-          <a href="#">상품</a>
-          <a href="#">이벤트</a>
-          <a href="#"></a>
-          <a href="#"></a>
-          <a href="#"></a>
-          <a href="#"></a>
-          <a href="#"></a>
-          <a href="#"></a>
+          <a href="http://localhost:9095/book/list">소설</a>
+          <a href="http://localhost:9095/book/list">시/에세이</a>
+          <a href="http://localhost:9095/book/list">인문</a>
+          <a href="http://localhost:9095/book/list">기술/공학</a>
+          <a href="http://localhost:9095/book/list">정치/사회</a>
+          <a href="http://localhost:9095/book/list">자기계발</a>
+          <a href="http://localhost:9095/book/list">컴퓨터/IT</a>
+          <a href="http://localhost:9095/book/list">수험서</a>
+          <a href="http://localhost:9095/book/list">역사</a>
+          <a href="http://localhost:9095/book/list">만화</a>
         </div>
       </div>
       <!-- menu icon end -->

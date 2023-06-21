@@ -24,7 +24,7 @@ public class ProfileDAO {
     	return sqlSession.insert("profile.insert", map);
     }
     
-    public List<ProfileDTO> list(String member_id){
+    public Map<String, Object> list(String member_id){
     	return sqlSession.selectOne("profile.list", member_id);
     }//list() end
      
