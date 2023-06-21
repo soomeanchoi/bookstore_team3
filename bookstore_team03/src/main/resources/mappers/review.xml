@@ -29,7 +29,13 @@
         WHERE review_no=#{review_no}
     </update>
 
-
+	<!-- 프로필 띄우는 용도로 추가했습니다 test -->
+	<select id="profie_list" resultType="kr.co.itwill.review.ReviewDTO" parameterType="String">
+        SELECT review_no, profile_no, isbn, review_content, review_date, review_score
+        FROM review
+        WHERE profile_no =#{profile_no}
+        ORDER BY review_date
+    </select>
 
 </mapper>     
 

@@ -1,23 +1,21 @@
-.find-section {
+@charset "UTF-8";
+.modify-section {
     height: calc(100vh - 200px);
     overflow: hidden;
 }
-.find-page-flex {
+.modify-page-flex {
     display: flex;
-    margin-top: 150px;
+    margin-top: 100px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
-.find {
-    margin-bottom: 50px;
-}
 
-.find-btn {
+.modify-btn {
     width: 100px;
     height: 30px;
     border-radius: 15px;
     color: #fff;
     background-color: #808080;
-} 
+}

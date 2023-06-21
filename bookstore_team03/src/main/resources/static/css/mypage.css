@@ -1,8 +1,30 @@
 .mypage-section {
-    display: flex;
+    height: calc(100vh - 200px);
+    overflow: hidden;
 }
 
-table{
-	margin : auto;
-    width : 80%;
+.mypage-page-flex {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+
+
+ 
+ .profile {
+    margin-bottom: 50px;
+}
+
+
+.myboo {
+  margin: 25px;
+  width: 350px;
+  height: 200px;
+  /* 설정 */
+  position: relative;
 }

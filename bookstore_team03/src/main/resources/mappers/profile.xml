@@ -11,6 +11,11 @@
 		VALUES(#{member_id}, #{profile_name}, #{profile_intro}, #{profile_imgname}, #{profile_imgoriname}, #{profile_imgpath}, #{profile_imgsize})
 	</insert>
 
+	<select id="list" resultType="java.util.Map">
+		SELECT profile_name, profile_intro, profile_imgname, profile_imgsize
+		FROM profile
+		WHERE member_id = #{member_id}
+	</select>
 
 	<select id="detail" resultType="java.util.Map" parameterType="String">
 		SELECT profile_name, profile_intro, profile_imgname, profile_imgoriname, profile_imgpath, profile_imgsize

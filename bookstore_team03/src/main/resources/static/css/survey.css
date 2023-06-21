@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+.research-title {
+    margin-bottom: 50px;
+}
+
+.research-section {
+    height: calc(100vh - 200px);
+    overflow: hidden;
+}

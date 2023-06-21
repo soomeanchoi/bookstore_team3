@@ -35,6 +35,7 @@
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
   </head>
+
 <%--       <c:forEach items="${que}" var="question" varStatus="status">--%>
 <%--           <form action="result" method="post" enctype="multipart/form-data">--%>
 <%--           ${question.toString()}--%>
@@ -45,9 +46,9 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 </head>
-
 <body>
-<h1>질문과 선택지</h1>
+<section>
+<h1><div class="research-title">질문과 선택지</div></h1>
     <form action="result" method="post">
         <c:forEach var="questionIndex" items="${que}" varStatus="loop">
             <h2>질문: ${que[loop.index]}</h2>
@@ -55,9 +56,10 @@
             <input type="radio" name="choice_${loop.index}" value="${choose_B[loop.index]}"> ${choose_B[loop.index]}<br>
             <br>
         </c:forEach>
-        <input type="submit" value="Submit">
+        <input type="submit" value="Submit"><br>
     </form>
 
     <input type="button" onclick="location.href='setting'" value="설문 관리">
+</section>
 </body>
 </html>

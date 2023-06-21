@@ -10,7 +10,6 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<title>아아디/비밀번호 찾기</title>
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/header.css" />
@@ -102,8 +101,8 @@
 				<div class="container">
 					<div class="area_inputs wow fadeIn">
 						<div class="sub_title font-weight-bold text-white">
-							<h3><div class="find-title">아이디/비밀번호 찾기</div></h3>
-							<p>인증된 이메일만 정보 찾기가 가능합니다</p>
+							<h1><div class="find">아이디/비밀번호 찾기</div></h1>
+							<h4>인증된 이메일만 정보 찾기가 가능합니다</h4>
 							<br>
 						</div>
 						<div style="margin-bottom: 10px;"
@@ -132,8 +131,8 @@
 							</div>
 							<br><br><br><br>
 							<div class="form-group">
-								<button type="button" id='find_id' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" onclick="findId_click()">찾기</button>
-								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
+								<button class="find-btn" type="button" id='find_id' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" onclick="findId_click()">찾기</button>
+								<button class="find-btn" type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
 							</div>
 						</div>
 						<div id="searchP" style="display: none;">
@@ -152,8 +151,8 @@
 							</div>
 							<br><br><br><br>
 							<div class="login-border">
-								<button type="button" id='checkEmail' class="find-btn">찾기</button>
-								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
+								<button class="find-btn" type="button" id='checkEmail'>찾기</button>
+								<button class="find-btn" type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
 							</div>
 							</div>
 						</div>
