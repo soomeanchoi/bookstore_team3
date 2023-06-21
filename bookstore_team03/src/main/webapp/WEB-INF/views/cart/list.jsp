@@ -97,21 +97,22 @@
     </table> --%>
     
     <!-- 카트 템플릿 -->
-<div class="container mt-5 mb-5">
+
+  <div class="container mt-5 mb-5">
             <div class="d-flex justify-content-center row">
                 <div class="col-md-8">
                     <div class="p-2">
                   
-                        <h4>Shopping cart</h4>
-                          <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
-                          	 <div class="mr-1 contents">
-                          	 	<div class="mr-1 content book">상품</div>
-                          	 	<div class="mr-1 content title">제목</div>
-                          	 	<div class="mr-1 content price">도서가격</div>
-                          	 	<div class="mr-1 content qty">수량</div>
-                          	 	<div class="mr-1 content totprice">총 금액</div>
-                          	 </div>
-                          </div>
+       <h4>Shopping cart</h4>
+         <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
+         	 <div class="mr-1 contents">
+         	 	<div class="mr-1 content book">상품</div>
+         	 	<div class="mr-1 content title">제목</div>
+         	 	<div class="mr-1 content price">도서가격</div>
+         	 	<div class="mr-1 content qty">수량</div>
+         	 	<div class="mr-1 content totprice">총 금액</div>
+         	 </div>
+         </div>
                         <!-- 장바구니품목반복 -->
                     	<c:forEach items="${list}" var="row">
 					  <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
@@ -144,23 +145,6 @@
                          	  <input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'">
                     </div>
 					    </c:forEach>
-					    
-					   
-                  <!--   <div class="d-flex flex-row justify-content-between align-items-center p-2 bg-white mt-4 px-3 rounded">
-                        <div class="mr-1"><img class="rounded" src="https://i.imgur.com/XiFJkhI.jpg" width="70"></div>
-                        <div class="d-flex flex-column align-items-center product-details"><span class="font-weight-bold">Basic T-shirt</span>
-                            <div class="d-flex flex-row product-desc">
-                                <div class="size mr-1"><span class="text-grey">Size:</span><span class="font-weight-bold">&nbsp;M</span></div>
-                                <div class="color"><span class="text-grey">Color:</span><span class="font-weight-bold">&nbsp;Grey</span></div>
-                            </div>
-                        </div>
-                        <div class="d-flex flex-row align-items-center qty"><i class="fa fa-minus text-danger"></i>
-                            <h5 class="text-grey mt-1 mr-1 ml-1">2</h5><i class="fa fa-plus text-success"></i></div>
-                        <div>
-                            <h5 class="text-grey">$20.00</h5>
-                        </div>
-                        <div class="d-flex align-items-center"><i class="fa fa-trash mb-1 text-danger"></i></div>
-                    </div> -->
          
                     <div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
                     <div class="buttonDiv1">
@@ -173,9 +157,9 @@
                 </div>
             </div>
         </div>
-	
+	</div>
 </div>
-</div>
+
 </body>
 <!-- <script src="js/script.js"></script> -->
 </html>
