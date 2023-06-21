@@ -94,7 +94,9 @@
             <div>책제목</div>
             <div>
               <div>별점</div>
-              <div>리뷰내용</div>
+              <div>리뷰내용
+              #{reviewlist}
+              </div>
             </div>
           </div>
           <div>
