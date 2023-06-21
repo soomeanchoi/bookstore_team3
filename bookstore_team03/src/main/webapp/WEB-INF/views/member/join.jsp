@@ -42,8 +42,8 @@
 			<th>아이디</th>
 			<td>
 				<input type="text" name="member_id" id="member_id" oninput="idCheck()"><br><br>
-				<span class="id_ok" style="display: none;">사용 가능한 이메일입니다.</span>
- 				<span class="id_already" style="display: none;">이미 사용 중인 이메일입니다.</span>
+				<span class="id_ok" style="display: none; color: green;" >사용 가능한 이메일입니다.</span>
+ 				<span class="id_already" style="display: none; color: red;">이미 사용 중인 이메일입니다.</span>
 			</td>
 		</tr>
 		<tr>

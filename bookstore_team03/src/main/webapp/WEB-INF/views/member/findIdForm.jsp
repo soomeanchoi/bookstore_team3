@@ -151,9 +151,9 @@
 								</div>
 							</div>
 							<br><br><br><br>
-							<div class="login-border">
-								<button type="button" id='checkEmail' class="find-btn">찾기</button>
-								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
+							<div class="form-group">
+								<button type="button" id='checkEmail' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
+								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">취소</button>
 							</div>
 							</div>
 						</div>
