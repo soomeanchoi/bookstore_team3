@@ -1,4 +1,4 @@
-/*
+
 package kr.co.itwill;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +16,10 @@ public class HomeController {
 	        System.out.println("-----HomeController()객체 생성됨");
 	    }
 	   
-	    @RequestMapping(value="/index")
+	    @RequestMapping("/index")
 	    public String index() {
-	        
-	        return "index";
+	        return "redirect:/";
 	    }
 	  
 }	    
-*/
+

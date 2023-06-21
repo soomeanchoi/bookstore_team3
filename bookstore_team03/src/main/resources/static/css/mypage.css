@@ -1,11 +1,16 @@
 .mypage-section {
     display: flex;
-<<<<<<< HEAD
 }
 
 table{
 	margin : auto;
     width : 80%;
-=======
->>>>>>> leesu1
 }
+
+/*
+.profile-section {
+  border: 1px solid #000;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+*/

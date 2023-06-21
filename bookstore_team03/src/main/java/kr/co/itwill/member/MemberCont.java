@@ -148,7 +148,7 @@ public class MemberCont {
 	        session.setAttribute("member_id", loginInfo.get("member_id")); 
 	        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
 	        
-	        viewPage = "template/index";
+	        viewPage = "/template/index";
 	        // 추후 메인 페이지로 이동하게 
 	    }
     

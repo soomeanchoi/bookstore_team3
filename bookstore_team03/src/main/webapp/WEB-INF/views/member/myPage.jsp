@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
-    <link rel="stylesheet" href="/css/signup.css" />
+    <link rel="stylesheet" href="/css/mypage.css" />
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -35,8 +35,9 @@
 <body>
 
 <section>
-      <h1>마이페이지</h1>
-      <img src="/storage/profile.png" width="200" height="280"><br>
+      <h1>마이페이지</h1><br><br><br>
+       <div>
+      <img src="/storage/profilelogo.png" width="200" height="180"><br>
       <button onclick="location.href='/profile/profileForm';">프로필 등록</button>
       <div>
       	<br><br>
@@ -47,7 +48,7 @@
       <div class="mypage-section">
         <aside>
         
-          <div>
+          <div class="">
             <h6><span>user</span>님의 bbti</h6>
             <div>bbti 결과</div>
           </div>
@@ -67,19 +68,22 @@
             자기소개
             ${profile_intro}
             </div>
-          </div>
-          <div>
             <div>좋아하는 태그</div>
+          </div>
+         
+            
           </div>
           <div>
             <div>주문내역</div>
-            <input type="button" value="버튼">
+            <input type="button" value="버튼" onclick="location.href='';">
           </div>
           <div>관리자 문의하기</div>
         </aside>
+        <br><br>
         <div>
-          <h1>내서재</h1>
-          <div>찜한책</div>
+          <!-- <h1>내서재</h1> -->
+          <h2 align="center"><a href='/choice/list'>찜한 책</a>/<a href='/review/list'>내가 작성한 리뷰</a>/<a href='/research/result'>커뮤니티 활동 내역</a></h2>
+          <!-- <div>찜한책</div> -->
           <div>
             <h6>당신에게 딱 맞는 추천도서</h6>
             <div>
@@ -90,7 +94,7 @@
             </div>
           </div>
           <div>
-            <h6>유저가 작성한 상품리뷰</h6>
+            <!-- <h6>유저가 작성한 상품리뷰</h6> -->
             <div>책제목</div>
             <div>
               <div>별점</div>
