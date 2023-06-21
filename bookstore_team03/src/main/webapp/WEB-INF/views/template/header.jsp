@@ -23,6 +23,27 @@
       type="text/javascript"
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
+  <script>
+  var dropdownTimeout;
+
+  function showDropdown() {
+      clearTimeout(dropdownTimeout);
+      var dropdown = document.getElementsByClassName("dropdown-content")[0];
+      dropdown.style.display = "block";
+      dropdown.style.maxHeight = dropdown.scrollHeight + "px";
+  }
+
+  function hideDropdown() {
+      clearTimeout(dropdownTimeout);
+      var dropdown = document.getElementsByClassName("dropdown-content")[0];
+      dropdownTimeout = setTimeout(function() {
+          dropdown.style.maxHeight = "0";
+          setTimeout(function() {
+              dropdown.style.display = "none";
+          }, 700);
+      }, 200);
+  }
+  </script>
 </head>
 <body>
        <header>
@@ -43,9 +64,9 @@
        </a>
       </div>
       <!-- logo end -->
-      <div>
+      <div class="dropdown" onMouseOver="showDropdown()" onMouseOut="hideDropdown()">
         <!-- menu icon -->
-        <button class="menu-drop">
+        <button>
           <svg
             class="menu-icon"
             viewBox="0 0 20 20"
@@ -58,9 +79,9 @@
             />
           </svg>
         </button>
-        <div class="drop-cont">
-          <a href="#">책 카테고리 1</a>
-          <a href="#">책 카테고리 1</a>
+        <div class="dropdown-content">
+          <a href="#">상품</a>
+          <a href="#">이벤트</a>
         </div>
       </div>
       <!-- menu icon end -->
