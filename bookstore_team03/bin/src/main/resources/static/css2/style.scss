@@ -1,0 +1,171 @@
+@import "variable";
+* {
+    box-sizing: border-box;
+}
+body {
+    font-family: $cont_font;
+    font-weight: $font_m;
+    font-style: normal;
+}
+// 헤더 + 책 광고
+.bs_background {
+    width: calc(100% - 400px);
+    background-color: $color1;
+    padding-left: 200px;
+    padding-right: 200px;
+}  
+// 플렉스 클래스
+.flex_j {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flex {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.flex_g20 {
+    display: flex;
+    gap: 20px;
+}
+// 헤더
+.content_header {
+    width: calc(100% - 40px);
+    padding: 20px;
+}
+.content {
+    width: 100%;
+    height: 100vh;
+}
+// 책 광고
+.fb_show {
+    height: calc(100vh - 6.5vh);
+}
+.content_text {
+    width: 50%;
+}
+.title {
+    margin-top: 150px;
+    margin-bottom: 120px;
+}
+.g_01 {
+    margin-bottom: 20px;
+} // 타이틀 하단 갭
+.m_01 {
+    margin-top: 10px;
+}
+.t_01 {
+    font-size: 36pt;
+    font-weight: $font_b;
+} // 타이틀 1번
+.p-l-50 {
+    padding-left: 50px;
+}
+.p-r-50 {
+    padding-right: 50px;
+}
+.bs_w {
+    width: 250px;
+}
+.text_center {
+    text-align: center;
+}
+.t_03 {
+    margin-top: 10px;
+    font-size: 12pt;
+    line-height: 120%;
+    font-weight: $font_b;
+} // 타이틀 3번
+.title_des {
+    font-size: 10pt;
+    font-weight: 400;
+}
+.line_h {
+    line-height: 170%;
+}
+.author_01 {
+    color: $color2;
+    font-size: 10pt;
+    font-weight: 200;
+    text-align: center;
+}
+.search_bar {
+    width: 500px;
+    height: 20px;
+    background-color: white;
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 18px;
+    border-radius: 15px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+}
+.search_bar input {
+    border: none;
+}
+.btn01 {
+    background-color: $color1;
+    color: $color5;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.btn01:hover {
+    background-color: $color5;
+    color: $color1;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.content_book {
+    position: relative;
+    width: 300px;
+}
+.bs_book {
+    width: 250px;
+    height: 250px;
+}
+.bs_book_back {
+    background-color: $color1;
+    border-radius: 15px;
+}
+.inner_shadow {
+    box-shadow: inset 5px 5px 20px rgba($color: #000000, $alpha: 0.2);
+}
+.shadow {
+    box-shadow: 5px 5px 20px rgba($color: #000000, $alpha: 0.2);
+}
+.thumb_book {
+    border-radius: 10px;
+    width: 120px;
+}
+// 책 캐러셀
+.slide-container {
+    width: 900px;
+    transition: all 1s;
+    transform: translateX(0px);
+    display: flex;
+}
+.slide-box {
+    width: 300px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+.slide-box img {
+    width: 100%;
+    border-radius: 15px;
+} 
+// 책 캐러셀 끝
+// 책 리스트
+.content_body {
+    width: 100%;
+    height: 1000px;
+}
+.bs_book_li {
+    margin-top: 50px;
+    width: calc(100% - 400px);
+    padding: 0 200px;
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+}

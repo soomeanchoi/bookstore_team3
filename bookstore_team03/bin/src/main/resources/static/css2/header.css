@@ -1,0 +1,46 @@
+.bg-c-1 {
+  background-color: #F2F2F2;
+}
+
+.bg-c-2 {
+  background-color: #A2A685;
+}
+
+.bg-c-3 {
+  background-color: #274001;
+}
+
+.bg-c-4 {
+  background-color: #117CD9;
+}
+
+.bg-c-5 {
+  background-color: #0460D9;
+}
+
+.header-back {
+  width: 100%;
+  height: 200px;
+}
+
+.wh-100 {
+  width: 100px;
+  height: 100px;
+}
+
+.wd-100 {
+  width: 100px;
+}
+
+.wd-50 {
+  width: 50px;
+  height: 50px;
+}
+
+.wd-100p {
+  width: 100%;
+}
+
+.m-l-30 {
+  margin-left: 30px;
+}/*# sourceMappingURL=header.css.map */

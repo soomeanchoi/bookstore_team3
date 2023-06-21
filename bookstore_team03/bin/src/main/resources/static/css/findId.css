@@ -1,8 +1,8 @@
-.login-section {
-    height: calc(100vh - 80px);
+.find-section {
+    height: calc(100vh - 200px);
     overflow: hidden;
 }
-.login-page-flex {
+.find-page-flex {
     display: flex;
     margin-top: 150px;
     flex-direction: column;
@@ -10,7 +10,7 @@
     align-items: center;
     width: 100%;
 }
-.login-title {
+.find-title {
     margin-bottom: 50px;
 }
 input {
@@ -20,7 +20,7 @@ input {
     display: flex;
     flex-direction: column;
 }
-.user-id {
+.form-group {
     width: 500px;
     height: 50px;
     margin-bottom: 20px;
@@ -38,15 +38,13 @@ input {
 .id-save {
     width: 20px;
     height: 20px;
-    position: relative;
-    top: 5px;
 }
 
 .login-btn {
     width: 100px;
     height: 120px;
     margin-left: 20px;
-    background-color:  #f17945;
+    background-color:  #117cd9;
     color: #fff;
     border-radius: 15px;
 }
@@ -70,20 +68,11 @@ input {
     background-color: #808080;
 } 
 .kakao-login {
+    margin: 0 auto;
     width: 70px;
     height: 70px;
     border-radius: 50px;
     background-color: #ffe812;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-}
-.sign-up {
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    background-color: #117cd9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -96,10 +85,4 @@ input {
     width: 100%;
     display: flex;
     justify-content: center;
-}
-.icon-flex {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    gap: 30px;
 }
