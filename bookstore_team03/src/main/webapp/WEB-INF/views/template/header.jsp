@@ -82,6 +82,12 @@
         <div class="dropdown-content">
           <a href="#">상품</a>
           <a href="#">이벤트</a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
+          <a href="#"></a>
         </div>
       </div>
       <!-- menu icon end -->
