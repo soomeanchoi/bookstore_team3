@@ -10,12 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 
-@Component
 public class IntervalJab implements Job {
-	
-	public IntervalJab() {
-		System.out.println("=====IntervalJab()객체 생성됨");
-	}
 	
 	@Autowired
 	AttendanceDAO attendanceDao;
@@ -32,14 +27,14 @@ public class IntervalJab implements Job {
 	    //System.out.println(dayOfWeekValue);
 	    
 	    //월요일이면
-	    if(dayOfWeekValue == 2) {
+	    if(dayOfWeekValue == 3) {
 	    	//AttendanceCont cont = new AttendanceCont();
 	    	
 	    	//System.out.println(cont.check());
 	    	//cont.resetAttend();
 	    	
 	    	int resetCnt = attendanceDao.resetAttend();
-	    	System.out.println("-------------------------------" + resetCnt);
+	    	System.out.println("-------------------------------" + resetCnt); 
 	    }//if end
 	//System.out.println("trigger test");
 	    
