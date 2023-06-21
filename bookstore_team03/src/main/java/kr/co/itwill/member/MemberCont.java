@@ -29,11 +29,16 @@ import kr.co.itwill.dropmem.DropMemberDTO;
 import kr.co.itwill.mail.mailDTO;
 import kr.co.itwill.profile.ProfileDAO;
 import kr.co.itwill.profile.ProfileDTO;
+import kr.co.itwill.review.ReviewDAO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.security.Principal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
 
@@ -143,7 +148,7 @@ public class MemberCont {
 	        session.setAttribute("member_id", loginInfo.get("member_id")); 
 	        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
 	        
-	        viewPage = "member/myPage";
+	        viewPage = "template/index";
 	        // 추후 메인 페이지로 이동하게 
 	    }
     
@@ -155,7 +160,7 @@ public class MemberCont {
 	 @RequestMapping("/time")
 	 public void time(HttpServletRequest request) {
          HttpSession session = request.getSession();
-         session.setMaxInactiveInterval(10);
+         session.setMaxInactiveInterval(30);
 	 } 
 	 
 	 
@@ -171,20 +176,34 @@ public class MemberCont {
 	public ModelAndView myPage(HttpSession session) {
 		ModelAndView mav=new ModelAndView();
 
-		
 		String member_id = (String) session.getAttribute("member_id");
 		System.out.println(member_id);
-		// 프로필 정보 가져오기
-		//model.addAttribute("loginInfo", loginInfo);
-	   // mav.addObject("profile.list", profileDao.list(member_id));
 		
 		
-		mav.addObject(memberDao.profilelist(member_id));
-		//System.out.println(memberDao.profilelist(member_id));
-		mav.setViewName("member/myPage"); 
-//		System.out.println(profileDao.list(member_id));
-//		mav.addObject("list", profileDao.list(member_id));
+		// memberDao.List(member_id)를 호출하여 반환되는 데이터를 MemberDTO 형태의 리스트로 저장
+	    List<MemberDTO> memberData = memberDao.List(member_id);
+	    mav.addObject("list", memberData);
+
+	    if (!memberData.isEmpty()) {
+	        MemberDTO memberInfo = memberData.get(0);
+	        mav.addObject("member_name", memberInfo.getMember_name());
+	    }
 		
+		// profileDao.list(member_id)를 호출하여 반환되는 데이터를 Map 형태로 저장
+	    Map<String, Object> profileData = profileDao.list(member_id);
+
+	    if (!profileData.isEmpty()) {
+	    mav.addObject("list", profileData);
+	    mav.setViewName("member/myPage"); 
+
+	    // profile_name만 추출하여 mav에 추가
+	    mav.addObject("profile_name", profileData.get("profile_name"));
+
+	    mav.addObject("profile_intro", profileData.get("profile_intro"));
+	    }
+	    
+	    // 리뷰 추가
+
 		return mav;
 	}
 	
