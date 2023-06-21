@@ -19,9 +19,9 @@ import kr.co.itwill.event.Qscheduler;
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class BookstoreTeam03Application {
 	
-	@Autowired
-	private Qscheduler scheduler;
-
+	/*
+	 * @Autowired private Qscheduler scheduler;
+	 */
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreTeam03Application.class, args);
 	}//main end

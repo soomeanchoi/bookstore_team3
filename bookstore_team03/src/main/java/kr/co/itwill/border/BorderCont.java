@@ -1,3 +1,4 @@
+/*
 package kr.co.itwill.border;
 
 import java.text.SimpleDateFormat;
@@ -203,3 +204,4 @@ public class BorderCont {
 			return "border/msgView";
 		}//msgView() end
 	}//class end
+*/
