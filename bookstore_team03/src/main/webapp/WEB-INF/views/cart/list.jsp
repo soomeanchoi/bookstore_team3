@@ -44,7 +44,7 @@
 		}//if end
 	}//order() end
 	
-	function book_Price(){//책 수량 수정에 따른 결제금액 변경
+	/* function book_Price(){//책 수량 수정에 따른 결제금액 변경
 		var cnt = 0;
 		var price = 0;
 		var total=0;
@@ -52,14 +52,12 @@
 		cnt = Number(cart_qty.item(i).value);
 		price = Number(book_price.item(i).innerText);
 		booktot_Price.item(i).innerText = cnt*price;
-	 	/* for(var i = 0; i < orderlist_cnt.length; i++){
+	 	for(var i = 0; i < orderlist_cnt.length; i++){
 			
-		
-			
-			total += cnt*price; */
+			total += cnt*price;
 		}//for end
 		
-	}//book_price() end
+	}//book_price() end */
 </script>
 
 </head>

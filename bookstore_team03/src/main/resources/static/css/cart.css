@@ -47,13 +47,11 @@ body {
 .buttonDiv1{
 	display: inline-block; 
 	margin: 0 5px;
-	float: right;
 }
 
 .buttonDiv2{
 	display: inline-block; 
 	margin: 0 5px;
-	float: left;
 }
 
 .content{
@@ -64,4 +62,3 @@ body {
 	text-align:center;
 }
 
-.book
