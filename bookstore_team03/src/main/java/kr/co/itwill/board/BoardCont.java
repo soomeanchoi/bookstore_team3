@@ -1,4 +1,4 @@
-/*package kr.co.itwill.board;
+package kr.co.itwill.board;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,9 +23,15 @@ public class BoardCont {
 		
 		ModelAndView mav=new ModelAndView();
         mav.setViewName("board/list");
-       // mav.addObject("list", boardDao.list());
+        mav.addObject("list", boardDao.list());
         return mav;
 	}//list() end
 	
+	@RequestMapping("/write")
+    public String write() {
+        return "board/write";
+    }//write() end
+	
+	
+	
 }//class end
-*/

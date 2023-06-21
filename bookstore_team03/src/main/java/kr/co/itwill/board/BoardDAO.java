@@ -1,4 +1,4 @@
-/*package kr.co.itwill.board;
+package kr.co.itwill.board;
 
 import java.util.List;
 
@@ -22,4 +22,3 @@ public class BoardDAO {
 	
 	
 }//class end
-*/

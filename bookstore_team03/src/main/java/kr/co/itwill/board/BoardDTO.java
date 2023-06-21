@@ -1,4 +1,4 @@
-/*package kr.co.itwill.board;
+package kr.co.itwill.board;
 
 public class BoardDTO {
 
@@ -97,4 +97,3 @@ public class BoardDTO {
     
     
 }//class end
-*/
