@@ -38,6 +38,10 @@ public class BookDAO {
         return sqlSession.selectOne("book.detail", isbn);
     }//detail() end
 
+    public Map<String, Object> reviewCount(String isbn) {
+        return sqlSession.selectOne("book.reviewCount", isbn);
+    }
+
     public String filename(String isbn) {
         return sqlSession.selectOne("book.filename", isbn);
     }//filename() end

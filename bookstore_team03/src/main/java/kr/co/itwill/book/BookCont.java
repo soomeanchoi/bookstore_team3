@@ -107,17 +107,8 @@ public class BookCont {
         mav.addObject("book", bookDao.detail(isbn));
         bookDao.count(isbn);
         mav.addObject("score",bookDao.reviewScore(isbn));
-        return mav;
-    }//detail() end
+        mav.addObject("reviewCount", bookDao.reviewCount(isbn));
 
-    @RequestMapping("/detail2/{isbn}")
-    public ModelAndView detail2(@PathVariable String isbn) {
-        ModelAndView mav = new ModelAndView();
-        ReviewDTO review=new ReviewDTO();
-        mav.setViewName("book/detail2");
-        mav.addObject("book", bookDao.detail(isbn));
-        bookDao.count(isbn);
-        mav.addObject("score",bookDao.reviewScore(isbn));
         return mav;
     }//detail() end
 
