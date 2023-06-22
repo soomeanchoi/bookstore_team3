@@ -69,6 +69,14 @@
 		UPDATE member SET member_pw=#{member_pw} where member_id=#{member_id}
 	</update>
 	
+	<select id="mytag" resultType="java.util.Map" parameterType="String">
+		SELECT tag_name
+			FROM tag t 	
+			LEFT JOIN membertag m 
+			ON t.tag_no = m.tag_no
+			WHERE m.member_id = #{member_id};
+	</select>
+	
 </mapper>     
 
 

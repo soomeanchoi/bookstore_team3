@@ -41,7 +41,9 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="member_id" id="member_id" oninput="idCheck()"><br><br>
+				<input type="text" name="member_id" id="member_id" maxlength="50">
+				<button class="idCheck_btn" onclick="idCheck()"></button>
+				<br><br>
 				<span class="id_ok" style="display: none; color: green;" >사용 가능한 이메일입니다.</span>
  				<span class="id_already" style="display: none; color: red;">이미 사용 중인 이메일입니다.</span>
 			</td>
@@ -462,6 +464,8 @@
 // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 function idCheck(){
        var member_id = $('#member_id').val(); //id값이 "id"인 입력란의 값을 저장
+       
+  
        $.ajax({
            url:'./idCheck', //Controller에서 요청 받을 주소
            type:'post', //POST 방식으로 전달
@@ -474,7 +478,7 @@ function idCheck(){
                    $('.id_already').css("display","inline-block");
                    $('.id_ok').css("display", "none");
                    alert("아이디를 다시 입력해주세요");
-                   $('#member_id').val('');
+                   /* $('#member_id').val(''); */
                }
            },
            error:function(){

@@ -205,12 +205,11 @@ public class MemberCont<ReviewDTO> {
 
 	    mav.addObject("profile_intro", profileData.get("profile_intro"));
 	    }
+	    
 	    //이웃이 최근에 좋아요한 책, 내 bbti에 맞는 책
 	    //tag
-	    //mav.addObject("mytag", bookTagDao.mylist(member_id));
-	    
-	   // List<Map<String, Object>> tagData = bookTagDao.mylist(member_id);
-	    //mav.addObject("mytag", tagData);
+	    mav.addObject("mytag" , memberDao.taglist(member_id));
+	   
 	    
 		return mav;
 	}

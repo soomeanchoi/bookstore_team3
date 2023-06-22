@@ -73,5 +73,10 @@ public class MemberDAO {
 		return sqlSession.update("member.updatePw", dto);
 	}
 	
+	//dto가 없어서 map으로 가져와야함 여기에 review랑 tag를 가져온다 
+	public List<Map<String, Object>> taglist(String member_id) {
+		return sqlSession.selectList("member.mytag", member_id);
+	}
+	
 	
 }

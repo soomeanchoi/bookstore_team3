@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
     <link rel="stylesheet" href="/css/mypage.css" />
+    <link rel="stylesheet" href="/css/carousel.css" />
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -32,25 +33,54 @@
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
     <script src="/js/mypage.js"></script>
-    
+    <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script><!--  캐러셀 -->
   </head>
 
 <body>
-<main class="container_wrapper my_home">
+
+
+
+<main class="container_wrapper_my_home">
 <section id ="1" class="contents_wrap">
-<h1>마이페이지</h1><br><br><br>
+	<div class="mypage-title">
+	<div class="mypage-icon">
+	<img src="/storage/house3.png" height="40" width="40">
+	</div>
+	
+	</div>
+
+<div class="gwang">
+
+
+
     <div class="contents_inner">
+    
+    
+    
     <aside class="aside_wrap">
          <!-- <img src="/storage/profilelogo.png" width="180" height="180"><br> -->
-	      <button onclick="location.href='/profile/profileForm';">프로필 등록</button>
-	      <div>
-	      	<br><br>
-		    <button onclick="location.href='modify';">회원정보 수정</button>
-			<button onclick="location.href='deleteView';">회원탈퇴</button>
-			<button onclick="location.href='logout';">로그아웃</button>
-	      </div>
-        
-            <h6><span>user</span>님의 bbti</h6>
+	     
+	     
+	     
+	     <div class="my_profile_area">
+	      <div class="profile-box">
+	      
+	      	<div class="profile-box-inner">
+	      	<div class="profile-thumb_box_no_img">
+	      		<div class="profile-thumb">
+	      		<!-- <button onclick="location.href='/profile/profileForm';" class="profile_btn"> -->
+	      		<a href="">
+	      		<div class="profile_img">
+	      		<img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
+	      		</a>
+	      		</div>
+	      		</div>
+	      	</div>	
+	      		<div class="profile-name-box">
+	      			<span class="name">${member_name }</span>
+	      		</div>
+	      		
+	      		 <h6><span>user</span>님의 bbti</h6>
             <div>bbti 결과</div>
           
           <div>
@@ -74,16 +104,107 @@
             ${mytag }
             </div>
           </div>
+	      		
+	      		<div class="profile-info-box">
+	      			<li class="info_item">
+	      				<a href="http://localhost:9095/choice/list">
+	      					<span class="title">찜</span>
+	      					<span class="val"></span>
+	      				</a>
+	      			</li>
+	      			<li class="info_item">
+	      				<a href="http://localhost:9095/cart/list">
+	      					<span class="title">장바구니</span>
+	      					<span class="val"></span>
+	      				</a>
+	      			</li>
+	      		</div>	
+	      		
+	      	</div>
+	      </div>
+	      </div> 
+<!-- 프로필 상자만..  -->	            
+	    
+	      
+	      
+	      <div class="logout">
+	      	<br><br>
+		    <button class="modify" onclick="location.href='modify';">회원정보 수정</button>
+			<button onclick="location.href='deleteView';">회원탈퇴</button>
+			<button onclick="location.href='logout';">로그아웃</button>
+	      </div>
+        	 <div>
+            <div>주문내역</div>
+            <input type="button" value="버튼" onclick="location.href='';">
+             
+		    <div>관리자 문의하기</div>
+          </div>
+           
          
             
           </div>
-          <div>
-            <div>주문내역</div>
-            <input type="button" value="버튼" onclick="location.href='';">
-          </div>
-          <div>관리자 문의하기</div>
-        
-        <br><br>
+          <section class="article">
+		    	<article>
+		    		
+		    		<!-- 캐러셀 시작 -->
+		    		<div class="container">
+					  <div class="slide-container">
+					    <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190299770.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190090261.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190090018.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791196589103.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/200x0/pdt/9788954675352.jpg" alt="">
+					      </div>
+					  </div>
+					  
+					  <div class="slide-container">
+					    <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788998441074.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791189327156.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788937427831.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9788954692007.jpg" alt="">
+					      </div>
+					      
+					      <div class="slide-image">
+					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791192968032.jpg" alt="">
+					      </div>
+					  </div>
+					    <div class="slide-container-bottom"></div>
+					</div>
+		    		
+		    	
+		    	
+		    	</article>
+		    </section> 
+		    
+		   
+</div>
+          
+          
+          
+          
         <div>
           <!-- <h1>내서재</h1> -->
           <h2 align="center"><a href='/choice/list'>찜한 책</a>/<a href='/review/list'>내가 작성한 리뷰</a>/<a href='/research/result'>커뮤니티 활동 내역</a></h2>
@@ -116,7 +237,18 @@
         </div>
       </div>	
     </div>  
+    
+    <div class="main_contents">
+    
+    
+    
+    </div>
+    
+    
+    
+    
       </aside>
+  
       
       
 
@@ -128,10 +260,17 @@
   
 <!-- ----------------------------------------------------------------- ----------------------------------------------------------->
 	<section id="contents" class="section_wrap"></section>
-</section>
+
 </main>
  </body>
-
+<script type="text/javascript">
+  var emblaNode = document.querySelector(".embla");
+  var options = { loop: false };
+  var plugins = [EmblaCarouselAutoplay()]; // Plugins	
+  
+  var embla = EmblaCarousel(emblaNode, options);
+</script>
 </html>
+</section>
  <script src="js/script.js"></script>
  <%@ include file="../template/footer.jsp" %> 

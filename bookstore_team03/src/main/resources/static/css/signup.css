@@ -16,3 +16,13 @@ table {
     line-height: 1.6;
     padding: 100px;
 }
+
+
+
+.idCheck_btn {
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    background-color: #808080;
+} 
