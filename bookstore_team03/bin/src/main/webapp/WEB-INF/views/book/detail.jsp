@@ -16,6 +16,11 @@
     <title>detail.jsp</title>
     <script src="/js/jquery-3.6.4.min.js"></script>
 
+	 <meta charset="utf-8">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">
+	 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+	 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
     <script>
         function book_update(){
@@ -40,6 +45,21 @@
             }//if end
         }//book_choice() end
 
+        //장바구니 수량선택 유효성 검사
+		function product_cart(){
+			if(confirm("장바구니에 담으시겠습니까?")){
+				document.bookfrm.action="/cart/insert";
+				document.bookfrm.submit();
+			}//if end
+		}//product_cart() end
+		
+		//상품직접구매
+		function dirOrder(){
+		 if(confirm("구매하시겠습니까?")){
+                document.bookfrm.action="/border/directborderForm";
+                document.bookfrm.submit();
+         }//if end
+		}//dirOrder() end
     </script>
 
 </head>
@@ -50,11 +70,28 @@
     <p>
         <button type="button" onclick="location.href='/book/write'">등록</button>
         <button type="button" onclick="location.href='/book/list'">리스트</button>
+        <button type="button" onclick="product_cart()">장바구니담기</button>
+        <input type ="button" value="구매" onclick="dirOrder()">
         &nbsp&nbsp 조회수 : ${book.book_count} &nbsp&nbsp
         평점 : ${score}
     </p>
+    
 
     <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">
+	   <table>
+	   <tr>
+	       <td>상품수량</td>
+	       <td> 
+			<select name="cart_qty" id="cart_qty">
+				<option value="1" selected>1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+		</td>
+	   </tr>
+	   </table>
         <table>
             <tr>
                 <td>isbn</td>
@@ -131,6 +168,8 @@
                 </td>
             </tr>
         </table>
+        <hr>
+        
     </form>
     <hr>
 

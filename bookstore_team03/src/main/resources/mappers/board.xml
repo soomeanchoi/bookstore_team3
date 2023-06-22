@@ -7,10 +7,46 @@
 
 <mapper namespace="board">
 
-	<select id="list" resultType="kr.co.itwill.board.BoardDTO">
-		SELECT board_no, isbn, member_id, bbti_no, board_title, board_content, board_date, board_read, board_good
-		FROM itwill.board
-		ORDER BY board_date
+	<select id="list" resultType="java.util.HashMap">
+		SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_date, board_read, board_good
+		FROM (board b 
+		     join profile p on b.member_id = p.member_id) 
+		ORDER BY board_date asc
 	</select>
+	
+	<select id="replylist" resultType="int" parameterType="int">
+		SELECT COUNT(reply_no)
+		FROM reply
+		WHERE board_no=#{board_no}
+	</select>
+	
+	<select id="detail" parameterType="int" resultType="java.util.HashMap">
+		SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_content, board_date, board_read, board_good
+		FROM (board b 
+		     join profile p on b.member_id = p.member_id) 
+		WHERE board_no=#{board_no}
+	</select>
+	
+	<select id="userinfo" parameterType="String" resultType="java.util.HashMap">
+		SELECT m.member_id, profile_name, p.bbti_no
+		FROM (member m 
+		     join profile p on m.member_id = p.member_id) 
+		WHERE m.member_id=#{s_id}
+	</select>
+	
+	<insert id="write" parameterType="kr.co.itwill.board.BoardDTO">
+		INSERT INTO itwill.board
+		(isbn, member_id, bbti_no, board_title, board_content, board_date, board_read, board_good)
+		VALUES(#{isbn}, #{member_id}, #{bbti_no}, #{board_title}, #{board_content}, current_timestamp(), 0, 0)
+	</insert>
+	
+	<delete id="delete" parameterType="int">
+		DELETE FROM board
+		WHERE board_no=#{board_no} 
+	</delete>
+	
+	<update id="update" parameterType="kr.co.itwill.board.BoardDTO">
+		
+	</update>
 	
 </mapper>

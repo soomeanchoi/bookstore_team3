@@ -14,7 +14,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import kr.co.itwill.event.Qscheduler;
+/*import kr.co.itwill.event.Qscheduler;*/
 
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 public class BookstoreTeam03Application {

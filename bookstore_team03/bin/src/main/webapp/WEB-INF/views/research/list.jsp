@@ -12,10 +12,29 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 
+<%@ include file="../template/header.jsp" %>
 <html>
 <head>
     <title>list</title>
-
+ <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/section.css" />
+    <link rel="stylesheet" href="/css/survey.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-latest.js"
+    ></script>
+  </head>
 <%--       <c:forEach items="${que}" var="question" varStatus="status">--%>
 <%--           <form action="result" method="post" enctype="multipart/form-data">--%>
 <%--           ${question.toString()}--%>

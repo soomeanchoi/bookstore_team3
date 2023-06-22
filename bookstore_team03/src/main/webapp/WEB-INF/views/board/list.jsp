@@ -64,33 +64,39 @@
 		<table class="table">
 			<thead class="thead-light">
 			<tr>
-				<th scope="col">작성자 닉네임</th>
+				<th scope="col">작성자</th>
 				<th scope="col">제목</th>
 				<th scope="col">조회수</th>
+				<th scope="col">좋아요</th>
 				<th scope="col">작성일</th>
+				
 			</tr>
 			</thead>
 			<tbody class="customtable">
 			 <c:forEach items="${list}" var="row" varStatus="status">
 		    	 <input type="hidden" name="status" value="${status.index}">
-		    	 <%-- <input type="hidden" id="isbn" name="isbn" class="isbn" value="${row.isbn}"> --%>
+		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
 		    	<tr>
 		    		
-	    		<td>닉네임</td>
-	    		<td id="board_title" class="board_title">${row.board_title}</td>
+	    		<td id="profile_name" class="profile_name">${row.profile_name}</td>
+	    		<td id="board_title" class="board_title"><a href="detail/${row.board_no}">${row.board_title}</a>[${row.replycnt}]</td>
+	    		<td id="board_read" class="board_read">${row.board_read}</td>
+	    		<td id="board_good" class="board_good">${row.board_good}</td>
 	    		<td id="board_date" class="board_date">${row.board_date}</td>
-	    		<td id="board_read" class="board_read">${row.board_read}</td>	
+	    			
 	   		<%-- 	<td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
 	    		</tr>
-				    </c:forEach>
-				
+				    </c:forEach>				
 			</tbody>
 		</table>
+		</div>
+		<div>
+		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>
 	</div>
 </div>
 </div>
-</div>
+
 
 </body>
 </html>

@@ -43,3 +43,19 @@ $(window).on("wheel", function(e){
  
 	$html.animate({scrollTop : posTop});
 });
+
+
+
+
+
+const button = document.querySelector(".menu-drop");
+
+button.addEventListener("click", () => {
+  const dropdown = document.querySelector(".drop-cont");
+  dropdown.style.display = "block";
+});
+
+button.addEventListener("blur", () => {
+  const dropdown = document.querySelector(".drop-cont");
+  dropdown.style.display = "";
+});

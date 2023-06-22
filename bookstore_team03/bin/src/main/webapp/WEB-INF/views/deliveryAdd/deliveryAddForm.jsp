@@ -12,7 +12,18 @@
 <script src="/js/jquery-3.6.4.min.js"></script>
 	
 <script>
-	
+	function nullcheck(){
+		var deliv_postno = document.getElementById("deliv_postno").value;
+		var deliv_add1 = document.getElementById("deliv_add1").value;
+		
+		if(deliv_postno == "" && deliv_add1 == ""){
+			alert("주소를 입력해 주세요");
+			return false;
+		}else{
+			alert("배송지를 등록하시겠습니까?");
+			return true;
+		}//if end 
+	}//nullcheck() end
 </script>
 </head>
 
@@ -20,7 +31,7 @@
 <div class="container mt-3">
 	<h3>배송지 추가</h3>
 <hr>
-<form name="deliveryAddForm" id="deliveryAddForm" method="post" action="insert">
+<form name="deliveryAddForm" id="deliveryAddForm" method="post" action="insert" onsubmit="return nullcheck()">
 	<table border='1' class="type01">
 	<tr>
 		<th>우편번호</th>
