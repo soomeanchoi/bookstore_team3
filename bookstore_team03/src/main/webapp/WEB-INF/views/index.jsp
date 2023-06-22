@@ -83,7 +83,7 @@
 								</ul>
 							</li>
 							<li><a href="services.html">Services</a></li>
-							<li><a href="blog.html">Blog</a></li>
+							<li><a href="list3.jsp">Blog</a></li>
 
 						</ul>
 					</div>

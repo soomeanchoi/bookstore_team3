@@ -63,15 +63,23 @@ public class BookCont {
 
     }//insert() end
 
-    @RequestMapping("/list")
+    @RequestMapping("/bestList")
     public ModelAndView list() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/bestList");
+        mav.addObject("list", bookDao.list());
+        mav.addObject("bestList", bookDao.bestList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/list")
+    public ModelAndView blog() {
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/list");
         mav.addObject("list", bookDao.list());
         mav.addObject("bestList", bookDao.bestList());
         return mav;
     }//list() end
-
 
 
     @RequestMapping("/search")
