@@ -28,4 +28,14 @@ public class IntroCont {
         return mav;
 
     }//list() end
+
+    @RequestMapping("/test")
+    public ModelAndView blog() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("template/template");
+        return mav;
+    }
+
+
+
 }

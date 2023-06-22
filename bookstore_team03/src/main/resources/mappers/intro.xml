@@ -36,7 +36,7 @@
 	</select>
 
 	<select id="recentReview" resultType="java.util.Map">
-		select book_name,DD.isbn,profile_name,review_score,review_content,review_date, member_id
+		select book_name,DD.isbn,profile_name,review_score,review_content,review_date, member_id, book_imgname, book_content
 		from (select isbn,profile_name,review_score,review_content,review_date,member_id
 			  from profile AA join review BB
 								   on AA.profile_no = BB.profile_no) CC join book DD

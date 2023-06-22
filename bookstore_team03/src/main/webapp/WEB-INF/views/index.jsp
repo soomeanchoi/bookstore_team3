@@ -83,7 +83,7 @@
 								</ul>
 							</li>
 							<li><a href="services.html">Services</a></li>
-							<li><a href="blog.html">Blog</a></li>
+							<li><a href="list3.jsp">Blog</a></li>
 
 						</ul>
 					</div>
@@ -243,16 +243,13 @@
 					<div id="destination-controls">
 						<span class="prev me-3" data-controls="prev">
 							<span class="icon-chevron-left"><</span>
-
 						</span>
 						<span class="next" data-controls="next">
 							<span class="icon-chevron-right">></span>
-
 						</span>
 					</div>
 				</div>
-			</div>	
-
+			</div>
 		</div>		
 
 		<div class="destination-slider-wrap">
@@ -277,17 +274,15 @@
 									</div>
 								</c:otherwise>
 						</c:choose>
-
 					</div>
 				</div>
 				</c:forEach>
-
 			</div>
 		</div>
 
 	</div>
 
-	&lt;%&ndash;<div class="section">
+	<div class="section">
 		<div class="container">
 			<div class="row justify-content-between align-items-center">
 				<c:forEach items="${todayWriter}" var="row" varStatus="vs">
@@ -374,73 +369,6 @@
 					</blockquote>
 				</div>
 				</c:forEach>
-<%--
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_2.jpg" alt="Free template by TemplateUX">
-							<h3>James Woodland</h3>
-							<p class="position mb-5">Designer at Facebook</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&rdquo;</p>
-
-					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_3.jpg" alt="Free template by TemplateUX">
-							<h3>Rob Smith</h3>
-							<p class="position mb-5">Product Designer at Twitter</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_1.jpg" alt="Free template by TemplateUX">
-							<h3>John Doe</h3>
-							<p class="position mb-5">CEO, Founder</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.&rdquo;</p>
-					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_2.jpg" alt="Free template by TemplateUX">
-							<h3>James Woodland</h3>
-							<p class="position mb-5">Designer at Facebook</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.&rdquo;</p>
-
-					</blockquote>
-				</div>
-
-				<div class="item">
-					<blockquote class="block-testimonial">
-						<div class="author">
-							<img src="images/person_3.jpg" alt="Free template by TemplateUX">
-							<h3>Rob Smith</h3>
-							<p class="position mb-5">Product Designer at Twitter</p>
-						</div>
-						<p>
-							<div class="quote">&ldquo;</div>
-						&ldquo;A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.&rdquo;</p>
-					</blockquote>
-				</div>--%>
 			</div>
 		</div>&ndash;%&gt;
 
@@ -451,23 +379,28 @@
 
 	<div class="section">
 		<div class="container">
-
 			<div class="row">
 				<div class="col-12"data-aos="fade-up" data-aos-delay="0">
-					
-					<h2 class="heading mb-5">Recent Posts</h2>
+					<h2 class="heading mb-5">새로나온 책</h2>
 				</div>
 			</div>
 			<div class="row align-items-stretch">
+				<c:forEach items="${recentReview}" var="row" varStatus="vs" end="3">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
 					<div class="media-entry">
-						<a href="#">
-							<img src="images/gal_1.jpg" alt="Image" class="img-fluid">
-						</a>
+						<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">
 						<div class="bg-white m-body">
-							<span class="date">May 14, 2020</span>
-							<h3><a href="#">Far far away, behind the word mountains</a></h3>
-							<p>Vokalia and Consonantia, there live the blind texts. Separated they live.</p>
+							<h3><a href="#">${row.book_name}</a></h3>
+							<p>
+								<c:choose>
+									<c:when test="${fn:length(row.book_content) > 100}">
+										<c:out value="${fn:substring(row.book_content,0,99)}"/>...
+									</c:when>
+									<c:otherwise>
+										<c:out value="${row.book_content}"/>
+									</c:otherwise>
+								</c:choose>
+							</p>
 
 							<a href="single.html" class="more d-flex align-items-center float-start">
 								<span class="label">Read More</span>
@@ -476,7 +409,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
+				</c:forEach>
+				<%--<div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="200">
 					<div class="media-entry">
 						<a href="#">
 							<img src="images/gal_2.jpg" alt="Image" class="img-fluid">
@@ -524,7 +458,7 @@
 							</a>
 						</div>
 					</div>
-				</div>
+				</div>--%>
 			</div>	
 		</div>		
 	</div>

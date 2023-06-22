@@ -63,6 +63,15 @@ public class BookCont {
 
     }//insert() end
 
+    @RequestMapping("/bestList")
+    public ModelAndView bestList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/bestList");
+        mav.addObject("list", bookDao.list());
+        mav.addObject("bestList", bookDao.bestList());
+        return mav;
+    }//list() end
+
     @RequestMapping("/list")
     public ModelAndView list() {
         ModelAndView mav=new ModelAndView();
@@ -72,7 +81,14 @@ public class BookCont {
         return mav;
     }//list() end
 
-
+    @RequestMapping("/list2")
+    public ModelAndView list2() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/list2");
+        mav.addObject("list", bookDao.list());
+        mav.addObject("bestList", bookDao.bestList());
+        return mav;
+    }//list() end
 
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(defaultValue = "") String book_name) {
@@ -93,7 +109,18 @@ public class BookCont {
         mav.addObject("score",bookDao.reviewScore(isbn));
         return mav;
     }//detail() end
-        
+
+    @RequestMapping("/detail2/{isbn}")
+    public ModelAndView detail2(@PathVariable String isbn) {
+        ModelAndView mav = new ModelAndView();
+        ReviewDTO review=new ReviewDTO();
+        mav.setViewName("book/detail2");
+        mav.addObject("book", bookDao.detail(isbn));
+        bookDao.count(isbn);
+        mav.addObject("score",bookDao.reviewScore(isbn));
+        return mav;
+    }//detail() end
+
     @RequestMapping("/delete")
     public String delete(String isbn, HttpServletRequest req) {
         System.out.println("isbn = " + isbn);
