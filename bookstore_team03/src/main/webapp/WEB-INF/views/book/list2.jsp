@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: apple
-  Date: 2023/06/12
-  Time: 2:13 PM
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -25,10 +19,6 @@
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
     <link rel="stylesheet" href="/css/signup.css" />
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -63,35 +53,59 @@
     <tr>
         <c:forEach items="${list}" var="row" varStatus="vs">
             <td>
-                <div class="list">
                 <c:choose>
                     <c:when test="${row.book_imgname != '-'}">
-                        <div class="list_img">
                         <img src="/storage/${row.book_imgname}" width="100px">
-                        </div>
-                        <div class="list_info_box">
-                            <a href="detail/${row.isbn}">${row.book_name}</a><br>
-                        ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}<br><br>
-                        ${row.book_price}원 | ${row.book_page}p <br><br>
-                            <%--조회수 : ${row.book_count}--%>
-                            <c:if test="${fn:length(row.book_content) > 100}">
-                                    <c:out value="${fn:substring(row.book_content,0,99)}"/>...
-                            </c:if>
-                        <hr>
                     </c:when>
                     <c:otherwise>
-                        등록된 제품 없음
+                        등록된 제품 없음 <br>
                     </c:otherwise>
                 </c:choose>
+                <br>
+                <a href="detail/${row.isbn}">[${row.book_mainname}] ${row.book_name}</a> 조회수 : ${row.book_count}
+                <br>
+                ${row.book_pub} ・ ${row.book_pubdate}
+                <br>
+                ${row.book_price}원
+                    <hr>
                 <c:if test="${vs.count mod 1==0}">
                     <tr></tr>
                 </c:if>
-                </div>
             </td>
         </c:forEach>
     </tr>
     </table>
     <hr>
+
+    <h3>베스트 셀러</h3>
+    <table>
+    <tr>
+        <c:forEach items="${bestList}" var="row" varStatus="vs">
+            <td>
+                ${vs.count}위
+                <c:choose>
+                        <c:when test="${row.book_imgname != '-'}">
+                    <img src="/storage/${row.book_imgname}" width="100px">
+                    </c:when>
+                    <c:otherwise>
+                        등록된 제품 없음 <br>
+                    </c:otherwise>
+                </c:choose>
+                <br>
+                <a href="detail/${row.isbn}">[${row.book_mainname}] ${row.book_name}</a>
+                <br>
+                ${row.book_pub} ・ ${row.book_pubdate}
+                <br>
+                ${row.book_price}원
+                <hr>
+                <c:if test="${vs.count mod 5==0}">
+                    <tr></tr>
+                </c:if>
+    </td>
+        </c:forEach>
+    </tr>
+    </table>
+
 
 </body>
 </section>
