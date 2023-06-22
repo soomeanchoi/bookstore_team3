@@ -108,7 +108,7 @@ public class BookCont {
         bookDao.count(isbn);
         mav.addObject("score",bookDao.reviewScore(isbn));
         mav.addObject("reviewCount", bookDao.reviewCount(isbn));
-        System.out.println(mav);
+
         return mav;
     }//detail() end
 

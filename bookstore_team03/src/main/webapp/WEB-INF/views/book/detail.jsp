@@ -41,6 +41,13 @@
             right: 250px;
         }
 
+        hr.info-hr {
+            height: 3px;
+            background-color: black;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -104,7 +111,7 @@
 
         <section>
             <hr>
-            <br>
+            <br><br>
         <div>
             <div class="book-detail-content">
                 <div>
@@ -123,6 +130,7 @@
                     <br>${book.book_content}<br><br>
                 </div>
                 <hr>
+                <br><br>
                 <div>
                     <h2>작가정보</h2>
                 </div>
@@ -131,13 +139,167 @@
                     <button class="detail-writer-info">인물정보</button></span><br><br>
                 </div>
                 <div>
-                    ${book.writer_info}
+                    ${book.writer_info}<br><br>
+                        <hr>
                 </div>
             </div>
         </div>
-
-
         </section>
+
+        <section class="detail-info">
+            <div>
+                <br><br>
+                <h2>기본정보</h2>
+                <br><hr class="info-hr">
+            </div>
+            <div>
+                <table>
+                    <tr>
+                        <th><strong>ISBN</strong></th>
+                        <td>${book.book_isbn}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>발행(출시)일자</strong></th>
+                        <td>${book.book_pubdate}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>쪽수</strong></th>
+                        <td>${book.book_page}</td>
+                    </tr>
+                    <tr>
+                        <th><strong>총권수</strong></th>
+                        <td>1권</td>
+                    </tr>
+                </table>
+            </div>
+            <br>
+            <hr>
+
+            <div>
+                <h2>리뷰(${reviewCount})</h2>
+            </div>
+
+            <%-- 상품번호 --%>
+            <input type="hidden" name="isbn" value="${book.isbn}">
+            <input type="text" name="review_content" id="review_content" placeholder="내용을 입력해 주세요">
+            <button type="button" name="reviewInsertBtn" id="reviewInsertBtn">리뷰등록</button>
+
+
+    <div>
+        <%-- 리뷰목록 --%>
+        <div class="reviewList"></div>
+    </div>
+
+    <%-- 리뷰 자바스크립트 --%>
+    <script>
+
+        let isbn = '${book.isbn}'; //상품 번호
+
+        //등록 클릭했을때
+        $("#reviewInsertBtn").click(function() {
+            let insertData=$("#reviewInsertForm").serialize();
+            reviewInsert(insertData); //리뷰등록 함수 호출
+
+        })//click() end
+
+        function reviewInsert(insertData){ //리뷰등록 함수
+            $.ajax({
+                url:'/review/insert'
+                , type:'post'
+                , data:insertData
+                , error:function(error){
+                    alert(error);
+                }//error end
+                , success:function(data){
+                    if(data=1){ //리뷰 등록 성공
+                        reviewList(); //리뷰 작성후 리뷰 목록 함수 호출
+                        //기존 리뷰 내용을 빈 문자열로 대입
+                        $('#review_content').val('');
+                    }//if end
+                }//success end
+            })//ajax() end
+        }//reviewInsert() end
+
+        function reviewList() {
+            $.ajax({
+                url:'/review/list'
+                , type:'get'
+                , data:{'isbn' : isbn } //부모글번호
+                , success:function(data){
+                    let a=''; //출력할 결과값
+                    $.each(data, function(key, value){
+
+                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
+                        a += '	<div class="commentInfo' + value.review_no + '">';
+                        a += '		댓글번호:' + value.review_no + ' / 작성자:' + value.profile_no + ' / 평점:' + value.review_score + ' ' + value.review_date;
+                        a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
+                        a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
+                        a += '	</div>';
+                        a += '	<div class="reviewContent' + value.review_no + '">';
+                        a += '		<p>내용:' + value.review_content + '</p>';
+                        a += '	</div>'
+                        a += '</div>'
+
+                    });//each() end
+
+                    $(".reviewList").html(a);
+
+                }//success end
+            }); //ajax() end
+        }//reviewList() end
+
+        //리뷰수정 - 리뷰 내용 출력을 input 폼으로 변경
+        function reviewUpdate(review_no, review_content){
+            let a='';
+            a += '<div class="input-group">';
+            a += '		<input type="text" value="' + review_content + '" id="review_content_' + review_no + '">';
+            a += '		<button type="button" onclick="reviewUpdateProc(' + review_no + ')">수정</button>';
+            a += '</div>';
+            $(".reviewContent" + review_no).html(a);
+        }//reviewUpdate() end
+
+        //리뷰수정
+        function reviewUpdateProc(review_no){
+            let updateContent=$('#review_content_' + review_no).val();
+
+            $.ajax({
+                url:'/review/update'
+                , type:'post'
+                , data:{'review_no':review_no, 'review_content':updateContent}
+                , success:function(data){
+                    if(data==1){
+                        alert("리뷰가 수정되었습니다");
+                        reviewList();
+                    }//if end
+                }//if end
+            });//ajax() end
+        }//reviewUpdateProc() end
+
+        //리뷰삭제
+        function reviewDelete(review_no) {
+            $.ajax({
+                url:'/review/delete/' + review_no
+                , type:'post'
+                , success:function(data){ //콜백함수
+                    if(data==1){
+                        alert("리뷰가 삭제되었습니다");
+                        reviewList(); //리뷰 삭제후 목록 출력
+                    }//if end
+                }//success end
+            });//ajax() end
+        }//reviewDelete() end
+
+        $(document).ready(function(){ //페이지 로딩시 리뷰 목록 출력
+            reviewList();
+        });//ready() end
+
+    </script>
+        </section>
+
+
+
+
+
     </div>
 
 
