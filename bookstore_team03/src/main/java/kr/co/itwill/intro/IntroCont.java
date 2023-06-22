@@ -32,8 +32,10 @@ public class IntroCont {
     @RequestMapping("/test")
     public ModelAndView blog() {
         ModelAndView mav=new ModelAndView();
-        mav.setViewName("blog");
+        mav.setViewName("template/template");
         return mav;
     }
+
+
 
 }
