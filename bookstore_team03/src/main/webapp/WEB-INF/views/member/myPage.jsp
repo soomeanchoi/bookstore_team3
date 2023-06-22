@@ -3,6 +3,7 @@
 
 <%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ include file="../template/header.jsp" %>    
 <!DOCTYPE html>
@@ -30,28 +31,28 @@
       type="text/javascript"
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
+    <script src="/js/mypage.js"></script>
+    
   </head>
 
 <body>
-
-<section>
-      <h1>마이페이지</h1><br><br><br>
-       <div>
-      <img src="/storage/profilelogo.png" width="200" height="180"><br>
-      <button onclick="location.href='/profile/profileForm';">프로필 등록</button>
-      <div>
-      	<br><br>
-	    <button onclick="location.href='modify';">회원정보 수정</button>
-		<button onclick="location.href='deleteView';">회원탈퇴</button>
-		<button onclick="location.href='logout';">로그아웃</button>
-      </div>
-      <div class="mypage-section">
-        <aside>
+<main class="container_wrapper my_home">
+<section id ="1" class="contents_wrap">
+<h1>마이페이지</h1><br><br><br>
+    <div class="contents_inner">
+    <aside class="aside_wrap">
+         <!-- <img src="/storage/profilelogo.png" width="180" height="180"><br> -->
+	      <button onclick="location.href='/profile/profileForm';">프로필 등록</button>
+	      <div>
+	      	<br><br>
+		    <button onclick="location.href='modify';">회원정보 수정</button>
+			<button onclick="location.href='deleteView';">회원탈퇴</button>
+			<button onclick="location.href='logout';">로그아웃</button>
+	      </div>
         
-          <div class="">
             <h6><span>user</span>님의 bbti</h6>
             <div>bbti 결과</div>
-          </div>
+          
           <div>
             <!-- <h6>Profile</h6> -->
             <!-- <div>프로필 사진</div> -->
@@ -68,7 +69,10 @@
             자기소개
             ${profile_intro}
             </div>
-            <div>좋아하는 태그</div>
+            <div>
+            좋아하는 태그
+            ${mytag }
+            </div>
           </div>
          
             
@@ -78,7 +82,7 @@
             <input type="button" value="버튼" onclick="location.href='';">
           </div>
           <div>관리자 문의하기</div>
-        </aside>
+        
         <br><br>
         <div>
           <!-- <h1>내서재</h1> -->
@@ -86,7 +90,7 @@
           <!-- <div>찜한책</div> -->
           <div>
             <h6>당신에게 딱 맞는 추천도서</h6>
-            <div>
+            <div >
               <div>책 표지</div>
               <div>책 표지</div>
               <div>책 표지</div>
@@ -98,7 +102,10 @@
             <div>책제목</div>
             <div>
               <div>별점</div>
-              <div>리뷰내용</div>
+              <div>
+              리뷰내용
+              
+              </div>
             </div>
           </div>
           <div>
@@ -107,11 +114,24 @@
             <div>글내용</div>
           </div>
         </div>
-      </div>
-    </section>
+      </div>	
+    </div>  
+      </aside>
+      
+      
 
+    
+      
+     
+     
+        
+  
+<!-- ----------------------------------------------------------------- ----------------------------------------------------------->
+	<section id="contents" class="section_wrap"></section>
+</section>
+</main>
  </body>
- 
+
 </html>
  <script src="js/script.js"></script>
  <%@ include file="../template/footer.jsp" %> 

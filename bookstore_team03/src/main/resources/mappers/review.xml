@@ -29,8 +29,15 @@
         WHERE review_no=#{review_no}
     </update>
 
-
-
+<!--  
+	<select id="mylist" resultType="kr.co.itwill.review.ReviewDTO" parameterType="String">
+	        SELET tag_name
+			FROM tag t 	
+			LEFT JOIN membertag m 
+			ON t.tag_no = m.tag_no
+			WHERE m.member_id = #{member_id};
+	</select>
+-->
 </mapper>     
 
 

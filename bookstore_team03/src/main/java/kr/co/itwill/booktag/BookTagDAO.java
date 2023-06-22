@@ -54,4 +54,8 @@ public class BookTagDAO {
 
     }//update() end
 
+    public List<Map<String, Object>> mylist(String member_id) {
+        return sqlSession.selectList("booktag.mytag");
+    }//list() end
+    
 }

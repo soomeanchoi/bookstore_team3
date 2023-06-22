@@ -35,6 +35,8 @@ public class ReviewDAO {
         return sqlSession.update("review.update", review);
     }//update() end
 
-
+    public List<ReviewDTO> myreviewlist(String member_id){
+        return sqlSession.selectList("review.mylist", member_id);
+    }//list() end
 
 }//ReviewDAO() end

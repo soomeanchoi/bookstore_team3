@@ -24,6 +24,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.qos.logback.core.encoder.Encoder;
 import kr.co.itwill.KaKao.KakaoAPI;
+import kr.co.itwill.booktag.BookTagDAO;
 import kr.co.itwill.dropmem.DropMemberDAO;
 import kr.co.itwill.dropmem.DropMemberDTO;
 import kr.co.itwill.mail.mailDTO;
@@ -47,7 +48,7 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/member")
-public class MemberCont {
+public class MemberCont<ReviewDTO> {
     
 	public MemberCont() {
         System.out.println("-----MemberCont()객체 생성됨");
@@ -65,6 +66,8 @@ public class MemberCont {
 	@Autowired
 	ProfileDTO profileDto;
 
+	
+	
 	@Autowired
 	private KakaoAPI kakao;
 	
@@ -173,7 +176,8 @@ public class MemberCont {
 	
 
 	@RequestMapping("/myPage")
-	public ModelAndView myPage(HttpSession session) {
+	public <BookTagDTO> ModelAndView myPage(HttpSession session, Model model
+			, @ModelAttribute BookTagDAO bookTagDao) {
 		ModelAndView mav=new ModelAndView();
 
 		String member_id = (String) session.getAttribute("member_id");
@@ -201,9 +205,13 @@ public class MemberCont {
 
 	    mav.addObject("profile_intro", profileData.get("profile_intro"));
 	    }
+	    //이웃이 최근에 좋아요한 책, 내 bbti에 맞는 책
+	    //tag
+	    //mav.addObject("mytag", bookTagDao.mylist(member_id));
 	    
-	    // 리뷰 추가
-
+	   // List<Map<String, Object>> tagData = bookTagDao.mylist(member_id);
+	    //mav.addObject("mytag", tagData);
+	    
 		return mav;
 	}
 	
