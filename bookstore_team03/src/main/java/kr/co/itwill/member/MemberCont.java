@@ -27,7 +27,7 @@ import kr.co.itwill.KaKao.KakaoAPI;
 import kr.co.itwill.booktag.BookTagDAO;
 import kr.co.itwill.dropmem.DropMemberDAO;
 import kr.co.itwill.dropmem.DropMemberDTO;
-import kr.co.itwill.mail.mailDTO;
+
 import kr.co.itwill.profile.ProfileDAO;
 import kr.co.itwill.profile.ProfileDTO;
 import kr.co.itwill.review.ReviewDAO;
@@ -210,6 +210,8 @@ public class MemberCont<ReviewDTO> {
 	    //tag
 	    mav.addObject("mytag" , memberDao.taglist(member_id));
 	   
+	    //review
+	    mav.addObject("myreview", memberDao.reviewlist(member_id));
 	    
 		return mav;
 	}

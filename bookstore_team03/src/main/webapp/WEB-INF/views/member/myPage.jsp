@@ -144,7 +144,7 @@
             
           </div>
           <section class="article">
-		    	<article>
+		    	<article class="oreder_list">
 		    		
 		    		<!-- 캐러셀 시작 -->
 		    		<div class="container">
@@ -194,7 +194,93 @@
 					    <div class="slide-container-bottom"></div>
 					</div>
 		    		
+		    	<!-- -----------------주문내역 테이블 추가 -->
+		    	<h3><div class="tbl_name" style="margin-top: 40px; margin-left: 30px;">최근 주문</div></h3>
+		    	<div class="tbl_prod_wrap_type_myroom" style="margin-top: 50px;">
+		    	<table class="book_tbl">
+		    		<colgroup>
+			    		<col style="width: 130px;">
+			    		<col>
+			    		<col style="width: 160px;">
+			    		<col style="width: 130px;">
+		    		</colgroup>
+		    		<thead class="hidden">
+		    			<tr>
+		    				<th scope="col">주문정보</th>
+		    				<th scope="col">상품정보</th>
+		    				<th scope="col">금액</th>
+		    				<th scope="col">배송정보</th>
+		    			</tr>
+		    		</thead>
+		    		<tbody>
+		    			<tr>
+		    				<td class="order_info">
+		    					<span class="date">날짜 데이터</span>
+		    					<a class="licnk" href="#" alt="주문번호 누르면 주문 상세 페이지로"></a>
+		    				</td>
+		    				<td class="book">
+		    					<div class="book_area_horizontal">
+			    					<div class="book_thumb_size">
+			    						<a herf="#">책 디테일 페이지</a>	
+			    					<span class="img_box">
+			    						<img alt="책이름" src="#">
+			    					</span>
+			    					</a>
+		    					</div>
+		    				<div class="info_box">
+		    					<a class="book_info" href="#">
+		    					<span class="book_multi_count">
+			    					<span class="book_name">도서 이름<(대분류는?)</span>
+			    					<span class="book_count">{}외 1건</span>
+		    					</span>
+		    					</a>
+		    				<ul class="book_option_list">
+		    					<li class="option_item">
+		    						<span class="text">수량 : </span>
+		    						<span class="val">{ }</span>
+		    					</li>	
+		    				</ul>
+		    				</div>
+		    				</div>
+		    				</td>
+		    				<td>
+		    				<span class="price">
+		    					<span class="val">{가격}</span>
+		    					<span class="unit">{원}</span>
+		    				</span>
+		    				</td>
+		    				<td>
+		    				<div class="delivery_info">
+		    					<span class="delivery_state">{반품완료/취소완료/배송완료}</span>
+		    				</div>
+		    				</td>
+		    			</tr>
+		    			<!-- 한 칸 완 성 -->
+		    			<tr>
+		    				<td class="order_info"></td>
+		    				<td class="book"></td>
+		    				<td></td>
+		    				<td></td>
+		    			</tr>
+		    			
+		    		</tbody>		
+		    	</table>
+		    	</div>
 		    	
+		    	<div class="my_review">
+		            <h3><div class="my_review_title">내가 작성한 리뷰</div></h3>
+		         	<h6><a href='/review/list'>더보기 ></a></h6>
+		            <div>책제목</div>
+		            <div>
+		              <div>별점</div>
+		              <div>
+		              리뷰내용
+		              ${myreview }
+		              </div>
+		       </div>
+		       </div>
+		       
+	          
 		    	
 		    	</article>
 		    </section> 
@@ -207,9 +293,8 @@
           
         <div>
           <!-- <h1>내서재</h1> -->
-          <h2 align="center"><a href='/choice/list'>찜한 책</a>/<a href='/review/list'>내가 작성한 리뷰</a>/<a href='/research/result'>커뮤니티 활동 내역</a></h2>
           <!-- <div>찜한책</div> -->
-          <div>
+          <!-- <div>
             <h6>당신에게 딱 맞는 추천도서</h6>
             <div >
               <div>책 표지</div>
@@ -217,23 +302,15 @@
               <div>책 표지</div>
               <div>책 표지</div>
             </div>
-          </div>
-          <div>
-            <!-- <h6>유저가 작성한 상품리뷰</h6> -->
-            <div>책제목</div>
-            <div>
-              <div>별점</div>
-              <div>
-              리뷰내용
-              
-              </div>
-            </div>
-          </div>
-          <div>
-            <h6>bbti 커뮤니티 게시글</h6>
-            <div>글제목</div>
-            <div>글내용</div>
-          </div>
+          </div> -->
+          
+          <div class="bbti">
+	            <h3><div class="my_bbti_title">BBTI 활동내역</div></h3>
+	         	<h6><a href='/research/list'>더보기 ></a></h6>
+	            <div>글제목</div>
+	            <div>글내용</div>
+	      </div>
+          
         </div>
       </div>	
     </div>  
@@ -262,6 +339,7 @@
 	<section id="contents" class="section_wrap"></section>
 
 </main>
+ 
  </body>
 <script type="text/javascript">
   var emblaNode = document.querySelector(".embla");
@@ -271,6 +349,6 @@
   var embla = EmblaCarousel(emblaNode, options);
 </script>
 </html>
+<%-- <%@ include file="../template/footer.jsp" %>  --%>
 </section>
  <script src="js/script.js"></script>
- <%@ include file="../template/footer.jsp" %> 

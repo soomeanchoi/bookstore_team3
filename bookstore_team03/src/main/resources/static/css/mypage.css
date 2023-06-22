@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
 .mypage-title {
 	
 }
@@ -152,10 +159,11 @@ table{
     align-items: center;
 }
 
-.article {
+.order_list {
 	margin-top: 100px;
-	float: right;        
-    width: 580px;
+	float: right;    
+	width: 90%;  
+	height: 100%;  
 }
 
 .gwang {
@@ -180,4 +188,53 @@ table{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+/* 주문 내역 테이블 */
+.tbl_prod_wrap.type_myroom {
+	width: 100%;
+}
+
+/* .tbl_prod_wrap_type_myroom .book_tbl tbody tr td.order_info {
+    border-right: 1px solid #eaeaea;
+}
+.tbl_prod_wrap_type_myroom .book_tbl tbody tr td {
+    padding: 16px 20px;
+} */
+table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    border: 0;
+}
+thead {
+	display: none;
+}
+td {
+    display: table-cell;
+    vertical-align: inherit;
+}
+
+
+.tbl_prod_wrap_type_myroom {
+	width: 90%;
+}
+.book_tbl {
+	width: 580px;
+}
+
+.tbl_name {
+	font-family: 'HANAMDAUM';
+}
+.my_review_title {
+	font-family: 'HANAMDAUM';
+}
+.my_bbti_title {
+	font-family: 'HANAMDAUM';
+}
+.my_review{
+	margin-left: 32px;
+}
+
+.bbti {
+	margin-left: 410px;
 }

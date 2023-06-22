@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
     <link rel="stylesheet" href="/css/signup.css" />
+    
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -32,7 +33,7 @@
 
 <body>
 	<section>
-      <h1>회원가입</h1>
+      <div class="join-title"><h1>회원가입</h1></div>
      
 		<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
 		<br><br><br><br>

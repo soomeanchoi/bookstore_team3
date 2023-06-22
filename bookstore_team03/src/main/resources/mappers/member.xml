@@ -77,6 +77,14 @@
 			WHERE m.member_id = #{member_id};
 	</select>
 	
+	<select id="myreview" resultType="java.util.Map" parameterType="String">
+			SELECT profile_name ,isbn, review_content, review_score
+			FROM review r 
+			LEFT JOIN profile p 
+			ON r.profile_no = p.profile_no 
+			WHERE r.profile_no = 16;
+	</select>
+	
 </mapper>     
 
 
