@@ -6460,7 +6460,8 @@ textarea.form-control-lg {
 .justify-content-end {
   -webkit-box-pack: end !important;
   -ms-flex-pack: end !important;
-  justify-content: flex-end !important; }
+  justify-content: flex-start !important;
+  margin-left: 123px; }
 
 .justify-content-center {
   -webkit-box-pack: center !important;
