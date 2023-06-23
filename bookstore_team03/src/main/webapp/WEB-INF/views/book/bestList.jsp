@@ -52,7 +52,7 @@
         }
 
         nav.list-side {
-            margin: -710px 50px;
+            margin: -455px 50px;
         }
 
         ul.list-side-ul {
@@ -138,17 +138,24 @@
                 <div>
                 <c:choose>
                     <c:when test="${row.book_imgname != '-'}">
-                        <div class="list_img">
-                            <img src="/storage/${row.book_imgname}" width="100px">
-                        </div>
-                        <div class="list_info_box">
-                            <a href="detail/${row.isbn}">${row.book_name}</a><br>
-                                ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}<br>
-                                ${row.book_price}원 | ${row.book_page}p <br><br>
-                            <%--조회수 : ${row.book_count}--%>
-                            <c:if test="${fn:length(row.book_content) > 100}">
-                                    <c:out value="${fn:substring(row.book_content,0,99)}"/>...
-                            </c:if>
+                        <div class="container">
+                            <div class="row">
+                            <div class="list_img col-6">
+                                <img src="/storage/${row.book_imgname}" width="100px">
+                            </div>
+                            <div class="list_info_box col-6">
+                                <a href="detail/${row.isbn}">${row.book_name}</a><br>
+                                    <span>
+                                        ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
+                                        <input type="button" value="장바구니">
+                                    </span><br>
+                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매"><br><br>
+                                <%--조회수 : ${row.book_count}--%>
+                                <c:if test="${fn:length(row.book_content) > 100}">
+                                        <c:out value="${fn:substring(row.book_content,0,99)}"/>...
+                                </c:if>
+                            </div>
+                            </div>
                         </div>
                     </c:when>
                     <c:otherwise>
