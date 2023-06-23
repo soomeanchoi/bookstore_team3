@@ -33,35 +33,30 @@
       type="text/javascript"
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
-  </head>
-<body>
-<section>
-<h3><a href='/booktag/list'>태그</a>/<a href='/book/list'>책</a>/<a href='/writer/list'>작가</a>/<a href="/choice/list">찜 목록</a></h3>
-	<form name="choicefrm" id="choicefrm" method="post">
-	<table border="1">
-		<tr>
-			<th>찜코드</th>
-			<th>아이디</th>
-			<th>책코드</th>
-			<th>찜한날짜</th>
-		</tr>
-		
-	<c:forEach items="${list}" var="row">
-		<tr>
-			<td align="center">${row.choice_no}</td>
-			<td>${row.member_id}</td>
-			<td>${row.isbn}</td>
-			<td>${row.choice_date}</td>
-			<td>
-				<input type="button" value="삭제" onclick="location.href='/choice/delete?choice_no=${row.choice_no}'">
-			</td>
-		</tr>
-	</c:forEach>
-	</table>
-	</form>
+    <style>
 
-	<br>
-	<input type="button" value="책 보기" onclick="location.href='/book/list'">
+    </style>
+</head>
+<body>
+    <section>
+        <h2>찜 목록</h2>
+        <img src="" alt="">
+        <form name="choicefrm" id="choicefrm" method="post">
+            <div class="container">
+                <div class="row" align="center">
+                    <c:forEach items="${list}" var="row">
+                        <div class="col-6">
+                            <img src="/storage/${row.book_imgname}" class="choice-img" width="45%"><br>
+                            <strong><font size="4px">${row.book_name}</font></strong><br>${row.writer_name}<br>
+                            <input type="button" value="삭제" onclick="location.href='/choice/delete?choice_no=${row.choice_no}'">
+                            <input type="button" value="장바구니에 담기">
+                            <br><br>
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </form>
+    </section>
+    <%@ include file="../template/footer.jsp" %>
 </body>
-</section>
 </html>

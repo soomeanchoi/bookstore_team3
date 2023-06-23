@@ -1,5 +1,6 @@
 package kr.co.itwill.book;
 
+import kr.co.itwill.review.ReviewDTO;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -38,8 +39,8 @@ public class BookDAO {
         return sqlSession.selectOne("book.detail", isbn);
     }//detail() end
 
-    public Map<String, Object> reviewCount(String isbn) {
-        return sqlSession.selectOne("book.reviewCount", isbn);
+    public int reviewCount(ReviewDTO dto) {
+        return sqlSession.selectOne("book.reviewCount", dto);
     }
 
     public String filename(String isbn) {
@@ -61,5 +62,6 @@ public class BookDAO {
     public double reviewScore(String isbn){
         return sqlSession.selectOne("book.score", isbn);
     }//reviewScore() end
+
 
 }//class end

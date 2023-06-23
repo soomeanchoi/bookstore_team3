@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ChoiceDAO {
@@ -21,7 +22,7 @@ public class ChoiceDAO {
         return sqlSession.insert("choice.insert", dto);
     }//insert() end
 
-    public List<ChoiceDTO> choicelist(String member_id) {
+    public List<Map<String ,Object>> choicelist(String member_id) {
         return sqlSession.selectList("choice.list", member_id);
     }//list() end
 

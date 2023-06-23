@@ -34,7 +34,7 @@ public class ChoiceCont {
     @RequestMapping("/list")
     public ModelAndView list(HttpSession session) {
         //String smember_id=session.getAttribute("smember_id");
-        String smember_id="test@naver.com";
+        String smember_id="kgukid38@naver.com";
 
         ModelAndView mav=new ModelAndView();
         mav.setViewName("choice/list");
