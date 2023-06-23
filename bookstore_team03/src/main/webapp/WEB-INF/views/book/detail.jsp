@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/aos.css">
     <link rel="stylesheet" href="/css/flatpickr.min.css">
     <link rel="stylesheet" href="/css/glightbox.min.css">
+    <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
@@ -46,9 +47,6 @@
             background-color: black;
         }
 
-        section.detail-review {
-            margin-top: -300px;
-        }
 
 
     </style>
@@ -116,7 +114,7 @@
 <%--                     <fmt:formatDate value="${ymd}" pattern="dd" />--%>
 <%--                 </div>--%>
                  <div>
-                     배송비 : 3000원
+                     배송비 : 3000원 (30,000원 이상 구매시 무료)
                  </div>
                  <div>
                      평점 : ${score}
@@ -285,7 +283,7 @@
                     let a=''; //출력할 결과값
                     $.each(data, function(key, value){
 
-                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
+                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
                         a += '		댓글번호:' + value.review_no + ' / 작성자:' + value.profile_no + ' / 평점:' + value.review_score + ' ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
@@ -352,10 +350,6 @@
         });//ready() end
 
     </script>
-
-
-
-
 
 
     </div>

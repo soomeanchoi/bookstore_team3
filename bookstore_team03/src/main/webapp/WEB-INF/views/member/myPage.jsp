@@ -349,6 +349,6 @@
   var embla = EmblaCarousel(emblaNode, options);
 </script>
 </html>
-<%-- <%@ include file="../template/footer.jsp" %>  --%>
+ <%@ include file="../template/footer.jsp" %>
 </section>
  <script src="js/script.js"></script>

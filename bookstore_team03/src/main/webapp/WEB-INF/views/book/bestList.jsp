@@ -47,17 +47,6 @@
             border-radius: 20px;
             background-color: #dde0e3;
         }
-        section{
-            background-color: #ffffff;
-        }
-
-        nav.list-side {
-            margin: -455px 50px;
-        }
-
-        ul.list-side-ul {
-            margin: 0px -30px;
-        }
 
         #chase {
             width:100px;
@@ -75,6 +64,15 @@
             font-weight:bold;
             text-align:center;
         }
+
+        .sidebar {
+            left: 15px;
+            position: absolute;
+        }
+
+
+
+
     </style>
     <script>
         jQuery(window).scroll(function() {
@@ -92,19 +90,22 @@
 
 <body>
 <section>
-   <%-- <h3><a href='/booktag/list'>태그</a>/<a href='/book/list'>책</a>/<a href='/writer/list'>작가</a>/<a href="/choice/list">찜 목록</a></h3>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#"><h4>소설</h4></a></li>
+            <li><a href="#">소설1</a></li>
+            <li><a href="#">소설2</a></li>
+            <li><a href="#">소설3</a></li>
+            <li><a href="#">소설4</a></li>
+            <li><a href="#">소설5</a></li>
+            <li><a href="#">소설6</a></li>
+            <li><a href="#">소설7</a></li>
+            <li><a href="#">소설8</a></li>
+            <li><a href="#">소설9</a></li>
+            <li><a href="#">소설10</a></li>
+        </ul>
+    </div>
 
-    <p>
-        <button type="button" onclick="location.href='/book/write'">등록</button>
-        <button type="button" onclick="location.href='/book/list'">리스트</button>
-    </p>
-
-<aside>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-</aside>--%>
     <h3>베스트 셀러</h3>
     <%--<form action="search">
         <input type="text" name="book_name" value="${book_name}">
@@ -112,7 +113,8 @@
     </form>--%>
 
     <div align="center">
-    <button type="button" class="btn btn-light">소설</button>
+        <button type="button" class="btn btn-light">전체</button>
+        <button type="button" class="btn btn-light">소설</button>
         <button type="button" class="btn btn-light">시/에세이</button>
         <button type="button" class="btn btn-light">인문</button>
         <button type="button" class="btn btn-light">기술/계발</button>
@@ -172,22 +174,12 @@
         </c:forEach>
     </tr>
     </table>
-</body>
 </section>
-<nav class="list-side">
-    <div>
-        <h3>소설</h3>
-            <ul class="list-side-ul">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-            </ul>
-    </div>
-</nav>
+
+
+
+<%@ include file="../template/footer.jsp" %>
+</body>
 </html>
+
+

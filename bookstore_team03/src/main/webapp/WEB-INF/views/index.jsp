@@ -35,11 +35,22 @@
 	<link rel="stylesheet" href="css/aos.css">
 	<link rel="stylesheet" href="css/flatpickr.min.css">
 	<link rel="stylesheet" href="css/glightbox.min.css">
+<%--	<link rel="stylesheet" href="css/reset.css" />--%>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/header.css" />
 	<link rel="stylesheet" href="css/section.css" />
 	<link rel="stylesheet" href="css/signup.css" />
-
+	<style>
+		ol, ul {
+			list-style: none;
+		}
+		.drop-cont a:hover{
+			background-color : #0460D9;
+			color: #fff;
+			border: 1px solid #fff;
+			display: block;
+		}
+	</style>
 
 	<title>Team3 - BookStore</title>
 </head>
@@ -55,7 +66,7 @@
 			<div class="row align-items-center justify-content-start">
 				<div class="col-lg-5">
 					<h1 class="heading" data-aos="fade-up">3조 팀프로젝트</h1>
-					<p class="mb-5" data-aos="fade-up">sample</p>
+					<p class="mb-5" data-aos="fade-up"></p>
 				</div>
 			</div>
 		</div>
