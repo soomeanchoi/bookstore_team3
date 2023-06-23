@@ -11,7 +11,7 @@
 		SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_date, board_read, board_good
 		FROM (board b 
 		     join profile p on b.member_id = p.member_id) 
-		ORDER BY board_date asc
+		ORDER BY board_date desc
 	</select>
 	
 	<select id="replylist" resultType="int" parameterType="int">
@@ -46,7 +46,9 @@
 	</delete>
 	
 	<update id="update" parameterType="kr.co.itwill.board.BoardDTO">
-		
+		UPDATE itwill.board
+		SET isbn=#{isbn}, bbti_no=#{bbti_no}, board_title=#{board_title}, board_content=#{board_content}, board_date=current_timestamp(), board_read=0, board_good=0
+		WHERE board_no=#{board_no}
 	</update>
 	
 </mapper>

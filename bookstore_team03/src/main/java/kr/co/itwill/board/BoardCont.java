@@ -6,8 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -90,21 +87,27 @@ public class BoardCont {
 		return "redirect:/board/boardForm";
     }//write() end
 	
-	/*//게시글삭제
+	//게시글삭제
 	@RequestMapping("/delete/{board_no}")
 	public String delete(@PathVariable int board_no) {
 	    boardDao.delete(board_no);
 	    return "redirect:/board/list";
 	}//delete() end
 	
+	
 	//게시글수정
-	@RequestMapping("/update/{board_no}")
-	public String update(@PathVariable int board_no
-						,@RequestParam Map<String, Object> map) {
-	
-	        boardDao.update(map);
-	        return "redirect:/board/list";
-	
+	@RequestMapping("/boardUpForm/{board_no}")
+	public ModelAndView update(@PathVariable int board_no
+							, @ModelAttribute BoardDTO dto) {
+		ModelAndView mav=new ModelAndView();
+        mav.setViewName("board/boardUpForm");
+		
+        //수정폼에 기존내용 불러오기
+        mav.addObject("detail", boardDao.detail(board_no));
+        
+        
+	    //boardDao.update(dto);
+	    return mav;
 	    }//update() end
-	*/	
+		
 }//class end

@@ -22,12 +22,6 @@
 
 <link rel="stylesheet" href="/css/signup.css" />
 <!-- Latest compiled and minified CSS -->
-
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
 <!-- Latest compiled JavaScript -->
 <script
@@ -58,14 +52,14 @@
                   <div class="col-sm-6 mt-2 ps-sm-0">
                       <div class="form-outline">
                        <label id="border_price" class="form-label" for="form10">작성자</label>
-                          <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}"/>
+                          <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}" disabled/>
                       </div>
                   </div>
                   
                   <div class="col-sm-6 mt-2 ps-sm-0">
                       <div class="form-outline">
                        <label id="board_title" class="form-label" for="form10">제목</label>
-                       <input type="text" id="board_title" name="board_title" class="form-control order-form-input" value="${detail.board_title}"/>
+                       <input type="text" id="board_title" name="board_title" class="form-control order-form-input" value="${detail.board_title}" disabled/>
                       </div>
                   </div>
                   
@@ -100,7 +94,7 @@
 			</div>
 			<div class="mb-3">
 			<button type="button" onclick="location.href='/board/list'">글목록</button>
-			<button type="button" onclick="location.href='/board/update/${detail.board_no}'">수정</button>
+			<button type="button" onclick="location.href='/board/boardUpForm/${detail.board_no}'">수정</button>
 			<button type="button" onclick="location.href='/board/delete/${detail.board_no}'">삭제</button>
 			<%-- <a href="delete/${detail.board_no}" 
 				onclick="return confirm('삭제하시겠습니까?')">삭제</a> --%>
