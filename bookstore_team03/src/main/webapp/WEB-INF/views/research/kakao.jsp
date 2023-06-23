@@ -35,6 +35,7 @@
       </p>
       <button type="button" class="btn btn-outline-danger mt-3" onclick="js:begin()">시작하기</button>
     </section>
+
     <section id="qna">
       <div class="qBox">
 
@@ -46,7 +47,10 @@
     <section id="result">
 
     </section>
-    <script src="/js/bbtiStart.js" charset="UTF-8"></script>
+    <script src = "/js/bbtiStart.js">
+
+
+    </script>
   </div>
 </body>
 </html>

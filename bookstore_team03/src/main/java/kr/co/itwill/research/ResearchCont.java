@@ -2,10 +2,7 @@ package kr.co.itwill.research;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -204,8 +201,18 @@ public class ResearchCont {
         return "research/test";
     }
 
-    @RequestMapping("kakao")
+    @RequestMapping("kakao" )
     public String kakao(){
+
+        return "research/kakao";
+//        return que;
+    }
+
+    @ResponseBody
+    @RequestMapping("kakao1" )
+    public List<String> kakao1(){
+
+        System.out.println("111111");
 
         //리스트 목록 받아옴
         List<String> que = researchDAO.qlist();
@@ -215,10 +222,6 @@ public class ResearchCont {
         List<String> choose_B = researchDAO.rlist_B();
         System.out.println("choose_B = " + choose_B);
 
-
-
-
-        return "research/kakao";
+        return que;
     }
-
 }
