@@ -27,7 +27,7 @@
 	<tr>
 	    <th>제목</th>
 	    <td style="text-align: left">
-	    	<input type="text" name="board_title" id="board_title" >
+	    	<input type="text" name="board_title" id="board_title" required>
 	    </td>
 	</tr>
 	
@@ -41,7 +41,7 @@
 	<tr>
 	    <th>내용</th>
 	    <td style="text-align: left">
-	    	<textarea name="board_content" id="board_content"></textarea>
+	    	<textarea name="board_content" id="board_content" required></textarea>
 	    </td>
 	</tr>
 	

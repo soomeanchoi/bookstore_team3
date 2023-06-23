@@ -17,9 +17,13 @@ public class BoardDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
+	//페이징 없는 리스트
 	public List<HashMap<String, Object>> list(){
 		return sqlSession.selectList("board.list");
 	}//list end
+	
+	
+	
 	
 	//댓글개수 가져오기
 	public int replylist(int board_no){

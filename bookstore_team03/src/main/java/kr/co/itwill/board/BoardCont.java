@@ -2,10 +2,12 @@ package kr.co.itwill.board;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,7 @@ public class BoardCont {
 	@Autowired
 	BoardDAO boardDao;
 	
+	//페이징 없음
 	@RequestMapping("/list")
 	public ModelAndView list() {
 		ModelAndView mav=new ModelAndView();
@@ -54,6 +57,10 @@ public class BoardCont {
         mav.addObject("list", list);
         return mav;
 	}//list() end
+	
+	
+	
+	
 	
 	@RequestMapping("/detail/{board_no}")
 	public ModelAndView detail(@PathVariable int board_no) {
@@ -95,9 +102,9 @@ public class BoardCont {
 	}//delete() end
 	
 	
-	//게시글수정
+	//게시글수정폼
 	@RequestMapping("/boardUpForm/{board_no}")
-	public ModelAndView update(@PathVariable int board_no
+	public ModelAndView boardUpForm(@PathVariable int board_no
 							, @ModelAttribute BoardDTO dto) {
 		ModelAndView mav=new ModelAndView();
         mav.setViewName("board/boardUpForm");
@@ -105,9 +112,23 @@ public class BoardCont {
         //수정폼에 기존내용 불러오기
         mav.addObject("detail", boardDao.detail(board_no));
         
-        
-	    //boardDao.update(dto);
 	    return mav;
-	    }//update() end
+	    }//boardUpForm() end
+	
+	@RequestMapping("/boardUpForm/update")
+	public String update(@ModelAttribute BoardDTO dto) {
+        
+		System.out.println(dto.getBoard_no());
+		
+		int cnt = boardDao.update(dto);
+		if(cnt!=0) {
+			System.out.println("글수정성공");
+			return "redirect:/board/detail/" + dto.getBoard_no();
+		}else{
+			System.out.println("글수정실패");
+			return "redirect:/board/boardUpForm/" + dto.getBoard_no();
+		}//if end
+		
+	}//update() end
 		
 }//class end

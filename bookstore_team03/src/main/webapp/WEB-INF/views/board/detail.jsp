@@ -45,25 +45,24 @@
 	<div class="card mb-4">
 		<div class="card-body">
 		<form>
+		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">
 		<div class="col-12">
                      <!--  <label class="order-form-label">게시글 상세보기</label> -->
                      
-                  </div>
-                  <div class="col-sm-6 mt-2 ps-sm-0">
-                      <div class="form-outline">
-                       <label id="border_price" class="form-label" for="form10">작성자</label>
-                          <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}" disabled/>
-                      </div>
-                  </div>
-                  
-                  <div class="col-sm-6 mt-2 ps-sm-0">
-                      <div class="form-outline">
-                       <label id="board_title" class="form-label" for="form10">제목</label>
-                       <input type="text" id="board_title" name="board_title" class="form-control order-form-input" value="${detail.board_title}" disabled/>
-                      </div>
-                  </div>
-                  
-
+            </div>
+            <div class="col-sm-6 mt-2 ps-sm-0">
+                <div class="form-outline">
+                 <label id="border_price" class="form-label" for="form10">작성자</label>
+                    <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}" disabled/>
+                </div>
+            </div>
+            
+            <div class="col-sm-6 mt-2 ps-sm-0">
+                <div class="form-outline">
+                 <label id="board_title" class="form-label" for="form10">제목</label>
+                 <input type="text" id="board_title" name="board_title" class="form-control order-form-input" value="${detail.board_title}" disabled/>
+                </div>
+            </div>
 			
 			<div class="mb-3">
 				<label for="board_date" class="form-label">작성일</label> <input

@@ -21,7 +21,7 @@
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="java.util.HashMap">
-		SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_content, board_date, board_read, board_good
+		SELECT b.member_id, board_no, isbn, profile_name, p.bbti_no, board_title, board_content, board_date, board_read, board_good
 		FROM (board b 
 		     join profile p on b.member_id = p.member_id) 
 		WHERE board_no=#{board_no}

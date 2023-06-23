@@ -51,15 +51,18 @@
 <body>
 
 
-	<div class="container">
+<div class="container">
 
-
-	<div class="row">
-		<div class="col-12">
-			<div class="card">
+	<div class="col-12">
+		<div class="card">
 				<div class="card-body text-center">
 					<h5 class="card-title m-b-0">bbti 커뮤니티</h5>
 				</div>
+				
+	 <c:if test="${requestScope.count==0}">
+	 	<table><tr><td>게시판에 글 없음</td></tr></table>
+	 </c:if>
+				
 				<div class="table-responsive">
 		<table class="table">
 			<thead class="thead-light">
@@ -90,12 +93,44 @@
 			</tbody>
 		</table>
 		</div>
+		
 		<div>
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>
 	</div>
+	
+	 <!-- 페이지 리스트 -->
+	 <c:if test="${requestScope.count > 0}">
+	 	<c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
+	 	<c:set var="startPage" value="${requestScope.startPage}"></c:set>
+	 	<c:set var="endPage" value="${requestScope.endPage}"></c:set>
+	 	
+	 	<div class="content">
+	 		<c:if test="${endPage > pageCount }">
+	 		
+	 			<c:set var="endPage" value="${pageCount+1}"></c:set>
+	 		</c:if>
+	 	
+	 		<c:if test="${startPage > 0 }">
+	 			<a href="./list.do?pageNum=${startPage }">[이전]</a>
+	 		</c:if>
+	 		
+	 		<c:forEach var="i" begin="${startPage +1 }" end="${endPage-1 }">
+	 			<c:choose>
+	 				<c:when test="${pageNum==i }"><span style = "font-weight: bold">${i}</span></c:when>
+	 				<c:when test="${pageNum!=i }"><a href="./list.do?pageNum=${i}">[${i}]</a></c:when>
+	 			</c:choose>
+	 		</c:forEach>
+	 		
+	 		<c:if test="${endPage < pageCount }">
+	 			<a href="./list.do?pageNum=${startPage+11}">[다음]</a>
+	 		</c:if>
+	 	</div>
+	 </c:if>
+	
+	</div>
 </div>
-</div>
+
 
 
 </body>
