@@ -59,16 +59,22 @@ public class BoardCont {
 	}//list() end
 	
 	
-	
-	
-	
 	@RequestMapping("/detail/{board_no}")
 	public ModelAndView detail(@PathVariable int board_no) {
 		ModelAndView mav=new ModelAndView();
         mav.setViewName("board/detail");
         mav.addObject("detail", boardDao.detail(board_no));
+        
+        //조회수증가
+        boardDao.board_read(board_no);
         return mav;
 	}//detail() end
+	
+	@RequestMapping("/good/{board_no}")
+	public String good(@PathVariable int board_no) {
+		boardDao.board_good(board_no);
+		return "redirect:/board/detail/"+ board_no;
+	}//good() end
 	
 	//글쓰기창에 유저정보 불러오기
 	@RequestMapping("/boardForm")

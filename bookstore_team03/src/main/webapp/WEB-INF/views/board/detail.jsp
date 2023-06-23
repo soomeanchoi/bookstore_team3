@@ -34,26 +34,34 @@
 <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
 <!-- <script type="text/javascript"
 	src="http://code.jquery.com/jquery-latest.js"></script> -->
-  
+ 
+<script>
+
+</script>
   
 </head>
 
 <body>
+
 <main class="mt-5 pt-5">
 	<div class="container-fluid px-4">
 		<h1 class="mt-4">Board</h1>
 	<div class="card mb-4">
 		<div class="card-body">
-		<form>
+		<form id ="boardfrm" name="boardfrm" >
 		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">
-		<div class="col-12">
-                     <!--  <label class="order-form-label">게시글 상세보기</label> -->
-                     
+		
+			<div class="col-sm-6 mt-2 ps-sm-0">
+                <div class="form-outline">
+					<input type="button" id="good" name="good" value="좋아요" onclick="location.href='/board/good/${detail.board_no}'">
+					<input type="text" id="form10" class="form-control order-form-input" value="${detail.board_good}" disabled/>
+			    </div>
             </div>
+			
             <div class="col-sm-6 mt-2 ps-sm-0">
                 <div class="form-outline">
                  <label id="border_price" class="form-label" for="form10">작성자</label>
-                    <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}" disabled/>
+                 <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}" disabled/>
                 </div>
             </div>
             
@@ -82,7 +90,7 @@
 			
 			<div class="mb-3">
 				<label for="board_content" class="form-label">책</label>
-				<textarea class="form-control" id="board_content" name="board_content"
+				<textarea class="form-control" id="isbn" name="isbn"
 					disabled>${detail.isbn}</textarea>
 			</div>
 			

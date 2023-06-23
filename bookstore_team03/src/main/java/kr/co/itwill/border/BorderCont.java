@@ -69,6 +69,11 @@ public class BorderCont {
 		int havepoint = borderDao.havepoint(s_id);
 		mav.addObject("havepoint", havepoint);
 		
+		//적립포인트 계산 총도서금액*0.1
+		int book_price = (int)map.get("book_price"); 
+		int addpoint = (int)Math.floor(book_price * 0.1);
+		mav.addObject("addpoint", addpoint);
+		
 		return mav;
 	}//directorderForm() end
 	

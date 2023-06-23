@@ -22,9 +22,6 @@ public class BoardDAO {
 		return sqlSession.selectList("board.list");
 	}//list end
 	
-	
-	
-	
 	//댓글개수 가져오기
 	public int replylist(int board_no){
 		return sqlSession.selectOne("board.replylist", board_no);
@@ -35,6 +32,16 @@ public class BoardDAO {
 		//System.out.println(board_no);
 		return sqlSession.selectOne("board.detail", board_no);
 	}//detail() end
+	
+	//게시글 조회수
+	public void board_read(int board_no) {
+		sqlSession.update("board.board_read", board_no);
+	}//board_read() end
+	
+	//좋아요
+	public void board_good(int board_no) {
+		sqlSession.update("board.board_good", board_no);
+	}//board_good() end
 	
 	//글쓰기폼에 유저아이디, 닉네임, bbti불러오기
 	public HashMap<String, Object> userinfo(String s_id){
