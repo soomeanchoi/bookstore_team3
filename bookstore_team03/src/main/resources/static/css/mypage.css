@@ -132,7 +132,7 @@
 }
 
 .container_wrapper_my_home .contents_wrap .contents_inner .my_profile_area .profile-box .profile-box-inner .profile-info-box {
-    padding: 22px 20px 19px;
+    padding: 22px 20px 0px;
     margin-top: 12px;
     border-radius: 12px;
     background-color: rgba(56, 59, 124, 0.2);
@@ -143,6 +143,7 @@
 
 .profile-info-box {
 	list-style:none;
+	height: 130px;
 }
 
 .mypage-section {
@@ -277,4 +278,5 @@ ul {
 }
 .profile-info-box ul {
 	padding-left:0;
+	height: 150px;
 }
