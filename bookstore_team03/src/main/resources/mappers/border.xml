@@ -16,7 +16,7 @@
 	
 	<!-- 카트주문시 카트조회 -->
 	<select id="cart" parameterType="String" resultType="java.util.HashMap">
-		SELECT cart_no, c.isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize, cart_qty
+		SELECT cart_no, c.isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize, cart_qty, book_imgname
         FROM (cart c JOIN book b 
         	  ON c.isbn=b.isbn)
         WHERE member_id = #{s_id}
@@ -25,7 +25,7 @@
 	
 	<!-- 직접주문시 책정보조회 -->
 	<select id="directborder" parameterType="String" resultType="java.util.HashMap" >
-		SELECT isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize
+		SELECT isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize, book_imgname
 		FROM itwill.book
 		WHERE isbn = #{isbn}
 	</select>

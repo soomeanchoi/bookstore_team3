@@ -4,6 +4,7 @@ import kr.co.itwill.choice.ChoiceDAO;
 import kr.co.itwill.review.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -100,14 +101,14 @@ public class BookCont {
     }//search() end
 
     @RequestMapping("/detail/{isbn}")
-    public ModelAndView detail(@PathVariable String isbn) {
+    public ModelAndView detail(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
         ModelAndView mav = new ModelAndView();
         ReviewDTO review=new ReviewDTO();
         mav.setViewName("book/detail");
         mav.addObject("book", bookDao.detail(isbn));
         bookDao.count(isbn);
         mav.addObject("score",bookDao.reviewScore(isbn));
-        mav.addObject("reviewCount", bookDao.reviewCount(isbn));
+        mav.addObject("reviewCount", bookDao.reviewCount(dto));
 
         return mav;
     }//detail() end

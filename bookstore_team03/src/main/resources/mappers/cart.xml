@@ -8,15 +8,15 @@
 	
 	<insert id="insert" parameterType="kr.co.itwill.cart.CartDTO">
 		INSERT INTO cart(isbn, member_id, cart_qty, cart_date)
-		VALUES(#{isbn}, #{member_id}, #{cart_qty}, current_timestamp());
+		VALUES(#{isbn}, #{member_id}, #{cart_qty}, current_timestamp())
 	</insert>
 	
 	<select id="list" resultType="java.util.Map" parameterType="String">
-		SELECT cart_no, c.isbn, book_name, book_price, cart_qty
+		SELECT cart_no, c.isbn, book_name, book_price, cart_qty, book_imgname
         FROM (cart c JOIN book b 
         	  ON c.isbn=b.isbn)
         WHERE member_id = #{s_id}
-        ORDER BY cart_date;
+        ORDER BY cart_date
 	</select>
 
 	<update id="update" parameterType="kr.co.itwill.cart.CartDTO">

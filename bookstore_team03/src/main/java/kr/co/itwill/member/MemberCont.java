@@ -151,7 +151,7 @@ public class MemberCont<ReviewDTO> {
 	        session.setAttribute("member_id", loginInfo.get("member_id")); 
 	        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
 	        
-	        viewPage = "/template/index";
+	        viewPage = "redirect:/";
 	        // 추후 메인 페이지로 이동하게 
 	    }
     

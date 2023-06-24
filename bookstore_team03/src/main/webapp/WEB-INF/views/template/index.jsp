@@ -32,6 +32,7 @@
 
 	<link rel="stylesheet" href="css/tiny-slider.css">
 	<link rel="stylesheet" href="css/aos.css">
+	<link rel="stylesheet" href="css/reset.css" />
 	<link rel="stylesheet" href="css/flatpickr.min.css">
 	<link rel="stylesheet" href="css/glightbox.min.css">
 	<link rel="stylesheet" href="css/style.css">
@@ -275,83 +276,6 @@
 					</div>
 				</div>
 				</c:forEach>
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-2.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-3.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-4.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-
-
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-5.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-6.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-7.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
-
-<%--				<div class="destination">--%>
-<%--					<div class="thumb">--%>
-<%--						<img src="images/img-4.jpg" alt="Image" class="img-fluid">--%>
-<%--						책 이미지--%>
-<%--					</div>--%>
-<%--					<div class="mt-4">--%>
-<%--						<h3><a href="#">책 제목</a></h3>--%>
-<%--						<div class="price">책 가격</div>--%>
-<%--					</div>--%>
-<%--				</div>--%>
 
 			</div>
 		</div>

@@ -8,7 +8,7 @@
 <%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
 	<!-- Required meta tags -->
 	<meta charset="utf-8">
@@ -31,10 +31,24 @@
 	<link rel="stylesheet" href="/css/aos.css">
 	<link rel="stylesheet" href="/css/flatpickr.min.css">
 	<link rel="stylesheet" href="/css/glightbox.min.css">
+	<link rel="stylesheet" href="/css/reset.css" />
 	<link rel="stylesheet" href="/css/style.css">
 	<link rel="stylesheet" href="/css/header.css" />
 	<link rel="stylesheet" href="/css/section.css" />
 	<link rel="stylesheet" href="/css/signup.css" />
+	<link
+			rel="stylesheet"
+			href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+	/>
+	<link
+			rel="stylesheet"
+			href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+	/>
+	<link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
+	<script
+			type="text/javascript"
+			src="http://code.jquery.com/jquery-latest.js"
+	></script>
 	<style>
 		button.btn.btn-light {
 			color: black;
@@ -72,7 +86,7 @@
 							<c:when test="${row.book_imgname != '-'}">
 								<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">
 								<div class="bg-white m-body">
-								<h3><a href="index.html">${row.book_name}</a></h3>
+								<h3><a href="detail/${row.isbn}">${row.book_name}</a></h3>
 									<p>
 										<c:if test="${fn:length(row.book_content) > 100}">
 											<c:out value="${fn:substring(row.book_content,0,99)}"/>...
@@ -81,10 +95,6 @@
 									<div>
 									${row.book_price}원
 									</div>
-									<a href="single.html" class="more d-flex align-items-center float-start">
-										<span class="label">Read More</span>
-										<span class="arrow"><span class="icon-keyboard_arrow_right"></span></span>
-									</a>
 								</div>
 					</div>
 							</c:when>

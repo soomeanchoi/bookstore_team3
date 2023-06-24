@@ -11,11 +11,20 @@
         values (#{member_id}, #{isbn})
     </insert>
 
-    <select id="list" resultType="kr.co.itwill.choice.ChoiceDTO" parameterType="String">
-        select choice_no, member_id, isbn, choice_date
-        from choice
-        where member_id=#{member_id}
-        order by choice_no;
+<!--    <select id="list" resultType="kr.co.itwill.choice.ChoiceDTO" parameterType="String">-->
+<!--        select *-->
+<!--        from book join choice-->
+<!--        on book.isbn=choice.isbn-->
+<!--        where member_id=#{member_id}-->
+<!--    </select>-->
+
+    <select id="list" resultType="java.util.Map" parameterType="String">
+        select *
+        from (select book_writerno, book_name, book_imgname, choice_no
+              from book join choice
+                             on book.isbn=choice.isbn
+              where member_id='kgukid38@naver.com') AA join writer
+                                                            on AA.book_writerno=writer.writer_no
     </select>
 
     <delete id="delete" parameterType="java.util.HashMap">

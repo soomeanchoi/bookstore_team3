@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="/css/aos.css">
     <link rel="stylesheet" href="/css/flatpickr.min.css">
     <link rel="stylesheet" href="/css/glightbox.min.css">
+    <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
@@ -49,6 +50,45 @@
 
 
     </style>
+    <script>
+        function book_update(){
+            // alert();
+            document.bookfrm.action="/book/update";
+            document.bookfrm.submit();
+        }//book_update() end
+
+        function book_delete(){
+            // alert();
+            if(confirm("첨부된 파일은 영구히 삭제됩니다\n진행할까요?")){
+                document.bookfrm.action="/book/delete";
+                document.bookfrm.submit();
+            }//if end
+        }//book_delete() end
+
+        function book_choice(){
+            // alert();
+            if(confirm("찜 하시겠습니까?")){
+                document.bookfrm.action="/choice/insert";
+                document.bookfrm.submit();
+            }//if end
+        }//book_choice() end
+
+        //장바구니 수량선택 유효성 검사
+        function product_cart(){
+            if(confirm("장바구니에 담으시겠습니까?")){
+                document.bookfrm.action="/cart/insert";
+                document.bookfrm.submit();
+            }//if end
+        }//product_cart() end
+
+        //상품직접구매
+        function dirOrder(){
+            if(confirm("구매하시겠습니까?")){
+                document.bookfrm.action="/border/directborderForm";
+                document.bookfrm.submit();
+            }//if end
+        }//dirOrder() end
+    </script>
 </head>
 <body>
 
@@ -74,7 +114,7 @@
 <%--                     <fmt:formatDate value="${ymd}" pattern="dd" />--%>
 <%--                 </div>--%>
                  <div>
-                     배송비 : 3000원
+                     배송비 : 3000원 (30,000원 이상 구매시 무료)
                  </div>
                  <div>
                      평점 : ${score}
@@ -97,7 +137,7 @@
                     <a class="nav-link active" aria-current="page" href="#">상품정보</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">상품후기()</a>${reviewCount}
+                    <a class="nav-link" href="#">상품후기(${reviewCount})</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">상품문의</a>
@@ -174,10 +214,24 @@
             </div>
             <br>
             <hr>
+        </section>
 
+        <%--  리뷰  --%>
+        <section class="detail-review">
             <div>
-                <h2>리뷰(${reviewCount})</h2>
-            </div>
+                <label for="review_content">리뷰</label>
+                <form name="reviewInsertForm" id="reviewInsertForm">
+                    <div class="review_score_div">
+                        <h4>평점</h4>
+                        <select name="review_score" id="review_score">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5" selected>5</option>
+                        </select>
+                    </div>
+            <div>
 
             <%-- 상품번호 --%>
             <input type="hidden" name="isbn" value="${book.isbn}">
@@ -189,7 +243,7 @@
         <%-- 리뷰목록 --%>
         <div class="reviewList"></div>
     </div>
-
+        </section>
     <%-- 리뷰 자바스크립트 --%>
     <script>
 
@@ -229,7 +283,7 @@
                     let a=''; //출력할 결과값
                     $.each(data, function(key, value){
 
-                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
+                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
                         a += '		댓글번호:' + value.review_no + ' / 작성자:' + value.profile_no + ' / 평점:' + value.review_score + ' ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
@@ -282,8 +336,10 @@
                 , type:'post'
                 , success:function(data){ //콜백함수
                     if(data==1){
-                        alert("리뷰가 삭제되었습니다");
-                        reviewList(); //리뷰 삭제후 목록 출력
+                        if(confirm("리뷰를 삭제하시겠습니까?")){
+                            alert("리뷰가 삭제되었습니다");
+                            reviewList(); //리뷰 삭제후 목록 출력
+                        }//if end
                     }//if end
                 }//success end
             });//ajax() end
@@ -294,10 +350,6 @@
         });//ready() end
 
     </script>
-        </section>
-
-
-
 
 
     </div>

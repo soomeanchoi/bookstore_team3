@@ -98,7 +98,7 @@
       <!-- menu icon end -->
       <div class="bbti-menu">
         <ul class="b-menu-li">
-          <li><a href="best.html">Best</a></li>
+          <li><a href="/book/bestList">Best</a></li>
           <li><a href="">Event</a></li>
           <li><a href="http://localhost:9095/research/list">B-BTI</a></li>
         </ul>

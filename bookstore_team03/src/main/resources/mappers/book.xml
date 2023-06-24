@@ -12,8 +12,14 @@
 	  	on AA.book_writerno=BB.writer_no;
 	</select>
 
-	<select id="reviewCount" resultType="java.util.Map" parameterType="String">
-		select count(*) 상품후기
+<!--	<select id="reviewCount" resultType="java.util.Map" parameterType="String">-->
+<!--		select count(*) as 상품후기-->
+<!--		from review-->
+<!--		where isbn=${isbn}-->
+<!--	</select>-->
+
+	<select id="reviewCount" parameterType="kr.co.itwill.review.ReviewDTO" resultType="int">
+		select count(*) as 상품후기
 		from review
 		where isbn=${isbn}
 	</select>

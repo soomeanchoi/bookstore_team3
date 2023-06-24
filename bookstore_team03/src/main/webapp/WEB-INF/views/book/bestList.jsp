@@ -47,17 +47,6 @@
             border-radius: 20px;
             background-color: #dde0e3;
         }
-        section{
-            background-color: #ffffff;
-        }
-
-        nav.list-side {
-            margin: -710px 50px;
-        }
-
-        ul.list-side-ul {
-            margin: 0px -30px;
-        }
 
         #chase {
             width:100px;
@@ -75,6 +64,15 @@
             font-weight:bold;
             text-align:center;
         }
+
+        .sidebar {
+            left: 15px;
+            position: absolute;
+        }
+
+
+
+
     </style>
     <script>
         jQuery(window).scroll(function() {
@@ -92,19 +90,22 @@
 
 <body>
 <section>
-   <%-- <h3><a href='/booktag/list'>태그</a>/<a href='/book/list'>책</a>/<a href='/writer/list'>작가</a>/<a href="/choice/list">찜 목록</a></h3>
+    <div class="sidebar">
+        <ul>
+            <li><a href="#"><h4>소설</h4></a></li>
+            <li><a href="#">소설1</a></li>
+            <li><a href="#">소설2</a></li>
+            <li><a href="#">소설3</a></li>
+            <li><a href="#">소설4</a></li>
+            <li><a href="#">소설5</a></li>
+            <li><a href="#">소설6</a></li>
+            <li><a href="#">소설7</a></li>
+            <li><a href="#">소설8</a></li>
+            <li><a href="#">소설9</a></li>
+            <li><a href="#">소설10</a></li>
+        </ul>
+    </div>
 
-    <p>
-        <button type="button" onclick="location.href='/book/write'">등록</button>
-        <button type="button" onclick="location.href='/book/list'">리스트</button>
-    </p>
-
-<aside>
-    <div>1</div>
-    <div>2</div>
-    <div>3</div>
-    <div>4</div>
-</aside>--%>
     <h3>베스트 셀러</h3>
     <%--<form action="search">
         <input type="text" name="book_name" value="${book_name}">
@@ -112,7 +113,8 @@
     </form>--%>
 
     <div align="center">
-    <button type="button" class="btn btn-light">소설</button>
+        <button type="button" class="btn btn-light">전체</button>
+        <button type="button" class="btn btn-light">소설</button>
         <button type="button" class="btn btn-light">시/에세이</button>
         <button type="button" class="btn btn-light">인문</button>
         <button type="button" class="btn btn-light">기술/계발</button>
@@ -138,17 +140,24 @@
                 <div>
                 <c:choose>
                     <c:when test="${row.book_imgname != '-'}">
-                        <div class="list_img">
-                            <img src="/storage/${row.book_imgname}" width="100px">
-                        </div>
-                        <div class="list_info_box">
-                            <a href="detail/${row.isbn}">${row.book_name}</a><br>
-                                ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}<br>
-                                ${row.book_price}원 | ${row.book_page}p <br><br>
-                            <%--조회수 : ${row.book_count}--%>
-                            <c:if test="${fn:length(row.book_content) > 100}">
-                                    <c:out value="${fn:substring(row.book_content,0,99)}"/>...
-                            </c:if>
+                        <div class="container">
+                            <div class="row">
+                            <div class="list_img col-6">
+                                <img src="/storage/${row.book_imgname}" width="100px">
+                            </div>
+                            <div class="list_info_box col-6">
+                                <a href="detail/${row.isbn}">${row.book_name}</a><br>
+                                    <span>
+                                        ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
+                                        <input type="button" value="장바구니">
+                                    </span><br>
+                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매"><br><br>
+                                <%--조회수 : ${row.book_count}--%>
+                                <c:if test="${fn:length(row.book_content) > 100}">
+                                        <c:out value="${fn:substring(row.book_content,0,99)}"/>...
+                                </c:if>
+                            </div>
+                            </div>
                         </div>
                     </c:when>
                     <c:otherwise>
@@ -165,22 +174,12 @@
         </c:forEach>
     </tr>
     </table>
-</body>
 </section>
-<nav class="list-side">
-    <div>
-        <h3>소설</h3>
-            <ul class="list-side-ul">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>5</li>
-                <li>6</li>
-                <li>7</li>
-                <li>8</li>
-                <li>9</li>
-                <li>10</li>
-            </ul>
-    </div>
-</nav>
+
+
+
+<%@ include file="../template/footer.jsp" %>
+</body>
 </html>
+
+
