@@ -1,10 +1,20 @@
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+.find-title {
+	font-family: 'HANAMDAUM';
+}
+
 .find-section {
-    height: calc(100vh - 200px);
+	height: 100%;
+    /* height: calc(100vh - 200px); */
     overflow: hidden;
 }
 .find-page-flex {
     display: flex;
-    margin-top: 150px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -20,19 +30,21 @@ input {
     display: flex;
     flex-direction: column;
 }
-.form-group {
+
+/* .form-group {
     width: 500px;
     height: 50px;
     margin-bottom: 20px;
     border-radius: 25px;
-}
+    border: 1px solid gray;
+} */
 
 .user-pw {
     width: 500px;
     height: 50px;
     margin-bottom: 20px;
     border-radius: 25px;
-    
+    border: 1px solid gray;
 }
 
 .id-save {
@@ -67,20 +79,8 @@ input {
     color: #fff;
     background-color: #808080;
 } 
-.kakao-login {
-    margin: 0 auto;
-    width: 70px;
-    height: 70px;
-    border-radius: 50px;
-    background-color: #ffe812;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.login-border {
-    width: 620px;
-    margin: 50px 0 50px 0;
-}
+
+
 .f {
     width: 100%;
     display: flex;

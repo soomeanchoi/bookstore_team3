@@ -1,0 +1,39 @@
+@charset "UTF-8";
+
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.mail-title {
+	font-family: 'HANAMDAUM';
+	margin-bottom: 30px;
+	margin-right: 60px;
+}
+.tbl_row {
+	width: 1200px;
+}
+
+.mail_Content {
+    height: 600px;
+}
+
+.review_tbl {
+	border: 1px solid black;
+}
+.form_sel select {
+	width:500px;
+}
+.valid_check input {
+	width:500px;
+}
+.byte_check_wrap_w_full textarea{
+	width:500px;
+	height:200px !important;
+}
+.mail_btn_group {
+	margin-top:130px;
+	margin-right:50px;
+}

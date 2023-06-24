@@ -27,4 +27,9 @@ public class AttendanceDAO {
 	public int attendCnt(String s_id) {
 		return sqlSession.selectOne("attendance.attendCnt", s_id);
 	}//attendCnt() end
+	
+	//매주 월요일 테이블 전체행삭제
+	public int resetAttend() {
+		return sqlSession.delete("attendance.resetAttend");
+	}//resetAttend()
 }//class end

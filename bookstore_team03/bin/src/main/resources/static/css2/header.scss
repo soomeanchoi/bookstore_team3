@@ -1,0 +1,39 @@
+@import "variable.scss";
+.bg-c-1 {
+    background-color: $color1;
+}
+.bg-c-2 {
+    background-color: $color2;
+}
+.bg-c-3 {
+    background-color: $color3;
+}
+.bg-c-4 {
+    background-color: $color4;
+}
+.bg-c-5 {
+    background-color: $color5;
+}
+.header-back {
+    width: 100%;
+    height: 200px;
+}
+
+.wh-100 {
+    width: 100px;
+    height: 100px;
+}
+
+.wd-100 {
+    width: 100px;
+}
+.wd-50 {
+    width: 50px;
+    height: 50px;
+}
+.wd-100p {
+    width: 100%;
+}
+.m-l-30 {
+    margin-left: 30px;
+}

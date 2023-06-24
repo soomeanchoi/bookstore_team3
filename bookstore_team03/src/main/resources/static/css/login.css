@@ -1,17 +1,29 @@
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+
+.login-title {
+	font-family: 'HANAMDAUM';
+}
+
 .login-section {
+	margin-top: -50p;
     height: calc(100vh - 80px);
     overflow: hidden;
+    margin-bottom: -100px;
 }
 .login-page-flex {
     display: flex;
-    margin-top: 150px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
 }
 .login-title {
-    margin-bottom: 50px;
+    margin-bottom: 100px;
 }
 input {
     border: 0;
@@ -25,6 +37,7 @@ input {
     height: 50px;
     margin-bottom: 20px;
     border-radius: 25px;
+    border: 1px solid gray;
 }
 
 .user-pw {
@@ -32,7 +45,7 @@ input {
     height: 50px;
     margin-bottom: 20px;
     border-radius: 25px;
-    
+    border: 1px solid gray;
 }
 
 .id-save {
@@ -70,13 +83,14 @@ input {
     background-color: #808080;
 } 
 .kakao-login {
-    width: 70px;
-    height: 70px;
+    width: 60px;
+    height: 60px;
     border-radius: 50px;
     background-color: #ffe812;
     display: flex;
     justify-content: center;
     align-items: center;
+    margin: 0 auto;
 }
 .sign-up {
     width: 70px;

@@ -29,13 +29,15 @@
         WHERE review_no=#{review_no}
     </update>
 
-	<select id="my-review-list" resultType="kr.co.itwill.review.ReviewDTO" parameterType="String">
-        SELECT review_no, profile_no, isbn, review_content, review_date, review_score
-        FROM review
-        WHERE member_id=#{member_id}
-        ORDER BY review_date
-    </select>
-
+<!--  
+	<select id="mylist" resultType="kr.co.itwill.review.ReviewDTO" parameterType="String">
+	        SELET tag_name
+			FROM tag t 	
+			LEFT JOIN membertag m 
+			ON t.tag_no = m.tag_no
+			WHERE m.member_id = #{member_id};
+	</select>
+-->
 </mapper>     
 
 

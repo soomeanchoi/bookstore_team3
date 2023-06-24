@@ -7,8 +7,21 @@
 <mapper namespace="book">
 	
 	<select id="list" resultType="java.util.Map">
-		SELECT isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
-        FROM book
+		select *
+		from book AA join writer BB
+	  	on AA.book_writerno=BB.writer_no;
+	</select>
+
+<!--	<select id="reviewCount" resultType="java.util.Map" parameterType="String">-->
+<!--		select count(*) as 상품후기-->
+<!--		from review-->
+<!--		where isbn=${isbn}-->
+<!--	</select>-->
+
+	<select id="reviewCount" parameterType="kr.co.itwill.review.ReviewDTO" resultType="int">
+		select count(*) as 상품후기
+		from review
+		where isbn=${isbn}
 	</select>
 
 	<select id="bestList" resultType="java.util.Map">
@@ -30,9 +43,10 @@
 	</select>
 
 	<select id="detail" resultType="java.util.Map" parameterType="String">
-		select isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
-		from book
-		where isbn = #{isbn}
+		select *
+		from book AA join writer BB
+						  on AA.book_writerno=BB.writer_no
+		where isbn=#{isbn}
 	</select>
 	
 	<select id="filename" resultType="String" parameterType="String">
@@ -69,6 +83,8 @@
 		from review
 		where isbn=#{isbn}
 	</select>
+
+
 
 </mapper>     
 

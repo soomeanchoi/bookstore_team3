@@ -2,10 +2,7 @@ package kr.co.itwill.research;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
@@ -25,7 +22,7 @@ public class ResearchCont {
         ModelAndView mav = new ModelAndView();
 
        //설문 목록 받아오기
-       List<String> que = researchDAO.qlist();
+        List<String> que = researchDAO.qlist();
         System.out.println("que = " + que);
         List<String> choose_A = researchDAO.rlist_A();
         System.out.println("choose_A = " + choose_A);
@@ -51,7 +48,7 @@ public class ResearchCont {
             String paramName = entry.getKey();
             String paramValue = entry.getValue();
 
-            paramValue = "\'"+ paramValue +"\'";
+//            paramValue = "\'"+ paramValue +"\'";
 
             System.out.println("paramValue = " + paramValue);
             System.out.println("paramName = " + paramName);
@@ -204,9 +201,27 @@ public class ResearchCont {
         return "research/test";
     }
 
-    @RequestMapping("kakao")
+    @RequestMapping("kakao" )
     public String kakao(){
+
         return "research/kakao";
+//        return que;
     }
 
+    @ResponseBody
+    @RequestMapping("kakao1" )
+    public List<String> kakao1(){
+
+        System.out.println("111111");
+
+        //리스트 목록 받아옴
+        List<String> que = researchDAO.qlist();
+        System.out.println("que = " + que);
+        List<String> choose_A = researchDAO.rlist_A();
+        System.out.println("choose_A = " + choose_A);
+        List<String> choose_B = researchDAO.rlist_B();
+        System.out.println("choose_B = " + choose_B);
+
+        return que;
+    }
 }

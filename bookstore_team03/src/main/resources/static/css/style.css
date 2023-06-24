@@ -13,6 +13,15 @@
  * Copyright 2011-2021 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
  */
+ 
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+ 
+ 
 :root {
   --bs-blue: #0d6efd;
   --bs-indigo: #6610f2;
@@ -232,7 +241,7 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 hr {
-  margin: 1rem 0;
+  margin: 0;
   color: inherit;
   background-color: currentColor;
   border: 0;
@@ -6460,7 +6469,8 @@ textarea.form-control-lg {
 .justify-content-end {
   -webkit-box-pack: end !important;
   -ms-flex-pack: end !important;
-  justify-content: flex-end !important; }
+  justify-content: flex-start !important;
+  margin-left: 123px; }
 
 .justify-content-center {
   -webkit-box-pack: center !important;
@@ -10130,7 +10140,7 @@ textarea {
     .block-testimonial .author img {
       width: 80px;
       margin-bottom: 20px;
-      border-radius: 50%; }
+    }
     .block-testimonial .author h3, .block-testimonial .author .h3 {
       font-size: 18px;
       color: #f17945;
@@ -10337,7 +10347,7 @@ textarea {
   font-size: 14px; }
 
 .section-2 {
-  padding: 10rem 0 !important; }
+  padding: 2rem 0 !important; }
   @media (max-width: 991.98px) {
     .section-2 {
       padding: 3rem 0 !important; } }
@@ -10365,7 +10375,6 @@ textarea {
   padding-right: 30%;
   width: 70%; }
   .image-stack__item--top img {
-    border: 10px solid #fff;
     -webkit-box-shadow: 0 15px 30px -18px rgba(0, 0, 0, 0.2);
     box-shadow: 0 15px 30px -18px rgba(0, 0, 0, 0.2); }
 

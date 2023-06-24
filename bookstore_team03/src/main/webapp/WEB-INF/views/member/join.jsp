@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
     <link rel="stylesheet" href="/css/signup.css" />
+    
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -32,7 +33,7 @@
 
 <body>
 	<section>
-      <h1>회원가입</h1>
+      <h1><div class="join-title">회원가입</div></h1>
      
 		<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
 		<br><br><br><br>
@@ -41,9 +42,12 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="member_id" id="member_id" oninput="idCheck()"><br><br>
-				<span class="id_ok" style="display: none;">사용 가능한 이메일입니다.</span>
- 				<span class="id_already" style="display: none;">이미 사용 중인 이메일입니다.</span>
+				<input type="text" name="member_id" id="member_id" maxlength="50">
+				<!-- <button class="idCheck_btn" onclick="idCheck()"></button> -->
+				<input type="button" value="이메일 중복체크" onclick="idCheck()">
+				<br><br>
+				<span class="id_ok" style="display: none; color: green;" >사용 가능한 이메일입니다.</span>
+ 				<span class="id_already" style="display: none; color: red;">이미 사용 중인 이메일입니다.</span>
 			</td>
 		</tr>
 		<tr>
@@ -105,7 +109,7 @@
 		</table>
 		
 		<br><br><br><br>
-		<h1>회원약관</h1>
+		<h1><div class="agree-title">회원약관</div></h1>
 		<br><br><br><br><br><br><br>
         <div class="member-paper">
         교보문고 이용약관
@@ -462,6 +466,8 @@
 // 아이디 유효성 검사(1 = 중복 / 0 != 중복)
 function idCheck(){
        var member_id = $('#member_id').val(); //id값이 "id"인 입력란의 값을 저장
+       
+  
        $.ajax({
            url:'./idCheck', //Controller에서 요청 받을 주소
            type:'post', //POST 방식으로 전달
@@ -474,7 +480,7 @@ function idCheck(){
                    $('.id_already').css("display","inline-block");
                    $('.id_ok').css("display", "none");
                    alert("아이디를 다시 입력해주세요");
-                   $('#member_id').val('');
+                   /* $('#member_id').val(''); */
                }
            },
            error:function(){

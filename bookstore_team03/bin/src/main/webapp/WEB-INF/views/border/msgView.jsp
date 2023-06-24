@@ -7,6 +7,6 @@
 <title>msgView</title>
 </head>
 <body>
-
+ 결제완료
 </body>
 </html>

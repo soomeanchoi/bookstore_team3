@@ -40,6 +40,15 @@
 		where tag_no=#{tag_no}
 	</update>
 
+	<!--  result 로 받는다 -->
+	<select id="mytag" resultType="java.util.Map" parameterType="String">
+	        SELECT tag_name
+			FROM tag t 	
+			LEFT JOIN membertag m 
+			ON t.tag_no = m.tag_no
+			WHERE m.member_id = #{member_id};
+	</select>
+
 </mapper>     
 
 

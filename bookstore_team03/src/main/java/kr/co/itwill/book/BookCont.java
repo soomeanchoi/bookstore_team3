@@ -4,6 +4,7 @@ import kr.co.itwill.choice.ChoiceDAO;
 import kr.co.itwill.review.ReviewDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -63,6 +64,15 @@ public class BookCont {
 
     }//insert() end
 
+    @RequestMapping("/bestList")
+    public ModelAndView bestList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/bestList");
+        mav.addObject("list", bookDao.list());
+        mav.addObject("bestList", bookDao.bestList());
+        return mav;
+    }//list() end
+
     @RequestMapping("/list")
     public ModelAndView list() {
         ModelAndView mav=new ModelAndView();
@@ -72,7 +82,14 @@ public class BookCont {
         return mav;
     }//list() end
 
-
+    @RequestMapping("/list2")
+    public ModelAndView list2() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/list2");
+        mav.addObject("list", bookDao.list());
+        mav.addObject("bestList", bookDao.bestList());
+        return mav;
+    }//list() end
 
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(defaultValue = "") String book_name) {
@@ -84,16 +101,18 @@ public class BookCont {
     }//search() end
 
     @RequestMapping("/detail/{isbn}")
-    public ModelAndView detail(@PathVariable String isbn) {
+    public ModelAndView detail(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
         ModelAndView mav = new ModelAndView();
         ReviewDTO review=new ReviewDTO();
         mav.setViewName("book/detail");
         mav.addObject("book", bookDao.detail(isbn));
         bookDao.count(isbn);
         mav.addObject("score",bookDao.reviewScore(isbn));
+        mav.addObject("reviewCount", bookDao.reviewCount(dto));
+
         return mav;
     }//detail() end
-        
+
     @RequestMapping("/delete")
     public String delete(String isbn, HttpServletRequest req) {
         System.out.println("isbn = " + isbn);

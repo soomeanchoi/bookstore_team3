@@ -24,13 +24,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.qos.logback.core.encoder.Encoder;
 import kr.co.itwill.KaKao.KakaoAPI;
+import kr.co.itwill.booktag.BookTagDAO;
 import kr.co.itwill.dropmem.DropMemberDAO;
 import kr.co.itwill.dropmem.DropMemberDTO;
-import kr.co.itwill.mail.mailDTO;
+
 import kr.co.itwill.profile.ProfileDAO;
 import kr.co.itwill.profile.ProfileDTO;
 import kr.co.itwill.review.ReviewDAO;
-import kr.co.itwill.review.ReviewDTO;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -48,7 +48,7 @@ import java.util.UUID;
 
 @Controller
 @RequestMapping("/member")
-public class MemberCont {
+public class MemberCont<ReviewDTO> {
     
 	public MemberCont() {
         System.out.println("-----MemberCont()객체 생성됨");
@@ -66,11 +66,11 @@ public class MemberCont {
 	@Autowired
 	ProfileDTO profileDto;
 
+	
+	
 	@Autowired
 	private KakaoAPI kakao;
 	
-	@Autowired
-	ReviewDAO reviewDao;
 	
 	/*
 	 * @RequestMapping("/list") public ModelAndView list() { ModelAndView mav=new
@@ -151,7 +151,7 @@ public class MemberCont {
 	        session.setAttribute("member_id", loginInfo.get("member_id")); 
 	        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
 	        
-	        viewPage = "template/index";
+	        viewPage = "redirect:/";
 	        // 추후 메인 페이지로 이동하게 
 	    }
     
@@ -175,7 +175,49 @@ public class MemberCont {
 	}
 	
 
-	
+	@RequestMapping("/myPage")
+	public <BookTagDTO> ModelAndView myPage(HttpSession session, Model model
+			, @ModelAttribute BookTagDAO bookTagDao) {
+		ModelAndView mav=new ModelAndView();
+
+		String member_id = (String) session.getAttribute("member_id");
+		System.out.println(member_id);
+		
+		
+		// memberDao.List(member_id)를 호출하여 반환되는 데이터를 MemberDTO 형태의 리스트로 저장
+	    List<MemberDTO> memberData = memberDao.List(member_id);
+	    mav.addObject("list", memberData);
+
+	    if (!memberData.isEmpty()) {
+	        MemberDTO memberInfo = memberData.get(0);
+	        mav.addObject("member_name", memberInfo.getMember_name());
+	    }
+		
+		// profileDao.list(member_id)를 호출하여 반환되는 데이터를 Map 형태로 저장
+	    Map<String, Object> profileData = profileDao.list(member_id);
+
+	    if (!profileData.isEmpty()) {
+	    mav.addObject("list", profileData);
+	    mav.setViewName("member/myPage"); 
+
+	    // profile_name만 추출하여 mav에 추가
+	    mav.addObject("profile_name", profileData.get("profile_name"));
+
+	    mav.addObject("profile_intro", profileData.get("profile_intro"));
+	    }
+	    
+	    //border
+	    mav.addObject("myorder", memberDao.orderlist(member_id));
+	    
+	    //이웃이 최근에 좋아요한 책, 내 bbti에 맞는 책
+	    //tag
+	    mav.addObject("mytag" , memberDao.taglist(member_id));
+	    
+	    //review
+	    mav.addObject("myreview", memberDao.reviewlist(member_id));
+	    
+		return mav;
+	}
 	
 	// 수정 페이지
 	@RequestMapping("/modify")
@@ -329,7 +371,7 @@ public class MemberCont {
 	}
 	*/
 	
-	
+	/*
 	@RequestMapping("/findPw")
 	public ModelAndView findPw(HttpServletRequest request, String member_name,
 								HttpServletResponse response_email) throws IOException {
@@ -384,42 +426,15 @@ public class MemberCont {
         return mav;
       
 		}
-	
+		*/
 
-		@RequestMapping("/myPage")
-		public ModelAndView myPage(HttpSession session) {
-		ModelAndView mav=new ModelAndView();
-
-		String member_id = (String) session.getAttribute("member_id");
-		System.out.println(member_id);
-		
-		
-		// memberDao.List(member_id)를 호출하여 반환되는 데이터를 MemberDTO 형태의 리스트로 저장
-	    List<MemberDTO> memberData = memberDao.List(member_id);
-	    mav.addObject("list", memberData);
-
-	    if (!memberData.isEmpty()) {
-	        MemberDTO memberInfo = memberData.get(0);
-	        mav.addObject("member_name", memberInfo.getMember_name());
-	    }
-		
-		// profileDao.list(member_id)를 호출하여 반환되는 데이터를 Map 형태로 저장
-	    Map<String, Object> profileData = profileDao.list(member_id);
-
-	    if (!profileData.isEmpty()) {
-	    mav.addObject("list", profileData);
-	    mav.setViewName("member/myPage"); 
-
-	    // profile_name만 추출하여 mav에 추가
-	    mav.addObject("profile_name", profileData.get("profile_name"));
-
-	    mav.addObject("profile_intro", profileData.get("profile_intro"));
-	    }
-	   
-	   
-	    
-		return mav;
-	}
+		// 비밀번호 찾기 위한 메일 보내는 페이지로 이동
+		@RequestMapping("/myPageMail")
+		public ModelAndView myPageMail() {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("member/myPageMail");
+			return mav;
+		}
     
 }//class end
 	
