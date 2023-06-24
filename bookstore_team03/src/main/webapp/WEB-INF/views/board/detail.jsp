@@ -50,7 +50,7 @@
 		<div class="card-body">
 		<form id ="boardfrm" name="boardfrm" >
 		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">
-		
+		<input type="hidden" id="member_id" name="member_id" value="${detail.isbn}">
 			<div class="col-sm-6 mt-2 ps-sm-0">
                 <div class="form-outline">
 					<input type="button" id="good" name="good" value="좋아요" onclick="location.href='/board/good/${detail.board_no}'">
@@ -87,11 +87,20 @@
 					type="text" class="form-control" id="board_good" name="board_good"
 					value="${detail.board_good}" disabled>
 			</div>
-			
-			<div class="mb-3">
-				<label for="board_content" class="form-label">책</label>
-				<textarea class="form-control" id="isbn" name="isbn"
-					disabled>${detail.isbn}</textarea>
+					
+				<c:choose>
+		             <c:when test="${bookinfo.book_imgname != '-'}">
+		             <div><img src="/storage/${bookinfo.book_imgname}" width="120px;" alt="Book"></div>
+		                 ${bookinfo.book_name}&nbsp|&nbsp${bookinfo.writer_name}
+		                 <br>
+		                 ${bookinfo.book_mainname}-${bookinfo.book_subname}
+		                 <br>
+		                 ${bookinfo.book_pubdate}
+		             </c:when>
+		             <c:otherwise>
+		                 등록된 도서 없음 <br>
+		             </c:otherwise>
+        		</c:choose>	
 			</div>
 			
 			<div class="mb-3">

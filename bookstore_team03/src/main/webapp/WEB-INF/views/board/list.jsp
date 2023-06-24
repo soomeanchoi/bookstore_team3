@@ -44,7 +44,7 @@
 	src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script>
-	
+
 </script>
 
 </head>
@@ -72,24 +72,42 @@
 				<th scope="col">조회수</th>
 				<th scope="col">좋아요</th>
 				<th scope="col">작성일</th>
-				
 			</tr>
 			</thead>
 			<tbody class="customtable">
-			 <c:forEach items="${list}" var="row" varStatus="status">
+
+			 <c:forEach var="i" begin="1" end="${totalPage}" items="${list}" varStatus="status">
+		    	 <a href="list?pageNum=${i}"> ${i} </a>
 		    	 <input type="hidden" name="status" value="${status.index}">
-		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
+		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${i.board_no}">
 		    	<tr>
 		    		
-	    		<td id="profile_name" class="profile_name">${row.profile_name}</td>
-	    		<td id="board_title" class="board_title"><a href="detail/${row.board_no}">${row.board_title}</a>[${row.replycnt}]</td>
-	    		<td id="board_read" class="board_read">${row.board_read}</td>
-	    		<td id="board_good" class="board_good">${row.board_good}</td>
-	    		<td id="board_date" class="board_date">${row.board_date}</td>
+	    		<td id="profile_name" class="profile_name">${i.profile_name}</td>
+	    		<td id="board_title" class="board_title"><a href="detail/${i.board_no}">${i.board_title}</a>[${i.replycnt}]</td>
+	    		<td id="board_read" class="board_read">${i.board_read}</td>
+	    		<td id="board_good" class="board_good">${i.board_good}</td>
+	    		<td id="board_date" class="board_date">${i.board_date}</td>
 	    			
 	   		<%-- 	<td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
 	    		</tr>
-				    </c:forEach>				
+			</c:forEach>	
+
+		<!-- 검색시작 -->
+		<!-- <tr>
+			<td colspan="4"  style='text-align:center; height: 50px;'>
+				<form action="list.jsp" onsubmit="return searchCheck()">myscript.js함수 작성함
+					<select name="col">
+						<option value="subject_content">제목+내용
+						<option value="subject">제목
+						<option value="content">내용
+						<option value="wname">작성자
+					</select>
+					<input type="text" name="word" id="word">
+					<input type="submit" value="검색" class="btn btn-primary">
+				</form>
+			</td>
+		</tr> -->
+		<!-- 검색끝 -->		
 			</tbody>
 		</table>
 		</div>
@@ -98,40 +116,7 @@
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>
 	</div>
-	
-	 <!-- 페이지 리스트 -->
-	 <c:if test="${requestScope.count > 0}">
-	 	<c:set var="pageCount" value="${requestScope.totalPage}"></c:set>
-	 	<c:set var="startPage" value="${requestScope.startPage}"></c:set>
-	 	<c:set var="endPage" value="${requestScope.endPage}"></c:set>
-	 	
-	 	<div class="content">
-	 		<c:if test="${endPage > pageCount }">
-	 		
-	 			<c:set var="endPage" value="${pageCount+1}"></c:set>
-	 		</c:if>
-	 	
-	 		<c:if test="${startPage > 0 }">
-	 			<a href="./list.do?pageNum=${startPage }">[이전]</a>
-	 		</c:if>
-	 		
-	 		<c:forEach var="i" begin="${startPage +1 }" end="${endPage-1 }">
-	 			<c:choose>
-	 				<c:when test="${pageNum==i }"><span style = "font-weight: bold">${i}</span></c:when>
-	 				<c:when test="${pageNum!=i }"><a href="./list.do?pageNum=${i}">[${i}]</a></c:when>
-	 			</c:choose>
-	 		</c:forEach>
-	 		
-	 		<c:if test="${endPage < pageCount }">
-	 			<a href="./list.do?pageNum=${startPage+11}">[다음]</a>
-	 		</c:if>
-	 	</div>
-	 </c:if>
-	
 	</div>
 </div>
-
-
-
 </body>
 </html>

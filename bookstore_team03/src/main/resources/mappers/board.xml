@@ -14,6 +14,19 @@
 		ORDER BY board_date desc
 	</select>
 	
+	<!-- 페이징 총 페이지수 -->
+	<select id="totalRecord" resultType="int">
+		SELECT COUNT(board_no) 
+		FROM board
+	</select>
+	
+	<select id="paginglist" resultType="java.util.HashMap">
+	  select b1.* from(SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_content, board_date, board_read, board_good
+      FROM (board b join profile p on b.member_id = p.member_id) 
+      order by board_date ASC) b1 
+      limit #{end} offset #{start}
+	</select>
+	
 	<select id="replylist" resultType="int" parameterType="int">
 		SELECT COUNT(reply_no)
 		FROM reply
@@ -25,6 +38,18 @@
 		FROM (board b 
 		     join profile p on b.member_id = p.member_id) 
 		WHERE board_no=#{board_no}
+	</select>
+	
+	<select id="search" parameterType="String" resultType="java.util.List">
+		SELECT isbn, book_name, book_pub, b.book_writerno, writer_name, book_pubdate, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname
+		FROM (book b join writer w on b.book_writerno = w.writer_no)
+		WHERE book_name like '%'|| #{keyword} ||'%'
+	</select>
+	
+	<select id="bookinfo" parameterType="String" resultType="java.util.HashMap">
+		SELECT isbn, book_name, book_pub, b.book_writerno, writer_name, book_pubdate, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+		FROM (book b join writer w on b.book_writerno = w.writer_no)
+		WHERE isbn=#{isbn}
 	</select>
 	
 	<!-- 글 조회수 -->
