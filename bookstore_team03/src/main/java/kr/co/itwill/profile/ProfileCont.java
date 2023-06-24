@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -89,14 +90,23 @@ public class ProfileCont {
 		return "redirect:/member/myPage";
 	}
 	
-	@RequestMapping("/detail/{member_id}")
-    public ModelAndView detail(@PathVariable String member_id) {
+	@RequestMapping("/detail/{profile_no}")
+    public ModelAndView detail(@PathVariable int profile_no, @ModelAttribute ProfileDTO dto) {
         ModelAndView mav = new ModelAndView();
-        ProfileDTO review=new ProfileDTO();
+        ProfileDTO profileDto=new ProfileDTO();
         mav.setViewName("profile/detail");
-        mav.addObject("profile", profileDao.detail(member_id));
+        mav.addObject("profile", profileDao.detail(profile_no));
         return mav;
     }//detail() end
 
+	@RequestMapping("/search")
+    public ModelAndView search(@RequestParam(defaultValue = "") String member_id) {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/detail/{member_id}");
+        mav.addObject("list", profileDao.search(member_id));
+        mav.addObject("member_id", member_id); //검색어
+        return mav;
+    }//search() end
+	
 	
 }

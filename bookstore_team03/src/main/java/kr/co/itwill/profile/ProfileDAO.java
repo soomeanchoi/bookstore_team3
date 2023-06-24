@@ -34,7 +34,13 @@ public class ProfileDAO {
     }//list() end
     */
     
-    public Map<String, Object> detail(String member_id) {
-        return sqlSession.selectOne("profile.detail", member_id);
+    public ProfileDTO detail(int profile_no) {
+        return sqlSession.selectOne("profile.detail", profile_no);
     }//detail() end
+    
+    /* Map을 dto로 받아도 안됨*/
+    
+    public List<Map<String, Object>> search(String profile_no) {
+        return sqlSession.selectList("profile.search", "%" + profile_no + "%");
+    }//search() end
 }

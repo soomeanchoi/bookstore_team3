@@ -12,16 +12,22 @@
 	</insert>
 
 
-	<select id="detail" resultType="java.util.Map" parameterType="String">
+	<select id="detail" resultType="java.util.Map" parameterType="int">
 		SELECT profile_name, profile_intro, profile_imgname, profile_imgoriname, profile_imgpath, profile_imgsize
 		FROM profile
-		WHERE member_id = #{member_id}
+		WHERE profile_no = #{profile_no}
 	</select>
 	
 	<select id="list" resultType="java.util.Map" parameterType="String">
 		SELECT profile_name, profile_intro, profile_imgname, profile_imgoriname, profile_imgpath, profile_imgsize
 		FROM profile
 		WHERE member_id = #{member_id}
+	</select>
+	
+	<select id="search" parameterType="String" resultType="java.util.Map">
+		SELECT member_id, profile_name, profile_intro, profile_imgname, profile_imgsize
+		FROM book
+		WHERE profile_no LIKE #{profile_no}
 	</select>
 	
 </mapper>
