@@ -14,13 +14,20 @@
 		WHERE member_id = #{s_id} AND deliv_defaltadd = 1
 	</select>
 	
-	<!-- 카트조회 -->
+	<!-- 카트주문시 카트조회 -->
 	<select id="cart" parameterType="String" resultType="java.util.HashMap">
-		SELECT cart_no, c.isbn, book_name, book_price, cart_qty
+		SELECT cart_no, c.isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize, cart_qty
         FROM (cart c JOIN book b 
         	  ON c.isbn=b.isbn)
         WHERE member_id = #{s_id}
         ORDER BY cart_date
+	</select>
+	
+	<!-- 직접주문시 책정보조회 -->
+	<select id="directborder" parameterType="String" resultType="java.util.HashMap" >
+		SELECT isbn, book_name, book_price, book_imgoriname, book_imgpath, book_imgsize
+		FROM itwill.book
+		WHERE isbn = #{isbn}
 	</select>
 	
 	<!-- 보유포인트조회 -->
@@ -48,22 +55,37 @@
 		WHERE border_no like #{border_date}||'%'
 	</select>
 	
-	<!-- 주문서테이블행추가 -->
+	<!-- 장바구니구매: 주문서테이블행추가 -->
 	<insert id="insert" parameterType="kr.co.itwill.border.BorderDTO">		
-		INSERT INTO border(deliv_no, member_id, border_name, border_phone, border_price, border_paycode, border_date, border_msg, border_usepoint)
-		VALUES(#{deliv_no},#{s_id},#{border_name},#{border_phone},#{border_price},#{border_paycode},current_timestamp(), #{border_msg}, #{border_usepoint});
+		INSERT INTO border(border_no, member_id, border_name, border_phone, border_price, border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2)
+		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
 	</insert>
 	
-	<!-- 주문상세행추가 -->
-	<insert id="orderlistinsert" parameterType="java.util.HashMap">
+	<!-- 직접구매:  주문서테이블행추가 -->
+	<!-- <insert id="directinsert" parameterType="kr.co.itwill.border.BorderDTO">		
+		INSERT INTO border(border_no, member_id, border_name, border_phone, border_price, border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2)
+		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
+	</insert> -->
+	
+	<!-- 직접구매: 주문상세행추가 -->
+	<insert id="directorderlistInsert" parameterType="java.util.HashMap">
 		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
-		VALUES(#{isbn}, #{border_no}, #{orderlist_cnt});
+		VALUES("${isbn}", "${border_no}", "${orderlist_cnt}")
+	</insert>
+	
+	<!-- 장바구니 구매: 주문상세행추가 -->
+	<insert id="orderlistinsert" parameterType="java.util.List">
+		INSERT INTO itwill.orderlist(isbn, border_no, orderlist_cnt)
+		VALUES
+		<foreach collection="list" item="item" separator=" , ">
+		("${item.isbn}", "${item.border_no}", "${item.orderlist_cnt}")
+		</foreach>
 	</insert>
 	
 	<!-- 카트비우기 -->
 	<delete id="cartdelete" parameterType="String">
 		DELETE FROM cart
-		WHERE id=#{s_id}	
+		WHERE member_id=#{s_id}	
 	</delete>
 	
 </mapper>

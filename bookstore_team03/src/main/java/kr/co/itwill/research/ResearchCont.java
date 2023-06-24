@@ -48,7 +48,7 @@ public class ResearchCont {
             String paramName = entry.getKey();
             String paramValue = entry.getValue();
 
-            paramValue = "\'"+ paramValue +"\'";
+//            paramValue = "\'"+ paramValue +"\'";
 
             System.out.println("paramValue = " + paramValue);
             System.out.println("paramName = " + paramName);

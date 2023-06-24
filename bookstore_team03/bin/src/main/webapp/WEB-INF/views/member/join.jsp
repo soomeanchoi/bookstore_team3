@@ -1,86 +1,114 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ include file="../template/header.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
-<link rel="stylesheet" href="/resources/css/member/join.css">
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-</head>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Team3 - BookStore</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/section.css" />
+    <link rel="stylesheet" href="/css/signup.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
+    />
+    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
+    <script
+      type="text/javascript"
+      src="http://code.jquery.com/jquery-latest.js"
+    ></script>
+  </head>
 
 <body>
-
-	<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
-		<table class="table" style="margin: auto;">
+	<section>
+      <h1>회원가입</h1>
+     
+		<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
+		<br><br><br><br>
+		<table style="margin: auto;">
+		<!-- <table class="table" style="margin: auto;"> -->
 		<tr>
-			<th style="text-align: left">아이디</th>
-			<td style="text-align: left">
-				<input type="text" name="member_id" id="member_id" size="20" maxlength="20">
-				
-				<input type="button" value="EMAIL 중복확인" onclick="checkId()"><!-- myscript.js 작성 -->
+			<th>아이디</th>
+			<td>
+				<input type="text" name="member_id" id="member_id" oninput="idCheck()"><br><br>
+				<span class="id_ok" style="display: none;">사용 가능한 이메일입니다.</span>
+ 				<span class="id_already" style="display: none;">이미 사용 중인 이메일입니다.</span>
 			</td>
 		</tr>
-<%--
-	String member_id1 = request.getParameter("member_id1");
-	String member_id2 = request.getParameter("member_id2");
-	String member_id = member_id1 + "@" + member_id2;
---%> 
 		<tr>
-			<th style="text-align: left">비밀번호</th>
-			<td style="text-align: left">
-				<input type="password" name="member_pw" id="member_pw" size="10" maxlength="10" required>
+          <th></th>
+          <td>
+           <!--  <div class="passwd-validate"><span>아이디 조건 표시</span></div> -->
+          </td>
+          <td></td>
+        </tr>
+		<tr>
+			<th>비밀번호</th>
+			<td>
+				<input type="password" name="member_pw" id="member_pw" maxlength="10" required><br><br>
 			</td>
 		</tr> 
+		<tr>
+          <th></th>
+          <td>
+            <!-- <div class="passwd-validate"><span>비밀번호 조건 표시</span></div> -->
+          </td>
+          <td></td>
+        </tr>
 		<tr>
 			<th>비밀번호 확인</th>
-			<td style="text-align: left">
-				<input type="password" name="member_pw2" id="member_pw2" size="10" maxlength="10" required>
+			<td>
+				<input type="password" name="member_pw2" id="member_pw2" maxlength="10" required><br><br>
 			</td>
 		</tr> 
 		<tr>
-			<th style="text-align: left">이름</th>
-			<td style="text-align: left">
-				<input type="text" name="member_name" id="member_name" size="5" maxlength="5" required>
+          <th></th>
+          <td>
+            <!-- <div class="passwd-validate"><span>비밀번호 동일성 표시</span></div> -->
+          </td>
+          <td></td>
+        </tr>
+		<tr>
+			<th>이름</th>
+			<td>
+				<input type="text" name="member_name" id="member_name" maxlength="5" required><br><br>
 			</td>
 		</tr> 
 		<tr>
-			<th style="text-align: left">생년월일/성별</th>
-			<td style="text-align: left">
-				<input type="text" name="member_birth" id="member_birth" size="8" maxlength="8" required>
+			<th>생년월일/성별</th>
+			<td>
+				<input type="text" name="member_birth" id="member_birth" maxlength="8" required>
 				<select name="member_gender">
 					<option>선택</option>
 					<option value="male">남</option>
 					<option value="female">여</option>
-				</select>	
+				</select><br><br>	
 			</td>
 		</tr>
 		<tr>
-			<th style="text-align: left">전화번호</th>
-			<td style="text-align: left">
-				<input type="text" name="member_phone" id="member_phone" size="11" maxlength="11" required>
+			<th>전화번호</th>
+			<td>
+				<input type="text" name="member_phone" id="member_phone" maxlength="11" required>
 			</td>
-		</tr> 
-		<tr>
-			<td colspan="2" style="text-align: center">
-				
-			</td>
-		</tr> 		
+		</tr>  		
 		</table>
 		
-       <!-- 본문 끝 -->
-
-		<!-- 본문시작 agreement.jsp-->
-		<!-- JavaScript는 현재페이지에 작성 -->
-		
 		<br><br><br><br>
-		<table border="0" cellspacing="2" cellpadding="2" align="center">
-		    <tr align="center" height="10"> 
-		        <td>
-		            <textarea cols="100" rows="20" readonly>
-			            
-			            		
-교보문고 이용약관
+		<h1>회원약관</h1>
+		<br><br><br><br><br><br><br>
+        <div class="member-paper">
+        교보문고 이용약관
 		
 		
 제1장 총칙
@@ -402,27 +430,24 @@
 1. 이 약관은 회사와 회원간에 성립되는 서비스 이용계약의 기본 약정입니다. 회사는 필요한 경우 특정 서비스에 관하여 적용될 사항(이하 개별약관이라고 합니다)을 정하여 미리 공지할 수 있습니다. 회원이 이러한 개별약관에 동의하고 특정 서비스를 이용하는 경우에는 개별약관이 우선적으로 적용되고, 이 약관은 보충적인 효력을 갖습니다.
 2. 회사는 필요한 경우 서비스 이용과 관련된 세부적인 개별내용(이용정책 등)을 정하여 사이트 등을 통하여 공지할 수 있습니다.
 부칙
-본 이용약관은 2020년 9월 1일부터 시행하며 종전의 약관내용은 본 약관으로 대체합니다.	            
-		            
-			  </textarea>
-			        </td>
-			    </tr>
-			</table>
-			<br>
-			<div style="text-align: center">
-			  <label><input type="checkbox" name="agree" id="agree">&nbsp;&nbsp;약관에 동의합니다</label>
-			  <br><br>
-			  	<input type="submit" value="회원가입" class="btn btn-primary">
-				<input type="reset" value="취소" class="btn btn-warning">
-			</div>
-			</form>
-			</form>
-
-
-<!-- 본문 끝 -->
-</div>           
-			            
-</body>
+본 이용약관은 2020년 9월 1일부터 시행하며 종전의 약관내용은 본 약관으로 대체합니다.	  
+      </div>
+      <br><br><br><br>
+      <div style="text-align: center">
+      <span>위의 약관에 동의하십니까?</span>
+      <input type="checkbox" name="agree" id="agree">
+      <span>예</span>
+      <br><br><br>
+      <div>
+        <input type="submit" value="회원가입">
+        <input type="button" value="취소" onclick="location.href='login';">
+      </div>
+      </div>
+    </section>
+    </form>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+  </body>
+<script src="js/script.js"></script>
 <script>
 	function send(){
 		if(document.getElementById("agree").checked==true){
@@ -432,38 +457,30 @@
 			return false;
 		}//if end
 	}//send() end
+	    
 
-	$(function(){
-		 
-	    
-	    
-	    $("#checkId").click(function(){
-	    
-	        let member_id = $("#member_id").val();
-	         
-	        $.ajax({
-	            type:'post', //post 형식으로 controller 에 보내기위함!!
-	            url:"/spring/checkId.do", // 컨트롤러로 가는 mapping 입력
-	            data: {"member_id":member_id}, // 원하는 값을 중복확인하기위해서  JSON 형태로 DATA 전송
-	            success: function(data){ 
-	                if(data == "N"){ // 만약 성공할시
-	                    result = "사용 가능한 아이디입니다.";
-	                    $("#result_checkId").html(result).css("color", "green");
-	                    $("#member_pw").trigger("focus");
-	                 
-	             }else{ // 만약 실패할시
-	                 result="이미 사용중인 아이디입니다.";
-	                     $("#result_checkId").html(result).css("color","red");
-	                     $("#member_id").val("").trigger("focus");
-	             }
-	                 
-	         },
-	            error : function(error){alert(error);}
-	        });
-	        
-	    });
-	    
-	});
-	
+// 아이디 유효성 검사(1 = 중복 / 0 != 중복)
+function idCheck(){
+       var member_id = $('#member_id').val(); //id값이 "id"인 입력란의 값을 저장
+       $.ajax({
+           url:'./idCheck', //Controller에서 요청 받을 주소
+           type:'post', //POST 방식으로 전달
+           data:{member_id:member_id},
+           success:function(cnt){ //컨트롤러에서 넘어온 cnt값을 받는다 
+               if(cnt == 0){ //cnt가 1이 아니면(=0일 경우) -> 사용 가능한 아이디 
+                   $('.id_ok').css("display","inline-block"); 
+                   $('.id_already').css("display", "none");
+               } else { // cnt가 1일 경우 -> 이미 존재하는 아이디
+                   $('.id_already').css("display","inline-block");
+                   $('.id_ok').css("display", "none");
+                   alert("아이디를 다시 입력해주세요");
+                   $('#member_id').val('');
+               }
+           },
+           error:function(){
+               alert("에러입니다");
+           }
+       });
+       };
 </script>
 </html>

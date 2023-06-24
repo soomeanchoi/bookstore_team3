@@ -6,7 +6,10 @@
 
 <mapper namespace="member">
 	
-	
+	<select id="list" resultType="kr.co.itwill.member.MemberDTO" parameterType="String">
+			SELECT  member_id, member_birth, member_gender, member_name, member_pw, member_phone, member_jointype, member_type, member_rejoin, member_joindate
+	        FROM member
+	</select>
 	
 	<insert id="insert" parameterType="kr.co.itwill.member.MemberDTO">
 		INSERT INTO member(member_id, member_pw, member_name, member_birth, member_gender, member_phone)
@@ -37,8 +40,8 @@
 		  AND member_pw = #{member_pw}
 	</delete>
 	
-	<select id="checkId" parameterType="String" resultType="int">
-		SELECT COUNT(*) FROM member WHERE member_id= #{member_id}
+	<select id="idCheck" parameterType="String" resultType="int">
+		SELECT COUNT(member_id) FROM member WHERE member_id= #{member_id}
 	</select>
 	
 	<select id="profilelist" parameterType="String" resultType="java.util.Map">
@@ -46,6 +49,25 @@
 		FROM profile
 		WHERE member_id = #{member_id}
 	</select>
+	
+	<insert id="dropinsert" parameterType="kr.co.itwill.member.MemberDTO">
+		INSERT INTO dropmember(member_phone, member_name, member_birth)
+		VALUES(#{member_phone}, #{member_name}, #{member_birth})
+	</insert>
+	
+	<!-- 아이디 / 비밀번호 찾기 추가 -->
+	
+	<select id="findId" resultType="String">
+		SELECT nvl(member_id, 0) FROM member WHERE member_name=#{member_name} AND member_phone=CONCAT(SUBSTR(#{member_phone}, 1, 3), '-', SUBSTR(#{member_phone}, 4, 4), '-', SUBSTR(#{member_phone}, 8))
+	</select>
+	
+	<select id="findPw" resultType="String">
+		SELECT nvl(member_id, 0) FROM member WHERE member_id=#{member_id} AND member_phone=#{member_phone}
+	</select>
+	
+	<update id="updatePw">
+		UPDATE member SET member_pw=#{member_pw} where member_id=#{member_id}
+	</update>
 	
 </mapper>     
 

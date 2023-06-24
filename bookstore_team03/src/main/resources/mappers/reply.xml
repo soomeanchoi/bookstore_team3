@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- reply.xml -->
+
+<mapper namespace="reply">
+	
+	<insert id="insert"	parameterType="kr.co.itwill.reply.ReplyDTO">
+		INSERT INTO itwill.reply
+		(member_id, reply_content, reply_date, board_no)
+		VALUES(#{member_id}, #{reply_content}, current_timestamp(), #{board_no})
+	</insert>
+	
+	
+	<select id="list" resultType="kr.co.itwill.reply.ReplyDTO" parameterType="int">
+		SELECT reply_no, member_id, reply_content, reply_date, board_no
+		FROM itwill.reply
+		WHERE board_no=#{board_no}
+		ORDER BY reply_date
+    </select>
+    
+    
+    <delete id="delete" parameterType="int">
+    	DELETE FROM itwill.reply
+		WHERE reply_no=#{reply_no}
+    </delete>
+        
+
+    <update id="update" parameterType="kr.co.itwill.reply.ReplyDTO">
+	    UPDATE itwill.reply
+		SET reply_content=#{reply_content}, reply_date=current_timestamp()
+		WHERE reply_no=#{reply_no}
+    </update>
+        
+</mapper>     
+
+
+
+

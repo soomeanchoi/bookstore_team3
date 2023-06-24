@@ -14,9 +14,8 @@
 <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/header.css" />
-  <!--   <link rel="stylesheet" href="/css/section.css" /> -->
     <link rel="stylesheet" href="/css/orderfrm.css" />
-    <link rel="stylesheet" href="/css/signup.css" />
+    <!-- <link rel="stylesheet" href="/css/signup.css" /> -->
     <!-- Latest compiled and minified CSS -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -57,56 +56,65 @@
 			cnt = Number(orderlist_cnt.item(i).value);
 			price = Number(book_price.item(i).innerText);
 			booktot_Price.item(i).innerText = cnt*price;
-			
 			total += cnt*price;
 		}//for end
 		
-		document.getElementById("border_oprice").innerText = total;
-		document.getElementById("addpoint").innerText = parseInt(total/10);
+		document.getElementById("border_price").value = total;
 		
+		//수량변경에 따른 변경된 가격(포인트 적용 전)
+		document.getElementById("border_oprice").value = total;	
+		
+		document.getElementById("addpoint").value = parseInt(total/10);
 	}//book_price() end
 	
 		
 	function pointuse(){
 		var usepoint = document.getElementById("border_usepoint").value;
-		var border_oprice = document.getElementById("border_oprice").innerText;//초기가격
-		var border_price = document.getElementById("border_price").innerText;//포인트 사용에 따라 변동되는 가격
+		var border_oprice = document.getElementById("border_oprice").value;
+		var border_price = document.getElementById("border_price").value;
 		var havepoint = document.getElementById("havepoint").value;
 		
 		if(usepoint > havepoint){
 			//보유포인트보다 많은 포인트 사용시도 시 
 			alert("보유 포인트보다 많이 사용할 수 없습니다");		
-			//사용포인트의 값을 0으로 변경 후 커서이동
+			//사용포인트의 값을 0으로 변경
 			document.getElementById("border_usepoint").value = 0;
-			document.getElementById("usepoint").focus();
 			
 			//결제금액초기화
-			document.getElementById("border_price").innerText = border_oprice;
+			document.getElementById("border_price").value = border_oprice;
+			
+			//가진포인트 초기화
+			document.getElementById("chavepoint").value = havepoint;
+			
+			//적립예정포인트 초기화
+			document.getElementById("addpoint").value = parseInt(border_oprice/10);
 			
 		}else{
 			//보유포인트와 같거나 적은 포인트를 사용할 경우 
-			document.getElementById("border_price").innerText = (border_oprice - usepoint);
-			document.getElementById("addpoint").innerText = parseInt((border_oprice - usepoint)/10);
+			document.getElementById("border_price").value = (border_oprice - usepoint);
+			document.getElementById("addpoint").value = parseInt((border_oprice - usepoint)/10);
+			document.getElementById("chavepoint").value = havepoint - usepoint;
 		}//if end
 		
-		
-		if(usepoint > border_price){
+		/* if(usepoint > border_price){
 			//결제금액보다 많은 포인트 사용시도 시 
 			alert("총 금액보다 많이 사용할 수 없습니다");
-			//총가격으로 포인트값 변경 후 커서이동
-			document.getElementById("border_usepoint").value = border_oprice;
-			document.getElementById("border_usepoint").focus();
+			//사용포인트의 값을 0으로 변경
+			document.getElementById("border_usepoint").value = 0;
 			
-			//총금액 초기화
-			//Number(document.getElementById("border_price").innerText) = border_oprice - usepoint;
+			//결제금액초기화
+			document.getElementById("border_price").value = border_oprice;
 			
-			//총가격에서 총가격만큼의 포인트 빼고 적립액 0으로 
-			document.getElementById("border_price").innerText = border_oprice - document.getElementById("border_usepoint").value ;
-			document.getElementById("addpoint").innerText = parseInt((border_oprice - document.getElementById("border_usepoint").value)/10);
+			//가진포인트 초기화
+			document.getElementById("chavepoint").value = havepoint;
+			
+			//적립예정포인트 초기화
+			document.getElementById("addpoint").value = parseInt(border_oprice/10);
 		}else{
-			document.getElementById("border_price").innerText = border_oprice - usepoint;
-			document.getElementById("addpoint").innerText = parseInt((border_oprice - usepoint)/10);
-		}//if end
+			document.getElementById("border_price").value = border_oprice - usepoint;
+			document.getElementById("addpoint").value = parseInt((border_oprice - usepoint)/10);
+			document.getElementById("chavepoint").value = havepoint - usepoint;
+		}//if end */
 	}//pointuse() end
 	
 </script>
@@ -211,12 +219,19 @@
 				    	 <input type="hidden" id="isbn" name="isbn" class="isbn" value="${row.isbn}">
 				    	<tr>
 				    		<td>
-				    		이미지
+				    		<c:choose>
+			                   <c:when test="${row.book_imgname != '-'}">
+			                       <img src="/storage/${row.book_imgname}" class="img-fluid rounded-3" width="120px" alt="Book">
+			                   </c:when>
+			                   <c:otherwise>
+			                       등록된 제품 없음 <br>
+			                   </c:otherwise>
+               				</c:choose>
 				    		</td>
 				    		
 				    		<td>${row.book_name}</td>
 				    		<td id="book_price" class="book_price">${row.book_price}</td>
-				    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()">
+				    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()" onchange="pointuse()">
 				    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
 				    			<option value="1">1</option>
 				    			<option value="2">2</option>
@@ -229,54 +244,30 @@
 				   			<%-- <td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
 				    		</tr>
 				    </c:forEach>
+				     <%--장바구니상품끝 --%>
 					    </tbody>
 					  </table>
-					  
-					  <div class="col-12">
-                      <label class="order-form-label">상품총금액 : ${border_price}</label>
-                 	  </div>
 					</div>   
-             <%--장바구니상품끝 --%>
-                  
-             <%--포인트 및 결제금액 --%>     
                   </div>
-             <%--      
-                  <div class="container mt-3">
-                  <div class="col-12">
-                      <label class="order-form-label">포인트 및 결제금액</label>
-                  </div>
-				  <hr>
-				  <table class="table">
-				    <thead>
-				      <tr>
-				        <th>사용할 포인트</th>
-				        <th>보유 포인트</th>
-				       
-				      </tr>
-				    </thead>
-				    <tbody>
-				      <tr>
-				        <td> <input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0 class="form-control order-form-input" /></td>
-				        
-				       
-				      </tr>
-				     
-				    </tbody>
-				  </table>
-				</div> --%>
                   
+                  	<div class="col-12">
+                     <input type="hidden" id="totcost" name="totcost" value="${border_price}">
+                  	</div>
+       
                   <div class="col-12">
                       <label class="order-form-label">포인트 및 결제금액</label>
                   </div>
                   <div class="col-sm-6 mt-2 pe-sm-2">
                       <div class="form-outline">
-                          <input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0 class="form-control order-form-input" />
+                          <input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" value=0 class="form-control order-form-input" />
                           <label class="form-label" for="form8">사용할 포인트</label>
+                          <input type="button" value="적용" onclick="pointuse()">
                       </div>
                   </div>
                   <div class="col-sm-6 mt-2 ps-sm-0">
                       <div class="form-outline">
-                          <input type="number" name="havepoint" id="havepoint" value="${havepoint}" class="form-control order-form-input" readonly/>
+                      <input type="hidden" name="havepoint" id="havepoint" value="${havepoint}">
+                          <input type="number" name="chavepoint" id="chavepoint" value="${havepoint}" class="form-control order-form-input" readonly/>
                           <label class="form-label" for="form8">보유포인트</label>
                       </div>
                   </div>
@@ -289,8 +280,9 @@
                   <hr>
                   <div class="col-sm-6 mt-2 ps-sm-0">
                       <div class="form-outline">
-                          <input type="text" id="form10" class="form-control order-form-input" value="${border_price}"/>
-                          <label id="border_price" class="form-label" for="form10">총 결제금액</label>
+                      	<input type="hidden" id="border_oprice" name="border_oprice" value="${border_price}">
+                        <input type="text" id="border_price" name="border_price" class="form-control order-form-input" value="${border_price}"/>
+                        <label class="form-label" for="form10">총 결제금액</label>
                       </div>
                   </div>
                   <br><br>
