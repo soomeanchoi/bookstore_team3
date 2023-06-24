@@ -359,7 +359,7 @@
               <div>책 표지</div>
               <div>책 표지</div>
             </div>
-<<<<<<< HEAD
+
           </div>
           <div>
             <h6>유저가 작성한 상품리뷰</h6>
@@ -367,7 +367,7 @@
             <div>
               <div>별점</div>
               <div>리뷰내용
-              #{reviewlist}
+              ${reviewlist}
               </div>
             </div>
           </div>
@@ -376,7 +376,7 @@
             <div>글제목</div>
             <div>글내용</div>
           </div>
-=======
+
           </div> -->
           
           <div class="bbti">
@@ -385,8 +385,7 @@
 	            <div>글제목</div>
 	            <div>글내용</div>
 	      </div>
-          
->>>>>>> 482bc90f11617ceb7552cc400053cd0262afe13c
+
         </div>
         <%@ include file="../template/footer.jsp" %>
       </div>	
