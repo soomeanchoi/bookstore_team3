@@ -37,6 +37,46 @@
  
 <script>
 
+<%--글수정삭제 작성한 유저에게만--%>
+/* function getSessionId() {
+    var cookies = document.cookie.split(";"); // 쿠키를 세미콜론으로 분리하여 배열로 저장
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim(); // 각 쿠키의 공백 제거
+        if (cookie.indexOf("JSESSIONID=") === 0) { // JSESSIONID로 시작하는 쿠키 찾기
+            var sessionId = cookie.substring("JSESSIONID=".length, cookie.length); // 세션 아이디 추출
+            return sessionId;
+        }//if end
+    }//for end
+    return null; // 세션 아이디를 찾지 못한 경우
+}//getSessionId() end
+
+var sessionId = getSessionId();
+console.log(sessionId); // 세션 아이디 출력
+
+function idcheck(){
+	var sessionId = getSessionId();
+	console.log(sessionId); // 세션 아이디 출력
+	alert(sessionId);
+}
+
+$(document).ready(function() {
+	//쿠키에서 아이디 정보 가져와 s_id에 넣어야
+	//var s_id = session.getAttribute("s_id");
+    var currentUser = s_id; // 현재 사용자 정보
+
+    // 글 작성자와 현재 사용자 비교하여 버튼 표시/숨김 처리
+    function toggleButtons(writer) {
+        if (writer === currentUser) {
+            $('.edit-btn, .delete-btn').show();
+        } else {
+            $('.edit-btn, .delete-btn').hide();
+        }
+    }
+
+    // 글 작성자 정보를 가져와서 버튼 표시/숨김 처리
+    var writer = "글 작성자 이름"; // 글 작성자 정보 (서버에서 가져온 값으로 대체해야 함)
+    toggleButtons(writer);
+}); */
 </script>
   
 </head>
@@ -53,6 +93,7 @@
 		<input type="hidden" id="member_id" name="member_id" value="${detail.isbn}">
 			<div class="col-sm-6 mt-2 ps-sm-0">
                 <div class="form-outline">
+                	<input type="button" value="아이디확인" onclick="idcheck()">
 					<input type="button" id="good" name="good" value="좋아요" onclick="location.href='/board/good/${detail.board_no}'">
 					<input type="text" id="form10" class="form-control order-form-input" value="${detail.board_good}" disabled/>
 			    </div>

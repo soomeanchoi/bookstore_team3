@@ -48,6 +48,7 @@ public class BorderCont {
 	@RequestMapping("/directborderForm")
 	public ModelAndView directorderForm(String isbn, int cart_qty, HttpSession session) {
 		String s_id = (String)session.getAttribute("s_id"); 
+		
 		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("border/directborderForm");

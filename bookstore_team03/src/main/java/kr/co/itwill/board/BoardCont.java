@@ -5,7 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,17 @@ public class BoardCont {
 	
 	@Autowired
 	BoardDAO boardDao;
+	
+	
+	//세션아이디 쿠키에 저장
+	public void idcookie(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession(); // 세션 가져오기
+		String sessionId = session.getId(); // 세션 아이디 가져오기
+		Cookie sessionCookie = new Cookie("JSESSIONID", sessionId); // 세션 아이디를 가진 쿠키 생성
+		
+		response.addCookie(sessionCookie); // 쿠키를 응답에 추가
+		
+	}//idcookie() end
 	
 	
 	//페이징 있음
