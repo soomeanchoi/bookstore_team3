@@ -6,13 +6,20 @@
     background-color: whitesmoke;
     text-align: center;
     border-radius: 20px;
-    font-size: 20px;
+    font-size: 24px;
+    width: 80%;
 }
 
 .que {
     background-color: whitesmoke;
     border-radius: 20px;
     display: block;
-    width: 100%;
+    width: 80%;
     border: 0px;
+    font-size: 20px;
+}
+
+.que:hover, .que:focus{
+    background-color: pink;
+    color: whitesmoke;
 }

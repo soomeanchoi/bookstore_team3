@@ -37,7 +37,7 @@
     </section>
 
     <section id="qna">
-      <div class="qBox my-5 py-3">
+      <div class="qBox my-5 py-3 mx-auto">
 
       </div>
       <div class="answerBox">
