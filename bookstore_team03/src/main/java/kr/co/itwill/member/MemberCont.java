@@ -206,10 +206,13 @@ public class MemberCont<ReviewDTO> {
 	    mav.addObject("profile_intro", profileData.get("profile_intro"));
 	    }
 	    
+	    //border
+	    mav.addObject("myorder", memberDao.orderlist(member_id));
+	    
 	    //이웃이 최근에 좋아요한 책, 내 bbti에 맞는 책
 	    //tag
 	    mav.addObject("mytag" , memberDao.taglist(member_id));
-	   
+	    
 	    //review
 	    mav.addObject("myreview", memberDao.reviewlist(member_id));
 	    
@@ -368,7 +371,7 @@ public class MemberCont<ReviewDTO> {
 	}
 	*/
 	
-	
+	/*
 	@RequestMapping("/findPw")
 	public ModelAndView findPw(HttpServletRequest request, String member_name,
 								HttpServletResponse response_email) throws IOException {
@@ -423,9 +426,15 @@ public class MemberCont<ReviewDTO> {
         return mav;
       
 		}
-	
+		*/
 
-	
+		// 비밀번호 찾기 위한 메일 보내는 페이지로 이동
+		@RequestMapping("/myPageMail")
+		public ModelAndView myPageMail() {
+			ModelAndView mav=new ModelAndView();
+			mav.setViewName("member/myPageMail");
+			return mav;
+		}
     
 }//class end
 	

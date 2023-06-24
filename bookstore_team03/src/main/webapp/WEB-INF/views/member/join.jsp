@@ -33,7 +33,7 @@
 
 <body>
 	<section>
-      <div class="join-title"><h1>회원가입</h1></div>
+      <h1><div class="join-title">회원가입</div></h1>
      
 		<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
 		<br><br><br><br>
@@ -43,7 +43,8 @@
 			<th>아이디</th>
 			<td>
 				<input type="text" name="member_id" id="member_id" maxlength="50">
-				<button class="idCheck_btn" onclick="idCheck()"></button>
+				<!-- <button class="idCheck_btn" onclick="idCheck()"></button> -->
+				<input type="button" value="이메일 중복체크" onclick="idCheck()">
 				<br><br>
 				<span class="id_ok" style="display: none; color: green;" >사용 가능한 이메일입니다.</span>
  				<span class="id_already" style="display: none; color: red;">이미 사용 중인 이메일입니다.</span>
@@ -108,7 +109,7 @@
 		</table>
 		
 		<br><br><br><br>
-		<h1>회원약관</h1>
+		<h1><div class="agree-title">회원약관</div></h1>
 		<br><br><br><br><br><br><br>
         <div class="member-paper">
         교보문고 이용약관

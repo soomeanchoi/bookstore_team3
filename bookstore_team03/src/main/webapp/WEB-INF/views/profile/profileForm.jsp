@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/header.css" />
     <link rel="stylesheet" href="/css/section.css" />
-    <link rel="stylesheet" href="/css/login.css" />
+    <link rel="stylesheet" href="/css/profileform.css" />
     <link
       rel="stylesheet"
       href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
@@ -33,10 +33,10 @@
 <%
 	String member_id = (String)session.getAttribute("member_id");
 %>
-
-	<br><br><br><br><br><br><br><br><br><br><br>
+<section style="padding: 50px;">
+	<h1><div class="profilefrm-title">프로필 등록</div></h1>
 	<form name="profilefrm" id="profilefrm" method="post" action="insert" enctype="multipart/form-data">
-	    <table class="table" style="margin: auto;">
+	    <table class="table" style="margin-top: 0px;">
 	    <tr>
 	        <th>프로필 사진</th>
 	        <td> <input type="file" id="profile_imgname" name="profile_imgname"><br><br></td>
@@ -47,16 +47,18 @@
 	    </tr>
 	    <tr>
 	        <th>자기소개</th>
-	        <td> <textarea rows="5" cols="20" id="profile_intro" name="profile_intro"></textarea><br><br></td>
+	        <td> <textarea rows="5" cols="20" id="profile_intro" name="profile_intro" class="intro-text"></textarea><br><br></td>
 	    </tr>   
 	    <tr>
 	        <td colspan="2" align="center">
-	            <input type="submit" value="프로필 등록"> 
+	            <input type="submit" value="프로필 등록" class="submit-btn"> 
 	        </td>
 	    </tr>    
 	    </table>  
 	</form>
 	
-	
+</section>
+<br><br><br><br><br>	
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

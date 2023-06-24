@@ -102,7 +102,7 @@
 				<div class="container">
 					<div class="area_inputs wow fadeIn">
 						<div class="sub_title font-weight-bold text-white">
-							<h3><div class="find-title">아이디/비밀번호 찾기</div></h3>
+							<h1><div class="find-title">아이디/비밀번호 찾기</div></h1>
 							<p>인증된 이메일만 정보 찾기가 가능합니다</p>
 							<br>
 						</div>
@@ -132,8 +132,8 @@
 							</div>
 							<br><br><br><br>
 							<div class="form-group">
-								<button type="button" id='find_id' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round" onclick="findId_click()">찾기</button>
-								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-margin-bottom w3-round">취소</button>
+								<button type="button" id='find_id' class="id-pw-btn" onclick="findId_click()">찾기</button>
+								<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 							</div>
 						</div>
 						<div id="searchP" style="display: none;">
@@ -152,15 +152,17 @@
 							</div>
 							<br><br><br><br>
 							<div class="form-group">
-								<button type="button" id='checkEmail' class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">찾기</button>
-								<button type="button" onclick="history.go(-1);" class="w3-button w3-block w3-black w3-ripple w3-margin-top w3-round">취소</button>
+								<button type="button" id='checkEmail' class="id-pw-btn">찾기</button>
+								<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 							</div>
 							</div>
 						</div>
 					</div>
 				</div>
 		</form>	
+		<%@ include file="../template/footer.jsp" %>
 		</section>
+		
 </body>
 <script>
 //체크 버튼에 따라 아이디/비밀번호 기능이 달라진다

@@ -106,7 +106,8 @@
         </div>
       </div>
     </section>	
-</form>      
+</form>
+<%@ include file="../template/footer.jsp" %>      
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="js/script.js"></script>

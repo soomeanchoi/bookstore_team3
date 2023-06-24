@@ -85,6 +85,14 @@
 			WHERE r.profile_no = 16;
 	</select>
 	
+	<select id="myorder" resultType="java.util.Map" parameterType="String">
+			SELECT border_no, border_price
+			FROM border b
+			LEFT JOIN member m 
+			ON  b.member_id = m.member_id 
+			WHERE m.member_id  = 'itwill8@gmail.com';
+	</select>
+	
 </mapper>     
 
 

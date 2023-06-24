@@ -41,7 +41,7 @@
 
 
 <main class="container_wrapper_my_home">
-<section id ="1" class="contents_wrap">
+<div id ="1" class="contents_wrap">
 	<div class="mypage-title">
 	<div class="mypage-icon">
 	<img src="/storage/house3.png" height="40" width="40">
@@ -69,20 +69,26 @@
 	      	<div class="profile-thumb_box_no_img">
 	      		<div class="profile-thumb">
 	      		<!-- <button onclick="location.href='/profile/profileForm';" class="profile_btn"> -->
-	      		<a href="">
+	      		<a href="#">
 	      		<div class="profile_img">
 	      		<img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
 	      		</a>
 	      		</div>
 	      		</div>
+	      		<a href="http://localhost:9095/profile/profileForm">
+	      		<img src="/storage/pencil.png" height="35" width="35" style="position: relative; top: 20px; left: -20px;">
+	      		</a>
 	      	</div>	
+	      	
 	      		<div class="profile-name-box">
 	      			<span class="name">${member_name }</span>
 	      		</div>
 	      		
-	      		 <h6><span>user</span>님의 bbti</h6>
-            <div>bbti 결과</div>
-          
+	      		 <h6><span>${member_name }</span>님의 bbti</h6>
+            <div>
+            <div>${mybbti }</div>
+            </div>
+          	
           <div>
             <!-- <h6>Profile</h6> -->
             <!-- <div>프로필 사진</div> -->
@@ -100,24 +106,30 @@
             ${profile_intro}
             </div>
             <div>
-            좋아하는 태그
-            ${mytag }
+            좋아하는 태그<br>
+            <c:forEach var="tag" items="${mytag}">
+			  ${tag.tag_name}
+			</c:forEach>
             </div>
           </div>
 	      		
 	      		<div class="profile-info-box">
-	      			<li class="info_item">
+	      		<ul>
+	      			<li class="info_item" style="margin-left: 10px">
 	      				<a href="http://localhost:9095/choice/list">
-	      					<span class="title">찜</span>
+	      				<img src="/storage/zzim.png" height="40" width="40">
+	      					<!-- <span class="title" style="margin-right: 15px;">찜</span> -->
 	      					<span class="val"></span>
 	      				</a>
 	      			</li>
-	      			<li class="info_item">
+	      			<li class="info_item" style="margin-left: 30px">
 	      				<a href="http://localhost:9095/cart/list">
-	      					<span class="title">장바구니</span>
+	      				<img src="/storage/cart3.png" height="38" width="38" style=margin-bottom:20px;>
+	      					<!-- <span class="title">장바구니</span> -->
 	      					<span class="val"></span>
 	      				</a>
 	      			</li>
+	      		</ul>	
 	      		</div>	
 	      		
 	      	</div>
@@ -129,21 +141,22 @@
 	      
 	      <div class="logout">
 	      	<br><br>
-		    <button class="modify" onclick="location.href='modify';">회원정보 수정</button>
-			<button onclick="location.href='deleteView';">회원탈퇴</button>
-			<button onclick="location.href='logout';">로그아웃</button>
+		    <input type="button" value="회원정보수정" onclick="location.href='modify';">
+			<input type="button" value="회원탈퇴" onclick="location.href='deleteView';">
+			<input type="button" value="로그아웃" onclick="location.href='logout';">
 	      </div>
-        	 <div>
-            <div>주문내역</div>
-            <input type="button" value="버튼" onclick="location.href='';">
-             
-		    <div>관리자 문의하기</div>
+        	 
+            
+            
+          <div>   
+		    <div>1 : 1 문의</div>
+		    <input type="button" value="버튼" onclick="location.href='myPageMail';">
           </div>
            
          
             
           </div>
-          <section class="article">
+          <div class="article">
 		    	<article class="oreder_list">
 		    		
 		    		<!-- 캐러셀 시작 -->
@@ -195,9 +208,11 @@
 					</div>
 		    		
 		    	<!-- -----------------주문내역 테이블 추가 -->
+		    	<div class="carousel_down">
 		    	<h3><div class="tbl_name" style="margin-top: 40px; margin-left: 30px;">최근 주문</div></h3>
-		    	<div class="tbl_prod_wrap_type_myroom" style="margin-top: 50px;">
-		    	<table class="book_tbl">
+		    	<h6 style="margin-left: 33px;"><a href='/border/list'>더보기 ></a></h6>
+		    	<div class="tbl_prod_wrap_type_myroom" style="margin-top: 20px;">
+		    	<%-- <table class="book_tbl">
 		    		<colgroup>
 			    		<col style="width: 130px;">
 			    		<col>
@@ -264,26 +279,68 @@
 		    			</tr>
 		    			
 		    		</tbody>		
-		    	</table>
+		    	</table> --%>
+		    	<table class="book_tbl">
+				    <thead>
+				        <tr>
+				            <th scope="col">주문번호</th>
+				            <th scope="col">상품정보</th>
+				            <th scope="col">가격</th>
+				            <th scope="col">배송상태</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <c:forEach var="order" items="${myorder}">
+				            <tr>
+				                <td>주문번호</td>
+				                <td>${order.border_no}</td>
+				                <td>상품정보</td>
+				                <td>조인해서 가져와야할듯</td>
+				                <td>가격</td>
+				                <td>${order.border_price}</td>
+				                <td>배송상태</td>
+				                <td>이것도</td>
+				            </tr>
+				        </c:forEach>
+				    </tbody>
+				</table>
 		    	</div>
 		    	
+		    	
 		    	<div class="my_review">
-		            <h3><div class="my_review_title">내가 작성한 리뷰</div></h3>
-		         	<h6><a href='/review/list'>더보기 ></a></h6>
-		            <div>책제목</div>
-		            <div>
-		              <div>별점</div>
-		              <div>
-		              리뷰내용
-		              ${myreview }
-		              </div>
+		    	<h3><div class="my_review_title">내가 작성한 리뷰</div></h3>
+		    	<table class="review_tbl">
+				    <thead>
+				        <tr>
+				            <th scope="col">isbn(책 사진)</th>
+				            <th scope="col">별점</th>
+				            <th scope="col">내용</th>
+				            <th scope="col">쓴 날짜</th>
+				        </tr>
+				    </thead>
+				    <tbody>
+				        <c:forEach var="review" items="${myreview}">
+				            <tr>
+				                <td>책제목</td>
+				                <td>${review.isbn}</td>
+				                <td>내용</td>
+				                <td>${review.review_content}</td>
+				                <td>별점</td>
+				                <td>${review.review_score}</td>
+				                <td>날짜</td>
+				                <td>${review.review_date}</td>
+				            </tr>
+				        </c:forEach>
+				    </tbody>
+				</table>
+		            
 		       </div>
 		       </div>
 		       
 	          
 		    	
 		    	</article>
-		    </section> 
+		    </div> 
 		    
 		   
 </div>
@@ -291,7 +348,7 @@
           
           
           
-        <div>
+        <div class="bbti_wrap">
           <!-- <h1>내서재</h1> -->
           <!-- <div>찜한책</div> -->
           <!-- <div>
@@ -312,6 +369,7 @@
 	      </div>
           
         </div>
+        <%@ include file="../template/footer.jsp" %>
       </div>	
     </div>  
     
@@ -336,7 +394,10 @@
         
   
 <!-- ----------------------------------------------------------------- ----------------------------------------------------------->
-	<section id="contents" class="section_wrap"></section>
+	<div id="contents" class="section_wrap"></section>
+
+</div><!-- 나중에 추가한거 -->
+</div>
 
 </main>
  
@@ -350,5 +411,5 @@
 </script>
 </html>
 <%-- <%@ include file="../template/footer.jsp" %>  --%>
-</section>
+</div>
  <script src="js/script.js"></script>
