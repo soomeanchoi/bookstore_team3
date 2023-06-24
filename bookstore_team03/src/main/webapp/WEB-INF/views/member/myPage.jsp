@@ -83,7 +83,7 @@
 	      		<div class="profile-name-box">
 	      			<span class="name">${member_name }</span>
 	      		</div>
-	      		
+	      		<input type="button" value="로그아웃" onclick="location.href='logout';">
 	      		 <h6><span>${member_name }</span>님의 bbti</h6>
             <div>
             <div>${mybbti }</div>
@@ -129,6 +129,13 @@
 	      					<span class="val"></span>
 	      				</a>
 	      			</li>
+	      			<li class="info_item" style="margin-left: 45px">
+	      				<a href="http://localhost:9095/cart/list">
+	      				<img src="/storage/neighbor.png" height="38" width="50">
+	      					<!-- <span class="title">장바구니</span> -->
+	      					<span class="val"></span>
+	      				</a>
+	      			</li>
 	      		</ul>	
 	      		</div>	
 	      		
@@ -139,21 +146,22 @@
 	    
 	      
 	      
-	      <div class="logout">
-	      	<br><br>
-		    <input type="button" value="회원정보수정" onclick="location.href='modify';">
-			<input type="button" value="회원탈퇴" onclick="location.href='deleteView';">
-			<input type="button" value="로그아웃" onclick="location.href='logout';">
-	      </div>
+	      
         	 
             
             
-          <div>   
-		    <div>1 : 1 문의</div>
+          <div style="margin-top: 10px;">   
+		    <div>1 : 1 문의
 		    <input type="button" value="버튼" onclick="location.href='myPageMail';">
           </div>
+          </div>
            
-         
+          <div class="logout">
+	      	<br><br>
+		    <input type="button" value="회원정보수정" onclick="location.href='modify';">
+			<input type="button" value="회원탈퇴" onclick="location.href='deleteView';">
+			
+	      </div>
             
           </div>
           <div class="article">
