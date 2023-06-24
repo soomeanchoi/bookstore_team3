@@ -1,3 +1,18 @@
 #qna{
     display: none;
 }
+
+.qBox{
+    background-color: whitesmoke;
+    text-align: center;
+    border-radius: 20px;
+    font-size: 20px;
+}
+
+.que {
+    background-color: whitesmoke;
+    border-radius: 20px;
+    display: block;
+    width: 100%;
+    border: 0px;
+}

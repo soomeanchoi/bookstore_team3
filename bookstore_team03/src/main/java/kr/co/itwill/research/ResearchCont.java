@@ -210,9 +210,9 @@ public class ResearchCont {
 
     @ResponseBody
     @RequestMapping("kakao1" )
-    public List<String> kakao1(){
+    public Map<String, List<String>> kakao1(){
 
-        System.out.println("111111");
+//        System.out.println("111111");
 
         //리스트 목록 받아옴
         List<String> que = researchDAO.qlist();
@@ -222,6 +222,12 @@ public class ResearchCont {
         List<String> choose_B = researchDAO.rlist_B();
         System.out.println("choose_B = " + choose_B);
 
-        return que;
+        Map<String, List<String>> data = new HashMap<>();
+
+        data.put("que", que);
+        data.put("choose_A", choose_A);
+        data.put("choose_B", choose_B);
+
+        return data;
     }
 }

@@ -37,7 +37,7 @@
     </section>
 
     <section id="qna">
-      <div class="qBox">
+      <div class="qBox my-5 py-3">
 
       </div>
       <div class="answerBox">
@@ -47,10 +47,8 @@
     <section id="result">
 
     </section>
-    <script src = "/js/bbtiStart.js">
+    <script src = "/js/bbtiStart.js"></script>
 
-
-    </script>
   </div>
 </body>
 </html>

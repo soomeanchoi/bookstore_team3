@@ -29,73 +29,75 @@ public class ProfileCont {
 	public ProfileCont() {
 		System.out.println("-----ProfileCont()객체 생성됨");
 	}
-	
+
 	@Autowired
 	ProfileDTO profileDto;
-	
+
 	@Autowired
 	ProfileDAO profileDao;
-	
+
 	@RequestMapping("/profileForm")
     public String profileForm() {
         return "profile/profileForm";
     }//write() end
-	
-	
+
+
 	@RequestMapping("/insert")
     public String insert(@RequestParam Map<String, Object> map
-    		          ,@RequestParam MultipartFile profile_img
-    		          ,HttpServletRequest req
-    		          ,HttpSession session) throws Exception{ 
-		
+			,@RequestParam MultipartFile profile_img
+			,HttpServletRequest req
+			,HttpSession session) throws Exception{
+
 		String member_id = (String) session.getAttribute("member_id");
-		
+
 		String profile_imgname="-";
-    	long profile_imgsize=0;
-    	if(profile_imgname != null && !profile_imgname.isEmpty()) { //파일이 존재한다면
-    		profile_imgname=profile_img.getOriginalFilename();
-    		profile_imgsize=profile_img.getSize();
-    		try {
-    			
-    			ServletContext application=req.getSession().getServletContext();
-    			String path=application.getRealPath("/storage");  //실제 물리적인 경로
-    			profile_img.transferTo(new File(path + "\\" + profile_imgname)); //파일저장
-    			
-    			
-    		}catch (Exception e) {
-    			e.printStackTrace(); //System.out.println(e);
-			}//try end    		
-    	}//if end
-    	
-    	map.put("member_id", member_id);
-    	map.put("profile_imgname", profile_imgname);
-    	map.put("profile_imgsize", profile_imgsize);
-    	
-    	profileDao.insert(map);
-    	
-    	return "redirect:/member/myPage";
+		long profile_imgsize=0;
+		if(profile_imgname != null && !profile_imgname.isEmpty()) { //파일이 존재한다면
+			profile_imgname=profile_img.getOriginalFilename();
+			profile_imgsize=profile_img.getSize();
+			try {
+
+				ServletContext application=req.getSession().getServletContext();
+				String path=application.getRealPath("/storage");  //실제 물리적인 경로
+				profile_img.transferTo(new File(path + "\\" + profile_imgname)); //파일저장
+
+
+			}catch (Exception e) {
+				e.printStackTrace(); //System.out.println(e);
+			}//try end
+		}//if end
+
+		map.put("member_id", member_id);
+		map.put("profile_imgname", profile_imgname);
+		map.put("profile_imgsize", profile_imgsize);
+
+		profileDao.insert(map);
+
+		return "redirect:/member/myPage";
 	}
-	
-	
+
+
 	@RequestMapping("/list")
 	public String list(HttpSession session,
-							Model model) throws Exception {
-		
+					   Model model) throws Exception {
+
 		String member_id = (String)session.getAttribute("member_id");
-		
+
 		String profile_name = profileDto.getProfile_name();
 		if(profile_name != null) {
 			model.addAttribute("profile_name", profile_name);
 		}
 		return "redirect:/member/myPage";
 	}
-	
+
 	@RequestMapping("/detail/{profile_no}")
     public ModelAndView detail(@PathVariable int profile_no, @ModelAttribute ProfileDTO dto) {
         ModelAndView mav = new ModelAndView();
         ProfileDTO profileDto=new ProfileDTO();
+		System.out.println("profile_no = " + profile_no);
         mav.setViewName("profile/detail");
         mav.addObject("profile", profileDao.detail(profile_no));
+
         return mav;
     }//detail() end
 
@@ -107,6 +109,6 @@ public class ProfileCont {
         mav.addObject("member_id", member_id); //검색어
         return mav;
     }//search() end
-	
-	
+
+
 }
