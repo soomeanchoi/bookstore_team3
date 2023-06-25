@@ -64,7 +64,24 @@ function goResult() {
             result.style.display = "block";
         }, 450);
     }, 500);
-    alert(selected.join(", "));
+    alert(selected);
+
+    $.ajax({
+        url: "/research/resultTest",
+        type: "POST",
+        contentType: "application/json",
+        data: JSON.stringify(selected),
+        success: function(response) {
+            // Ajax 요청 성공 시 처리할 코드 작성
+            console.log("결과 전송 성공");
+        },
+        error: function(xhr, status, error) {
+            // Ajax 요청 실패 시 처리할 코드 작성
+            console.error("결과 전송 실패:", status, error);
+        }
+    });
+
+
 }
 
 function goNext(qIdx) {

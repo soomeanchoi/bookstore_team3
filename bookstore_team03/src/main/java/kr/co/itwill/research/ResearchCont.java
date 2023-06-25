@@ -216,11 +216,11 @@ public class ResearchCont {
 
         //리스트 목록 받아옴
         List<String> que = researchDAO.qlist();
-        System.out.println("que = " + que);
+//        System.out.println("que = " + que);
         List<String> choose_A = researchDAO.rlist_A();
-        System.out.println("choose_A = " + choose_A);
+//        System.out.println("choose_A = " + choose_A);
         List<String> choose_B = researchDAO.rlist_B();
-        System.out.println("choose_B = " + choose_B);
+//        System.out.println("choose_B = " + choose_B);
 
         Map<String, List<String>> data = new HashMap<>();
 
@@ -230,4 +230,28 @@ public class ResearchCont {
 
         return data;
     }
+
+    @PostMapping("/resultTest")
+    @ResponseBody
+    public String handleResult(@RequestBody List<String> selectedValues) {
+
+        try {
+            // 선택된 값 처리 로직 작성
+            System.out.println("받은 값들: " + selectedValues);
+
+
+            // 처리 결과 반환
+            return "결과 전송 완료";
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "오류 발생";
+        }
+
+
+
+
+        // 처리 결과 반환
+//        return "결과 전송 완료";
+    }
+
 }
