@@ -15,6 +15,7 @@
   <link rel="stylesheet" href="/css/bbtiDefault.css">
   <link rel="stylesheet" href="/css/bbtiMain.css">
   <link rel="stylesheet" href="/css/bbtiQna.css">
+  <link rel="stylesheet" href="/css/bbtiResult.css">
   <link rel="stylesheet" href="/css/bbtiAnimation.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -24,7 +25,7 @@
 </head>
 <body>
   <div class="container">
-    <section id="main" class="mx-auto mt-5 py-5 px-3">
+    <section id="main" class="mx-auto my-5 py-5 px-3">
       <h1 class="pt-5">BBTI 테스트로 알아보는 나의 추천 책</h1>
       <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
         <img src="/storage/bbtimain.png" alt="img" class="img-fluid">
@@ -50,6 +51,15 @@
       </div>
     </section>
     <section id="result">
+      <h1>당신의 결과는?1</h1>
+      <div class="resultName"></div>
+      <div id="resultImg" class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
+
+      </div>
+      <div class="resultDesc">
+
+      </div>
+      <button type="button">공유하기</button>
 
     </section>
     <script src = "/js/bbtiStart.js"></script>
