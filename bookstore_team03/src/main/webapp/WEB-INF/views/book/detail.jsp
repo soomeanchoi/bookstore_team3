@@ -123,8 +123,8 @@
                      재고 : ${book.book_stock}권
                  </div>
                  <div>
-                     <button>구매하기</button>
-                     <button>장바구니</button>
+                     <button onclick="dirOrder()">구매하기</button>
+                     <button onclick="product_cart()">장바구니</button>
                  </div>
              </div>
          </div>

@@ -67,7 +67,7 @@
 		document.getElementById("addpoint").value = parseInt(total/10);
 	}//book_price() end
 	
-		
+			
 	function pointuse(){
 		var usepoint = document.getElementById("border_usepoint").value;
 		var border_oprice = document.getElementById("border_oprice").value;
@@ -96,11 +96,12 @@
 			document.getElementById("chavepoint").value = havepoint - usepoint;
 		}//if end
 		
-		/* if(usepoint > border_price){
+		/*  if(border_price < usepoint){
 			//결제금액보다 많은 포인트 사용시도 시 
 			alert("총 금액보다 많이 사용할 수 없습니다");
 			//사용포인트의 값을 0으로 변경
-			document.getElementById("border_usepoint").value = 0;
+			usepoint = 0;
+			document.getElementById("border_usepoint").value = usepoint;
 			
 			//결제금액초기화
 			document.getElementById("border_price").value = border_oprice;
@@ -111,10 +112,13 @@
 			//적립예정포인트 초기화
 			document.getElementById("addpoint").value = parseInt(border_oprice/10);
 		}else{
-			document.getElementById("border_price").value = border_oprice - usepoint;
-			document.getElementById("addpoint").value = parseInt((border_oprice - usepoint)/10);
-			document.getElementById("chavepoint").value = havepoint - usepoint;
-		}//if end */
+			var wkOprice = border_oprice - usepoint;
+			document.getElementById("border_price").value = wkOprice;
+			var wkAddpoint = parseInt((border_oprice - usepoint)/10);
+			document.getElementById("addpoint").value = wkAddpoint
+			var chavepoint = havepoint - usepoint;
+			document.getElementById("chavepoint").value = chavepoint;
+		}//if end     */
 	}//pointuse() end
 	
 </script>
