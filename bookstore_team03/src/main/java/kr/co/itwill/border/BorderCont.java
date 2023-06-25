@@ -47,9 +47,12 @@ public class BorderCont {
 	//상품 직접 구매 페이지
 	@RequestMapping("/directborderForm")
 	public ModelAndView directorderForm(String isbn, int cart_qty, HttpSession session) {
-		String s_id = (String)session.getAttribute("s_id"); 
+		System.out.println(isbn);
+		System.out.println(cart_qty);
 		
-		//String s_id = "kgukid38@naver.com";
+		//String s_id = (String)session.getAttribute("member_id"); 
+		
+		String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("border/directborderForm");
 		
@@ -81,8 +84,8 @@ public class BorderCont {
 	//장바구니구매: 기본배송지, 장바구니, 포인트 가져와 출력하며 주문서페이지 띄우기
 	@RequestMapping("/orderForm")
 	public ModelAndView borderform(HttpSession session) {
-		String s_id = (String)session.getAttribute("s_id"); 
-		//String s_id = "kgukid38@naver.com";
+		//String s_id = (String)session.getAttribute("member_id"); 
+		String s_id = "kgukid38@naver.com";
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("border/orderForm");
@@ -115,8 +118,8 @@ public class BorderCont {
 	public ModelAndView directinsert(String isbn, int orderlist_cnt
 									, HttpSession session
 									,@ModelAttribute BorderDTO dto) {
-		String s_id = (String)session.getAttribute("s_id"); 
-		//String s_id = "kgukid38@naver.com";
+		//String s_id = (String)session.getAttribute("member_id"); 
+		String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		String border_no = dateno();//생성한 주문번호 변수넣기
 		
@@ -156,8 +159,8 @@ public class BorderCont {
 											 ,@RequestParam("orderlist_cnt") List<Integer> orderlist_cnt
 											, HttpSession session) {
 		
-		String s_id = (String)session.getAttribute("s_id"); 
-		//String s_id = "kgukid38@naver.com";
+		//String s_id = (String)session.getAttribute("member_id"); 
+		String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		String border_no = dateno();//생성한 주문번호 변수넣기
 		

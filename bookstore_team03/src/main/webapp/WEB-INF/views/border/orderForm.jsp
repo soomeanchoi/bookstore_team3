@@ -48,16 +48,25 @@
 
 	
 	function book_Price(){//책 수량 수정에 따른 결제금액 변경
+		
 		var cnt = 0;
 		var price = 0;
 		var total=0;
 		
-	 	for(var i = 0; i < orderlist_cnt.length; i++){
+		//alert(document.getElementById("cartsize").value);
+		
+		//alert("카트리스트 길이"+orderlist_cnt.length);
+	 	for(var i = 0; i < document.getElementById("cartsize").value; i++){
 			cnt = Number(orderlist_cnt.item(i).value);
-			price = Number(book_price.item(i).innerText);
-			booktot_Price.item(i).innerText = cnt*price;
+			alert("cnt"+cnt);
+			
+			//price = Number(book_price.item(i).innerText);
+			alert("price : " + book_price.item(i).innerText);
+			//booktot_Price.item(i).innerText = cnt*price;
+			booktot_Price.item(i).value = cnt*price;
+			alert("total: " + cnt*price);
 			total += cnt*price;
-		}//for end
+		}//for end 
 		
 		document.getElementById("border_price").value = total;
 		
@@ -69,6 +78,37 @@
 	
 			
 	function pointuse(){
+		var cnt = 0;
+		var price = 0;
+		var total=0;
+		
+		alert("cartsize : " + document.getElementById("cartsize").value);
+
+		//alert("카트리스트 길이"+orderlist_cnt.length);
+	 	for(var i = 0; i < document.getElementById("cartsize").value; i++){
+			cnt = Number(orderlist_cnt.item(i).value);
+			alert("cnt : "+cnt);
+			
+			/* alert("inner price" + Number(orderlist_cnt.item(i).innerText));
+			alert("value price" + Number(orderlist_cnt.item(i).value)); */
+			price = Number(orderlist_cnt.item(i).value);
+			
+			
+			//booktot_Price.item(i).innerText = cnt*price;
+			booktot_Price.item(i).value = cnt*price;
+			alert("개별 도서의 총액 : "+cnt*price);
+			total += cnt*price;
+		}//for end 
+		
+		document.getElementById("border_price").value = total;
+		
+		//수량변경에 따른 변경된 가격(포인트 적용 전)
+		document.getElementById("border_oprice").value = total;	
+		
+		document.getElementById("addpoint").value = parseInt(total/10);
+		
+		////////////////////////////////
+		
 		var usepoint = document.getElementById("border_usepoint").value;
 		var border_oprice = document.getElementById("border_oprice").value;
 		var border_price = document.getElementById("border_price").value;
@@ -96,7 +136,8 @@
 			document.getElementById("chavepoint").value = havepoint - usepoint;
 		}//if end
 		
-		/*  if(border_price < usepoint){
+		/* 
+		  if(border_price < usepoint){
 			//결제금액보다 많은 포인트 사용시도 시 
 			alert("총 금액보다 많이 사용할 수 없습니다");
 			//사용포인트의 값을 0으로 변경
@@ -119,6 +160,7 @@
 			var chavepoint = havepoint - usepoint;
 			document.getElementById("chavepoint").value = chavepoint;
 		}//if end     */
+		
 	}//pointuse() end
 	
 </script>
@@ -201,6 +243,7 @@
                   
                   <div class="container mt-3">
                   <div class="col-12">
+                  		<input type="hidden" id="cartsize" name="cartsize" value="${fn:length(cart)}">
                       <label class="order-form-label">주문상품</label>
                   </div>
 					 <hr>
@@ -235,7 +278,7 @@
 				    		
 				    		<td>${row.book_name}</td>
 				    		<td id="book_price" class="book_price">${row.book_price}</td>
-				    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="book_Price()" onchange="pointuse()">
+				    		<td><select id="orderlist_cnt" name ="orderlist_cnt" class="orderlist_cnt" oninput="pointuse()"> <!-- oninput="book_Price()" -->
 				    			<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
 				    			<option value="1">1</option>
 				    			<option value="2">2</option>

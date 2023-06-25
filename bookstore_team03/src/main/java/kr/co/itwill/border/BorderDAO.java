@@ -21,7 +21,7 @@ public class BorderDAO {
 	}//end
 	
 	//기본배송지 가져오기
-	public HashMap<String, Object> deliveryAdd(String s_id){
+	public HashMap<String, Object> deliveryAdd(String s_id){	
 		return sqlSession.selectOne("border.deliveryAdd", s_id);
 	}//deliveryAdd() end
 	
@@ -37,7 +37,6 @@ public class BorderDAO {
 		
 	//보유포인트 가져오기
 	public int havepoint(String s_id){
-		//System.out.println((int)sqlSession.selectOne("border.havepoint", s_id));
 		return sqlSession.selectOne("border.havepoint", s_id);
 	}//deliveryAdd() end	
 	

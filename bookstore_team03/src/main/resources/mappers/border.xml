@@ -32,9 +32,11 @@
 	
 	<!-- 보유포인트조회 -->
 	<select id="havepoint" parameterType="String" resultType="int">
+	select nvl(havepoint,0) from (
 		SELECT sum(point_change) havepoint
 		FROM itwill.point
 		WHERE member_id = #{s_id}
+		)a
 	</select>
 	
 	<!-- 총도서액조회 -->

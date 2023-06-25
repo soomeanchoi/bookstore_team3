@@ -93,11 +93,15 @@
 <body>
 
     <div>
-
+<form name="bookfrm" id="bookfrm">
         <section>
         <div class="container" align="center">
          <div class="row">
              <div class="col-6">
+             <!-- isbn 안옴!!!!!!! -->
+             	<input type="hidden" id="isbn" name="isbn" value="${book.isbn}">
+             	<input type="hidden" id="cart_qty" name="cart_qty" value="1">
+             	<input type="hidden" id="orderlist_cnt" name="orderlist_cnt" value="1">
                 <img src="/storage/${book.book_imgname}">
              </div>
 
@@ -148,7 +152,7 @@
             </ul>
         </div>
         </section>
-
+</form>
         <section>
             <hr>
             <br><br>
