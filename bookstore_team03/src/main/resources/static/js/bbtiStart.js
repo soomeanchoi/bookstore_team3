@@ -5,6 +5,7 @@ var que;
 var choose_A;
 var choose_B;
 
+var endPoint;
 
 
 
@@ -17,6 +18,11 @@ $.ajax({
         que = data.que;
         choose_A = data.choose_A;
         choose_B = data.choose_B;
+
+        // alert(que.length);
+        endPoint = que.length;
+        // alert(endPoint);
+        // alert("hi")
 
         // alert(que.toString());
         // alert(choose_A.toString());
@@ -62,6 +68,9 @@ function goNext(qIdx) {
     q.innerHTML = que[qIdx];
     addAnswer(choose_A[qIdx] ,qIdx);
     addAnswer(choose_B[qIdx], qIdx);
+    var status = document.querySelector('.statusBar');
+    status.style.width = (100/endPoint) * (qIdx+1) + '%';
+
 }
 function begin() {
     main.style.WebkitAnimation = "fadeOut 1s";
