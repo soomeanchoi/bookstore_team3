@@ -74,23 +74,24 @@
 				<th scope="col">작성일</th>
 			</tr>
 			</thead>
-			<tbody class="customtable">
-
-			 <c:forEach var="i" begin="1" end="${totalPage}" items="${list}" varStatus="status">
-		    	 <a href="list?pageNum=${i}"> ${i} </a>
-		    	 <input type="hidden" name="status" value="${status.index}">
-		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${i.board_no}">
+			<tbody class="customtable">		    	
+		    	<c:forEach items="${list}" var="row" begin="0" end="${totalRecord}" varStatus="status">
+		    	<input type="hidden" name="status" value="${status.index}">
+		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
 		    	<tr>
-		    		
-	    		<td id="profile_name" class="profile_name">${i.profile_name}</td>
-	    		<td id="board_title" class="board_title"><a href="detail/${i.board_no}">${i.board_title}</a>[${i.replycnt}]</td>
-	    		<td id="board_read" class="board_read">${i.board_read}</td>
-	    		<td id="board_good" class="board_good">${i.board_good}</td>
-	    		<td id="board_date" class="board_date">${i.board_date}</td>
+	    		<td id="profile_name" class="profile_name">${row.profile_name}</td>
+	    		<td id="board_title" class="board_title"><a href="detail/${row.board_no}">${row.board_title}</a>[${row.replycnt}]</td>
+	    		<td id="board_read" class="board_read">${row.board_read}</td>
+	    		<td id="board_good" class="board_good">${row.board_good}</td>
+	    		<td id="board_date" class="board_date">${row.board_date}</td>
 	    			
 	   		<%-- 	<td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
 	    		</tr>
 			</c:forEach>	
+			
+			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+		    	 <a href="list?pageNum=${i}"> ${i} </a>
+		    </c:forEach>
 
 		<!-- 검색시작 -->
 		<!-- <tr>

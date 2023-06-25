@@ -21,16 +21,14 @@
 	</select>
 	
 	<select id="paginglist" resultType="java.util.HashMap">
-	  select b1.* from(SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_content, board_date, board_read, board_good
-      FROM (board b join profile p on b.member_id = p.member_id) 
-      order by board_date ASC) b1 
-      limit #{end} offset #{start}
-	</select>
-	
-	<select id="replylist" resultType="int" parameterType="int">
-		SELECT COUNT(reply_no)
-		FROM reply
-		WHERE board_no=#{board_no}
+		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
+		FROM profile p
+		JOIN board b ON b.member_id = p.member_id
+		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
+		BY board_no) rc
+		ON b.board_no = rc.bno
+		ORDER BY b.board_date ASC
+		LIMIT #{end} OFFSET #{start}
 	</select>
 	
 	<select id="detail" parameterType="int" resultType="java.util.HashMap">

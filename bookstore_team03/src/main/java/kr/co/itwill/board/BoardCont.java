@@ -51,6 +51,7 @@ public class BoardCont {
 	
 	//총 게시글개수
 	int totalRecord = boardDao.totalRecord();
+	
 	int totalPage = totalRecord / pageSize;
 	if(totalRecord%pageSize!=0) {
 		totalPage++;
@@ -60,34 +61,22 @@ public class BoardCont {
 	
 	int start = (pageNum -1) * pageSize + 1;
 	int end = start +pageSize - 1;
-	System.out.println("시작레코드" + start);
-	System.out.println("end" + end);
 	
 	List<HashMap<String, Object>> list = new ArrayList<>();
 	list = boardDao.list();
 	ModelAndView mav = new ModelAndView();
 	mav.setViewName("board/list");
-	
-	 //댓개수
-    for (int i=0 ; i < list.size() ; i++) {
-    	HashMap<String, Object> hashMap = new HashMap<>();
-    	hashMap = list.get(i);
-    	Object replycnt=null;
-    	
-    	for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-           
-            if(key.equals("board_no")) {
-            	 replycnt = boardDao.replylist((int)value);
-            }//if end
-        }//for end	
-    	hashMap.put("replycnt", replycnt);
-    }//for end
-	
+    
+    //총 게시글
+    mav.addObject("totalRecord",  totalRecord);
+    
+    //1~5개의 게시글 불러오기
 	mav.addObject("list", boardDao.paginglist(start, end));
+	
+	//총 페이지수
 	mav.addObject("totalPage", totalPage);
 	
+	System.out.println(boardDao.paginglist(start, end).size());
 	return mav;
 	}//list2 end
 	/*

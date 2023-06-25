@@ -32,6 +32,7 @@ public class BoardDAO {
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("start", start);
 		map.put("end", end);
+		
 		return sqlSession.selectList("board.paginglist", map);
 	}//listBoard() end
 	
