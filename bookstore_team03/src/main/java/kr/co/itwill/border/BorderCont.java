@@ -50,9 +50,9 @@ public class BorderCont {
 		System.out.println(isbn);
 		System.out.println(cart_qty);
 		
-		//String s_id = (String)session.getAttribute("member_id"); 
+		String s_id = (String)session.getAttribute("member_id"); 
 		
-		String s_id = "kgukid38@naver.com";
+		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("border/directborderForm");
 		
@@ -81,11 +81,33 @@ public class BorderCont {
 		return mav;
 	}//directorderForm() end
 	
+	
+	
 	//장바구니구매: 기본배송지, 장바구니, 포인트 가져와 출력하며 주문서페이지 띄우기
 	@RequestMapping("/orderForm")
-	public ModelAndView borderform(HttpSession session) {
-		//String s_id = (String)session.getAttribute("member_id"); 
-		String s_id = "kgukid38@naver.com";
+	public ModelAndView borderform(HttpSession session
+								   ,@RequestParam("cart_no") List<String> cart_no
+								   ,@RequestParam("cart_qty") List<Integer> cart_qty) {
+		
+		System.out.println("borderCont 호출확인");
+		String s_id = (String)session.getAttribute("member_id"); 
+		//String s_id = "kgukid38@naver.com";
+		
+		//장바구니 업데이트
+		//주문상품 각각의 정보를 넣을 list생성
+		List<HashMap<String, Object>> cartlist = new ArrayList<>();
+		
+		//주문상품 각각의 정보를 map에 넣고 이것을 list에 넣기 
+		for(int i =0 ; i < cart_no.size() ; i++) {
+			HashMap<String, Object> map = new HashMap<>();
+			map.put("cart_no", cart_no.get(i));
+			map.put("cart_qty", cart_qty.get(i));
+			cartlist.add(i, map);					
+		}//for end
+
+		//카트내역 업데이트
+		borderDao.cartUpdate(cartlist);
+		
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("border/orderForm");
@@ -118,8 +140,8 @@ public class BorderCont {
 	public ModelAndView directinsert(String isbn, int orderlist_cnt
 									, HttpSession session
 									,@ModelAttribute BorderDTO dto) {
-		//String s_id = (String)session.getAttribute("member_id"); 
-		String s_id = "kgukid38@naver.com";
+		String s_id = (String)session.getAttribute("member_id"); 
+		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		String border_no = dateno();//생성한 주문번호 변수넣기
 		
@@ -159,8 +181,8 @@ public class BorderCont {
 											 ,@RequestParam("orderlist_cnt") List<Integer> orderlist_cnt
 											, HttpSession session) {
 		
-		//String s_id = (String)session.getAttribute("member_id"); 
-		String s_id = "kgukid38@naver.com";
+		String s_id = (String)session.getAttribute("member_id"); 
+		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		String border_no = dateno();//생성한 주문번호 변수넣기
 		

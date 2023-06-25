@@ -31,38 +31,36 @@
 </head>
 <title>cartList</title>
 <script>
+
 	function order() {
 		if (confirm("주문 진행하시겠습니까?")) {
-			location.href = '../border/orderForm';
+			document.cartfrm.action="/border/orderForm";
+	        document.cartfrm.submit();
+			//location.href = '../border/orderForm';
 		}//if end
-	}//order() end
+	}//order() end 
 
-	function book_Price() {//책 수량 수정에 따른 결제금액 변경
-		
-		
+	function cbook_Price() {//책 수량 수정에 따른 결제금액 변경
+		/* 
 		var cart_qty = document.getElementById("cart_qty").value;
 		var book_price = document.getElementById("book_price").value;
 		var booktot_Price= cart_qty*book_price;
 		
-		alert(booktot_Price);
+		document.getElementById("booktot_Price").value = booktot_Price */
+	
 		
-		document.getElementById("booktot_Price").value = booktot_Price
-		
-		alert(document.getElementById("booktot_Price").value);
-		
-		/* for (var i = 0; i < cart_qty.length; i++) {
+		 for (var i = 0; i < cart_qty.length; i++) {
 			cnt = Number(cart_qty.item(i).value);
 			price = Number(book_price.item(i).value);
 			booktot_Price.item(i).innerText = cnt * price;
-			total += cnt * price;
-		}//for end  */
+		}//for end  
 
 	}//book_price() end
 </script>
 
 </head>
 <body>
-
+<form id="cartfrm" name="cartfrm" action="orderForm">
 	<!-- 카트 템플릿1 -->
 	<section class="h-100 h-custom">
   <div class="container h-100 py-5">
@@ -90,7 +88,7 @@
 	                      
 	                   </c:when>
 	                   <c:otherwise>
-	                        <c:forEach items="${list}" var="row">
+	         <c:forEach items="${list}" var="row">
 			 <tr>
                 <th scope="row">
                   <div class="d-flex align-items-center">
@@ -115,7 +113,8 @@
                    
 					<div class="d-flex flex-row align-items-center qty">
 						<i class="fa fa-minus text-danger"></i> 
-						<select id="cart_qty" name="cart_qty" class="cart_qty" onchange="book_Price()"> <!-- oninput="book_Price()" -->
+						<input type="hidden" id="cart_no" name="cart_no" value="${row.cart_no}">
+						<select id="cart_qty" name="cart_qty" class="cart_qty" onchange="cbook_Price()"> <!-- oninput="book_Price()" -->
 							<option value="1" selected>1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
@@ -177,6 +176,8 @@
 	</div>
 	</div>
 </div>
+
 </section>
+</form>
 </body>
 </html>

@@ -5,7 +5,12 @@
 <!-- border.xml --> 
 
 <mapper namespace="border"> 
-
+	<!-- 장바구니 업데이트 -->
+	<update id="cartUpdate" parameterType="java.util.HashMap">
+		UPDATE itwill.cart
+		SET cart_qty=#{cart_qty}
+		WHERE cart_no=#{cart_no}
+	</update>
 
 	<!-- 기본배송지조회 -->
 	<select id="deliveryAdd" parameterType="String" resultType="java.util.HashMap">

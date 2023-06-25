@@ -20,6 +20,11 @@ public class BorderDAO {
 		System.out.println("----BorderDAO()객체생성");
 	}//end
 	
+	//카트수량 업데이트
+	public int cartUpdate(List<HashMap<String, Object>> cartlist) {
+		return sqlSession.update("border.cartUpdate", cartlist);
+	}//cartUpdate() end
+	
 	//기본배송지 가져오기
 	public HashMap<String, Object> deliveryAdd(String s_id){	
 		return sqlSession.selectOne("border.deliveryAdd", s_id);

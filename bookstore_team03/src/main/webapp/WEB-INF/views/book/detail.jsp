@@ -98,7 +98,6 @@
         <div class="container" align="center">
          <div class="row">
              <div class="col-6">
-             <!-- isbn 안옴!!!!!!! -->
              	<input type="hidden" id="isbn" name="isbn" value="${book.isbn}">
              	<input type="hidden" id="cart_qty" name="cart_qty" value="1">
              	<input type="hidden" id="orderlist_cnt" name="orderlist_cnt" value="1">
