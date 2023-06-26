@@ -85,6 +85,11 @@
 		FROM research
 		WHERE research_a2text = #{selectedValues} AND research_q = #{questions};
 	</select>
+	<update id="bbtiUpdate" parameterType="java.util.Map">
+		UPDATE profile
+		SET bbti_name = #{bbti}
+		where member_id = #{s_id}
+	</update>
 
 	
 

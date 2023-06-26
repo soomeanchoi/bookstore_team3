@@ -239,8 +239,8 @@ public class ResearchCont {
             List<String> questions = (List<String>) requestData.get("question");
 
             // 선택된 값과 질문 처리 로직 작성
-            System.out.println("받은 값들: " + selectedValues);
-            System.out.println("받은 질문들: " + questions);
+//            System.out.println("받은 값들: " + selectedValues);
+//            System.out.println("받은 질문들: " + questions);
 
             //결과물을 담을 것들 생성;
             ArrayList<String> first = new ArrayList<>();
@@ -249,15 +249,15 @@ public class ResearchCont {
             String bbti = "";
 
             for (int i = 0; i < questions.size(); i++) {
-                System.out.println("questions = " + questions.get(i));
-                System.out.println("selectedValues = " + selectedValues.get(i));
+//                System.out.println("questions = " + questions.get(i));
+//                System.out.println("selectedValues = " + selectedValues.get(i));
 
                 Map<String, Object> data = new HashMap<>();
                 data.put("questions" , questions.get(i));
                 data.put("selectedValues", selectedValues.get(i));
 
-                System.out.println("data = " + data);
-
+//                System.out.println("data = " + data);
+//
                 String result = "";
 
                 if (researchDAO.result_A1(data) == null){
@@ -266,7 +266,7 @@ public class ResearchCont {
                     result = researchDAO.result_A1(data);
                 }
 
-                System.out.println("result = " + result);
+//                System.out.println("result = " + result);
 
                 if (result != null){
                     if (result.equals("i") || result.equals("e")){
@@ -282,9 +282,9 @@ public class ResearchCont {
 
             }//for end
 
-            System.out.println("first = " + first);
-            System.out.println("second = " + second);
-            System.out.println("third = " + third);
+//            System.out.println("first = " + first);
+//            System.out.println("second = " + second);
+//            System.out.println("third = " + third);
 
             int check_i = Collections.frequency(first, "i");
             int check_e = Collections.frequency(first, "e");
@@ -294,12 +294,12 @@ public class ResearchCont {
             int check_f = Collections.frequency(third, "f");
 
 
-            System.out.println("check_i = " + check_i);
-            System.out.println("check_e = " + check_e);
-            System.out.println("check_s = " + check_s);
-            System.out.println("check_n = " + check_n);
-            System.out.println("check_t = " + check_t);
-            System.out.println("check_f = " + check_f);
+//            System.out.println("check_i = " + check_i);
+//            System.out.println("check_e = " + check_e);
+//            System.out.println("check_s = " + check_s);
+//            System.out.println("check_n = " + check_n);
+//            System.out.println("check_t = " + check_t);
+//            System.out.println("check_f = " + check_f);
 
             if (check_i > check_e){
                 bbti += "i";
@@ -320,7 +320,7 @@ public class ResearchCont {
                 bbti += "f";
             }
 
-            System.out.println("bbti = " + bbti);
+//            System.out.println("bbti = " + bbti);
 
 
 
@@ -330,6 +330,25 @@ public class ResearchCont {
             e.printStackTrace();
             return "오류 발생";
         }
+    }
+
+    @RequestMapping("/bbti")
+    public String bbti(@RequestParam("bbti") String bbti){
+
+        String s_id = "kgukid38@naver.com";
+
+
+        System.out.println("bbti = " + bbti);
+
+        Map<String, Object> map = new HashMap<>();
+
+        map.put("s_id", s_id);
+        map.put("bbti", bbti);
+
+        researchDAO.bbtiUpdate(map);
+
+
+        return "redirect:/";
     }
 
 }

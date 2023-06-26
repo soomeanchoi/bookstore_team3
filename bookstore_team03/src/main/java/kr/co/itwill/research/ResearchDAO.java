@@ -33,4 +33,5 @@ public class ResearchDAO {
 
     public int update(Map<String, Object> map){return sqlSession.update("research.update", map);}
 
+    public int bbtiUpdate(Map<String, Object> map){return sqlSession.update("research.bbtiUpdate", map);}
 }

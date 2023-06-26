@@ -60,6 +60,8 @@ function setResult() {
     // alert(bbti);
     const resultName = document.querySelector('.resultName');
     resultName.innerHTML = bbti;
+    const myBbti = document.querySelector('#bbti');
+    myBbti.value = bbti;
 }
 
 function goResult() {
