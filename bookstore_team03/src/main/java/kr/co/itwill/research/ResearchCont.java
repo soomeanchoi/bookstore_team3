@@ -325,7 +325,7 @@ public class ResearchCont {
 
 
             // 처리 결과 반환
-            return "결과 전송 완료";
+            return bbti;
         } catch (Exception e) {
             e.printStackTrace();
             return "오류 발생";

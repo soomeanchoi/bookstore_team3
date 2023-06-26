@@ -7,7 +7,7 @@ const question = [];
 var que;
 var choose_A;
 var choose_B;
-
+let bbti;
 var endPoint;
 
 
@@ -56,6 +56,12 @@ function addAnswer(answerText, qIdx) {
     }, false);
 }
 
+function setResult() {
+    // alert(bbti);
+    const resultName = document.querySelector('.resultName');
+    resultName.innerHTML = bbti;
+}
+
 function goResult() {
     qna.style.WebkitAnimation = "fadeOut 1s";
     qna.style.animation = "fadeOut 1s";
@@ -81,12 +87,22 @@ function goResult() {
         success: function(response) {
             // Ajax 요청 성공 시 처리할 코드 작성
             console.log("결과 전송 성공");
+
+            // 서버에서 반환한 결과를 받아와서 사용
+            bbti = response;
+
+            // bbti 값을 사용하여 원하는 작업 수행
+            console.log("bbti:", bbti);
+
+            setResult();
         },
         error: function(xhr, status, error) {
             // Ajax 요청 실패 시 처리할 코드 작성
             console.error("결과 전송 실패:", status, error);
         }
     });
+
+
 }
 
 function goNext(qIdx) {
