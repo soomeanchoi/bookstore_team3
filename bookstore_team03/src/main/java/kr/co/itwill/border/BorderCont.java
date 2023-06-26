@@ -50,8 +50,8 @@ public class BorderCont {
 	//상품 직접 구매 페이지
 	@RequestMapping("/directborderForm")
 	public ModelAndView directorderForm(String isbn, int cart_qty, HttpSession session) {
-		System.out.println(isbn);
-		System.out.println(cart_qty);
+		System.out.println("폼으로 넘어가는 상품코드"+isbn);
+		System.out.println("폼으로 넘어가는 수량"+cart_qty);
 		
 		String s_id = (String)session.getAttribute("member_id"); 
 		
@@ -123,6 +123,8 @@ public class BorderCont {
 	public ModelAndView directinsert(String isbn, int orderlist_cnt
 									, HttpSession session
 									,@ModelAttribute BorderDTO dto) {
+		System.out.println("주문서로 넘어가는 상품코드"+isbn);
+		System.out.println("주문서로 넘어가는 수량"+orderlist_cnt);
 		String s_id = (String)session.getAttribute("member_id"); 
 		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
@@ -148,7 +150,7 @@ public class BorderCont {
 			System.out.println("orderlist행추가결과: " + result);
 			
 			mav.addObject("msg", "주문이 완료되었습니다");
-			mav.addObject("border_no", border_no);
+			//mav.addObject("border_no", border_no);
 			mav.setViewName("/border/msgView");  // /WEB-INF/views/border/msgView.jsp
 		}//if end
 		
