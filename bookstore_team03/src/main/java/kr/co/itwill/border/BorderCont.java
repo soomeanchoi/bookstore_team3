@@ -112,9 +112,9 @@ public class BorderCont {
 			cartlist.add(i, map);					
 		}//for end
 		
-		int cnt = borderDao.cartUpdate(cartlist);
-		
+		//int cnt = borderDao.cartUpdate(cartlist);
 		//System.out.println("카트수정성공"+ cnt);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("border/orderForm");
 		

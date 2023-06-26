@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%@ include file="../template/header.jsp"%>
-
-<link rel="stylesheet" href="/css/reset.css" />
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/header.css" />
-<!-- <link rel="stylesheet" href="/css/section.css" /> -->
-<link rel="stylesheet" href="/css/cart.css" />
-<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
-<link rel="stylesheet" 	href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" />
-<link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script>
 
@@ -39,7 +25,6 @@
 			document.getElementById("booktot_Price").value = booktot_Price;
 			alert(document.getElementById("booktot_Price").value);
 		 }//for end 
-			
 			
 			alert("카트1총가격: "+booktot_Price[0].value);
 			/* 
