@@ -77,6 +77,15 @@
 		FROM research
 		WHERE research_a1text = #{selectedValues} AND research_q = #{questions};
 	</select>
+	<select id="result_B1" resultType="String" parameterType="java.util.Map">
+		SELECT
+			CASE
+				WHEN research_a2text = #{selectedValues} THEN research_a2
+				END AS result
+		FROM research
+		WHERE research_a2text = #{selectedValues} AND research_q = #{questions};
+	</select>
+
 	
 
 

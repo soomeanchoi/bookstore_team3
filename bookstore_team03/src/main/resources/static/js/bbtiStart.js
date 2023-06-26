@@ -10,6 +10,7 @@ var choose_B;
 
 var endPoint;
 
+
 $.ajax({
     url: "/research/kakao1",
     type: "GET",
