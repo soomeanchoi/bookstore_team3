@@ -2,6 +2,7 @@ const main = document.querySelector("#main");
 const qna = document.querySelector("#qna");
 const result = document.querySelector("#result");
 const selected = [];
+const question = [];
 
 var que;
 var choose_A;
@@ -48,6 +49,7 @@ function addAnswer(answerText, qIdx) {
             }
             var selectedAnswer = answerText;
             selected.push(selectedAnswer);
+            question.push(que[qIdx]); // 선택된 답변과 질문을 각각 저장
             goNext(++qIdx);
         }, 450);
     }, false);
@@ -64,13 +66,17 @@ function goResult() {
             result.style.display = "block";
         }, 450);
     }, 500);
-    alert(selected);
+
+    var dataToSend = {
+        selected: selected,
+        question: question // 선택된 답변과 질문을 함께 전송
+    };
 
     $.ajax({
         url: "/research/resultTest",
         type: "POST",
         contentType: "application/json",
-        data: JSON.stringify(selected),
+        data: JSON.stringify(dataToSend),
         success: function(response) {
             // Ajax 요청 성공 시 처리할 코드 작성
             console.log("결과 전송 성공");
@@ -80,8 +86,6 @@ function goResult() {
             console.error("결과 전송 실패:", status, error);
         }
     });
-
-
 }
 
 function goNext(qIdx) {

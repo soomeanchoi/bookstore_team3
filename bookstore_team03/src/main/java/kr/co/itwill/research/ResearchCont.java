@@ -233,12 +233,14 @@ public class ResearchCont {
 
     @PostMapping("/resultTest")
     @ResponseBody
-    public String handleResult(@RequestBody List<String> selectedValues) {
-
+    public String handleResult(@RequestBody Map<String, Object> requestData) {
         try {
-            // 선택된 값 처리 로직 작성
-            System.out.println("받은 값들: " + selectedValues);
+            List<String> selectedValues = (List<String>) requestData.get("selected");
+            List<String> questions = (List<String>) requestData.get("question");
 
+            // 선택된 값과 질문 처리 로직 작성
+            System.out.println("받은 값들: " + selectedValues);
+            System.out.println("받은 질문들: " + questions);
 
             // 처리 결과 반환
             return "결과 전송 완료";
@@ -246,12 +248,6 @@ public class ResearchCont {
             e.printStackTrace();
             return "오류 발생";
         }
-
-
-
-
-        // 처리 결과 반환
-//        return "결과 전송 완료";
     }
 
 }
