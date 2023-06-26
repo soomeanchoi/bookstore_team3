@@ -68,7 +68,7 @@
 }
 */
 .profile-thumb {
-	border: 1px solid #eaeaea;
+	/* border: 1px solid #eaeaea; */
     box-sizing: border-box;
     border-radius: 100%;
     display: flex; 
@@ -87,7 +87,7 @@
 
 .profile_img {
 	object-fit: cover;
-	background-image: url(https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png);
+	/* background-image: url(https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png); */
 	width: 100%;
     height: 100%;
     border-radius: 100%;

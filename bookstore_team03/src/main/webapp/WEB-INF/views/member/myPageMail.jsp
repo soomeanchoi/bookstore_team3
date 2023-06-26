@@ -151,7 +151,7 @@
                                     <!-- 수정 220422 placeholder 마침표 추가, 타이틀 수정, style attr 추가 -->
                                     <div class="byte_check_footer">
                                         
-                                    <div class="byte_check"><span class="count">0</span><span class="total">500</span></div></div>
+                                    <div class="byte_check"><span class="count"></span><span class="total">500</span></div></div>
                                 </div>
                                 <!-- //byte_check_wrap -->
                                 <span class="valid_desc"></span>
