@@ -41,6 +41,11 @@ public class ProfileCont {
         return "profile/profileForm";
     }//write() end
 	
+	@RequestMapping("/profileModify")
+    public String profileModify() {
+        return "profile/profileModify";
+    }//write() end
+	
 	
 	@RequestMapping("/insert")
     public String insert(@RequestParam Map<String, Object> map

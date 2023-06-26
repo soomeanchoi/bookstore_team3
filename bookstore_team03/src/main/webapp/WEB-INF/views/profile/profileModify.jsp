@@ -30,7 +30,7 @@
     ></script>
   </head>
 <body>
-tion style="padding: 50px;">
+<section style="padding: 50px;">
 	<h1><div class="profilefrm-title">프로필 수정</div></h1>
 	<form name="profilefrm" id="profilefrm" method="post" action="update" enctype="multipart/form-data">
 	    <table class="table" style="margin-top: 0px;">
