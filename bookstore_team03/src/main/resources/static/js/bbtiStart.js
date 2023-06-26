@@ -12,7 +12,7 @@ var endPoint;
 
 
 $.ajax({
-    url: "/research/kakao1",
+    url: "/research/bbti1",
     type: "GET",
     success: function (data) {
         que = data.que;
@@ -82,7 +82,7 @@ function goResult() {
     };
 
     $.ajax({
-        url: "/research/resultTest",
+        url: "/research/bbtiResult",
         type: "POST",
         contentType: "application/json",
         data: JSON.stringify(dataToSend),

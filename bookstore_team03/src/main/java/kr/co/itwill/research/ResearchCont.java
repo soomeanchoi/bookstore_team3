@@ -201,16 +201,16 @@ public class ResearchCont {
         return "research/test";
     }
 
-    @RequestMapping("kakao" )
+    @RequestMapping("bbtiQuiz" )
     public String kakao(){
 
-        return "research/kakao";
+        return "research/bbti";
 //        return que;
     }
 
     @ResponseBody
-    @RequestMapping("kakao1" )
-    public Map<String, List<String>> kakao1(){
+    @RequestMapping("bbti1" )
+    public Map<String, List<String>> bbti1(){
 
 //        System.out.println("111111");
 
@@ -231,7 +231,7 @@ public class ResearchCont {
         return data;
     }
 
-    @PostMapping("/resultTest")
+    @PostMapping("/bbtiResult")
     @ResponseBody
     public String handleResult(@RequestBody Map<String, Object> requestData) {
         try {
