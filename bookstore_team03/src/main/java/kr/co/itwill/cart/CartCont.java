@@ -4,6 +4,7 @@ package kr.co.itwill.cart;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -36,6 +38,32 @@ public class CartCont {
 		cartDao.cartInsert(dto);
 		return "redirect:/cart/list";//장바구니 목록
 	}//cartInsert() end
+	
+	
+	//카트수정
+	@RequestMapping("/cartupate")
+	@ResponseBody
+	public int cartupate(HttpSession session, HttpServletRequest req) {
+		String s_id = (String)session.getAttribute("member_id");
+		//String s_id="kgukid38@naver.com";
+		
+		int cnt=0;
+		
+		int cart_no = Integer.parseInt(req.getParameter("cart_no"));
+		int cart_qty = Integer.parseInt(req.getParameter("cart_qty"));
+		//넘어온 카트번호와 수량 디비로 보내기
+		CartDTO dto = new CartDTO();
+		dto.setMember_id(s_id);
+		dto.setCart_no(cart_no);
+		dto.setCart_qty(cart_qty);
+		cnt = cartDao.cartupdate(dto);
+		/*
+		System.out.println(req.getParameter("cart_no"));
+		System.out.println(req.getParameter("cart_qty"));*/
+
+		return cnt;
+	}//cartupate() end
+	
 	
 	@RequestMapping("/list")
     public ModelAndView list(HttpSession session) {

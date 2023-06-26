@@ -1,21 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 <%@ include file="../template/header.jsp"%>
-
-<link rel="stylesheet" href="/css/reset.css" />
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/header.css" />
-<!-- <link rel="stylesheet" href="/css/section.css" /> -->
-<link rel="stylesheet" href="/css/cart.css" />
-<link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
-<link rel="stylesheet" 	href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" />
-<link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 
 <script>
 
@@ -27,35 +13,54 @@
 		}//if end
 	}//order() end 
 
-	function cbook_Price(cart_qty) {//책 수량 수정에 따른 결제금액 변경
-		/* 
-		var cart_qty = document.getElementById("cart_qty").value;
-		var book_price = document.getElementById("book_price").value;
-		var booktot_Price= cart_qty*book_price;
+	function cbook_Price(cart_no, cart_qty) {//책 수량 수정에 따른 결제금액 변경
+		 var book_price = document.getElementById("book_price").value;
+		var cartsize = document.getElementById("cartsize").value;
 		
-		document.getElementById("booktot_Price").value = booktot_Price */
+		alert(document.getElementById('"booktot_Price'+cart_no+'"').value);
+		 //document.getElementById("booktot_Price"+cart_no).value= book_price * cart_qty; */
+		 /*
+		
+		document.getElementById("booktot_Price").value = booktot_Price 
 		 for(var i = 0; i < cart_qty.length ; i++){
 			var booktot_Price = cart_qty[i] * book_price[i].value
 			document.getElementById("booktot_Price").value = booktot_Price;
 			alert(document.getElementById("booktot_Price").value);
 		 }//for end 
 			
-			
 			alert("카트1총가격: "+booktot_Price[0].value);
-			/* 
+		 
 		var book_price = Number(document.getElementById("book_price").value);
 		alert(eval(cart_qty*book_price));
 		document.getElementById("booktot_Price").value=eval(cart_qty*book_price);
 		alert(document.getElementById("booktot_Price"));
-		 */
-		/*
 		 for (var i = 0; i < cart_qty.length; i++) {
 			cnt = Number(cart_qty.item(i).value);
 			price = Number(book_price.item(i).value);
 			booktot_Price.item(i).innerText = cnt * price;
 		}//for end  
-*/
-	}//book_price() end
+		*/
+		//----------------------------------------------------------------------------
+		
+		//alert(cart_no);  카트번호
+		//alert(cart_qty); 카트수량
+		let params="cart_no=" + cart_no + "&cart_qty=" + cart_qty;
+		
+		$.ajax({
+		 	url:'/cart/cartupate'	//요청명령어
+		 	,type:'post'
+		 	,data:params		//요청정보, 유저가 입력한 댓글의 모든 정보
+		 	,error:function(error){
+		 		alert(error);
+		 	}//error end
+			,success:function(data){
+				alert("상품 수량이 변경되었습니다.");
+				//if(data ==1){//댓글 등록이 성공했다면
+				
+				//}//if end
+			}//success end
+		}); //ajax() end
+	}//cbook_Price() end
 </script>
 
 <form id="cartfrm" name="cartfrm" method="post">
@@ -66,11 +71,11 @@
       <div class="col">
 
         <div class="table-responsive">
+        <input type="hidden" id="cartsize" name="cartsize" value="${fn:length(list)}">
           <table class="table">
             <thead>
               <tr>
                 <th scope="col" class="h5">상품</th>
-                
                 <th scope="col">수량</th>
                 <th scope="col">가격</th>
                 <th scope="col">&nbsp</th>
@@ -86,7 +91,7 @@
 	                      
 	                   </c:when>
 	                   <c:otherwise>
-	         <c:forEach items="${list}" var="row">
+	         <c:forEach items="${list}" var="row" varStatus="status">
 			 <tr>
                 <th scope="row">
                   <div class="d-flex align-items-center">
@@ -112,8 +117,9 @@
 					<div class="d-flex flex-row align-items-center qty">
 						<i class="fa fa-minus text-danger"></i> 
 						<input type="hidden" id="cart_no" name="cart_no" value="${row.cart_no}">
-						<select id="cart_qty" name="cart_qty" onchange="cbook_Price(this.value)"> <!-- oninput="book_Price()" --> <!--  -->
-							<option value="1" selected>1</option>
+						<select id="cart_qty" name="cart_qty" onchange="cbook_Price(${row.cart_no}, this.value)"> <!-- oninput="book_Price()" -->
+							<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
+							<option value="1">1</option>
 							<option value="2">2</option>
 							<option value="3">3</option>
 							<option value="4">4</option>
@@ -132,7 +138,7 @@
                 <p style="font-weight: 500;" >${row.book_price}</p> --%>
                 <div>
                 	<%-- <input type="hidden" id="booktot_price" name="booktot_price" value="${row.book_price}"> --%>
-					<input type="text"	id="booktot_Price" class="booktot_Price" value="${row.book_price}" style="border:0">				
+					<input type="text"	id="booktot_Price${row.cart_no}" class="booktot_Price${row.cart_no}" value="${row.book_price * row.cart_qty}" style="border:0">				
 				</div>
 				</td>
 				
@@ -165,9 +171,7 @@
 			    <input type="button" class="btn btn-warning btn-block btn-lg ml-2 pay-button"
 				value="계속쇼핑하기" onclick="location.href='/book/list'">
               </c:otherwise>
-             </c:choose>
-				
-					
+             </c:choose>	
 			</div>
 		</div>
 	</div>

@@ -100,7 +100,7 @@
 <body>
 
     <div>
-<form name="bookfrm" id="bookfrm">
+<form name="bookfrm" id="bookfrm" method="post">
         <section>
         <div class="container" align="left">
             <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">

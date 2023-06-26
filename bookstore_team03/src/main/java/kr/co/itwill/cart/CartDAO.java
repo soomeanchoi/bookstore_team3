@@ -21,6 +21,10 @@ public class CartDAO {
 		return sqlSession.insert("cart.insert", dto);
 	}//cartInsert() end
 	
+	public int cartupdate(CartDTO dto) {
+		return sqlSession.update("cart.update", dto);
+	}//cartupdate() end
+	
 	public List<Map<String, Object>> cartList(String s_id){
 		return sqlSession.selectList("cart.list", s_id);
 	}//cartList() end

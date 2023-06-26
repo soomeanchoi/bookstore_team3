@@ -22,7 +22,7 @@
 	<update id="update" parameterType="kr.co.itwill.cart.CartDTO">
 		UPDATE itwill.cart
 		SET cart_qty=#{cart_qty}
-		WHERE cart_no=#{cart_no}
+		WHERE cart_no=#{cart_no} AND member_id=#{member_id}
 	</update>
 	
 	<delete id="delete" parameterType="java.util.HashMap">
