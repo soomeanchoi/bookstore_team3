@@ -68,6 +68,15 @@
 		  , research_a2text = #{research_a2text}
 		WHERE research_no = #{research_no}
 	</update>
+
+	<select id="result_A1" resultType="String" parameterType="java.util.Map">
+		SELECT
+			CASE
+				WHEN research_a1text = #{selectedValues} THEN research_a1
+				END AS result
+		FROM research
+		WHERE research_a1text = #{selectedValues} AND research_q = #{questions};
+	</select>
 	
 
 

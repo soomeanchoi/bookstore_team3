@@ -242,6 +242,18 @@ public class ResearchCont {
             System.out.println("받은 값들: " + selectedValues);
             System.out.println("받은 질문들: " + questions);
 
+            for (int i = 0; i < questions.size(); i++) {
+                System.out.println("questions = " + questions.get(i));
+                System.out.println("selectedValues = " + selectedValues.get(i));
+
+                Map<String, Object> data = new HashMap<>();
+                data.put("questions" , questions);
+                data.put("selectedValues", selectedValues);
+
+                researchDAO.result_A1(data);
+
+            }
+
             // 처리 결과 반환
             return "결과 전송 완료";
         } catch (Exception e) {
