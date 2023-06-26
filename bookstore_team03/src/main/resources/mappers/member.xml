@@ -82,15 +82,34 @@
 			FROM review r 
 			LEFT JOIN profile p 
 			ON r.profile_no = p.profile_no 
-			WHERE r.profile_no = 16;
+			WHERE p.profile_no = 19;
 	</select>
 	
+	<!-- 
+		SELECT profile_name,isbn, review_content, review_score
+		FROM review r 
+		LEFT JOIN profile p 
+		ON r.profile_no = p.profile_no 
+		WHERE p.member_id = 'itwill8@gmail.com';
+	 -->
+	
 	<select id="myorder" resultType="java.util.Map" parameterType="String">
-			SELECT border_no, border_price
+			SELECT border_no, border_price, border_date
 			FROM border b
 			LEFT JOIN member m 
 			ON  b.member_id = m.member_id 
-			WHERE m.member_id  = 'itwill8@gmail.com';
+			WHERE m.member_id  = #{member_id};
+	</select>
+	
+	<select id="book" resultType="java.util.Map" parameterType="String">
+			SELECT book_name, book_imgname
+			FROM book b 
+			LEFT JOIN orderlist o 
+			ON b.isbn = o.isbn 
+			JOIN border b2 
+			ON o.border_no = b2.border_no 
+			JOIN `member` m 
+			ON b2.member_id = #{member_id};
 	</select>
 	
 </mapper>     

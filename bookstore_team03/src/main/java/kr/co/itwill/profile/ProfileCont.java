@@ -29,75 +29,83 @@ public class ProfileCont {
 	public ProfileCont() {
 		System.out.println("-----ProfileCont()객체 생성됨");
 	}
-
+	
 	@Autowired
 	ProfileDTO profileDto;
-
+	
 	@Autowired
 	ProfileDAO profileDao;
-
+	
 	@RequestMapping("/profileForm")
     public String profileForm() {
         return "profile/profileForm";
     }//write() end
-
-
+	
+	
 	@RequestMapping("/insert")
     public String insert(@RequestParam Map<String, Object> map
-			,@RequestParam MultipartFile profile_img
-			,HttpServletRequest req
-			,HttpSession session) throws Exception{
-
+    		          ,@RequestParam MultipartFile profile_img
+    		          ,HttpServletRequest req
+    		          ,HttpSession session) throws Exception{ 
+		
 		String member_id = (String) session.getAttribute("member_id");
-
+		
 		String profile_imgname="-";
-		long profile_imgsize=0;
-		if(profile_imgname != null && !profile_imgname.isEmpty()) { //파일이 존재한다면
-			profile_imgname=profile_img.getOriginalFilename();
-			profile_imgsize=profile_img.getSize();
-			try {
-
-				ServletContext application=req.getSession().getServletContext();
-				String path=application.getRealPath("/storage");  //실제 물리적인 경로
-				profile_img.transferTo(new File(path + "\\" + profile_imgname)); //파일저장
-
-
-			}catch (Exception e) {
-				e.printStackTrace(); //System.out.println(e);
-			}//try end
-		}//if end
-
-		map.put("member_id", member_id);
-		map.put("profile_imgname", profile_imgname);
-		map.put("profile_imgsize", profile_imgsize);
-
-		profileDao.insert(map);
-
-		return "redirect:/member/myPage";
+    	long profile_imgsize=0;
+    	if(profile_img != null && !profile_img.isEmpty()) { //파일이 존재한다면
+    		profile_imgname=profile_img.getOriginalFilename();
+    		profile_imgsize=profile_img.getSize();
+    		try {
+    			
+    			ServletContext application=req.getSession().getServletContext();
+    			String path=application.getRealPath("/storage");  //실제 물리적인 경로
+    			profile_img.transferTo(new File(path + "\\" + profile_imgname)); //파일저장
+    			
+    			
+    		}catch (Exception e) {
+    			e.printStackTrace(); System.out.println(e);
+			}//try end    		
+    	}//if end
+    	
+    	map.put("member_id", member_id);
+    	map.put("profile_imgname", profile_imgname);
+    	map.put("profile_imgsize", profile_imgsize);
+    	
+    	profileDao.insert(map);
+    	
+    	return "redirect:/member/myPage";
 	}
-
-
+	
+	
 	@RequestMapping("/list")
 	public String list(HttpSession session,
-					   Model model) throws Exception {
-
+							Model model) throws Exception {
+		
 		String member_id = (String)session.getAttribute("member_id");
-
+		
 		String profile_name = profileDto.getProfile_name();
 		if(profile_name != null) {
 			model.addAttribute("profile_name", profile_name);
 		}
 		return "redirect:/member/myPage";
 	}
-
+	
 	@RequestMapping("/detail/{profile_no}")
     public ModelAndView detail(@PathVariable int profile_no, @ModelAttribute ProfileDTO dto) {
         ModelAndView mav = new ModelAndView();
-        ProfileDTO profileDto=new ProfileDTO();
-		System.out.println("profile_no = " + profile_no);
+        
+        
+        
+        List<Map<String, Object>> profileData = profileDao.detail(profile_no);
+        mav.addObject("profile", profileData);
+        
+        //ProfileDTO profileDto=new ProfileDTO();
         mav.setViewName("profile/detail");
-        mav.addObject("profile", profileDao.detail(profile_no));
-
+        //mav.addObject("profile", profileDao.detail(profile_no));
+        
+        
+        
+        
         return mav;
     }//detail() end
 
@@ -109,6 +117,63 @@ public class ProfileCont {
         mav.addObject("member_id", member_id); //검색어
         return mav;
     }//search() end
+	
+	
+	@RequestMapping("/delete")
+    public String delete(String member_id, HttpServletRequest req) {
+        System.out.println("member_id = " + member_id);
+        //삭제하고자 하는 파일명
+        String filename=profileDao.filename(member_id);
 
+        //첨부된 파일 삭제하기
+        if(filename != null && !filename.equals("-")) {
+            ServletContext application=req.getSession().getServletContext();
+            String path=application.getRealPath("/storage");
+            File file=new File(path + "\\" + filename);
+            if(file.exists()) {
+                file.delete();
+            }//if end
+        }//if end
 
+        profileDao.delete(member_id);
+
+        return "redirect:/member/myPage";
+
+    }//delete() end
+	
+	
+	@RequestMapping("/update")
+    public String update(@RequestParam Map<String, Object> map
+                        ,@RequestParam MultipartFile profile_img
+                        ,HttpServletRequest req
+                        ,HttpSession session) {
+
+        String filename="-";
+        long filesize=0;
+        if(profile_img != null && !profile_img.isEmpty()) {
+            filename=profile_img.getOriginalFilename();
+            filesize=profile_img.getSize();
+            try{
+                ServletContext application=req.getSession().getServletContext();
+                String path=application.getRealPath("/storage");
+                profile_img.transferTo(new File(path + "\\" + filename));
+            }catch (Exception e) {
+                e.printStackTrace();
+            }//try end
+        }else{
+            //String isbn=map.get("isbn").toString();
+        	String member_id = (String) session.getAttribute("member_id"); 
+            Map<String, Object> profileData = profileDao.list(member_id);
+            filename=profileData.get("profile_imgname").toString();
+            filesize=Long.parseLong(profileData.get("profile_imgsize").toString());
+        }//if end
+
+            map.put("profile_imgname", filename);
+            map.put("profile_imgsize", filesize);
+            profileDao.update(map);
+            
+            return "redirect:/member/myPage";
+
+        }//update() end
+	
 }
