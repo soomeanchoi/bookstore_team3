@@ -83,10 +83,14 @@
         </ul>
       </div>
       <!-- search bar -->
-      <div class="search_bar">
-        <input class="search" type="search" size="57" />
-        <input class="search-btn" type="submit" value="Search" />
-      </div>
+
+          <form action="/book/search">
+              <div class="search_bar">
+                <input class="search" type="text" size="57" value="${book_name}"/>
+                <input class="search-btn" type="submit" value="search" />
+              </div>
+          </form>
+
       <div class="icon-wrap">
         <!-- cart icon -->
         <div>

@@ -39,4 +39,10 @@ public class IntroDAO {
         return sqlSession.selectList("intro.recentReview");
     }//todayWriter() end
 
+    public List<Map<String, Object>> recentList() {
+        return sqlSession.selectList("intro.recentList");
+    }//todayWriter() end
+
+
+
 }

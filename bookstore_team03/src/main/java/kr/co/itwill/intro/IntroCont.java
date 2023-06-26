@@ -25,6 +25,7 @@ public class IntroCont {
         mav.addObject("todayWriter", introDao.todayWriter());
         mav.addObject("reviewList", introDao.reviewList());
         mav.addObject("recentReview", introDao.recentReview());
+        mav.addObject("recentList", introDao.recentList());
         return mav;
 
     }//list() end

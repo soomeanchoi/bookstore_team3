@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,6 +19,14 @@ public class BookDAO {
 
     @Autowired
     SqlSession sqlSession;
+
+    public List<Map<String, Object>> totalList() {
+        return sqlSession.selectList("book.totalList");
+    }//list() end
+
+    public List<BookDTO> comicList() {
+        return sqlSession.selectList("book.comicList");
+    }
 
     public List<Map<String, Object>> list() {
         return sqlSession.selectList("book.list");
@@ -63,5 +72,19 @@ public class BookDAO {
         return sqlSession.selectOne("book.score", isbn);
     }//reviewScore() end
 
+    public List<Map<String, Object>> listPaging(int start, int end) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("start", start);
+        params.put("end", end);
+        return sqlSession.selectList("book.listPaging", params);
+    }
+
+    public int bookCount() {
+        return sqlSession.selectOne("book.listCount");
+    }
+
+    public int choiceTable(Map<String, Object> map) {
+        return sqlSession.selectOne("book.choiceTable", map);
+    }
 
 }//class end
