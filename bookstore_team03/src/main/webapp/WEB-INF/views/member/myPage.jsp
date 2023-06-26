@@ -96,7 +96,7 @@
 	      		<div class="profile-name-box">
 	      			<span class="name">${member_name }</span>
 	      		</div>
-	      		<input type="button" value="로그아웃" onclick="location.href='logout';">
+	      		
 	      		 <h6><span>${member_name }</span>님의 bbti</h6>
             <div>
             <div>${mybbti }</div>
