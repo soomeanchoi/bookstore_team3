@@ -93,7 +93,7 @@
 <body>
 
     <div>
-<form name="bookfrm" id="bookfrm">
+<form name="bookfrm" id="bookfrm" method="post">
         <section>
         <div class="container" align="center">
          <div class="row">
