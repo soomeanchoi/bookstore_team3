@@ -195,15 +195,22 @@ public class MemberCont<ReviewDTO> {
 		
 		// profileDao.list(member_id)를 호출하여 반환되는 데이터를 Map 형태로 저장
 	    Map<String, Object> profileData = profileDao.list(member_id);
+	    System.out.println(profileData);
+	    
+	    if (profileData == null) {
+	    	
+	    	model.addAttribute("profile_name", "프로필을 등록해주세요");
+	    	model.addAttribute("profile_intro", "자신을 소개해보세요");
+	        // 프로필 정보가 없는 경우, 기본값을 설정하거나 필요한 처리를 수행
+	        // 예를 들어, 빈 프로필 정보를 추가하거나 다른 처리를 수행할 수 있습니다.
+	        // 여기에 필요한 로직을 추가해주세요.
+	    } else {
+	        mav.addObject("plist", profileData);
 
-	    if (!profileData.isEmpty()) {
-	    mav.addObject("list", profileData);
-	    mav.setViewName("member/myPage"); 
-
-	    // profile_name만 추출하여 mav에 추가
-	    mav.addObject("profile_name", profileData.get("profile_name"));
-
-	    mav.addObject("profile_intro", profileData.get("profile_intro"));
+	        // profile_name만 추출하여 mav에 추가
+	        mav.addObject("profile_name", profileData.get("profile_name"));
+	        mav.addObject("profile_intro", profileData.get("profile_intro"));
+	        mav.addObject("profile_imgname", profileData.get("profile_imgname"));
 	    }
 	    
 	    //border
@@ -215,7 +222,11 @@ public class MemberCont<ReviewDTO> {
 	    
 	    //review
 	    mav.addObject("myreview", memberDao.reviewlist(member_id));
+	    //책 사진
+	   // mav.addObject("book_img", memberDao.bookimg());
+	    mav.addObject("book", memberDao.bookname(member_id));
 	    
+	    mav.setViewName("member/myPage");
 		return mav;
 	}
 	
@@ -265,6 +276,7 @@ public class MemberCont<ReviewDTO> {
 	}
 	*/
 	
+	
 	// 삭제 과정
 	@RequestMapping("/deleteProc")
 	public String deleteProc(@ModelAttribute MemberDTO dto, HttpSession session
@@ -280,29 +292,24 @@ public class MemberCont<ReviewDTO> {
 		if(!(member_pw.equals(newPw))) {
 			rttr.addFlashAttribute("msg", false);
 			return "redirect:/member/deleteView";
+		}else {
+			
+			memberDao.delete(dto);
+			session.invalidate();
 		}
-		
-		String member_id = (String) session.getAttribute("member_id");
-		String member_phone = dto.getMember_phone();
-		System.out.println(member_phone);
-		String member_name = (String) session.getAttribute("member_name");
-		String member_birth = (String) session.getAttribute("member_birth");
-		
-		memberDao.dropinsert(dto);
-		
-		
-		//dto.getMember_phone();
-		//dto.getMember_name(); 
-		//dto.getMember_birth();
-		 
-		//dropDao.insert(dto);
-		
-		memberDao.delete(dto);
-		session.invalidate();
 		
 		return "redirect:/member/login";
 	}
 	
+	/*
+	// 패스워드 체크
+	@ResponseBody
+	@RequestMapping("/deleteProc")
+	public int deleteProc(@ModelAttribute MemberDTO dto) throws Exception {
+		int result = memberDao.delete(dto);
+		return result;
+	}
+	*/
 
 	@RequestMapping(value="/kakao/callback")
     public String login(@RequestParam("code") String code, HttpSession session) {

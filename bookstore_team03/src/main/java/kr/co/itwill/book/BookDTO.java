@@ -21,8 +21,22 @@ public class BookDTO {
     private String book_mainname;
     private String book_subname;
     private String book_content;
+    private int pageNum;	//페이지 번호
 
-    public BookDTO() {}
+    private int size;	//한 페이지당 출력 DATA 개수
+
+    public BookDTO() {
+        this(1,10);
+    }
+
+    public BookDTO(int pageNum,int size) {
+        this.pageNum=pageNum;
+        this.size=size;
+    }
+
+    public int BookDTO() {
+        return this.pageNum = (pageNum-1) * size;
+    }
 
     public String getIsbn() {
         return isbn;

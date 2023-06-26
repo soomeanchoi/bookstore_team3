@@ -85,4 +85,8 @@ public class MemberDAO {
 	public List<Map<String, Object>> orderlist(String member_id) {
 		return sqlSession.selectList("member.myorder", member_id);
 	}
+	
+	public List<MemberDTO> bookname(String member_id) {
+		return sqlSession.selectList("member.book" , member_id);
+	}
 }

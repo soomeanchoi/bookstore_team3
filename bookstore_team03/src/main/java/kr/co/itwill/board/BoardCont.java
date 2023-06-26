@@ -33,7 +33,6 @@ public class BoardCont {
 	@Autowired
 	BoardDAO boardDao;
 	
-	
 	//세션아이디 쿠키에 저장
 	public void idcookie(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession(); // 세션 가져오기
@@ -57,7 +56,6 @@ public class BoardCont {
 		totalPage++;
 	}//if end
 	
-	System.out.println("pageNum" + pageNum);
 	
 	int start = (pageNum -1) * pageSize + 1;
 	int end = start +pageSize - 1;
@@ -76,39 +74,8 @@ public class BoardCont {
 	//총 페이지수
 	mav.addObject("totalPage", totalPage);
 	
-	System.out.println(boardDao.paginglist(start, end).size());
 	return mav;
 	}//list2 end
-	/*
-	//페이징 없음
-	@RequestMapping("/list")
-	public ModelAndView list() {
-		ModelAndView mav=new ModelAndView();
-		
-		List<HashMap<String, Object>> list = new ArrayList<>();
-		list = boardDao.list();
-	    mav.setViewName("board/list");
-	    
-	    //댓개수
-	    for (int i=0 ; i < list.size() ; i++) {
-	    	HashMap<String, Object> hashMap = new HashMap<>();
-	    	hashMap = list.get(i);
-	    	Object replycnt=null;
-	    	
-	    	for (Map.Entry<String, Object> entry : hashMap.entrySet()) {
-	            String key = entry.getKey();
-	            Object value = entry.getValue();
-	           
-	            if(key.equals("board_no")) {
-	            	 replycnt = boardDao.replylist((int)value);
-	            }//if end
-	        }//for end	
-	    	hashMap.put("replycnt", replycnt);
-	    }//for end
-	    mav.addObject("list", list);
-	    return mav;
-	}//list() end
-	*/
 	
 	@RequestMapping("/detail/{board_no}")
 	public ModelAndView detail(@PathVariable int board_no) {

@@ -336,7 +336,7 @@
 				</div>
 			</div>
 			<div class="row align-items-stretch">
-				<c:forEach items="${recentReview}" var="row" varStatus="vs" end="3">
+				<c:forEach items="${recentList}" var="row" varStatus="vs" end="3">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
 					<div class="media-entry">
 						<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">

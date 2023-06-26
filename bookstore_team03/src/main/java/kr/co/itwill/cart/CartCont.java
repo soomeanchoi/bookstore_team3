@@ -28,9 +28,8 @@ public class CartCont {
 	public String cartInsert(@ModelAttribute CartDTO dto, HttpSession session) throws Exception{
 		
 		//뷰페이지에서 넘긴 값은 id만 잘 일치시켰다면 dto로 각각 잘 들어감
-		
 		//로그인을 구현했다면 session.getAttribute()활용
-		String s_id = (String)session.getAttribute("s_id");
+		String s_id = (String)session.getAttribute("member_id");
 		//String s_id="kgukid38@naver.com";
 		dto.setMember_id(s_id);
 		
@@ -42,8 +41,9 @@ public class CartCont {
     public ModelAndView list(HttpSession session) {
     	   	
     	//로그인 했다면
-    	String s_id = (String)session.getAttribute("s_id");
+    	String s_id = (String)session.getAttribute("member_id");
 		//String s_id="kgukid38@naver.com";
+    	//System.out.println(session.getAttribute("s_id"));
     	
         ModelAndView mav=new ModelAndView();
         mav.setViewName("cart/list"); // /WEB-INF/views/cart/list.jsp
@@ -54,7 +54,7 @@ public class CartCont {
 	@RequestMapping("/delete")
 	public String delete(int cart_no, HttpSession session) {
 		//로그인 했다면
-		String s_id = (String)session.getAttribute("s_id");
+		String s_id = (String)session.getAttribute("member_id");
 		//String s_id="kgukid38@naver.com";
     	
 		HashMap<String, Object> map = new HashMap<>();

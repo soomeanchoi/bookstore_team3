@@ -34,8 +34,8 @@ public class ProfileDAO {
     }//list() end
     */
     
-    public ProfileDTO detail(int profile_no) {
-        return sqlSession.selectOne("profile.detail", profile_no);
+    public List<Map<String, Object>> detail(int profile_no) {
+        return sqlSession.selectList("profile.detail", profile_no);
     }//detail() end
     
     /* Map을 dto로 받아도 안됨*/
@@ -43,4 +43,17 @@ public class ProfileDAO {
     public List<Map<String, Object>> search(String profile_no) {
         return sqlSession.selectList("profile.search", "%" + profile_no + "%");
     }//search() end
+    
+    public String filename(String member_id) {
+        return sqlSession.selectOne("profile.filename", member_id);
+    }//filename() end
+
+    public void delete(String member_id) {
+        sqlSession.delete("profile.delete", member_id);
+    }//delete() end
+
+    public void update(Map<String, Object> map) {
+        sqlSession.update("profile.update", map);
+    }//update() end
+    
 }

@@ -5,23 +5,22 @@
 <!-- book.xml -->
 
 <mapper namespace="book">
-	
+
+
+	<select id="totalList" resultType="java.util.Map">
+		select * from book
+	</select>
+
+	<select id="comicList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='만화'
+	</select>
+
 	<select id="list" resultType="java.util.Map">
 		select *
 		from book AA join writer BB
 	  	on AA.book_writerno=BB.writer_no;
-	</select>
-
-<!--	<select id="reviewCount" resultType="java.util.Map" parameterType="String">-->
-<!--		select count(*) as 상품후기-->
-<!--		from review-->
-<!--		where isbn=${isbn}-->
-<!--	</select>-->
-
-	<select id="reviewCount" parameterType="kr.co.itwill.review.ReviewDTO" resultType="int">
-		select count(*) as 상품후기
-		from review
-		where isbn=${isbn}
 	</select>
 
 	<select id="bestList" resultType="java.util.Map">
@@ -30,13 +29,19 @@
 		ORDER BY book_count DESC
 	</select>
 
+	<select id="reviewCount" parameterType="kr.co.itwill.review.ReviewDTO" resultType="int">
+		select count(*) as 상품후기
+		from review
+		where isbn=${isbn}
+	</select>
+
 	<insert id="insert" parameterType="java.util.Map">
 		insert into book(isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, tag_no1, book_mainname, book_subname, book_content, book_imgname, book_imgsize)
 		values (#{isbn}, #{book_name}, #{book_pub}, #{book_writerno}, #{book_price}, #{book_stock}, #{book_pubdate}, #{book_page}, #{tag_no1}, #{book_mainname}, #{book_subname}, #{book_content}, #{book_imgname}, #{book_imgsize})
 	</insert>
 
 	<select id="search" parameterType="String" resultType="java.util.Map">
-		select isbn, book_name, book_pub, book_price, book_content, book_pubdate, book_mainname, book_subname, book_imgname, book_imgsize
+		select *
 		from book
 		where book_name LIKE #{keyword}
 		order by book_name
@@ -79,11 +84,28 @@
 	</update>
 
 	<select id="score" resultType="double" parameterType="String">
-		select sum(review_score)/count(*)
+		select ifnull(sum(review_score)/count(*), 0)
 		from review
 		where isbn=#{isbn}
 	</select>
 
+	<!-- 페이징을 적용한 게시물 리스트 조회 -->
+	<select id="listPaging" resultType="java.util.Map">
+		SELECT *
+		FROM book
+		ORDER BY book_name DESC
+		LIMIT #{start}, #{end}
+	</select>
+
+	<select id="listCount" resultType="int">
+		SELECT COUNT(*) FROM book;
+	</select>
+
+	<select id="choiceTable" resultType="int" parameterType="java.util.Map">
+		select count(*)
+		from choice
+		where member_id=#{member_id} and isbn=#{isbn}
+	</select>
 
 
 </mapper>     

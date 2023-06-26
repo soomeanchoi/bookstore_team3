@@ -7,7 +7,6 @@
 <%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
 <%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <!doctype html>
 <html lang="ko">
 <head>
@@ -50,9 +49,23 @@
 			type="text/javascript"
 			src="http://code.jquery.com/jquery-latest.js"
 	></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 	<style>
+		button.btn.btn-light {
+			color: black;
+		}
+
+		/*body{*/
+		/*	margin-top: 100px;*/
+		/*	font-family: 'Trebuchet MS', serif;*/
+		/*	line-height: 1.6*/
+		/*}*/
+		/*.container{*/
+		/*	width: 500px;*/
+		/*	margin: 0 auto;*/
+		/*}*/
+
+
+
 		ul.tabs{
 			margin: 0px;
 			padding: 0px;
@@ -86,28 +99,6 @@
 			})
 
 		})
-
-		function goToPage(pageNum) {
-			var url = 'list?page=' + pageNum;
-			window.location.href = url;
-		}
-
-
-		function getCategory(categoryId) {
-			$.ajax({
-				url: '/book/list',
-				type: 'GET',
-				data: { categoryId: categoryId },
-				success: function(response) {
-					alert(response)
-				},
-				error: function(xhr, status, error) {
-					alert("에러");
-				}
-			});
-		}
-
-
 	</script>
 
 
@@ -115,41 +106,34 @@
 </head>
 
 <body>
-
+     
 	<div class="section">
-
-		<select id="categorySelect" onchange="getCategory(this.value)">
-			<option value="1">카테고리 1</option>
-			<option value="2">카테고리 2</option>
-			<option value="3">카테고리 3</option>
-		</select>
-
 
 		<form action="search">
 			<input type="text" name="book_name" value="${book_name}">
 			<input type="submit" value="검색">
 		</form>
 
-	<div class="container">
-		<ul class="tabs">
-			<a href="/book/list"><li class="tab-link current" data-tab="tab-1">전체</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">소설</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">시/에세이</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">인문</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">기술/계발</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">정치/사회</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">자기계발</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">컴퓨터/IT</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">수험서</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">역사</li></a>
-			<a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>
-		</ul>
-	</div>
+<%--	<div class="container">--%>
+<%--		<ul class="tabs">--%>
+<%--			<a href="/book/list"><li class="tab-link current" data-tab="tab-1">전체</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">소설</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">시/에세이</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">인문</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">기술/계발</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">정치/사회</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">자기계발</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">컴퓨터/IT</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">수험서</li></a>--%>
+<%--			<a href=""><li class="tab-link" data-tab="tab-2">역사</li></a>--%>
+<%--			<a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>--%>
+<%--		</ul>--%>
+<%--	</div>--%>
 		<div><hr>
 			<br><br></div>
 		<div class="container">
 			<div class="row align-items-stretch">
-				<c:forEach items="${list}" var="row" varStatus="vs">
+				<c:forEach items="${totalList}" var="row" varStatus="vs">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
 					<div class="media-entry">
 						<c:choose>
@@ -163,15 +147,7 @@
 										</c:if>
 									</p>
 									<div>
-										${row.book_price}원 ${member_id} ${row.isbn}
-										<c:choose>
-											<c:when test="${choiceTable == 1 }">
-												<input type="button" value="찜취소" onclick="book_choiceCancle()">
-											</c:when>
-											<c:otherwise>
-												<input type="button" value="찜하기" onclick="book_choice()">
-											</c:otherwise>
-										</c:choose>
+									${row.book_price}원
 									</div>
 								</div>
 					</div>
@@ -183,51 +159,17 @@
 				</div>
 				</c:forEach>
 
-<%--				<nav class="mt-5" aria-label="Page navigation example" data-aos="fade-up" data-aos-delay="100">--%>
-<%--					<ul class="custom-pagination pagination">--%>
-<%--						<li class="page-item prev"><a class="page-link" href="#">Previous</a></li>--%>
-<%--						<li class="page-item active"><a class="page-link" href="#">1</a></li>--%>
-<%--						<li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--						<li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--						<li class="page-item next"><a class="page-link" href="#">Next</a></li>--%>
-<%--					</ul>--%>
-<%--				</nav>--%>
-
-
-
+				<nav class="mt-5" aria-label="Page navigation example" data-aos="fade-up" data-aos-delay="100">
+					<ul class="custom-pagination pagination">
+						<li class="page-item prev"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item next"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</nav>
 			</div>	
-		</div>
-	</div>
-
-	<div class="pagination">
-		<c:set var="currentPage" value="${page}" />
-		<c:set var="startPage" value="${currentPage - 5}" />
-		<c:if test="${startPage lt 1}">
-			<c:set var="startPage" value="1" />
-		</c:if>
-		<c:set var="endPage" value="${currentPage + 5}" />
-		<c:if test="${endPage gt totalPage}">
-			<c:set var="endPage" value="${totalPage}" />
-		</c:if>
-
-		<a href="#" onclick="goToPage(1)">처음</a>
-		<c:if test="${currentPage gt 1}">  <%-- gt : > --%>
-			<a href="#" onclick="goToPage(${currentPage - 1})">이전</a>
-		</c:if>
-		<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-			<c:choose>
-				<c:when test="${pageNum eq currentPage}"> <%-- eq : == --%>
-					<a href="#" class="active">${pageNum}</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" onclick="goToPage(${pageNum})">${pageNum}</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${currentPage lt totalPage}">       <%-- lt : < --%>
-			<a href="#" onclick="goToPage(${currentPage + 1})">다음</a>
-		</c:if>
-		<a href="#" onclick="goToPage(${totalPage})">끝</a>
+		</div>		
 	</div>
 
 		<!-- Preloader -->

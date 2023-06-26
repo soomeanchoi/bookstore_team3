@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.itwill.border.BorderDTO;
+import kr.co.itwill.cart.CartDTO;
 
 @Controller
 @RequestMapping("/border")
@@ -47,7 +49,10 @@ public class BorderCont {
 	//상품 직접 구매 페이지
 	@RequestMapping("/directborderForm")
 	public ModelAndView directorderForm(String isbn, int cart_qty, HttpSession session) {
-		String s_id = (String)session.getAttribute("s_id"); 
+		System.out.println(isbn);
+		System.out.println(cart_qty);
+		
+		String s_id = (String)session.getAttribute("member_id"); 
 		
 		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
@@ -78,12 +83,38 @@ public class BorderCont {
 		return mav;
 	}//directorderForm() end
 	
+	
+	
 	//장바구니구매: 기본배송지, 장바구니, 포인트 가져와 출력하며 주문서페이지 띄우기
 	@RequestMapping("/orderForm")
-	public ModelAndView borderform(HttpSession session) {
-		String s_id = (String)session.getAttribute("s_id"); 
+	public ModelAndView borderform(HttpSession session, HttpServletRequest req) {
+	//public ModelAndView borderform(HttpSession session ,@RequestParam("cart_no") List<String> cart_no,@RequestParam("cart_qty") List<Integer> cart_qty) {
+		
+		System.out.println("-------borderCont 호출확인");
+		
+		String cart_no[] = req.getParameterValues("cart_no");
+		String cart_qty[] = req.getParameterValues("cart_qty");
+		
+		String s_id = (String)session.getAttribute("member_id"); 
 		//String s_id = "kgukid38@naver.com";
 		
+		
+		//장바구니 업데이트
+		//주문상품 각각의 정보를 넣을 list생성
+		List<Map<String, Object>> cartlist = new ArrayList<>();
+		
+		//주문상품 각각의 정보를 map에 넣고 이것을 list에 넣기 
+		for(int i =0 ; i < cart_no.length ; i++) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("cart_no", Integer.parseInt(cart_no[i]));
+			map.put("cart_qty", Integer.parseInt(cart_qty[i]));
+			
+			cartlist.add(i, map);					
+		}//for end
+		
+		int cnt = borderDao.cartUpdate(cartlist);
+		
+		//System.out.println("카트수정성공"+ cnt);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("border/orderForm");
 		
@@ -115,7 +146,7 @@ public class BorderCont {
 	public ModelAndView directinsert(String isbn, int orderlist_cnt
 									, HttpSession session
 									,@ModelAttribute BorderDTO dto) {
-		String s_id = (String)session.getAttribute("s_id"); 
+		String s_id = (String)session.getAttribute("member_id"); 
 		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		String border_no = dateno();//생성한 주문번호 변수넣기
@@ -156,7 +187,7 @@ public class BorderCont {
 											 ,@RequestParam("orderlist_cnt") List<Integer> orderlist_cnt
 											, HttpSession session) {
 		
-		String s_id = (String)session.getAttribute("s_id"); 
+		String s_id = (String)session.getAttribute("member_id"); 
 		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
 		String border_no = dateno();//생성한 주문번호 변수넣기

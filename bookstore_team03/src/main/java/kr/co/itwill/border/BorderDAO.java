@@ -20,8 +20,14 @@ public class BorderDAO {
 		System.out.println("----BorderDAO()객체생성");
 	}//end
 	
+	//카트수량 업데이트
+	public int cartUpdate(List<Map<String, Object>> cartlist) {
+		System.out.println("cartlist" + cartlist);
+		return sqlSession.update("border.cartUpdate", cartlist);
+	}//cartUpdate() end
+	
 	//기본배송지 가져오기
-	public HashMap<String, Object> deliveryAdd(String s_id){
+	public HashMap<String, Object> deliveryAdd(String s_id){	
 		return sqlSession.selectOne("border.deliveryAdd", s_id);
 	}//deliveryAdd() end
 	
@@ -37,7 +43,6 @@ public class BorderDAO {
 		
 	//보유포인트 가져오기
 	public int havepoint(String s_id){
-		//System.out.println((int)sqlSession.selectOne("border.havepoint", s_id));
 		return sqlSession.selectOne("border.havepoint", s_id);
 	}//deliveryAdd() end	
 	
