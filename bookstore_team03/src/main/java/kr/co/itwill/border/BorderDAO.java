@@ -21,7 +21,8 @@ public class BorderDAO {
 	}//end
 	
 	//카트수량 업데이트
-	public int cartUpdate(List<HashMap<String, Object>> cartlist) {
+	public int cartUpdate(List<Map<String, Object>> cartlist) {
+		System.out.println("cartlist" + cartlist);
 		return sqlSession.update("border.cartUpdate", cartlist);
 	}//cartUpdate() end
 	

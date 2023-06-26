@@ -6,7 +6,7 @@
 
 <mapper namespace="border"> 
 	<!-- 장바구니 업데이트 -->
-	<update id="cartUpdate" parameterType="java.util.HashMap">
+	<update id="cartUpdate" parameterType="java.util.Map">
 		UPDATE itwill.cart
 		SET cart_qty=#{cart_qty}
 		WHERE cart_no=#{cart_no}

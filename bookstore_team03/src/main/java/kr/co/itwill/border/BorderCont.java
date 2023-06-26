@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import kr.co.itwill.border.BorderDTO;
+import kr.co.itwill.cart.CartDTO;
 
 @Controller
 @RequestMapping("/border")
@@ -85,30 +87,34 @@ public class BorderCont {
 	
 	//장바구니구매: 기본배송지, 장바구니, 포인트 가져와 출력하며 주문서페이지 띄우기
 	@RequestMapping("/orderForm")
-	public ModelAndView borderform(HttpSession session
-								   ,@RequestParam("cart_no") List<String> cart_no
-								   ,@RequestParam("cart_qty") List<Integer> cart_qty) {
+	public ModelAndView borderform(HttpSession session, HttpServletRequest req) {
+	//public ModelAndView borderform(HttpSession session ,@RequestParam("cart_no") List<String> cart_no,@RequestParam("cart_qty") List<Integer> cart_qty) {
 		
-		System.out.println("borderCont 호출확인");
+		System.out.println("-------borderCont 호출확인");
+		
+		String cart_no[] = req.getParameterValues("cart_no");
+		String cart_qty[] = req.getParameterValues("cart_qty");
+		
 		String s_id = (String)session.getAttribute("member_id"); 
 		//String s_id = "kgukid38@naver.com";
 		
+		
 		//장바구니 업데이트
 		//주문상품 각각의 정보를 넣을 list생성
-		List<HashMap<String, Object>> cartlist = new ArrayList<>();
+		List<Map<String, Object>> cartlist = new ArrayList<>();
 		
 		//주문상품 각각의 정보를 map에 넣고 이것을 list에 넣기 
-		for(int i =0 ; i < cart_no.size() ; i++) {
-			HashMap<String, Object> map = new HashMap<>();
-			map.put("cart_no", cart_no.get(i));
-			map.put("cart_qty", cart_qty.get(i));
+		for(int i =0 ; i < cart_no.length ; i++) {
+			Map<String, Object> map = new HashMap<>();
+			map.put("cart_no", Integer.parseInt(cart_no[i]));
+			map.put("cart_qty", Integer.parseInt(cart_qty[i]));
+			
 			cartlist.add(i, map);					
 		}//for end
-
-		//카트내역 업데이트
-		borderDao.cartUpdate(cartlist);
 		
+		int cnt = borderDao.cartUpdate(cartlist);
 		
+		//System.out.println("카트수정성공"+ cnt);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("border/orderForm");
 		
