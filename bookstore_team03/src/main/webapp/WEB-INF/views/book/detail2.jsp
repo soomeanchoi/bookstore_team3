@@ -75,7 +75,7 @@
         <button type="button" onclick="product_cart()">장바구니담기</button>
         <input type ="button" value="구매" onclick="dirOrder()">
         &nbsp&nbsp 조회수 : ${book.book_count} &nbsp&nbsp
-        평점 : ${score}
+<%--        평점 : ${score}--%>
     </p>
     
 

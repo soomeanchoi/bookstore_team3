@@ -23,7 +23,7 @@ public class ChoiceCont {
     @RequestMapping("/insert")
     public String choiceInsert(@ModelAttribute ChoiceDTO dto, HttpSession session) throws Exception {
         //dto.setMember_id(session.getAttribute("smember_id"));
-        dto.setMember_id("test@naver.com");
+        dto.setMember_id("kgukid38@naver.com");
 
         choiceDao.choiceInsert(dto);
 

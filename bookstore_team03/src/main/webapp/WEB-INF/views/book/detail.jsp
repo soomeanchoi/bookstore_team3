@@ -47,6 +47,13 @@
             background-color: black;
         }
 
+        button{
+            border: 0px;
+        }
+
+        img.choice-img{
+            width: 30px;
+        }
 
 
     </style>
@@ -95,7 +102,9 @@
     <div>
 <form name="bookfrm" id="bookfrm">
         <section>
-        <div class="container" align="center">
+        <div class="container" align="left">
+            <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="isbn" value="${book.isbn}">
          <div class="row">
              <div class="col-6">
              	<input type="hidden" id="isbn" name="isbn" value="${book.isbn}">
@@ -105,9 +114,9 @@
              </div>
 
              <div class="col-6">
-                ${book.book_name}
+                <h3>${book.book_name}</h3><br>
                  <div>
-                     ${book.book_price}원
+                     ${book.book_price}원 <br><br>
                  </div>
                  <div>
                      적립/혜택 : ${book.book_price/20}p
@@ -129,8 +138,23 @@
                      <button onclick="dirOrder()">구매하기</button>
                      <button onclick="product_cart()">장바구니</button>
                  </div>
+                 <c:choose>
+                     <c:when test="${cnt == 1}">
+                         <button onclick="book_choiceCancle()">
+<%--                         <input type="button" onclick="book_choiceCancle()">--%>
+                         <img src="/storage/heart4.png" class="choice-img">
+                         </button>
+                     </c:when>
+                     <c:otherwise>
+                         <button onclick="book_choice()">
+<%--                             <input type="button" value="찜하기" onclick="book_choice()">--%>
+                             <img src="/storage/heart3.png" class="choice-img">
+                         </button>
+                     </c:otherwise>
+                 </c:choose>
              </div>
          </div>
+            </form>
         </div>
             <br><br>
 
@@ -199,7 +223,7 @@
                 <table>
                     <tr>
                         <th><strong>ISBN</strong></th>
-                        <td>${book.book_isbn}</td>
+                        <td>${book.isbn}</td>
                     </tr>
                     <tr>
                         <th><strong>발행(출시)일자</strong></th>

@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -74,42 +76,82 @@ public class BookCont {
     }//list() end
 
     @RequestMapping("/list")
-    public ModelAndView list() {
+    public ModelAndView list(@RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
+        String s_id="kgukid38@naver.com";
+        map.put("member_id", s_id);
+
         ModelAndView mav=new ModelAndView();
+
+        int totalCount = bookDao.bookCount();
+        int pageSize = 10;
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+
+        int start = (page - 1) * pageSize;
+        int end = start + pageSize;
+
+        List<Map<String, Object>> list = bookDao.listPaging(start, end);
+
         mav.setViewName("book/list");
-        mav.addObject("list", bookDao.list());
-        mav.addObject("bestList", bookDao.bestList());
+        mav.addObject("list", list);
+        mav.addObject("totalPage", totalPage);
+        mav.addObject("currentPage", page);
+//        mav.addObject("list", bookDao.list());
+        mav.addObject("totalList", bookDao.totalList());
+        mav.addObject("choiceTable", bookDao.choiceTable(map));
+
         return mav;
     }//list() end
 
-    @RequestMapping("/list2")
+    @RequestMapping("/comicList")
     public ModelAndView list2() {
         ModelAndView mav=new ModelAndView();
-        mav.setViewName("book/list2");
-        mav.addObject("list", bookDao.list());
-        mav.addObject("bestList", bookDao.bestList());
+        mav.setViewName("book/comicList");
+        mav.addObject("comicList", bookDao.comicList());
         return mav;
     }//list() end
 
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(defaultValue = "") String book_name) {
         ModelAndView mav=new ModelAndView();
-        mav.setViewName("book/list");
-        mav.addObject("list", bookDao.search(book_name));
+        mav.setViewName("book/searchList");
+        mav.addObject("totalList", bookDao.search(book_name));
         mav.addObject("book_name", book_name); //검색어
         return mav;
     }//search() end
 
     @RequestMapping("/detail/{isbn}")
-    public ModelAndView detail(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
+    public ModelAndView detail(@PathVariable String isbn, @ModelAttribute ReviewDTO dto, Map<String ,Object> map) {
+        String s_id="kgukid38@naver.com";
+        map.put("isbn", isbn);
+        map.put("member_id", s_id);
+
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("book/detail");
+        mav.addObject("book", bookDao.detail(isbn));
+        bookDao.count(isbn);
+        mav.addObject("score", bookDao.reviewScore(isbn));
+        mav.addObject("reviewCount", bookDao.reviewCount(dto));
+
+        int cnt = bookDao.choiceTable(map);
+        if (cnt == 1){
+            mav.addObject("cnt", cnt);
+        }else if (cnt == 0){
+            mav.addObject("cnt", cnt);
+        }else {
+            mav.addObject("cnt", cnt);
+        }
+        return mav;
+    }//detail() end
+
+    @RequestMapping("/detail2/{isbn}")
+    public ModelAndView detail2(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
         ModelAndView mav = new ModelAndView();
         ReviewDTO review=new ReviewDTO();
-        mav.setViewName("book/detail");
+        mav.setViewName("book/detail2");
         mav.addObject("book", bookDao.detail(isbn));
         bookDao.count(isbn);
         mav.addObject("score",bookDao.reviewScore(isbn));
         mav.addObject("reviewCount", bookDao.reviewCount(dto));
-
         return mav;
     }//detail() end
 
@@ -165,5 +207,6 @@ public class BookCont {
             return "redirect:/book/list";
 
         }//update() end
+
 
 }//BookCont end

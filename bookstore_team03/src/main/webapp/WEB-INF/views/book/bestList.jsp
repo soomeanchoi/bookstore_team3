@@ -70,8 +70,43 @@
             position: absolute;
         }
 
+        section {
+            width: 100%;
+            padding: 100px 250px 0 300px;
+            background-color: #F2F2F2;
+        }
 
+        img, svg {
+            vertical-align: middle;
+            width: 150px;
+        }
 
+        span{
+        display: flex;
+        justify-content: space-between;
+        }
+
+        hr{
+            width: 930px;
+        }
+
+        ul.tabs{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 10px;
+            cursor: pointer;
+        }
+
+        ul.tabs li.current{
+            background: #ededed;
+            color: #222;
+        }
 
     </style>
     <script>
@@ -85,6 +120,20 @@
                 jQuery("#chase").css("position", "static");
             }
         });
+
+        $(document).ready(function(){
+
+            $('ul.tabs li').click(function(){
+                var tab_id = $(this).attr('data-tab');
+
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+            })
+
+        })
     </script>
   </head>    
 
@@ -111,27 +160,29 @@
         <input type="text" name="book_name" value="${book_name}">
         <input type="submit" value="검색">
     </form>--%>
-
-    <div align="center">
-        <button type="button" class="btn btn-light">전체</button>
-        <button type="button" class="btn btn-light">소설</button>
-        <button type="button" class="btn btn-light">시/에세이</button>
-        <button type="button" class="btn btn-light">인문</button>
-        <button type="button" class="btn btn-light">기술/계발</button>
-        <button type="button" class="btn btn-light">정치/사회</button>
-        <button type="button" class="btn btn-light">자기계발</button>
-        <button type="button" class="btn btn-light">컴퓨터/IT</button>
-        <button type="button" class="btn btn-light">수험서</button>
-        <button type="button" class="btn btn-light">역사</button>
-        <button type="button" class="btn btn-light">만화</button>
+    <div class="banner">
+        <div id="chase">
+            <%--               <img src="/storage/danakka.png" id="chaseImg"/>--%>
+            <div id="chaseBar">event</div>
+            <div id="chaseBar">bbti</div>
+        </div>
     </div>
-       <div class="banner">
-           <div id="chase">
-<%--               <img src="/storage/danakka.png" id="chaseImg"/>--%>
-               <div id="chaseBar">event</div>
-               <div id="chaseBar">bbti</div>
-           </div>
-       </div>
+
+    <div class="container">
+        <ul class="tabs">
+            <a href="/book/list"><li class="tab-link" data-tab="tab-1">전체</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">소설</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">시/에세이</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">인문</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">기술/계발</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">정치/사회</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">자기계발</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">컴퓨터/IT</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">수험서</li></a>
+            <a href=""><li class="tab-link" data-tab="tab-2">역사</li></a>
+            <a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>
+        </ul>
+    </div>
     <table>
     <tr>
         <hr>
@@ -142,19 +193,22 @@
                     <c:when test="${row.book_imgname != '-'}">
                         <div class="container">
                             <div class="row">
-                            <div class="list_img col-6">
+                            <div class="list_img col-2">
                                 <img src="/storage/${row.book_imgname}" width="100px">
                             </div>
-                            <div class="list_info_box col-6">
+                            <div class="list_info_box col-9">
                                 <a href="detail/${row.isbn}">${row.book_name}</a><br>
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
                                         <input type="button" value="장바구니">
                                     </span><br>
-                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매"><br><br>
+                                    <span>
+                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매">
+                                    </span>
+                                <br><br>
                                 <%--조회수 : ${row.book_count}--%>
-                                <c:if test="${fn:length(row.book_content) > 100}">
-                                        <c:out value="${fn:substring(row.book_content,0,99)}"/>...
+                                <c:if test="${fn:length(row.book_content) > 150}">
+                                        <c:out value="${fn:substring(row.book_content,0,149)}"/>...
                                 </c:if>
                             </div>
                             </div>
