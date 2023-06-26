@@ -116,6 +116,11 @@
 		<div>
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>
+		
+		<form name="search" id="search"> <!-- action 없어도 동작됨 -->
+	 	<input type="text" name="keyword" id="keyword">
+	 	<input type="button" value="검색">
+	 </form>
 	</div>
 	</div>
 </div>
