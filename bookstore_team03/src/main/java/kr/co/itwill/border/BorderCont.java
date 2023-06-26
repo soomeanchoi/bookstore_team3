@@ -209,6 +209,7 @@ public class BorderCont {
 			}//if end
 			
 			mav.addObject("msg", "주문이 완료되었습니다");
+			mav.addObject("border_no", border_no);
 			mav.setViewName("/border/msgView");  // /WEB-INF/views/border/msgView.jsp
 		}//if end
 		return mav;
