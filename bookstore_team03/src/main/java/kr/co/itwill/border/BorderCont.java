@@ -50,9 +50,6 @@ public class BorderCont {
 	//상품 직접 구매 페이지
 	@RequestMapping("/directborderForm")
 	public ModelAndView directorderForm(String isbn, int cart_qty, HttpSession session) {
-		System.out.println("폼으로 넘어가는 상품코드"+isbn);
-		System.out.println("폼으로 넘어가는 수량"+cart_qty);
-		
 		String s_id = (String)session.getAttribute("member_id"); 
 		
 		//String s_id = "kgukid38@naver.com";
@@ -123,8 +120,7 @@ public class BorderCont {
 	public ModelAndView directinsert(String isbn, int orderlist_cnt
 									, HttpSession session
 									,@ModelAttribute BorderDTO dto) {
-		System.out.println("주문서로 넘어가는 상품코드"+isbn);
-		System.out.println("주문서로 넘어가는 수량"+orderlist_cnt);
+		System.out.println("직접구매수행호출");
 		String s_id = (String)session.getAttribute("member_id"); 
 		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
@@ -133,7 +129,7 @@ public class BorderCont {
 		//dto에 총결제금액, 세션아이디 추가로 담기(수령인, 주소 등은 이미 dto에 담겨있음)
 		dto.setBorder_no(border_no);
 		dto.setMember_id(s_id);
-		//System.out.println(dto.toString());
+		System.out.println(dto.toString());
 		//border테이블에 행추가
 		int cnt= borderDao.insert(dto);
 		System.out.println("행추가결과" + cnt);
@@ -215,6 +211,38 @@ public class BorderCont {
 		}//if end
 		return mav;
 	}//orderInsert() end
+	
+	//주문내역조회
+	@RequestMapping("/borderlist")
+	public ModelAndView borderlist(HttpSession session) {
+		
+		String s_id = (String)session.getAttribute("member_id"); 
+		//String s_id = "kgukid38@naver.com";
+		
+		List<BorderDTO> borderlist = new ArrayList<>(); 
+		borderlist = borderDao.borderlist(s_id);
+		//System.out.println(borderlist);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/border/borderlist");
+		mav.addObject("list", borderlist);
+		
+		return mav;
+	}//borderlist() end
+	
+	//주문상세조회
+	@RequestMapping("/orderlistDetail/{border_no}")
+	public ModelAndView borderlist(@PathVariable String border_no) {
+		
+		List<HashMap<String, Object>> orderlistDetail = new ArrayList<>(); 
+		
+		orderlistDetail = borderDao.orderlistDetail(border_no);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/border/orderlistDetail");
+		mav.addObject("border_no", border_no);
+		mav.addObject("list", orderlistDetail);
+		
+		return mav;
+	}//borderlist() end
 		
 		@RequestMapping("/msgView")
 		public String msgView() {

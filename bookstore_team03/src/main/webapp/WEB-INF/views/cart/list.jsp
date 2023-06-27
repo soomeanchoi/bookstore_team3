@@ -86,11 +86,11 @@
             <%-- <tr><td>${fn:length(list)}</td></tr> --%>
               <!-- 장바구니품목반복 -->
               <c:choose>
-	                   <c:when test="${fn:length(list) eq 0}">
-	              <tr><td> 장바구니 상품 없음</td></tr>
-	                      
-	                   </c:when>
-	                   <c:otherwise>
+	          <c:when test="${fn:length(list) eq 0}">
+	              <tr><td> 장바구니 상품 없음</td></tr>    
+			  </c:when>
+			  
+	          <c:otherwise>
 	         <c:forEach items="${list}" var="row" varStatus="status">
 			 <tr>
                 <th scope="row">
@@ -101,7 +101,7 @@
 	                   </c:when>
 	                   <c:otherwise>
 	                       등록된 제품 없음 <br>
-	                   </c:otherwise>
+	           		   </c:otherwise>
                		</c:choose>
             
                     <div class="flex-column ms-4">
