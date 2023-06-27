@@ -14,12 +14,13 @@
 		ORDER BY board_date desc
 	</select>
 	
-	<!-- 페이징 총 페이지수 -->
+	<!-- 총 게시글수 -->
 	<select id="totalRecord" resultType="int">
 		SELECT COUNT(board_no) 
 		FROM board
 	</select>
 	
+	<!-- 페이징: 전체게시글 -->
 	<select id="paginglist" resultType="java.util.HashMap">
 		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
 		FROM profile p
@@ -27,10 +28,30 @@
 		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
 		BY board_no) rc
 		ON b.board_no = rc.bno
-		ORDER BY b.board_date ASC
+		ORDER BY b.board_date desc
 		LIMIT #{end} OFFSET #{start}
 	</select>
 	
+	<!-- 검색된 총게시글수 -->
+	<select id="totalRecord" resultType="int">
+		SELECT COUNT(board_no) 
+		FROM board
+		WHERE #{category} LIKE '%'||#{keyWord}||'%'
+	</select>
+	
+	<!-- 게시글 검색 -->
+	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
+		FROM profile p
+		JOIN board b ON b.member_id = p.member_id
+		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
+		BY board_no) rc
+		ON b.board_no = rc.bno
+		ORDER BY b.board_date desc
+		LIMIT #{end} OFFSET #{start}
+	</select>
+	
+	<!-- 게시글 상세보기 -->
 	<select id="detail" parameterType="int" resultType="java.util.HashMap">
 		SELECT b.member_id, board_no, isbn, profile_name, p.bbti_name, board_title, board_content, board_date, board_read, board_good
 		FROM (board b 
@@ -50,14 +71,14 @@
 		WHERE isbn=#{isbn}
 	</select>
 	
-	<!-- 글 조회수 -->
+
 	<update id="board_read" parameterType="int">
 		UPDATE board
 		SET board_read = board_read + 1
 		WHERE board_no = #{board_no}
 	</update>
 	
-	<!-- 좋아요 -->
+
 	<update id="board_good" parameterType="int">
 		UPDATE board
 		SET board_good = board_good + 1

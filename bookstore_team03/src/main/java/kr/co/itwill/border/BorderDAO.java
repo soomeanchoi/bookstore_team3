@@ -76,10 +76,23 @@ public class BorderDAO {
 		sqlSession.delete("border.cartdelete", s_id);
 	}//cartdelete() end
 	
+	
+	///////페이징관련
+	//페이징관련 총 글개수 가져오기
+	public int totalRecord(String s_id) {
+		return sqlSession.selectOne("border.totalRecord", s_id);
+	}//totalRecord() end
+	
+	//페이징관련 시작/끝레코드 가져오기
+	public List<HashMap<String, Object>> paginglist(HashMap<String, Object> map){	
+		return sqlSession.selectList("border.paginglist", map);
+	}//listBoard() end
+	/*
 	//주문내역 조회
 	public List<BorderDTO> borderlist(String s_id) {
 		return sqlSession.selectList("border.borderlist", s_id);
 	}//borderlist() end
+	*/	
 	
 	//주문상세조회
 	public List<HashMap<String, Object>> orderlistDetail(String border_no) {

@@ -22,7 +22,7 @@ public class BoardDAO {
 		return sqlSession.selectList("board.list");
 	}//list end
 	
-	//페이징관련 총 글개수 가져오기
+	//페이징 : 총 글개수
 	public int totalRecord() {
 		return sqlSession.selectOne("board.totalRecord");
 	}//totalRecord() end
@@ -40,6 +40,16 @@ public class BoardDAO {
 	public int replylist(int board_no){
 		return sqlSession.selectOne("board.replylist", board_no);
 	}//replylist() end
+	
+	//페이징 : 검색된 총글개수
+	public int stotalRecord(HashMap<String, Object> map) {
+		return sqlSession.selectOne("board.stotalRecord", map);
+	}//totalRecord() end
+	
+	//게시글 검색
+	public List<HashMap<String, Object>> search(HashMap<String, Object> map){
+		return sqlSession.selectList("board.search", map);
+	}//search() end
 	
 	//게시글 상세보기
 	public HashMap<String, Object> detail(int board_no) {

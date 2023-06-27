@@ -62,11 +62,6 @@
 		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
 	</insert>
 	
-	<!-- 직접구매:  주문서테이블행추가 -->
-	<!-- <insert id="directinsert" parameterType="kr.co.itwill.border.BorderDTO">		
-		INSERT INTO border(border_no, member_id, border_name, border_phone, border_price, border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2)
-		VALUES(#{border_no},#{member_id},#{border_name},#{border_phone},#{border_price},current_timestamp(), #{border_msg}, #{border_usepoint}, #{border_postno}, #{border_add1}, #{border_add2});
-	</insert> -->
 	
 	<!-- 직접구매: 주문상세행추가 -->
 	<insert id="directorderlistInsert" parameterType="java.util.HashMap">
@@ -89,12 +84,30 @@
 		WHERE member_id=#{s_id}	
 	</delete>
 	
+	
+	<!-- 페이징관련 -->
+	<!-- 페이징 총 페이지수 -->
+	<select id="totalRecord" parameterType="String" resultType="int">
+		SELECT COUNT(border_no) 
+		FROM border
+		WHERE member_id=#{s_id}
+	</select>
+	
+	<!-- 페이징 주문내역조회 -->
+	<select id="paginglist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT border_no, member_id, border_price, border_date
+		FROM itwill.border
+		WHERE member_id=#{s_id}
+		ORDER BY border_date
+		LIMIT #{end} OFFSET #{start}
+	</select>
+	
 	<!-- 주문내역조회 -->
 	<select id="borderlist" parameterType="String" resultType="kr.co.itwill.border.BorderDTO">
 		SELECT border_no, member_id, border_price, border_date
 		FROM itwill.border
 		WHERE member_id=#{s_id}
-		ORDER BY border_date ASC
+		ORDER BY border_date
 	</select>
 	
 	<!-- 주문상세조회 -->

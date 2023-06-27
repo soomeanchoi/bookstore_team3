@@ -16,33 +16,8 @@
       </tr>
     </thead>
     <tbody>
-      <%-- <c:forEach items="${list}" var="row" varStatus="status">
-						<tr>
-				            <th scope="row"><!-- 주문번호 -->
-				                <div class="flex-column ms-4">
-				                  <p class="mb-2"><a href="border/orderlist/${row.border_no}">${row.border_no}</a></p>
-				                </div>
-				            </th>
-				            
-				        <td class="align-middle">
-				          <div class="d-flex flex-row">
-							<div class="d-flex flex-row align-items-center qty">
-							<p class="mb-2">${row.border_date}</p>	
-							</div>
-				          </div>
-				        </td>
-				        
-				        <td class="align-middle">
-				          <div class="d-flex flex-row">
-							<div class="d-flex flex-row align-items-center qty">
-							<p class="mb-2">${row.border_price}</p>	
-							</div>
-				          </div>
-				        </td>
-				      </tr>
-			      </c:forEach> --%>
+    
       <!-- 주문내역 시작 -->
-      
     <c:choose>
 	  <%-- 주문내역 없을 경우 --%>
       <c:when test="${fn:length(list) eq 0}">
@@ -83,8 +58,14 @@
   </table>
   
   <div>
-  <input type="button" value="프로필로">
-  <input type="button" value="쇼핑하기">
+	<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+    	 <a href="borderlist?pageNum=${i}"> ${i} </a>
+    </c:forEach>
+  </div>
+  
+  <div>
+  <input type="button" value="프로필로" onclick="location.href='/member/myPage'">
+  <input type="button" value="쇼핑하기" onclick="location.href='/book/list'">
   </div>
 </div>
 </section>
