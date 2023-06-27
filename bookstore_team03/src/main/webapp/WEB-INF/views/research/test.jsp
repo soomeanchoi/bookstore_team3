@@ -20,6 +20,7 @@ ${border_no}
 <button onclick="requestPay()">결제하기</button>
 <script>
   var IMP = window.IMP; // 생략가능
+  var cnt;
   // IMP.init('imp42450485'); // <-- 본인 가맹점 식별코드 삽입
   IMP.init('imp42450485');
 
@@ -41,6 +42,7 @@ ${border_no}
       if (rsp.success) {
         var msg = '결제가 완료되었습니다.';
         // 결제 완료시 코드
+        cnt = 1;
 
         alert(msg);
         location.href = "결제 완료 후 이동할 페이지 url"
@@ -48,6 +50,7 @@ ${border_no}
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
         alert(msg);
+        cnt= 0;
       }
     });
   }
