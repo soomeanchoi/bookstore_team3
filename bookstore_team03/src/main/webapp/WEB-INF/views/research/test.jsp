@@ -16,6 +16,7 @@
     <title>Title</title>
 </head>
 <body>
+${border_no}
 <button onclick="requestPay()">결제하기</button>
 <script>
   var IMP = window.IMP; // 생략가능
