@@ -15,6 +15,7 @@
         var borderNo = "${border_no}"; // 변수에 값을 할당
 
         //ajax요청 받은 값을 저장할 변수들
+        let member_name;
         let border_no;
         let member_id;
         let mborder_name;
@@ -32,6 +33,7 @@
             data: { borderNo: borderNo },
             success: function(response) {
                 // 응답을 처리하는 로직 작성
+                member_name = response.member_name;
                 border_no = response.border_no;
                 member_id = response.member_id;
                 mborder_name = response.mborder_name;
@@ -58,7 +60,7 @@
                     name: '3조 서점',
                     amount: 10,
                     buyer_email: member_id,
-                    buyer_name: 'member_id',
+                    buyer_name: member_name,
                     buyer_tel: border_phone,
                     buyer_addr: border_add1 + " " + border_add2,
                     buyer_postcode: border_postno
@@ -68,7 +70,6 @@
                         var msg = '결제가 완료되었습니다.';
                         // 결제 완료시 코드
                         cnt = 1;
-
                         alert(msg);
                         location.href = "결제 완료 후 이동할 페이지 url"
                     } else {

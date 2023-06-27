@@ -23,5 +23,9 @@ public class PayDAO {
         return sqlSession.selectList("pay.list", border_no);
     }
 
+    public String getName(String member_id){
+        return sqlSession.selectOne("pay.name", member_id);
+    }
+
 
 }

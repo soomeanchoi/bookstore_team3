@@ -62,7 +62,11 @@ public class PayCont {
         String border_add2 = (String) data.get(0).get("border_add2");
 //        String border_date = (String) data.get(0).get("border_date"); // date 타입을 (String)으로 변환시 에러
 
+        //유저 이름을 가져오는 작업
+        String member_name = payDAO.getName(member_id);
+
         //보내줄 데이터들을 map 에 담아줌
+        map.put("member_name", member_name);
         map.put("border_no", border_no);
         map.put("member_id", member_id);
         map.put("border_name", border_name);

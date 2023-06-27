@@ -13,6 +13,12 @@
 		WHERE border_no = #{border_no}
 	</select>
 
+	<select id="name" parameterType="String" resultType="String">
+		SELECT member_name
+		FROM member
+		WHERE member_id = #{member_id}
+	</select>
+
 
 
 </mapper>     
