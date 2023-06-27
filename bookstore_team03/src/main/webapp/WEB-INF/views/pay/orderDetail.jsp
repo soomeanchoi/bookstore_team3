@@ -71,18 +71,40 @@
                         // 결제 완료시 코드
                         cnt = 1;
                         alert(msg);
-                        location.href = "결제 완료 후 이동할 페이지 url"
+                        $.ajax({
+                            url: "/pay/result",
+                            type: "POST",
+                            data: {cnt : cnt, borderNo : borderNo},
+                            success: function (response) {
+
+                            },//success end
+                            error: function(xhr, status, error) {
+                                console.error("AJAX 요청 실패:", status, error);
+                            }//error end
+                        })
+                        location.href = "/"
                     } else {
                         var msg = '결제에 실패하였습니다.';
                         msg += '에러내용 : ' + rsp.error_msg;
-                        alert(msg);
                         cnt = 0;
+                        alert(msg);
+                        $.ajax({
+                            url: "/pay/result",
+                            type: "POST",
+                            data: {cnt : cnt, borderNo : borderNo},
+                            success: function (response) {
+
+                            },//success end
+                            error: function(xhr, status, error) {
+                                console.error("AJAX 요청 실패:", status, error);
+                            }//error end
+                        })
                     }
-                });
-            },
+                });//IMP function end
+            },//success
             error: function(xhr, status, error) {
                 console.error("AJAX 요청 실패:", status, error);
-            }
+            }//error end
         });
     });
 </script>

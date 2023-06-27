@@ -93,6 +93,19 @@ public class PayCont {
 //        System.out.println("border_date = " + border_date);
 //        System.out.println("border_add2 = " + border_add2);
 
+    }//detailAjaxRequset() end
+
+    @PostMapping("/result")
+    public String resultAjaxRequest(@RequestParam("cnt") int cnt, @RequestParam("borderNo") String borderNo){
+
+        System.out.println("cnt = " + cnt);
+        System.out.println("borderNo = " + borderNo);
+
+
+
+        return null;
     }
+
+
 
 }
