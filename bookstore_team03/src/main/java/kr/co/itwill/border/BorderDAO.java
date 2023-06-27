@@ -76,4 +76,14 @@ public class BorderDAO {
 		sqlSession.delete("border.cartdelete", s_id);
 	}//cartdelete() end
 	
+	//주문내역 조회
+	public List<BorderDTO> borderlist(String s_id) {
+		return sqlSession.selectList("border.borderlist", s_id);
+	}//borderlist() end
+	
+	//주문상세조회
+	public List<HashMap<String, Object>> orderlistDetail(String border_no) {
+		return sqlSession.selectList("border.orderlistDetail", border_no);
+	}//orderlistDetail() end
+	
 }//class end

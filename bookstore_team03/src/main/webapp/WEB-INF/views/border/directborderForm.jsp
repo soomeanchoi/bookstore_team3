@@ -231,20 +231,18 @@
              <hr>
              <div class="col-sm-6 mt-2 ps-sm-0">
                  <div class="form-outline">
-                     <input type="text" id="border_price" class="form-control order-form-input" value="${directborder.book_price}"/>
+                     <input type="text" id="border_price" name="border_price" class="form-control order-form-input" value="${directborder.book_price}"/>
                      <label class="form-label" for="form10">총 결제금액</label>
                  </div>
              </div>
              <br><br>
-             <input type="submit" value=" 결제하기" onclick="location.href='/border/'msgView">
+             <input type="submit" value="결제하기" onclick="location.href='/border/msgView'">
          </div>
          </div>
 	          
 	      </div>
 	  </div>
     </section>
-	
-	
 	
 	</form>
   	<%-- 
