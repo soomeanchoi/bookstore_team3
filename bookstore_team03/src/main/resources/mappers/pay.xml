@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- pay.xml -->
+
+<mapper namespace="pay">
+	
+	<select id="list" parameterType="String" resultType="java.util.Map">
+		SELECT border_no, deliv_no, member_id, border_name, border_phone, border_price
+		     , border_date, border_msg, border_usepoint, border_postno, border_add1, border_add2
+		FROM border
+		WHERE border_no = #{border_no}
+	</select>
+
+
+
+</mapper>     
+
+
+
+
