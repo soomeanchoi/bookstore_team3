@@ -447,13 +447,38 @@ public class MemberCont<ReviewDTO> {
 		}
 		*/
 
-		// 비밀번호 찾기 위한 메일 보내는 페이지로 이동
-		@RequestMapping("/myPageMail")
-		public ModelAndView myPageMail() {
-			ModelAndView mav=new ModelAndView();
-			mav.setViewName("member/myPageMail");
-			return mav;
-		}
+		
+			// 비밀번호 찾기 위한 메일 보내는 페이지로 이동
+			@RequestMapping("/myPageMail")
+			public ModelAndView myPageMail() {
+				ModelAndView mav=new ModelAndView();
+				mav.setViewName("member/myPageMail");
+				return mav;
+			}
+			
+			@PostMapping("/findpw")
+			@ResponseBody
+		    public String findPw(@RequestParam("member_name") String member_name, @RequestParam("member_id") String member_id) {
+				
+			
+				System.out.println(member_name);
+				System.out.println(member_id);
+				/*
+				 * // 회원 정보와 이메일 주소를 이용하여 비밀번호 찾기 로직 수행
+				 * 
+				 * // 비밀번호를 이메일로 전송 String toAddress = "tnals5870@naver.com"; // 수신자 이메일 주소
+				 * String subject = "비밀번호 찾기 결과"; String message = "비밀번호는 " +
+				 * memberDto.getMember_pw() + "입니다."; // 실제 비밀번호 값으로 변경
+				 * 
+				 * .sendEmail(toAddress, subject, message); // sendEmail() 메서드 호출
+				 */
+			
+			
+				
+				
+				
+		        return "location.href='mail'";
+		    }
     
 }//class end
 	
