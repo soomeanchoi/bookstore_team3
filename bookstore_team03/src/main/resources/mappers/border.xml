@@ -98,7 +98,7 @@
 		SELECT border_no, member_id, border_price, border_date
 		FROM itwill.border
 		WHERE member_id=#{s_id}
-		ORDER BY border_date
+		ORDER BY border_date DESC
 		LIMIT #{end} OFFSET #{start}
 	</select>
 	
