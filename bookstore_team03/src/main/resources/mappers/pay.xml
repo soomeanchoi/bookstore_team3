@@ -34,6 +34,10 @@
 		VALUE (#{border_no}, 1, #{border_usepoint}, #{pay_point})
 	</insert>
 
+	<update id="pointPlus" parameterType="java.util.Map">
+
+	</update>
+
 
 
 </mapper>     
