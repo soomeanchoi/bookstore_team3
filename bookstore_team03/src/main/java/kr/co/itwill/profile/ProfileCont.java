@@ -148,36 +148,37 @@ public class ProfileCont {
 	
 	
 	@RequestMapping("/update")
-    public String update(@RequestParam Map<String, Object> map
-                        ,@RequestParam MultipartFile profile_img
-                        ,HttpServletRequest req
-                        ,HttpSession session) {
-
-        String filename="-";
-        long filesize=0;
-        if(profile_img != null && !profile_img.isEmpty()) {
-            filename=profile_img.getOriginalFilename();
-            filesize=profile_img.getSize();
-            try{
-                ServletContext application=req.getSession().getServletContext();
-                String path=application.getRealPath("/storage");
-                profile_img.transferTo(new File(path + "\\" + filename));
-            }catch (Exception e) {
-                e.printStackTrace();
-            }//try end
-        }else{
-            //String isbn=map.get("isbn").toString();
-        	String member_id = (String) session.getAttribute("member_id"); 
-            Map<String, Object> profileData = profileDao.list(member_id);
-            filename=profileData.get("profile_imgname").toString();
-            filesize=Long.parseLong(profileData.get("profile_imgsize").toString());
-        }//if end
-
-            map.put("profile_imgname", filename);
-            map.put("profile_imgsize", filesize);
-            profileDao.update(map);
-            
-            return "redirect:/member/myPage";
+	 public String update(@RequestParam Map<String, Object> map
+				          ,@RequestParam MultipartFile profile_img
+				          ,HttpServletRequest req
+				          ,HttpSession session) throws Exception{ 
+			
+			String member_id = (String) session.getAttribute("member_id");
+			
+			String profile_imgname="-";
+			long profile_imgsize=0;
+			if(profile_img != null && !profile_img.isEmpty()) { //파일이 존재한다면
+				profile_imgname=profile_img.getOriginalFilename();
+				profile_imgsize=profile_img.getSize();
+				try {
+					
+					ServletContext application=req.getSession().getServletContext();
+					String path=application.getRealPath("/storage");  //실제 물리적인 경로
+					profile_img.transferTo(new File(path + "\\" + profile_imgname)); //파일저장
+					
+					
+				}catch (Exception e) {
+					e.printStackTrace(); System.out.println(e);
+				}//try end    		
+			}//if end
+			
+			map.put("member_id", member_id);
+			map.put("profile_imgname", profile_imgname);
+			map.put("profile_imgsize", profile_imgsize);
+			
+			profileDao.update(map);
+			
+			return "redirect:/member/myPage";
 
         }//update() end
 	

@@ -43,7 +43,7 @@
 	
 	<update id="update" parameterType="java.util.Map">
 		UPDATE profile
-		SET bbti_no = #{bbti_no},
+		SET 
 		profile_name = #{profile_name},
 		profile_intro = #{profile_intro},
 		profile_imgname = #{profile_imgname},
@@ -51,7 +51,6 @@
 		profile_imgpath = #{profile_imgpath},
 		profile_imgsize = #{profile_imgsize}
 		WHERE member_id = #{member_id}
-	
 	</update>
 	
 </mapper>
