@@ -91,6 +91,8 @@
 				data: {borderNo : borderNo},
 				success: function(response) {
 
+					alert(response)
+
 				},//success end
 				error: function(xhr, status, error) {
 					console.error("AJAX 요청 실패:", status, error);

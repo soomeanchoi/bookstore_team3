@@ -276,12 +276,31 @@ public class BorderCont {
 
 
 	@PostMapping("/cancel")
+	@ResponseBody
 	public String cancel(@RequestParam("borderNo") String borderNo) {
 		System.out.println("borderNo = " + borderNo);
 
+		//borderNo를 이용해 취소금액 조회
+
+		int cancelPrice = borderDao.cancelPirce(borderNo);
+
+		//값을 넘겨줄 Map 생성
+		Map<String, Object> map = new HashMap<>();
+
+		//데이터를 담아줌
+		map.put("cancelPrice", cancelPrice);
+		map.put("border_no", borderNo);
 
 
-		return "취소되었습니다";
+		int cnt = borderDao.orderCancel(map);
+
+		if (cnt == 1){
+			return "주문취소 완료";
+		}
+		else {
+			return "실패하였습니다";
+		}
+
 	}
 
 

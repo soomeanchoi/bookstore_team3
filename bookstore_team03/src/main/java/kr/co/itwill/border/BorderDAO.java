@@ -8,8 +8,6 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import kr.co.itwill.border.BorderDTO;
-
 @Repository
 public class BorderDAO {
 
@@ -98,5 +96,13 @@ public class BorderDAO {
 	public List<HashMap<String, Object>> orderlistDetail(String border_no) {
 		return sqlSession.selectList("border.orderlistDetail", border_no);
 	}//orderlistDetail() end
+
+	public int orderCancel(Map<String, Object> map){
+		return sqlSession.update("border.cancel", map);
+	}
+
+	public int cancelPirce(String border_no){
+		return sqlSession.selectOne("border.cancelPrice", border_no);
+	}
 	
 }//class end

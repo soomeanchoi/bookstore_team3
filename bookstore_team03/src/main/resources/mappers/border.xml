@@ -118,5 +118,17 @@
 		WHERE border_no=#{border_no}
 		ORDER BY orderlist_no
 	</select>
+
+	<select id="cancelPrice" parameterType="String" resultType="Integer">
+		SELECT border_price
+		FROM border
+		WHERE border_no = #{border_no};
+	</select>
+
+	<update id="cancel" parameterType="java.util.Map">
+		UPDATE pay
+			SET pay_witddate = NOW(), pay_witdprice= #{cancelPrice}, pay_witdstate = 0
+		WHERE border_no = #{border_no}
+	</update>
 	
 </mapper>
