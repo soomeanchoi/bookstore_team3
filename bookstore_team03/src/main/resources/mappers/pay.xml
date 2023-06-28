@@ -44,6 +44,11 @@
 		VALUE (#{member_id}, -#{border_usepoint}, #{border_no})
 	</insert>
 
+	<delete id="delCart" parameterType="String">
+		DELETE FROM cart
+		WHERE member_id = #{member_id}
+	</delete>
+
 
 
 
