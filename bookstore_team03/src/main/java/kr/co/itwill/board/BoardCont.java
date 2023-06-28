@@ -53,7 +53,7 @@ public class BoardCont {
 		totalPage = totalRecord / pageSize +1;
 	}//if end
 	
-	int start = (pageNum -1) * pageSize + 1;
+	int start = (pageNum -1) * pageSize;
 	int end = pageSize;
 	
 	ModelAndView mav = new ModelAndView();
@@ -120,13 +120,12 @@ public class BoardCont {
 		return "redirect:/board/boardForm";
     }//write() end
 	
-
+	//게시글검색
 	@RequestMapping("/search")    //defaultValue : 후행하는 매개변수의 기본값 설정(여기서는 빈값)
 	 public ModelAndView search(@RequestParam(value="pageNum", defaultValue="1") int pageNum
 			 				   ,@RequestParam(value="keyWord", defaultValue = "") String keyWord
 			 				   ,@RequestParam(value="category") String category) {
-		
-		System.out.println(keyWord);
+		System.out.println(category);
 		//페이징관련
 		int pageSize=5;
 		int totalRecord=0;
@@ -139,8 +138,9 @@ public class BoardCont {
 			totalPage = totalRecord / pageSize +1;
 		}//if end
 		
-		//시작페이지넘버
-		int start = (pageNum -1) * pageSize + 1;
+		//최상단글순서
+		int start = (pageNum -1) * pageSize;
+		
 		//보여줄 글개수
 		int end = pageSize;
 		
@@ -168,48 +168,9 @@ public class BoardCont {
 		
 		//검색된 단어 보내기
 		mav.addObject("keyWord", keyWord);
-		System.out.println(keyWord);
-		System.out.println("검색결과리스트" + boardDao.search(map));
 		return mav;
 	}//search() end
-		 
-		/*
-		@RequestMapping("/searchform")
-		public String bookSearch() {
-		    return "board/boardForm";
-		}//bookSearch() end
-		
-		
-		@RequestMapping("/boardForm/searchproc")
-		@ResponseBody
-		public ModelAndView searchProc(HttpServletRequest req) {
-			System.out.println("searchproc");
-			ModelAndView mav = new ModelAndView();
-			String keyword=req.getParameter("keyword").trim();
-			
-			mav.setViewName("/board/boardForm");
-			if(keyword.length()>0) { //검색어가 존재하는지? 
-				//검색한 키워드가 들어간 자료를 list에 넣음
-				List<String> list=search(keyword);
-				mav.addObject("search", list);
-			}//if end   
-			//검색결과반환
-			return mav;
-		}//searchProc() end
-		
-		@RequestMapping("/boardForm/search")
-		@ResponseBody
-		public List<String> search(String keyword) {
-			//검색기능
-			//검색어 키워드가 들어간 자료 디비에서 조회해 옴
-			List<String> list=new ArrayList<>();
-			list = boardDao.search(keyword);
-			System.out.println(list);
-			return list;
-		}//search() end
-			*/
-	///////////////////////////////////////////
-	
+		 	
 	
 	//게시글삭제
 	@RequestMapping("/delete/{board_no}")

@@ -58,7 +58,7 @@
 						<option value="board_content">내용</option>
 						<option value="isbn">도서</option>
 					</select>
-					<input type="text" name="keyword" id="keyword" value="${keyword}">
+					<input type="text" name="keyWord" id="keyWord" value="${keyWord}">
 					<input type="submit" value="검색">
 				</form>
 			</td>
