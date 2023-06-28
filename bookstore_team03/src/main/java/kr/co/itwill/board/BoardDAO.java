@@ -43,18 +43,11 @@ public class BoardDAO {
 	
 	//페이징 : 검색된 총글개수
 	public int stotalRecord(HashMap<String, Object> map) {
-		System.out.println("검색된 글수map" + map);
-		System.out.println("----------");
-		System.out.println("검색된글수: " + sqlSession.selectOne("board.stotalRecord", map));
-		System.out.println("----------");
 		return sqlSession.selectOne("board.stotalRecord", map);
 	}//totalRecord() end
 	
 	//게시글 검색
 	public List<HashMap<String, Object>> search(HashMap<String, Object> map){
-		System.out.println("검색map" + map);
-		System.out.println("----------");
-		System.out.println("검색리스트: " + sqlSession.selectList("board.search", map));
 		return sqlSession.selectList("board.search", map);
 	}//search() end
 	
