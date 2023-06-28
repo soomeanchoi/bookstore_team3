@@ -2,6 +2,7 @@ package kr.co.itwill.member;
 
 
 import javax.mail.internet.MimeMessage;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -140,10 +141,12 @@ public class MemberCont<ReviewDTO> {
     String viewPage = null;
     
 	    if(memberDao.loginMember(loginInfo) == null) { // 로그인 실패
-	    	viewPage = "member/login";
+	    	
 	    	mav.addObject("loginFailed", true);
 	    	model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
 	    	
+	    	viewPage = "member/login";
+
 	    }else{ // 로그인 성공 
 	        
 	        HttpSession session = request.getSession();
@@ -151,11 +154,20 @@ public class MemberCont<ReviewDTO> {
 	        session.setAttribute("member_id", loginInfo.get("member_id")); 
 	        session.setAttribute("member_pw", loginInfo.get("member_pw")); 
 	        
+	       
+	        
 	        viewPage = "redirect:/";
 	        // 추후 메인 페이지로 이동하게 
 	    }
     
     return viewPage;
+	}
+	
+	@RequestMapping("/loginfail")
+	public ModelAndView loginfail() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/login");
+		return mav;
 	}
 	
 	

@@ -54,6 +54,7 @@
                   id="member_pw"
                 />
               </div>
+              
               <div>
         <input type="submit" class="login-btn" value="Login" />
 		
@@ -61,15 +62,18 @@
             </div>
           </div>
         </div>
+        <c:if test="${msg == false}">
+			   <p style="color:#f00;">아이디와 비밀번호를 확인해주세요.</p>
+			  </c:if>
         <div class="flex">
           <div>
             <input
               type="checkbox"
               class="id-save"
-              name="id-save"
-              id="id-save"
+              name="checkId"
+              id="saveId"
             />
-            <span>아이디 저장</span>
+            <label for="saveId">아이디 저장</label>
           </div>
           <div>
             <input class="id-pw-btn" type="button" value="아이디 찾기" onclick="location.href='findIdForm';"/>
@@ -82,6 +86,7 @@
             <hr />
             <input class="button" type="button" value="sign up" onclick="location.href='join';" style="text-align: right;">
           </div>
+          
         </div>
         <div class="kakao-login">
         <c:if test="${userId eq null}">
@@ -107,9 +112,14 @@
       </div>
     </section>	
 </form>
+<br><br><br><br>
 <%@ include file="../template/footer.jsp" %>      
 </body>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="js/script.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+
 
 </html>
