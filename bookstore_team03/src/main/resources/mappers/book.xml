@@ -84,7 +84,7 @@
 	</select>
 
 	<select id="bestList" resultType="java.util.Map">
-		SELECT isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+		SELECT *
 		FROM book
 		ORDER BY book_count DESC
 	</select>
@@ -165,16 +165,20 @@
 		LIMIT #{start}, 10
 	</select>
 
-	<select id="bookPriceDesc" resultType="java.util.Map">
-		select *
-		from book
-		order by book_price desc;
-	</select>
-
-	<select id="bookPrice" resultType="java.util.Map">
-		select *
-		from book
-		order by book_price;
+	<select id="bestMain" resultType="java.util.Map">
+		select *, case when choice_no is null then 0
+					   when choice_no is not null then 1
+			end as choice
+		from book AA left join writer BB
+							   on AA.book_writerno=BB.writer_no left join
+			 (select aa.book_name,bb.isbn,bb.member_id, choice_no
+			  from book aa left join choice bb
+									 on aa.isbn=bb.isbn
+			  where member_id='kgukid38@naver.com') dd
+			 on AA.isbn=dd.isbn
+-- 		where book_mainname= ${main}
+		ORDER BY book_count desc
+		LIMIT #{start}, 10;
 	</select>
 
 	<select id="listCount" resultType="int">

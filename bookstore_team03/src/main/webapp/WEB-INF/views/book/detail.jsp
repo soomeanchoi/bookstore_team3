@@ -55,9 +55,74 @@
             width: 30px;
         }
 
+        .choice-button {
+            text-align: right;
+        }
+
+        button.buy {
+            width: 164px;
+            height: 58px;
+            background-color: black;
+            outline: auto;
+            color: white;
+        }
+
+        button.cart {
+            width: 160px;
+            height: 54px;
+            background-color: white;
+            outline: auto;
+            margin-left: 20px;
+            border: 1px;
+        }
+
+        #chase {
+            width:100px;
+            overflow:hidden;
+            margin-top:10px;
+            margin-left:1050px;
+            margin-right:10px;
+            margin-bottom:10px;
+        }
+
+        #chaseBar {
+            width:50%;
+            font-weight:bold;
+            text-align:center;
+        }
+
+        .sidebar {
+            left: 15px;
+            position: absolute;
+        }
 
     </style>
     <script>
+        jQuery(window).scroll(function() {
+            // 브라우저 화면 스크롤의 현재 높이가 플로팅 배너의 높이보다 클경우
+            if(jQuery(window).scrollTop() > jQuery(".banner").offset().top) {
+                jQuery("#chase").css("position", "fixed");
+            }
+            // 브라우저 화면 스크롤 현재 높이가 플로팅 배너의 높이보다 작을경우
+            else if((jQuery(window).scrollTop() < jQuery(".banner").offset().top)) {
+                jQuery("#chase").css("position", "static");
+            }
+        });
+
+        $(document).ready(function(){
+
+            $('ul.tabs li').click(function(){
+                var tab_id = $(this).attr('data-tab');
+
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+
+                $(this).addClass('current');
+                $("#"+tab_id).addClass('current');
+            })
+
+        })
+
         function book_update(){
             // alert();
             document.bookfrm.action="/book/update";
@@ -95,63 +160,77 @@
                 document.bookfrm.submit();
             }//if end
         }//dirOrder() end
+
     </script>
 </head>
 <body>
 
     <div>
-<form name="bookfrm" id="bookfrm">
         <section>
+
+            <div class="banner">
+                <div id="chase">
+                    <a href="#start">위로</a>
+                </div>
+            </div>
+
         <div class="container" align="left">
             <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">
                 <input type="hidden" name="isbn" value="${book.isbn}">
          <div class="row">
              <div class="col-6">
-<%--             	<input type="hidden" id="isbn" name="isbn" value="${book.isbn}">--%>
              	<input type="hidden" id="cart_qty" name="cart_qty" value="1">
              	<input type="hidden" id="orderlist_cnt" name="orderlist_cnt" value="1">
                 <img src="/storage/${book.book_imgname}">
              </div>
 
              <div class="col-6">
-                <h3>${book.book_name}</h3><br>
+                <h3>${book.book_name}</h3>
+                 <div class="choice-button">
+                     <c:choose>
+                         <c:when test="${cnt == 1}">
+                             <button onclick="book_choiceCancle()">
+                                     <%--                         <input type="button" onclick="book_choiceCancle()">--%>
+                                 <img src="/storage/heart4.png" class="choice-img">
+                             </button>
+                         </c:when>
+                         <c:otherwise>
+                             <button onclick="book_choice()">
+                                     <%--                             <input type="button" value="찜하기" onclick="book_choice()">--%>
+                                 <img src="/storage/heart3.png" class="choice-img">
+                             </button>
+                         </c:otherwise>
+                     </c:choose>
+                 </div><br>
+                 <hr><br>
                  <div>
-                     ${book.book_price}원 <br><br>
-                 </div>
+                     가격 : ${book.book_price}원
+                 </div><br>
                  <div>
                      적립/혜택 : ${book.book_price/20}p
-                 </div>
+                 </div><br>
 <%--                 <div>--%>
 <%--                     <c:set var="ymd" value="<%=new java.util.Date()%>" />--%>
 <%--                     <fmt:formatDate value="${ymd}" pattern="dd" />--%>
 <%--                 </div>--%>
                  <div>
                      배송비 : 3000원 (30,000원 이상 구매시 무료)
-                 </div>
+                 </div><br>
                  <div>
-                     평점 : ${score}
-                 </div>
+                     ISBN : ${isbn}
+                 </div><br>
                  <div>
-                     재고 : ${book.book_stock}권
-                 </div>
+                     출판사 : ${book.book_pub}
+                 </div><br>
                  <div>
-                     <button onclick="dirOrder()">구매하기</button>
-                     <button onclick="product_cart()">장바구니</button>
+                     평점 : ${score}점(총5점)
+                 </div><br><br><br>
+                 <hr>
+                 <br><br>
+                 <div>
+                     <button onclick="dirOrder()" class="buy">구매하기</button>
+                     <button onclick="product_cart()" class="cart">장바구니</button>
                  </div>
-                 <c:choose>
-                     <c:when test="${cnt == 1}">
-                         <button onclick="book_choiceCancle()">
-<%--                         <input type="button" onclick="book_choiceCancle()">--%>
-                         <img src="/storage/heart4.png" class="choice-img">
-                         </button>
-                     </c:when>
-                     <c:otherwise>
-                         <button onclick="book_choice()">
-<%--                             <input type="button" value="찜하기" onclick="book_choice()">--%>
-                             <img src="/storage/heart3.png" class="choice-img">
-                         </button>
-                     </c:otherwise>
-                 </c:choose>
              </div>
          </div>
             </form>
@@ -161,16 +240,16 @@
         <div>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">상품정보</a>
+                    <a class="nav-link active" aria-current="page" href="#상품정보">상품정보</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">상품후기(${reviewCount})</a>
+                    <a class="nav-link" href="#상품후기">상품후기(${reviewCount})</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">상품문의</a>
+                    <a class="nav-link" href="#작가">작가정보</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">배송/교환/환불</a>
+                    <a class="nav-link" href="#배송">배송/교환/환불</a>
                 </li>
             </ul>
         </div>
@@ -179,8 +258,8 @@
         <section>
             <hr>
             <br><br>
-        <div>
-            <div class="book-detail-content">
+        <div id="상품정보">
+            <div class="book-detail-content" >
                 <div>
                     <div>
                         <h2>책 소개</h2><br>
@@ -198,7 +277,7 @@
                 </div>
                 <hr>
                 <br><br>
-                <div>
+                <div id="작가">
                     <h2>작가정보</h2>
                 </div>
                 <div>
@@ -215,7 +294,6 @@
 
         <section class="detail-info">
             <div>
-                <br><br>
                 <h2>기본정보</h2>
                 <br><hr class="info-hr">
             </div>
@@ -241,10 +319,51 @@
             </div>
             <br>
             <hr>
+            <br><br><br>
+            <div id="배송">
+                <h2>배송/교환/환불 안내</h2>
+                <br><hr class="info-hr">
+                <br>
+            <h3>배송안내</h3>
+            - 배송비 : 기본배송료는 3,000원 입니다. (도서,산간,오지 일부지역은 배송비 3,000원 추가) <br>
+            - 30,000원 이상 구매 시 무료배송입니다. <br>
+            - 서점 내 재고가 있는 도서 배송 가능일은 1~2일 입니다. <br>
+            - 일반 도서(단행본)의 경우 재고가 없는 도서 배송 가능일은 3~5일 입니다. <br>
+            - 독립출판물 도서의 배송 가능일은 1~2일 입니다. <br>
+            - 배송 가능일이란 본 상품을 주문 하신 고객님들께 상품 배송이 가능한 기간을 의미합니다. (단, 연휴 및 공휴일은 기간 계산시 제외하며 현금 주문일 경우 입금일 기준 입니다)<br>
+            - 검색되는 모든 도서는 구매가 가능합니다. 단, 수급하는데 2~5일 시간이 걸립니다.<br>
+                <br>
+                <hr>
+                <br>
+            <h3>교환 및 반품안내</h3>
+            상품 청약철회 가능기간은 상품 수령일로 부터 7일 이내 입니다. <br><br>
+
+            <strong>반품/교환 가능 기간</strong><br>
+            - 상품 택(tag)제거 또는 개봉으로 상품 가치 훼손 시에는 상품수령후 7일 이내라도 교환 및 반품이 불가능합니다. <br>
+            - 공급받으신 상품 및 용역의 내용이 표시.광고 내용과 다르거나 다르게 이행된 경우에는 공급받은 날로부터 3월이내, 그사실을 알게 된 날로부터 30일이내<br>
+            - 변심,구매 착오의 경우에만 반송료 고객 부담<br>
+
+            <strong>반품/교환 불가 사유</strong><br>
+            - 소비자의 책임으로 상품 등이 손실되거나 훼손된 경우<br>
+            - 소비자의 사용, 포장 개봉에 의해 가치가 현저히 감소한 경우<br>
+            - 세트 상품 일부만 반품 불가<br>
+                <br>
+                <hr>
+                <br>
+            <h3>환불안내</h3>
+            <strong>상품 환불 규정</strong><br>
+            - 상품 철회 가능기간은 상품 수령일로 부터 7일 이내 입니다.<br>
+            - 출고 이후 환불요청 시 상품 회수 후 처리됩니다.<br>
+            - 얼리 등 주문제작상품 / 밀봉포장상품 등은 변심에 따른 환불이 불가합니다.<br>
+            - 비닐 커버 제거 시 반품 불가합니다.<br>
+            - 변심 환불의 경우 왕복배송비를 차감한 금액이 환불되며, 제품 및 포장 상태가 재판매 가능하여야 합니다.<br>
+            </div>
         </section>
 
         <%--  리뷰  --%>
-        <section class="detail-review">
+        <section class="detail-review" id="상품후기">
+            <hr>
+            <br><br>
             <div>
                 <label for="review_content">리뷰</label>
                 <form name="reviewInsertForm" id="reviewInsertForm">
@@ -262,7 +381,7 @@
 
             <%-- 상품번호 --%>
             <input type="hidden" name="isbn" value="${book.isbn}">
-            <input type="text" name="review_content" id="review_content" placeholder="내용을 입력해 주세요">
+            <textarea name="review_content" id="review_content" rows="3" cols="100" placeholder="내용을 입력해 주세요"></textarea>
             <button type="button" name="reviewInsertBtn" id="reviewInsertBtn">리뷰등록</button>
 
 

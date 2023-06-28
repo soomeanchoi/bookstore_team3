@@ -116,14 +116,12 @@ public class BookDAO {
         return sqlSession.selectList("book.listPaging", params);
     }
 
-    public List<Map<String, Object>> bookPriceDesc() {
-        return sqlSession.selectList("book.bookPriceDesc");
-    }
-
-    public List<Map<String, Object>> bookPrice(String sort) {
+    public List<Map<String, Object>> bestMain(int start, int end, String main) {
         Map<String, Object> params = new HashMap<>();
-        params.put("sort", sort);
-        return sqlSession.selectList("book.bookPrice", params);
+        params.put("start", start);
+        params.put("end", end);
+        params.put("main", main);
+        return sqlSession.selectList("book.bestMain", params);
     }
 
     public int bookCount() {

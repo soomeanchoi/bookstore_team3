@@ -51,6 +51,7 @@
 			src="http://code.jquery.com/jquery-latest.js"
 	></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 	<style>
 		ul.tabs{
@@ -80,6 +81,9 @@
 			border: 1px;
 		}
 
+		span {
+			margin-left: 8%;
+		}
 
 	</style>
 	<script>
@@ -108,23 +112,7 @@
 		}
 
 
-		function listSort(num){
-
-			$.ajax({
-				type: 'get',
-				url: "book/list",
-				data:{'num' : num },
-				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
-				success: function(key, value) {
-					value.book_price
-				},
-				error: function(request, status, error) {
-					alert("에러");
-				}
-			});
-		};
-
-		function book_choice(){
+		function book_choice(isbn){
 			// alert();
 			if(confirm("찜 하시겠습니까?")){
 				document.bookfrm.action="/choice/insert";
@@ -132,13 +120,21 @@
 			}//if end
 		}//book_choice() end
 
-		function book_choiceCancle() {
+		function book_choiceCancle(isbn) {
 			if(confirm("찜 취소 하시겠습니까?")){
 				document.bookfrm.action="/choice/del";
 				document.bookfrm.submit();
 			}
 		}
 
+		function handleOnChange(e) {
+			// 선택된 데이터 가져오기
+			const value = e.value;
+
+			// 데이터 출력
+			document.getElementById('result').innerText
+					= value;
+		}
 
 	</script>
 
@@ -150,18 +146,19 @@
 
 	<div class="section">
 
+		<select name="language" onchange="handleOnChange(this)">
+			<option value="korean">한국어</option>
+			<option value="english">영어</option>
+			<option value="chinese">중국어</option>
+			<option value="spanish">스페인어</option>
+		</select>
+		<div id='result'></div>
 
+	<form action="search">
+		<input type="text" name="book_name" value="${book_name}">
+		<input type="submit" value="검색">
+	</form>
 
-<%--		<a href="#" onclick="goToPageSort('book_price desc')">높은가격순</a>--%>
-<%--		<a href="#" onclick="goToPageSort('book_price')">낮은가격순</a>--%>
-<%--		<a href="#" onclick="goToPageSort('book_date')">등록일순</a>--%>
-
-
-
-		<form action="search">
-			<input type="text" name="book_name" value="${book_name}">
-			<input type="submit" value="검색">
-		</form>
 
 	<div class="container">
 		<ul class="tabs">
@@ -178,16 +175,22 @@
 			<a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>
 		</ul>
 	</div>
-		<div><hr>
-			<br><br></div>
+
+	<hr>
+
 	<div id="product_order_list">
-		<p>
-			<a href="javascript:goToPageSort('book_date');">최신순</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			<a href="javascript:goToPageSort('book_price');">낮은가격</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			<a href="javascript:goToPageSort('book_price desc');">높은가격순</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
-			<a href="javascript:goToPageSort('book_count desc');">조회순</a>
-		</p>
+		<br>
+		<div>
+			<p>
+				<span><a href="javascript:goToPageSort('book_date');">최신순</a></span>
+				<span><a href="javascript:goToPageSort('book_price');">낮은가격</a></span>
+				<span><a href="javascript:goToPageSort('book_price desc');">높은가격순</a></span>
+				<span><a href="javascript:goToPageSort('book_count desc');">조회순</a></span>
+			</p>
+		</div>
 	</div>
+	<hr>
+	<br><br>
 
 		<div class="container">
 			<form name="bookfrm" id="bookfrm">
@@ -209,14 +212,16 @@
 										${row.book_price}원
 										<c:choose>
 											<c:when test="${row.choice == 1}">
-												<button onclick="book_choiceCancle()">
+												<button onclick="book_choiceCancle(${row.isbn})">
 													<img src="/storage/heart4.png" class="choice-img">
 												</button>
 											</c:when>
 											<c:otherwise>
-												<button onclick="book_choice()">
+												<form>
+												<button onclick="book_choice(${row.isbn})">
 													<img src="/storage/heart3.png" class="choice-img">
 												</button>
+												</form>
 											</c:otherwise>
 										</c:choose>
 									</div>
@@ -233,6 +238,8 @@
 			<hr>
 			</div>
 		</div> <%-- container end --%>
+
+
 		<div class="paging" style="text-align: center; margin-top: 30px">
 			<c:set var="currentPage" value="${page}" />
 			<c:set var="startPage" value="${currentPage - 5}" />
@@ -264,6 +271,8 @@
 			</c:if>
 			<a href="#" onclick="goToPage(${totalPage})">끝</a>
 		</div>
+
+
 	</div> <%-- div-section end --%>
 
 

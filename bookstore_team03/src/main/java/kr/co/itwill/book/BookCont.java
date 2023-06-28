@@ -67,11 +67,43 @@ public class BookCont {
 
     }//insert() end
 
+//    @RequestMapping("/bestList")
+//    public ModelAndView bestList() {
+//        ModelAndView mav=new ModelAndView();
+//        mav.setViewName("book/bestList");
+//        mav.addObject("list", bookDao.list());
+//        mav.addObject("bestList", bookDao.bestList());
+//        return mav;
+//    }//list() end
+
     @RequestMapping("/bestList")
-    public ModelAndView bestList() {
+    public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
         ModelAndView mav=new ModelAndView();
+
+        int totalCount = bookDao.bookCount();
+        int pageSize = 10;
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+
+        int start = ((page - 1) * pageSize) ;
+        int end = page * pageSize;
+
+        int cnt = bookDao.choiceTable(map);
+        if (cnt == 1){
+            mav.addObject("cnt", cnt);
+        }else if (cnt == 0){
+            mav.addObject("cnt", cnt);
+        }else {
+            mav.addObject("cnt", cnt);
+        }
+
+        List<Map<String, Object>> list = bookDao.bestMain(start, end, main);
+
         mav.setViewName("book/bestList");
-        mav.addObject("list", bookDao.list());
+        mav.addObject("bookPrice", main);
+        mav.addObject("totalPage", totalPage);
+        mav.addObject("currentPage", page);
+        mav.addObject("list", list);
+
         mav.addObject("bestList", bookDao.bestList());
         return mav;
     }//list() end
@@ -113,38 +145,13 @@ public class BookCont {
         return mav;
     }//list() end@RequestMapping("/list")
 
-
-    // @RequestMapping("/list")
-//    public ModelAndView list2(@RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
-//        String s_id="kgukid38@naver.com";
-//        map.put("member_id", s_id);
-//
-//        ModelAndView mav=new ModelAndView();
-//
-//        int totalCount = bookDao.bookCount();
-//
-//
-//        int pageSize = 10;
-//        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
-//
-//        int start = ((page - 1) * pageSize) + 1;
-//        int end = page * pageSize;
-//
-//        List<Map<String, Object>> list = bookDao.listPaging(start, end);
-//
-//        mav.setViewName("book/list");
-//
-//        mav.addObject("list", list);
-//        mav.addObject("totalPage", totalPage);
-//        mav.addObject("currentPage", page);
-//
-////        mav.addObject("list", bookDao.list());
-//        mav.addObject("totalList", bookDao.totalList());
-//        mav.addObject("choiceTable", bookDao.choiceTable(map));
-//
-//
-//        return mav;
-//    }//list() end@RequestMapping("/list")
+    @RequestMapping("/novelList")
+    public ModelAndView novelList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/novelList");
+        mav.addObject("novelList", bookDao.novelList());
+        return mav;
+    }//list() end
 
 
     @RequestMapping("/comicList")
@@ -152,14 +159,6 @@ public class BookCont {
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/comicList");
         mav.addObject("comicList", bookDao.comicList());
-        return mav;
-    }//list() end
-
-    @RequestMapping("/novelList")
-    public ModelAndView novelList() {
-        ModelAndView mav=new ModelAndView();
-        mav.setViewName("book/novelList");
-        mav.addObject("novelList", bookDao.novelList());
         return mav;
     }//list() end
 
@@ -274,7 +273,7 @@ public class BookCont {
 
     @RequestMapping("/delete")
     public String delete(String isbn, HttpServletRequest req) {
-        System.out.println("isbn = " + isbn);
+//        System.out.println("isbn = " + isbn);
         //삭제하고자 하는 파일명
         String filename=bookDao.filename(isbn);
 

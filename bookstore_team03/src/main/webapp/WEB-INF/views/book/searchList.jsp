@@ -114,21 +114,6 @@
 			<input type="submit" value="검색">
 		</form>
 
-<%--	<div class="container">--%>
-<%--		<ul class="tabs">--%>
-<%--			<a href="/book/list"><li class="tab-link current" data-tab="tab-1">전체</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">소설</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">시/에세이</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">인문</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">기술/계발</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">정치/사회</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">자기계발</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">컴퓨터/IT</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">수험서</li></a>--%>
-<%--			<a href=""><li class="tab-link" data-tab="tab-2">역사</li></a>--%>
-<%--			<a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>--%>
-<%--		</ul>--%>
-<%--	</div>--%>
 		<div><hr>
 			<br><br></div>
 		<div class="container">
@@ -159,21 +144,15 @@
 				</div>
 				</c:forEach>
 
-				<nav class="mt-5" aria-label="Page navigation example" data-aos="fade-up" data-aos-delay="100">
-					<ul class="custom-pagination pagination">
-						<li class="page-item prev"><a class="page-link" href="#">Previous</a></li>
-						<li class="page-item active"><a class="page-link" href="#">1</a></li>
-						<li class="page-item"><a class="page-link" href="#">2</a></li>
-						<li class="page-item"><a class="page-link" href="#">3</a></li>
-						<li class="page-item next"><a class="page-link" href="#">Next</a></li>
-					</ul>
-				</nav>
+
+			</div> <%-- div-section end --%>
+
 			</div>	
 		</div>		
 	</div>
 
 		<!-- Preloader -->
-	<a href="write">글쓰기</a>
+<%--	<a href="write">글쓰기</a>--%>
 		<div id="overlayer"></div>
 		<div class="loader">
 			<div class="spinner-border text-primary" role="status">

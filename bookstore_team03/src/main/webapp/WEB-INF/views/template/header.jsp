@@ -59,7 +59,7 @@
 </head>
 <body>
 <header>
-    <div>
+    <div id="start">
         <!-- logo -->
         <a href="http://localhost:9095/">
             <svg class="logo" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -76,16 +76,17 @@
             </svg>
         </button>
         <div class="dropdown-content">
-            <a href="http://localhost:9095/book/list">소설</a>
-            <a href="http://localhost:9095/book/list">시/에세이</a>
-            <a href="http://localhost:9095/book/list">인문</a>
-            <a href="http://localhost:9095/book/list">기술/공학</a>
-            <a href="http://localhost:9095/book/list">정치/사회</a>
-            <a href="http://localhost:9095/book/list">자기계발</a>
-            <a href="http://localhost:9095/book/list">컴퓨터/IT</a>
-            <a href="http://localhost:9095/book/list">수험서</a>
-            <a href="http://localhost:9095/book/list">역사</a>
-            <a href="http://localhost:9095/book/list">만화</a>
+            <a href="http://localhost:9095/book/list">전체</a>
+            <a href="http://localhost:9095/book/novelList">소설</a>
+            <a href="http://localhost:9095/book/poemList">시/에세이</a>
+            <a href="http://localhost:9095/book/humanismList">인문</a>
+            <a href="http://localhost:9095/book/techList">기술/공학</a>
+            <a href="http://localhost:9095/book/socialList">정치/사회</a>
+            <a href="http://localhost:9095/book/selfList">자기계발</a>
+            <a href="http://localhost:9095/book/itList">컴퓨터/IT</a>
+            <a href="http://localhost:9095/book/testList">수험서</a>
+            <a href="http://localhost:9095/book/historyList">역사</a>
+            <a href="http://localhost:9095/book/comicList">만화</a>
         </div>
     </div>
     <!-- menu icon end -->
@@ -98,8 +99,10 @@
     </div>
     <!-- search bar -->
     <div class="search_bar">
-        <input class="search" type="search" size="57" />
-        <input class="search-btn" type="submit" value="Search" />
+        <form action="/book/search">
+            <input class="search" type="text" size="57" value="${book_name}" name="book_name" />
+            <input class="search-btn" type="submit" value="Search" />
+        </form>
     </div>
     <div class="icon-wrap">
         <!-- cart icon -->

@@ -108,6 +108,18 @@
             color: #222;
         }
 
+        img.choice-img{
+            width: 40px;
+        }
+
+        button {
+            border: 0;
+        }
+
+        .choice-button {
+            text-align: right;
+        }
+
     </style>
     <script>
         jQuery(window).scroll(function() {
@@ -136,7 +148,7 @@
         })
 
         //장바구니 수량선택 유효성 검사
-        function product_cart(){
+        function product_cart(isbn){
             if(confirm("장바구니에 담으시겠습니까?")){
                 document.bookfrm.action="/cart/insert";
                 document.bookfrm.submit();
@@ -144,13 +156,22 @@
         }//product_cart() end
 
         //상품직접구매
-        function dirOrder(){
+        function dirOrder(isbn){
             if(confirm("구매하시겠습니까?")){
                 document.bookfrm.action="/border/directborderForm";
                 document.bookfrm.submit();
             }//if end
         }//dirOrder() end
 
+        function goToPageMain(pageNum) {
+            var url = 'bestList?main=' + pageNum;
+            window.location.href = url;
+        }
+
+        function goToPage(pageNum) {
+            var url = 'bestList?page=' + pageNum;
+            window.location.href = url;
+        }
 
     </script>
   </head>    
@@ -201,6 +222,14 @@
             <a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>
         </ul>
     </div>
+    <div>
+        <p>
+            <span><a href="javascript:goToPageMain('book_date');">최신순</a></span>
+            <span><a href="javascript:goToPageMain('book_price');">낮은가격</a></span>
+            <span><a href="javascript:goToPageMain('book_price desc');">높은가격순</a></span>
+            <span><a href="javascript:goToPageMain('book_count desc');">조회순</a></span>
+        </p>
+    </div>
 
     <form name="bookfrm" id="bookfrm">
     <table>
@@ -218,15 +247,31 @@
                                 <img src="/storage/${row.book_imgname}" width="100px">
                             </div>
                             <div class="list_info_box col-9">
+                                <br>
                                 <a href="detail/${row.isbn}">${row.book_name}</a><br>
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
-                                        <input type="button" value="장바구니" onclick="product_cart()">
+                                        <div class="choice-button">
+                                    <c:choose>
+                                        <c:when test="${row.choice == 1}">
+                                            <button onclick="book_choiceCancle(${row.isbn})">
+                                                <img src="/storage/heart4.png" class="choice-img">
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <form>
+                                                <button onclick="book_choice(${row.isbn})">
+                                                    <img src="/storage/heart3.png" class="choice-img">
+                                                </button>
+                                            </form>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </div>
                                     </span><br>
-                                    <span>
-                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매" onclick="dirOrder()">
-                                    </span>
-                                <br><br>
+                                <div>
+                                    ${row.book_price}원
+                                </div>
+                                <br>
                                 <%--조회수 : ${row.book_count}--%>
                                 <c:if test="${fn:length(row.book_content) > 150}">
                                         <c:out value="${fn:substring(row.book_content,0,149)}"/>...
@@ -250,6 +295,39 @@
     </tr>
     </table>
     </form>
+
+    <div class="paging" style="text-align: center; margin-top: 30px">
+        <c:set var="currentPage" value="${page}" />
+        <c:set var="startPage" value="${currentPage - 5}" />
+        <c:if test="${startPage lt 1}">
+            <c:set var="startPage" value="1" />
+        </c:if>
+
+        <c:set var="endPage" value="${currentPage + 5}" />
+        <c:if test="${endPage gt totalPage}">
+            <c:set var="endPage" value="${totalPage}" />
+        </c:if>
+
+        <a href="#" onclick="goToPage(1)">처음</a>
+        <c:if test="${currentPage gt 1}">  <%-- gt : > --%>
+            <a href="#" onclick="goToPage(${currentPage - 1})">이전</a>
+        </c:if>
+        <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+            <c:choose>
+                <c:when test="${pageNum eq currentPage}"> <%-- eq : == --%>
+                    <a href="#" class="active">${pageNum}</a>
+                </c:when>
+                <c:otherwise>
+                    <a href="#" onclick="goToPage(${pageNum})">&nbsp&nbsp${pageNum}&nbsp&nbsp</a>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${currentPage lt totalPage}">       <%-- lt : < --%>
+            <a href="#" onclick="goToPage(${currentPage + 1})">다음</a>
+        </c:if>
+        <a href="#" onclick="goToPage(${totalPage})">끝</a>
+    </div>
+
 </section>
 
 
