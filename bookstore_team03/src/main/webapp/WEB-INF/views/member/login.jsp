@@ -66,10 +66,10 @@
             <input
               type="checkbox"
               class="id-save"
-              name="id-save"
-              id="id-save"
+              name="checkId"
+              id="saveId"
             />
-            <span>아이디 저장</span>
+            <label for="saveId">아이디 저장</label>
           </div>
           <div>
             <input class="id-pw-btn" type="button" value="아이디 찾기" onclick="location.href='findIdForm';"/>
@@ -109,6 +109,13 @@
 </form>
 <%@ include file="../template/footer.jsp" %>      
 </body>
+<script>
+    var msg = '${msg}';
+    if(loginfailed = true) {
+        alert("아이디와 비밀번호를 확인해주세요.");
+    }
+</script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
   <script src="js/script.js"></script>
 
