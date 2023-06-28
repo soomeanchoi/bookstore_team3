@@ -245,28 +245,6 @@
     </section>
 	
 	</form>
-  	<%-- 
-    <table border="1">
-    	<tr>
-		<td>사용할 포인트</td>
-		<td><input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0>
-		<input type="button" value="사용" >
-		</td>
-		<td>보유포인트</td>
-		<td><input type="number" name="havepoint" id="havepoint" value="${havepoint}" readonly></td>
-		</tr>    	
-	    <tr>
-		<td>적립예정 포인트</td>
-		<td id="addpoint">${directborder.book_price}</td>
-		</tr>
-		<tr>
-		<td>결제금액</td>
-		<td id="border_price"> ${directborder.book_price} </td>
-		</tr>
-	</table>	
-	
-	<input type="submit" value=" 결제하기">
-	</form> --%>
 
 
 <!--  DAUM 우편번호 API 시작 -->
