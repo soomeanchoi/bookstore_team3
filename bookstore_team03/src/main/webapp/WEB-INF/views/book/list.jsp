@@ -71,6 +71,15 @@
 			color: #222;
 		}
 
+		img.choice-img{
+			width: 30px;
+		}
+
+		button {
+			background: white;
+			border: 1px;
+		}
+
 	</style>
 	<script>
 		$(document).ready(function(){
@@ -92,19 +101,41 @@
 			window.location.href = url;
 		}
 
+		function goToPageSort(pageNum) {
+			var url = 'list?sort=' + pageNum;
+			window.location.href = url;
+		}
 
-		function getCategory(categoryId) {
+
+		function listSort(num){
+
 			$.ajax({
-				url: '/book/list',
-				type: 'GET',
-				data: { categoryId: categoryId },
-				success: function(response) {
-					alert(response)
+				type: 'get',
+				url: "book/list",
+				data:{'num' : num },
+				contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+				success: function(key, value) {
+					value.book_price
 				},
-				error: function(xhr, status, error) {
+				error: function(request, status, error) {
 					alert("에러");
 				}
 			});
+		};
+
+		function book_choice(){
+			// alert();
+			if(confirm("찜 하시겠습니까?")){
+				document.bookfrm.action="/choice/insert";
+				document.bookfrm.submit();
+			}//if end
+		}//book_choice() end
+
+		function book_choiceCancle() {
+			if(confirm("찜 취소 하시겠습니까?")){
+				document.bookfrm.action="/choice/del";
+				document.bookfrm.submit();
+			}
 		}
 
 
@@ -118,11 +149,17 @@
 
 	<div class="section">
 
-		<select id="categorySelect" onchange="getCategory(this.value)">
-			<option value="1">카테고리 1</option>
-			<option value="2">카테고리 2</option>
-			<option value="3">카테고리 3</option>
-		</select>
+<%--		<div id="product_order_list">--%>
+<%--			<p>--%>
+<%--			<a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp--%>
+<%--			<a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp--%>
+<%--			<a href="javascript:listSort(1);">가격순</a> </p>--%>
+<%--		</div>--%>
+
+		<a href="#" onclick="goToPageSort('book_price desc')">높은가격순</a>
+		<a href="#" onclick="goToPageSort('book_price')">낮은가격순</a>
+		<a href="#" onclick="goToPageSort('book_date')">등록일순</a>
+
 
 
 		<form action="search">
@@ -133,21 +170,23 @@
 	<div class="container">
 		<ul class="tabs">
 			<a href="/book/list"><li class="tab-link current" data-tab="tab-1">전체</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">소설</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">시/에세이</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">인문</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">기술/계발</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">정치/사회</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">자기계발</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">컴퓨터/IT</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">수험서</li></a>
-			<a href=""><li class="tab-link" data-tab="tab-2">역사</li></a>
+			<a href="/book/novelList"><li class="tab-link" data-tab="tab-2">소설</li></a>
+			<a href="/book/poemList"><li class="tab-link" data-tab="tab-2">시/에세이</li></a>
+			<a href="/book/humanismList"><li class="tab-link" data-tab="tab-2">인문</li></a>
+			<a href="/book/techList"><li class="tab-link" data-tab="tab-2">기술/계발</li></a>
+			<a href="/book/socialList"><li class="tab-link" data-tab="tab-2">정치/사회</li></a>
+			<a href="/book/selfList"><li class="tab-link" data-tab="tab-2">자기계발</li></a>
+			<a href="/book/itList"><li class="tab-link" data-tab="tab-2">컴퓨터/IT</li></a>
+			<a href="/book/testList"><li class="tab-link" data-tab="tab-2">수험서</li></a>
+			<a href="/book/historyList"><li class="tab-link" data-tab="tab-2">역사</li></a>
 			<a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>
 		</ul>
 	</div>
 		<div><hr>
 			<br><br></div>
+
 		<div class="container">
+			<form name="bookfrm" id="bookfrm">
 			<div class="row align-items-stretch">
 				<c:forEach items="${list}" var="row" varStatus="vs">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -163,18 +202,22 @@
 										</c:if>
 									</p>
 									<div>
-										${row.book_price}원 ${member_id} ${row.isbn}
+										${row.book_price}원
 										<c:choose>
-											<c:when test="${choiceTable == 1 }">
-												<input type="button" value="찜취소" onclick="book_choiceCancle()">
+											<c:when test="${row.choice == 1}">
+												<button onclick="book_choiceCancle()">
+													<img src="/storage/heart4.png" class="choice-img">
+												</button>
 											</c:when>
 											<c:otherwise>
-												<input type="button" value="찜하기" onclick="book_choice()">
+												<button onclick="book_choice()">
+													<img src="/storage/heart3.png" class="choice-img">
+												</button>
 											</c:otherwise>
 										</c:choose>
 									</div>
 								</div>
-					</div>
+					</div> <%-- media-entry end--%>
 							</c:when>
 							<c:otherwise>
 								등록된 제품 없음
@@ -182,21 +225,10 @@
 						</c:choose>
 				</div>
 				</c:forEach>
+				</form>
+			</div>
+		</div> <%-- container end --%>
 
-<%--				<nav class="mt-5" aria-label="Page navigation example" data-aos="fade-up" data-aos-delay="100">--%>
-<%--					<ul class="custom-pagination pagination">--%>
-<%--						<li class="page-item prev"><a class="page-link" href="#">Previous</a></li>--%>
-<%--						<li class="page-item active"><a class="page-link" href="#">1</a></li>--%>
-<%--						<li class="page-item"><a class="page-link" href="#">2</a></li>--%>
-<%--						<li class="page-item"><a class="page-link" href="#">3</a></li>--%>
-<%--						<li class="page-item next"><a class="page-link" href="#">Next</a></li>--%>
-<%--					</ul>--%>
-<%--				</nav>--%>
-
-
-
-			</div>	
-		</div>
 	</div>
 
 	<div class="pagination">
@@ -205,6 +237,7 @@
 		<c:if test="${startPage lt 1}">
 			<c:set var="startPage" value="1" />
 		</c:if>
+
 		<c:set var="endPage" value="${currentPage + 5}" />
 		<c:if test="${endPage gt totalPage}">
 			<c:set var="endPage" value="${totalPage}" />

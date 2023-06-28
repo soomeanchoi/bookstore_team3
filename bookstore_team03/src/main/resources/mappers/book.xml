@@ -6,7 +6,6 @@
 
 <mapper namespace="book">
 
-
 	<select id="totalList" resultType="java.util.Map">
 		select * from book
 	</select>
@@ -17,10 +16,71 @@
 		where book_mainname='만화'
 	</select>
 
-	<select id="list" resultType="java.util.Map">
+	<select id="novelList" resultType="kr.co.itwill.book.BookDTO">
 		select *
-		from book AA join writer BB
-	  	on AA.book_writerno=BB.writer_no;
+		from book
+		where book_mainname='소설'
+	</select>
+
+	<select id="poemList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='시/에세이'
+	</select>
+
+	<select id="humanismList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='인문'
+	</select>
+
+	<select id="techList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='기술/계발'
+	</select>
+
+	<select id="socialList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='정치/시회'
+	</select>
+
+	<select id="selfList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='자기계발'
+	</select>
+
+	<select id="itList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='컴퓨터/IT'
+	</select>
+
+	<select id="testList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='수험서'
+	</select>
+
+	<select id="historyList" resultType="kr.co.itwill.book.BookDTO">
+		select *
+		from book
+		where book_mainname='역사'
+	</select>
+
+	<select id="list" resultType="java.util.Map">
+		select *, case when choice_no is null then 0
+   					   when choice_no is not null then 1
+					   end as choice
+		from book AA left join writer BB
+							   on AA.book_writerno=BB.writer_no left join
+			 (select aa.book_name,bb.isbn,bb.member_id, choice_no
+			  from book aa left join choice bb
+									 on aa.isbn=bb.isbn
+			  where member_id='kgukid38@naver.com') dd
+			 on AA.isbn=dd.isbn;
 	</select>
 
 	<select id="bestList" resultType="java.util.Map">
@@ -91,10 +151,30 @@
 
 	<!-- 페이징을 적용한 게시물 리스트 조회 -->
 	<select id="listPaging" resultType="java.util.Map">
-		SELECT *
-		FROM book
-		ORDER BY book_name DESC
-		LIMIT #{start}, #{end}
+		select *, case when choice_no is null then 0
+   					   when choice_no is not null then 1
+		end as choice
+		from book AA left join writer BB
+							   on AA.book_writerno=BB.writer_no left join
+			 (select aa.book_name,bb.isbn,bb.member_id, choice_no
+			  from book aa left join choice bb
+									 on aa.isbn=bb.isbn
+			  where member_id='kgukid38@naver.com') dd
+			 on AA.isbn=dd.isbn
+		ORDER BY ${sort}
+		LIMIT #{start}, 10
+	</select>
+
+	<select id="bookPriceDesc" resultType="java.util.Map">
+		select *
+		from book
+		order by book_price desc;
+	</select>
+
+	<select id="bookPrice" resultType="java.util.Map">
+		select *
+		from book
+		order by book_price;
 	</select>
 
 	<select id="listCount" resultType="int">
@@ -106,6 +186,7 @@
 		from choice
 		where member_id=#{member_id} and isbn=#{isbn}
 	</select>
+
 
 
 </mapper>     

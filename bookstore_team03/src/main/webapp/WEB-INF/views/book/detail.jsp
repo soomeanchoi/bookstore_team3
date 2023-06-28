@@ -80,6 +80,13 @@
             }//if end
         }//book_choice() end
 
+        function book_choiceCancle() {
+            if(confirm("찜 취소 하시겠습니까?")){
+                document.bookfrm.action="/choice/del";
+                document.bookfrm.submit();
+            }
+        }
+
         //장바구니 수량선택 유효성 검사
         function product_cart(){
             if(confirm("장바구니에 담으시겠습니까?")){
@@ -95,16 +102,17 @@
                 document.bookfrm.submit();
             }//if end
         }//dirOrder() end
+
+
     </script>
 </head>
 <body>
 
     <div>
-<form name="bookfrm" id="bookfrm">
+    <form name="bookfrm" id="bookfrm">
         <section>
         <div class="container" align="left">
-            <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">
-                <input type="hidden" name="isbn" value="${book.isbn}">
+<%--            <form name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">--%>
          <div class="row">
              <div class="col-6">
              	<input type="hidden" id="isbn" name="isbn" value="${book.isbn}">
@@ -141,13 +149,11 @@
                  <c:choose>
                      <c:when test="${cnt == 1}">
                          <button onclick="book_choiceCancle()">
-<%--                         <input type="button" onclick="book_choiceCancle()">--%>
-                         <img src="/storage/heart4.png" class="choice-img">
+                            <img src="/storage/heart4.png" class="choice-img">
                          </button>
                      </c:when>
                      <c:otherwise>
                          <button onclick="book_choice()">
-<%--                             <input type="button" value="찜하기" onclick="book_choice()">--%>
                              <img src="/storage/heart3.png" class="choice-img">
                          </button>
                      </c:otherwise>

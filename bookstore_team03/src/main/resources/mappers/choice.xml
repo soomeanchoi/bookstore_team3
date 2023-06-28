@@ -32,4 +32,9 @@
         where choice_no=#{choice_no} and member_id=#{smember_id}
     </delete>
 
+    <delete id="del" parameterType="kr.co.itwill.choice.ChoiceDTO">
+        delete from choice
+        where isbn=#{isbn} and member_id=#{member_id}
+    </delete>
+
 </mapper>

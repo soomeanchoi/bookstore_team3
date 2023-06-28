@@ -47,11 +47,24 @@ public class ChoiceCont {
 
         HashMap<String, Object> map=new HashMap<>();
         map.put("choice_no", choice_no);
-        map.put("smember_id", "test@naver.com");
+        map.put("smember_id", "kgukid38@naver.com");
         choiceDao.choiceDelete(map);
 
         return "redirect:/choice/list";
 
     }//delete() end
+
+    @RequestMapping("/del")
+    public String choiceDel(@ModelAttribute ChoiceDTO dto, HttpSession session) throws Exception {
+        //dto.setMember_id(session.getAttribute("smember_id"));
+
+        dto.setMember_id("kgukid38@naver.com");
+        System.out.println(dto.getIsbn());
+        System.out.println(dto.getMember_id());
+        choiceDao.choiceDel(dto);
+
+        return "redirect:/book/detail/" + dto.getIsbn();
+
+    }//choiceInsert() end
 
 }//ChoiceCont() end

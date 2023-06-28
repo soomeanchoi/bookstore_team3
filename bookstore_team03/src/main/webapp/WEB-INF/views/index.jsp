@@ -111,7 +111,7 @@
 
 								</p>
 
-								<p class="my-4" data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-primary">Read more</a></p>
+								<p class="my-4" data-aos="fade-up" data-aos-delay="300"><a href="/book/detail/${row.isbn}" class="btn btn-primary">Read more</a></p>
 							</c:if>
 						</c:forEach>
 					</div>
@@ -239,7 +239,8 @@
 				<c:forEach items="${todayWriter}" var="row" varStatus="vs">
 					<c:if test="${vs.first}">
 					<div class="col-lg-5 mb-4 mb-lg-0 order-lg-2" data-aos="fade-up">
-						<img src="/storage/${row.writer_imgname}" alt="Image" class="img-fluid">
+<%--						<img src="/storage/${row.writer_imgname}" alt="Image" class="img-fluid">--%>
+						${row.writer_imgname}
 						<br>
 						${row.writer_name}
 					</div>
