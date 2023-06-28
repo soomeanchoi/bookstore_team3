@@ -152,7 +152,7 @@
 							</div>
 							<br><br><br><br>
 							<div class="form-group">
-								<button type="button" id='checkEmail' class="id-pw-btn">찾기</button>
+								<button type="button" id='findBtn' class="id-pw-btn">찾기</button>
 								<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 							</div>
 							</div>
@@ -228,5 +228,22 @@ modal.addEventListener("click", e => {
 })
 
 
+</script>
+<script>
+	$(function(){
+		$("#findBtn").click(function(){
+			$.ajax({
+				url : "/member/findpw",
+				type : "POST",
+				data : {
+					member_name : $("#member_name").val(),
+					member_id : $("#member_id").val()
+				},
+				success : function(result) {
+					alert(result);
+				},
+			})
+		});
+	})
 </script>
 </html>

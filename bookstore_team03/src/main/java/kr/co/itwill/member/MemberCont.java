@@ -141,10 +141,12 @@ public class MemberCont<ReviewDTO> {
     String viewPage = null;
     
 	    if(memberDao.loginMember(loginInfo) == null) { // 로그인 실패
-	    	viewPage = "member/login";
+	    	
 	    	mav.addObject("loginFailed", true);
 	    	model.addAttribute("msg", "아이디와 비밀번호를 확인해주세요.");
 	    	
+	    	viewPage = "member/login";
+
 	    }else{ // 로그인 성공 
 	        
 	        HttpSession session = request.getSession();
@@ -159,6 +161,13 @@ public class MemberCont<ReviewDTO> {
 	    }
     
     return viewPage;
+	}
+	
+	@RequestMapping("/loginfail")
+	public ModelAndView loginfail() {
+		ModelAndView mav=new ModelAndView();
+		mav.setViewName("member/login");
+		return mav;
 	}
 	
 	
