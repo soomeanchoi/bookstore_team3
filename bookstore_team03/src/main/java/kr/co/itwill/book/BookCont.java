@@ -22,6 +22,7 @@ import java.util.Map;
 @RequestMapping("/book")
 public class BookCont {
 
+    
     public BookCont(){
         System.out.println("BookCont()객체 생성됨");
     }//class end
@@ -76,7 +77,7 @@ public class BookCont {
     }//list() end
 
     @RequestMapping("/list")
-    public ModelAndView list(@RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
+    public ModelAndView list(@RequestParam(defaultValue = "book_price") String sort, @RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
         String s_id="kgukid38@naver.com";
         map.put("member_id", s_id);
 
@@ -86,27 +87,143 @@ public class BookCont {
         int pageSize = 10;
         int totalPage = (int) Math.ceil((double) totalCount / pageSize);
 
-        int start = (page - 1) * pageSize;
-        int end = start + pageSize;
+        int start = ((page - 1) * pageSize) ;
+        int end = page * pageSize;
 
-        List<Map<String, Object>> list = bookDao.listPaging(start, end);
+        int cnt = bookDao.choiceTable(map);
+        if (cnt == 1){
+            mav.addObject("cnt", cnt);
+        }else if (cnt == 0){
+            mav.addObject("cnt", cnt);
+        }else {
+            mav.addObject("cnt", cnt);
+        }
+
+        List<Map<String, Object>> list = bookDao.listPaging(start, end, sort);
 
         mav.setViewName("book/list");
-        mav.addObject("list", list);
+        mav.addObject("bookPrice", sort);
         mav.addObject("totalPage", totalPage);
         mav.addObject("currentPage", page);
+        mav.addObject("list", list);
 //        mav.addObject("list", bookDao.list());
         mav.addObject("totalList", bookDao.totalList());
         mav.addObject("choiceTable", bookDao.choiceTable(map));
 
         return mav;
-    }//list() end
+    }//list() end@RequestMapping("/list")
+
+
+    // @RequestMapping("/list")
+//    public ModelAndView list2(@RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
+//        String s_id="kgukid38@naver.com";
+//        map.put("member_id", s_id);
+//
+//        ModelAndView mav=new ModelAndView();
+//
+//        int totalCount = bookDao.bookCount();
+//
+//
+//        int pageSize = 10;
+//        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+//
+//        int start = ((page - 1) * pageSize) + 1;
+//        int end = page * pageSize;
+//
+//        List<Map<String, Object>> list = bookDao.listPaging(start, end);
+//
+//        mav.setViewName("book/list");
+//
+//        mav.addObject("list", list);
+//        mav.addObject("totalPage", totalPage);
+//        mav.addObject("currentPage", page);
+//
+////        mav.addObject("list", bookDao.list());
+//        mav.addObject("totalList", bookDao.totalList());
+//        mav.addObject("choiceTable", bookDao.choiceTable(map));
+//
+//
+//        return mav;
+//    }//list() end@RequestMapping("/list")
+
 
     @RequestMapping("/comicList")
-    public ModelAndView list2() {
+    public ModelAndView comicList() {
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/comicList");
         mav.addObject("comicList", bookDao.comicList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/novelList")
+    public ModelAndView novelList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/novelList");
+        mav.addObject("novelList", bookDao.novelList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/poemList")
+    public ModelAndView poemList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/poemList");
+        mav.addObject("poemList", bookDao.poemList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/humanismList")
+    public ModelAndView humanismList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/humanismList");
+        mav.addObject("humanismList", bookDao.humanismList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/techList")
+    public ModelAndView techList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/techList");
+        mav.addObject("techList", bookDao.techList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/socialList")
+    public ModelAndView socialList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/socialList");
+        mav.addObject("socialList", bookDao.socialList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/selfList")
+    public ModelAndView selfList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/selfList");
+        mav.addObject("selfList", bookDao.selfList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/itList")
+    public ModelAndView itList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/itList");
+        mav.addObject("itList", bookDao.itList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/testList")
+    public ModelAndView testList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/testList");
+        mav.addObject("testList", bookDao.testList());
+        return mav;
+    }//list() end
+
+    @RequestMapping("/historyList")
+    public ModelAndView historyList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/historyList");
+        mav.addObject("historyList", bookDao.historyList());
         return mav;
     }//list() end
 

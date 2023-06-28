@@ -30,4 +30,8 @@ public class ChoiceDAO {
         return sqlSession.delete("choice.delete", map);
     }//delete() end
 
+    public int choiceDel(ChoiceDTO dto) {
+        return sqlSession.insert("choice.del", dto);
+    }//insert() end
+
 }//class end

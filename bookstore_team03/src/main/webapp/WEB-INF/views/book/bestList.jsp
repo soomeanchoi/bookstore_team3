@@ -134,6 +134,24 @@
             })
 
         })
+
+        //장바구니 수량선택 유효성 검사
+        function product_cart(){
+            if(confirm("장바구니에 담으시겠습니까?")){
+                document.bookfrm.action="/cart/insert";
+                document.bookfrm.submit();
+            }//if end
+        }//product_cart() end
+
+        //상품직접구매
+        function dirOrder(){
+            if(confirm("구매하시겠습니까?")){
+                document.bookfrm.action="/border/directborderForm";
+                document.bookfrm.submit();
+            }//if end
+        }//dirOrder() end
+
+
     </script>
   </head>    
 
@@ -183,6 +201,8 @@
             <a href="/book/comicList"><li class="tab-link" data-tab="tab-2">만화</li></a>
         </ul>
     </div>
+
+    <form name="bookfrm" id="bookfrm">
     <table>
     <tr>
         <hr>
@@ -191,6 +211,7 @@
                 <div>
                 <c:choose>
                     <c:when test="${row.book_imgname != '-'}">
+                        <input type="hidden" name="isbn" value="${row.isbn}">
                         <div class="container">
                             <div class="row">
                             <div class="list_img col-2">
@@ -200,10 +221,10 @@
                                 <a href="detail/${row.isbn}">${row.book_name}</a><br>
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
-                                        <input type="button" value="장바구니">
+                                        <input type="button" value="장바구니" onclick="product_cart()">
                                     </span><br>
                                     <span>
-                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매">
+                                    ${row.book_price}원 | ${row.book_page}p  <input type="button" value="바로구매" onclick="dirOrder()">
                                     </span>
                                 <br><br>
                                 <%--조회수 : ${row.book_count}--%>
@@ -228,6 +249,7 @@
         </c:forEach>
     </tr>
     </table>
+    </form>
 </section>
 
 

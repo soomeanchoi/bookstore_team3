@@ -28,6 +28,42 @@ public class BookDAO {
         return sqlSession.selectList("book.comicList");
     }
 
+    public List<BookDTO> novelList() {
+        return sqlSession.selectList("book.novelList");
+    }
+
+    public List<BookDTO> poemList() {
+        return sqlSession.selectList("book.poemList");
+    }
+
+    public List<BookDTO> humanismList() {
+        return sqlSession.selectList("book.humanismList");
+    }
+
+    public List<BookDTO> techList() {
+        return sqlSession.selectList("book.techList");
+    }
+
+    public List<BookDTO> socialList() {
+        return sqlSession.selectList("book.socialList");
+    }
+
+    public List<BookDTO> selfList() {
+        return sqlSession.selectList("book.selfList");
+    }
+
+    public List<BookDTO> itList() {
+        return sqlSession.selectList("book.itList");
+    }
+
+    public List<BookDTO> testList() {
+        return sqlSession.selectList("book.testList");
+    }
+
+    public List<BookDTO> historyList() {
+        return sqlSession.selectList("book.historyList");
+    }
+
     public List<Map<String, Object>> list() {
         return sqlSession.selectList("book.list");
     }//list() end
@@ -72,11 +108,22 @@ public class BookDAO {
         return sqlSession.selectOne("book.score", isbn);
     }//reviewScore() end
 
-    public List<Map<String, Object>> listPaging(int start, int end) {
+    public List<Map<String, Object>> listPaging(int start, int end, String sort) {
         Map<String, Object> params = new HashMap<>();
         params.put("start", start);
         params.put("end", end);
+        params.put("sort", sort);
         return sqlSession.selectList("book.listPaging", params);
+    }
+
+    public List<Map<String, Object>> bookPriceDesc() {
+        return sqlSession.selectList("book.bookPriceDesc");
+    }
+
+    public List<Map<String, Object>> bookPrice(String sort) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("sort", sort);
+        return sqlSession.selectList("book.bookPrice", params);
     }
 
     public int bookCount() {
