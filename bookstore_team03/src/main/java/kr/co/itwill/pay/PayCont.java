@@ -102,8 +102,29 @@ public class PayCont {
         System.out.println("borderNo = " + borderNo);
 
 
+        //Cnt = 1 이면 결제 성공 -> 장바구니만 지움 --> 직접구매는 없애면 안될듯, pay폼에 insert
+        if (cnt == 1){
 
-        return null;
+            //border 칼럼들을 가져옴
+            List<Map<String, Object>> data = payDAO.selectData(borderNo);
+
+            //pay 에 필요한 정보들
+
+
+        //Cnt = 0 이면 결제 실패 -> order_list 와 border 삭제
+        }else if (cnt ==0){
+
+            payDAO.payFail_border(borderNo);
+            payDAO.payFail_orderlist(borderNo);
+
+        }else{
+            System.out.println("오류 : 값을 찾을 수 없음");
+        }
+
+
+
+
+        return "redirect:/member/myPage";
     }
 
 

@@ -27,5 +27,12 @@ public class PayDAO {
         return sqlSession.selectOne("pay.name", member_id);
     }
 
+    public int payFail_border(String border_no){
+        return sqlSession.delete("pay.delBorder", border_no);
+    }
+    public int payFail_orderlist(String border_no){
+        return sqlSession.delete("pay.delOrderlist", border_no);
+    }
+
 
 }

@@ -19,6 +19,16 @@
 		WHERE member_id = #{member_id}
 	</select>
 
+	<delete id="delBorder" parameterType="String">
+		DELETE FROM border
+		WHERE border_no = #{border_no}
+	</delete>
+
+	<delete id="delOrderlist" parameterType="String">
+		DELETE FROM orderlist
+		WHERE border_no = #{border_no}
+	</delete>
+
 
 
 </mapper>     
