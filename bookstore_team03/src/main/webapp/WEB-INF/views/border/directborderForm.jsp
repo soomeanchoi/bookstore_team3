@@ -236,7 +236,7 @@
                  </div>
              </div>
              <br><br>
-             <input type="submit" value="결제하기" onclick="location.href='/border/msgView'">
+             <input type="submit" value="결제하기">
          </div>
          </div>
 	          

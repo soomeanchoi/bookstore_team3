@@ -102,7 +102,7 @@ public class PayCont {
         System.out.println("borderNo = " + borderNo);
 
 
-        //Cnt = 1 이면 결제 성공 -> 장바구니만 지움 --> 직접구매는 없애면 안될듯, pay폼에 insert
+        //Cnt = 1 이면 결제 성공 -> 장바구니만 지움 --> 직접구매는 없애면 안될듯, pay폼에 insert -> 포인트 지급, 차감
         if (cnt == 1){
 
             //border 칼럼들을 가져옴

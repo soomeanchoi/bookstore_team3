@@ -278,8 +278,8 @@ public class BorderCont {
 		return mav;
 	}//borderlist() end
 		
-		@RequestMapping("/msgView")
-		public String msgView() {
-			return "border/msgView";
-		}//msgView() end
+//		@RequestMapping("/msgView")
+//		public String msgView() {
+//			return "border/msgView";
+//		}//msgView() end
 	}//class end

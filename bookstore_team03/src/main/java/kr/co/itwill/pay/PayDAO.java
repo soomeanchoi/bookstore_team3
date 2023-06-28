@@ -36,6 +36,6 @@ public class PayDAO {
 
     public int payInsert(Map<String, Object> map) {return sqlSession.insert("pay.insert", map);}
 
-    public int payPointPlus(Map<String, Object> map){ return sqlSession.update("pay.pointPlus");}
-    public int payPointMinus(Map<String, Object> map){ return sqlSession.update("pay.pointMinus");}
+    public int payPointPlus(Map<String, Object> map){ return sqlSession.update("pay.pointPlus", map);}
+    public int payPointMinus(Map<String, Object> map){ return sqlSession.update("pay.pointMinus", map);}
 }

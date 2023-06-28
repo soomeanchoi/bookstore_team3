@@ -34,9 +34,17 @@
 		VALUE (#{border_no}, 1, #{border_usepoint}, #{pay_point})
 	</insert>
 
-	<update id="pointPlus" parameterType="java.util.Map">
+	<insert id="pointPlus" parameterType="java.util.Map">
+		INSERT INTO point (member_id, point_change, border_no)
+		VALUE (#{member_id}, #{pay_point}, #{border_no})
+	</insert>
 
-	</update>
+	<insert id="pointMinus" parameterType="java.util.Map">
+		INSERT INTO point (member_id, point_change, border_no)
+		VALUE (#{member_id}, -#{border_usepoint}, #{border_no})
+	</insert>
+
+
 
 
 
