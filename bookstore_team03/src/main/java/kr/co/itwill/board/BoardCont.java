@@ -121,7 +121,7 @@ public class BoardCont {
 	
 	///////////책검색////////////////////////////////////////////
 		
-	/*
+	
 	 @RequestMapping("/booksend")
 	@ResponseBody
 	public String bookSend(HttpServletRequest req) {
@@ -132,7 +132,7 @@ public class BoardCont {
 	    
 	    return img[bookIndex]; //응답메세지
 	}//bookSend() end
-	*/	///////////////////////////////////////////////////////////////////////////////
+		///////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/search")    //defaultValue : 후행하는 매개변수의 기본값 설정(여기서는 빈값)
 	 public ModelAndView search(@RequestParam(value="pageNum", defaultValue="1") int pageNum
@@ -179,7 +179,7 @@ public class BoardCont {
 		return mav;
 	}//search() end
 		 
-		/*
+		
 		@RequestMapping("/searchform")
 		public String bookSearch() {
 		    return "board/boardForm";
@@ -213,7 +213,7 @@ public class BoardCont {
 			System.out.println(list);
 			return list;
 		}//search() end
-			*/
+			
 	///////////////////////////////////////////
 	
 	

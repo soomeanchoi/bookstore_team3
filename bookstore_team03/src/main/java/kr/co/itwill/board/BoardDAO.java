@@ -64,10 +64,10 @@ public class BoardDAO {
 	
 	
 	//책검색
-	/*public List<String> search(String keyword){
+	public List<String> search(String keyword){
 		return sqlSession.selectList(keyword);
 	}//search() end
-	*/	
+		
 	//게시글 조회수
 	public void board_read(int board_no) {
 		sqlSession.update("board.board_read", board_no);
