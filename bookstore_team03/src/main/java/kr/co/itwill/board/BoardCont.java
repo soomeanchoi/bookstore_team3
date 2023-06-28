@@ -121,7 +121,7 @@ public class BoardCont {
     }//write() end
 	
 	//게시글검색
-	@RequestMapping("/search")    //defaultValue : 후행하는 매개변수의 기본값 설정(여기서는 빈값)
+	@RequestMapping("/search")   
 	 public ModelAndView search(@RequestParam(value="pageNum", defaultValue="1") int pageNum
 			 				   ,@RequestParam(value="keyWord", defaultValue = "") String keyWord
 			 				   ,@RequestParam(value="category") String category) {
