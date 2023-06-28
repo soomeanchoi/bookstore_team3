@@ -211,14 +211,13 @@
                 <div>
                 <c:choose>
                     <c:when test="${row.book_imgname != '-'}">
-                        <input type="hidden" name="isbn" value="${row.isbn}">--%>
+                        <input type="hidden" name="isbn" value="${row.isbn}">
                         <div class="container">
                             <div class="row">
                             <div class="list_img col-2">
                                 <img src="/storage/${row.book_imgname}" width="100px">
                             </div>
                             <div class="list_info_box col-9">
-
                                 <a href="detail/${row.isbn}">${row.book_name}</a><br>
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}

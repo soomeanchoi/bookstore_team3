@@ -80,6 +80,7 @@
 			border: 1px;
 		}
 
+
 	</style>
 	<script>
 		$(document).ready(function(){
@@ -149,16 +150,11 @@
 
 	<div class="section">
 
-<%--		<div id="product_order_list">--%>
-<%--			<p>--%>
-<%--			<a href="javascript:recentlist();">최신순</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp--%>
-<%--			<a href="javascript:pricelist();">낮은가격</a>&nbsp&nbsp&nbsp|&nbsp&nbsp&nbsp--%>
-<%--			<a href="javascript:listSort(1);">가격순</a> </p>--%>
-<%--		</div>--%>
 
-		<a href="#" onclick="goToPageSort('book_price desc')">높은가격순</a>
-		<a href="#" onclick="goToPageSort('book_price')">낮은가격순</a>
-		<a href="#" onclick="goToPageSort('book_date')">등록일순</a>
+
+<%--		<a href="#" onclick="goToPageSort('book_price desc')">높은가격순</a>--%>
+<%--		<a href="#" onclick="goToPageSort('book_price')">낮은가격순</a>--%>
+<%--		<a href="#" onclick="goToPageSort('book_date')">등록일순</a>--%>
 
 
 
@@ -184,6 +180,14 @@
 	</div>
 		<div><hr>
 			<br><br></div>
+	<div id="product_order_list">
+		<p>
+			<a href="javascript:goToPageSort('book_date');">최신순</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			<a href="javascript:goToPageSort('book_price');">낮은가격</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			<a href="javascript:goToPageSort('book_price desc');">높은가격순</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+			<a href="javascript:goToPageSort('book_count desc');">조회순</a>
+		</p>
+	</div>
 
 		<div class="container">
 			<form name="bookfrm" id="bookfrm">
@@ -226,45 +230,47 @@
 				</div>
 				</c:forEach>
 				</form>
+			<hr>
 			</div>
 		</div> <%-- container end --%>
+		<div class="paging" style="text-align: center; margin-top: 30px">
+			<c:set var="currentPage" value="${page}" />
+			<c:set var="startPage" value="${currentPage - 5}" />
+			<c:if test="${startPage lt 1}">
+				<c:set var="startPage" value="1" />
+			</c:if>
 
-	</div>
+			<c:set var="endPage" value="${currentPage + 5}" />
+			<c:if test="${endPage gt totalPage}">
+				<c:set var="endPage" value="${totalPage}" />
+			</c:if>
 
-	<div class="pagination">
-		<c:set var="currentPage" value="${page}" />
-		<c:set var="startPage" value="${currentPage - 5}" />
-		<c:if test="${startPage lt 1}">
-			<c:set var="startPage" value="1" />
-		</c:if>
+			<a href="#" onclick="goToPage(1)">처음</a>
+			<c:if test="${currentPage gt 1}">  <%-- gt : > --%>
+				<a href="#" onclick="goToPage(${currentPage - 1})">이전</a>
+			</c:if>
+			<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
+				<c:choose>
+					<c:when test="${pageNum eq currentPage}"> <%-- eq : == --%>
+						<a href="#" class="active">${pageNum}</a>
+					</c:when>
+					<c:otherwise>
+						<a href="#" onclick="goToPage(${pageNum})">&nbsp&nbsp${pageNum}&nbsp&nbsp</a>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
+			<c:if test="${currentPage lt totalPage}">       <%-- lt : < --%>
+				<a href="#" onclick="goToPage(${currentPage + 1})">다음</a>
+			</c:if>
+			<a href="#" onclick="goToPage(${totalPage})">끝</a>
+		</div>
+	</div> <%-- div-section end --%>
 
-		<c:set var="endPage" value="${currentPage + 5}" />
-		<c:if test="${endPage gt totalPage}">
-			<c:set var="endPage" value="${totalPage}" />
-		</c:if>
 
-		<a href="#" onclick="goToPage(1)">처음</a>
-		<c:if test="${currentPage gt 1}">  <%-- gt : > --%>
-			<a href="#" onclick="goToPage(${currentPage - 1})">이전</a>
-		</c:if>
-		<c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-			<c:choose>
-				<c:when test="${pageNum eq currentPage}"> <%-- eq : == --%>
-					<a href="#" class="active">${pageNum}</a>
-				</c:when>
-				<c:otherwise>
-					<a href="#" onclick="goToPage(${pageNum})">${pageNum}</a>
-				</c:otherwise>
-			</c:choose>
-		</c:forEach>
-		<c:if test="${currentPage lt totalPage}">       <%-- lt : < --%>
-			<a href="#" onclick="goToPage(${currentPage + 1})">다음</a>
-		</c:if>
-		<a href="#" onclick="goToPage(${totalPage})">끝</a>
-	</div>
 
+
+<%--		<a href="write">글쓰기</a>--%>
 		<!-- Preloader -->
-	<a href="write">글쓰기</a>
 		<div id="overlayer"></div>
 		<div class="loader">
 			<div class="spinner-border text-primary" role="status">
