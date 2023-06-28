@@ -45,16 +45,43 @@ $(document).ready(function(){
 				<li class="tab-link" data-tab="tab-7">ist</li>
 				<li class="tab-link" data-tab="tab-8">int</li>
 			</ul>
-			<!-- 탭 메뉴 상단 끝 -->
-			<!-- 탭 메뉴 내용 시작 -->
-			<div id="tab-1" class="tab-content current">
-				<h1>탭 메뉴 1 내용입니다.</h1>
-				<p>모그에 에 의하지 아니하고는 파면되지 아니하며, 징계처분에 의하지 아니하고는 정직·감봉 기타 불리한 처분을
-					</p>
-
-				<p>공법률이 정하되며, 대통령은 즉시 이를 공포하여야 한다. 대통령은 국민의 보통·평등·직접·비밀선거에 의하여
-					선출한다.</p>
-
+	<!-- 탭 메뉴 상단 끝 -->
+	<!-- 탭 메뉴 내용 시작 -->
+	<div id="tab-1" class="tab-content current">
+		<h1>탭 메뉴 1 내용입니다.</h1>
+		<c:if test="${requestScope.count==0}">
+		<div class="table-responsive">
+	 	<table><tr><td>게시판에 글 없음</td></tr></table>
+	 	</div>
+		 </c:if>
+		<c:if test="${requestScope.count!=0}">
+		<div class="table-responsive">
+		<table class="table">
+			<thead class="thead-light">
+			<tr>
+				<th scope="col">작성자</th>
+				<th scope="col">제목</th>
+				<th scope="col">조회수</th>
+				<th scope="col">좋아요</th>
+				<th scope="col">작성일</th>
+			</tr>
+			</thead>
+			<tbody class="customtable">		    	
+		    	<c:forEach items="${list}" var="row" begin="0" end="${totalRecord}" varStatus="status">
+		    	<input type="hidden" name="status" value="${status.index}">
+		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
+		    	<tr>
+	    		<td id="profile_name" class="profile_name">${row.profile_name}</td>
+	    		<td id="board_title" class="board_title"><a href="detail/${row.board_no}">${row.board_title}</a>[${row.replycnt}]</td>
+	    		<td id="board_read" class="board_read">${row.board_read}</td>
+	    		<td id="board_good" class="board_good">${row.board_good}</td>
+	    		<td id="board_date" class="board_date">${row.board_date}</td>
+	    		</tr>
+			</c:forEach>			
+			</tbody>
+		</table>
+		</div>
+	</c:if>
 			</div>
 			<div id="tab-2" class="tab-content">
 				<h1>탭 메뉴 2 내용입니다.</h1>
