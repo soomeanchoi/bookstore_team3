@@ -30,9 +30,9 @@ public class DeliveryAddCont {
 	@RequestMapping("/list")
 	public ModelAndView list(HttpSession session) {
 		//로그인했다면
-		//String s_id=session.getAttribute("s_id");
+		String s_id = (String)session.getAttribute("member_id"); 
 
-		String s_id = "kgukid38@naver.com";//임시아이디
+		//String s_id = "kgukid38@naver.com";//임시아이디
 
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("deliveryAdd/list");// /WEB-INF/cart/list.jap
@@ -49,8 +49,8 @@ public class DeliveryAddCont {
 	@RequestMapping("/insert")
 	public String insert(@ModelAttribute DeliveryAddDTO dto, HttpSession session) {
 		//로그인했다면
-		//String s_id=session.getAttribute("s_id");		
-		String s_id = "kgukid38@naver.com";//임시아이디
+		String s_id = (String)session.getAttribute("member_id"); ;		
+		//String s_id = "kgukid38@naver.com";//임시아이디
 
 		dto.setMember_id(s_id);
 		deliveryAddDao.insert(dto);

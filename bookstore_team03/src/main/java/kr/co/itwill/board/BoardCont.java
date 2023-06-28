@@ -33,38 +33,32 @@ public class BoardCont {
 	@Autowired
 	BoardDAO boardDao;
 	
-	//세션아이디 쿠키에 저장
-	public void idcookie(HttpServletRequest request, HttpServletResponse response) {
-		HttpSession session = request.getSession(); // 세션 가져오기
-		String sessionId = session.getId(); // 세션 아이디 가져오기
-		Cookie sessionCookie = new Cookie("JSESSIONID", sessionId); // 세션 아이디를 가진 쿠키 생성
-		
-		response.addCookie(sessionCookie); // 쿠키를 응답에 추가
-		
-	}//idcookie() end
-	
 	
 	//페이징 있음
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(value="pageNum", defaultValue="1") int pageNum) {
-	
+
+	//페이징
+	//총 주문내역개수
+	int pageSize=5;
+	int totalRecord=0;
+	int totalPage=1;
+		
 	//총 게시글개수
-	int totalRecord = boardDao.totalRecord();
+	totalRecord = boardDao.totalRecord();
 	
-	int totalPage = totalRecord / pageSize;
-	if(totalRecord%pageSize!=0) {
-		totalPage++;
+	if((double)totalRecord % (double)totalPage == 0 ) {
+		totalPage = totalRecord / pageSize;
+	}else {
+		totalPage = totalRecord / pageSize +1;
 	}//if end
 	
-	
 	int start = (pageNum -1) * pageSize + 1;
-	int end = start +pageSize - 1;
+	int end = pageSize;
 	
-	List<HashMap<String, Object>> list = new ArrayList<>();
-	list = boardDao.list();
 	ModelAndView mav = new ModelAndView();
 	mav.setViewName("board/list");
-    
+	
     //총 게시글
     mav.addObject("totalRecord",  totalRecord);
     
@@ -75,14 +69,18 @@ public class BoardCont {
 	mav.addObject("totalPage", totalPage);
 	
 	return mav;
-	}//list2 end
+	}//list end
 	
+	//게시글 상세보기
 	@RequestMapping("/detail/{board_no}")
-	public ModelAndView detail(@PathVariable int board_no) {
+	public ModelAndView detail(@PathVariable int board_no, HttpSession session) {
+		String s_id = (String)session.getAttribute("member_id"); 
+		//String s_id = "kgukid38@naver.com";
+		
 		ModelAndView mav=new ModelAndView();
         mav.setViewName("board/detail");
         mav.addObject("detail", boardDao.detail(board_no));
-        
+        mav.addObject("s_id", s_id);
         //유저가 선택한 책정보 추가
         String isbn = (String)boardDao.detail(board_no).get("isbn");
         mav.addObject("bookinfo", boardDao.bookinfo(isbn));
@@ -92,6 +90,7 @@ public class BoardCont {
         return mav;
 	}//detail() end
 	
+	//좋아요
 	@RequestMapping("/good/{board_no}")
 	public String good(@PathVariable int board_no) {
 		boardDao.board_good(board_no);
@@ -101,11 +100,10 @@ public class BoardCont {
 	//글쓰기창에 유저정보 불러오기
 	@RequestMapping("/boardForm")
 	public ModelAndView boardForm(HttpSession session){
-		//String s_id = session.getAttribute("s_id"); 
-		String s_id = "kgukid38@naver.com";
+		String s_id = (String)session.getAttribute("member_id"); 
+		//String s_id = "kgukid38@naver.com";
 		ModelAndView mav=new ModelAndView();
         mav.setViewName("board/boardForm");
-        
         mav.addObject("userinfo", boardDao.userinfo(s_id));
 		return mav;
 	}//boardForm end
@@ -123,7 +121,7 @@ public class BoardCont {
 	
 	///////////책검색////////////////////////////////////////////
 		
-	
+	/*
 	 @RequestMapping("/booksend")
 	@ResponseBody
 	public String bookSend(HttpServletRequest req) {
@@ -134,7 +132,53 @@ public class BoardCont {
 	    
 	    return img[bookIndex]; //응답메세지
 	}//bookSend() end
-	///////////////////////////////////////////////////////////////////////////////
+	*/	///////////////////////////////////////////////////////////////////////////////
+
+	@RequestMapping("/search")    //defaultValue : 후행하는 매개변수의 기본값 설정(여기서는 빈값)
+	 public ModelAndView search(@RequestParam(value="pageNum", defaultValue="1") int pageNum
+			 				   ,@RequestParam(defaultValue = "") String keyWord
+			 				   ,@RequestParam String category) {
+		//페이징관련
+		int pageSize=5;
+		int totalRecord=0;
+		int totalPage=1;
+		
+		//페이지개수
+		if((double)totalRecord % (double)totalPage == 0 ) {
+			totalPage = totalRecord / pageSize;
+		}else {
+			totalPage = totalRecord / pageSize +1;
+		}//if end
+		
+		//시작페이지넘버
+		int start = (pageNum -1) * pageSize + 1;
+		//보여줄 글개수
+		int end = pageSize;
+		
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("category", category);
+	    map.put("keyWord", keyWord);
+	    map.put("start", start);
+		map.put("end", end);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/list");
+		
+		//총 검색 게시글개수
+		totalRecord = boardDao.stotalRecord(map);
+		
+	    //검색된 모든 게시글 수 보내기
+	    mav.addObject("totalRecord",  totalRecord);
+	    
+		//총 페이지수
+		mav.addObject("totalPage", totalPage);
+				
+		//검색결과리스트
+		mav.addObject("list", boardDao.search(map));
+		
+		return mav;
+	}//search() end
+		 
 		/*
 		@RequestMapping("/searchform")
 		public String bookSearch() {
@@ -196,8 +240,6 @@ public class BoardCont {
 	
 	@RequestMapping("/boardUpForm/update")
 	public String update(@ModelAttribute BoardDTO dto) {
-        
-		//System.out.println(dto.getBoard_no());
 		
 		int cnt = boardDao.update(dto);
 		if(cnt!=0) {

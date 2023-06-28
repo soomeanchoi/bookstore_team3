@@ -23,7 +23,8 @@ public class ResearchDAO {
     public List<ResearchDTO> oneList(int research_no){return sqlSession.selectList("research.one", research_no);}
 
     public String result_A(String answer){return sqlSession.selectOne("research.result_A", answer);}
-    public String result_A1(Map<String, Object> data){return sqlSession.selectOne("research.result_A", data);}
+    public String result_A1(Map<String, Object> data){return sqlSession.selectOne("research.result_A1", data);}
+    public String result_B1(Map<String, Object> data){return sqlSession.selectOne("research.result_B1", data);}
     public String result_B(String answer){return sqlSession.selectOne("research.result_B", answer);}
 
     public int insert(Map<String, Object> map){return sqlSession.insert("research.insert", map);}
@@ -32,4 +33,5 @@ public class ResearchDAO {
 
     public int update(Map<String, Object> map){return sqlSession.update("research.update", map);}
 
+    public int bbtiUpdate(Map<String, Object> map){return sqlSession.update("research.bbtiUpdate", map);}
 }

@@ -38,10 +38,12 @@
   </head>
 <body>
 <section>
-	<h2>${profile.profile_name} 님의 프로필</h2>
+	<h2> 님의 프로필</h2>
 
 	<div>
-		${profile.profile_intro}
+		<c:forEach var="profile" items="${profile}">
+			  ${profile_name}
+			</c:forEach>
 	</div>
 
 

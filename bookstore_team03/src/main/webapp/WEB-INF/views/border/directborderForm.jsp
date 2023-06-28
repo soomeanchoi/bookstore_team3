@@ -1,41 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@taglib prefix="c" 	uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>directorderForm</title>
-
-<link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/orderfrm.css" />
-    <!-- <link rel="stylesheet" href="/css/signup.css" /> -->
-    <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
-    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-latest.js"
-    ></script>
-
+<%@ include file="../template/header.jsp" %>    
+<!-- 
+ <link rel="stylesheet" href="/css/orderfrm.css" /> -->
 <script>
 	function ordercheck(){
 		if(confirm("결제할까요?")){
@@ -264,12 +231,12 @@
              <hr>
              <div class="col-sm-6 mt-2 ps-sm-0">
                  <div class="form-outline">
-                     <input type="text" id="border_price" class="form-control order-form-input" value="${directborder.book_price}"/>
+                     <input type="text" id="border_price" name="border_price" class="form-control order-form-input" value="${directborder.book_price}"/>
                      <label class="form-label" for="form10">총 결제금액</label>
                  </div>
              </div>
              <br><br>
-             <input type="submit" value=" 결제하기" onclick="location.href='/border/'msgView">
+             <input type="submit" value="결제하기" onclick="location.href='/border/msgView'">
          </div>
          </div>
 	          
@@ -277,31 +244,7 @@
 	  </div>
     </section>
 	
-	
-	
 	</form>
-  	<%-- 
-    <table border="1">
-    	<tr>
-		<td>사용할 포인트</td>
-		<td><input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" onchange="pointuse()" value=0>
-		<input type="button" value="사용" >
-		</td>
-		<td>보유포인트</td>
-		<td><input type="number" name="havepoint" id="havepoint" value="${havepoint}" readonly></td>
-		</tr>    	
-	    <tr>
-		<td>적립예정 포인트</td>
-		<td id="addpoint">${directborder.book_price}</td>
-		</tr>
-		<tr>
-		<td>결제금액</td>
-		<td id="border_price"> ${directborder.book_price} </td>
-		</tr>
-	</table>	
-	
-	<input type="submit" value=" 결제하기">
-	</form> --%>
 
 
 <!--  DAUM 우편번호 API 시작 -->
@@ -387,5 +330,7 @@
     </script>
 <!--  DAUM 우편번호 API 종료 -->
 
+<%--    끝     --%>
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

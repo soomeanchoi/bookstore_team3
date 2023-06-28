@@ -31,8 +31,8 @@
   </head>
 <body>
 <section style="padding: 50px;">
-	<h1><div class="profilefrm-title">프로필 등록</div></h1>
-	<form name="profilefrm" id="profilefrm" method="post" action="insert" enctype="multipart/form-data">
+	<h1><div class="profilefrm-title">프로필 수정</div></h1>
+	<form name="profilefrm" id="profilefrm" method="post" action="update" enctype="multipart/form-data">
 	    <table class="table" style="margin-top: 0px;">
 	    <tr>
 	        <th>프로필 사진</th>
@@ -48,8 +48,8 @@
 	    </tr>   
 	    <tr>
 	        <td colspan="2" align="center">
-	            <input type="submit" value="프로필 등록" class="submit-btn"> 
-	            <input class="submit-btn" type="button" value="취소" onclick="location.href='/member/myPage';"/>
+	            <input type="submit" value="프로필 수정" class="submit-btn"> 
+	            <input class="id-pw-btn" type="button" value="취소" onclick="location.href='/member/myPage';"/>
 	        </td>
 	    </tr>    
 	    </table>  

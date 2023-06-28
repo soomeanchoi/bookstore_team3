@@ -1,47 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+	
 <%@ include file="../template/header.jsp"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<title>orderForm</title>
 
-<link rel="stylesheet" href="/css/reset.css" />
-<link rel="stylesheet" href="/css/board.css" />
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/header.css" />
-  <link rel="stylesheet" href="/css/section.css" />
-
-<link rel="stylesheet" href="/css/signup.css" />
-<!-- Latest compiled and minified CSS -->
-
-<link
-	href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700'
-	rel='stylesheet' type='text/css'>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
-<link rel="stylesheet"
-	href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" />
-<link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-<script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script>
+<title>bbti board</title>
 
 <script>
 
@@ -57,13 +19,14 @@
 		<div class="card">
 				<div class="card-body text-center">
 					<h5 class="card-title m-b-0">bbti 커뮤니티</h5>
+					<h5>${s_id}</h5>
 				</div>
 				
 	 <c:if test="${requestScope.count==0}">
 	 	<table><tr><td>게시판에 글 없음</td></tr></table>
 	 </c:if>
 				
-				<div class="table-responsive">
+	<div class="table-responsive">
 		<table class="table">
 			<thead class="thead-light">
 			<tr>
@@ -84,35 +47,32 @@
 	    		<td id="board_read" class="board_read">${row.board_read}</td>
 	    		<td id="board_good" class="board_good">${row.board_good}</td>
 	    		<td id="board_date" class="board_date">${row.board_date}</td>
-	    			
-	   		<%-- 	<td><input type='button' value='삭제' onclick="location.href='/cart/delete?cart_no=${row.cart_no}'"></td> --%>
 	    		</tr>
 			</c:forEach>	
-			
-			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
-		    	 <a href="list?pageNum=${i}"> ${i} </a>
-		    </c:forEach>
-
 		<!-- 검색시작 -->
-		<!-- <tr>
+		<tr>
 			<td colspan="4"  style='text-align:center; height: 50px;'>
-				<form action="list.jsp" onsubmit="return searchCheck()">myscript.js함수 작성함
-					<select name="col">
-						<option value="subject_content">제목+내용
-						<option value="subject">제목
-						<option value="content">내용
-						<option value="wname">작성자
+				<form action="list.jsp" onsubmit="return searchCheck()">
+					<select name="category" id="category">
+						<option value="board_title or board_content">제목+내용</option>
+						<option value="board_title">제목</option>
+						<option value="board_content">내용</option>
+						<option value="isbn">도서</option>
 					</select>
-					<input type="text" name="word" id="word">
-					<input type="submit" value="검색" class="btn btn-primary">
+					<input type="text" name="keyword" id="keyword">
+					<input type="submit" value="검색">
 				</form>
 			</td>
-		</tr> -->
+		</tr>
 		<!-- 검색끝 -->		
 			</tbody>
 		</table>
 		</div>
-		
+		<div>
+			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+		    	 <a href="list?pageNum=${i}"> ${i} </a>
+		    </c:forEach>
+		</div>
 		<div>
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>

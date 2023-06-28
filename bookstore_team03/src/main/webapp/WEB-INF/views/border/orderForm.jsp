@@ -1,50 +1,75 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@taglib prefix="c" 	uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
-    
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>orderForm</title>
 
-<link rel="stylesheet" href="/css/reset.css" />
-    <link rel="stylesheet" href="/css/style.css" />
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/orderfrm.css" />
-    <!-- <link rel="stylesheet" href="/css/signup.css" /> -->
-    <!-- Latest compiled and minified CSS -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
-<!-- Latest compiled JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"
-    />
-    <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-    <script
-      type="text/javascript"
-      src="http://code.jquery.com/jquery-latest.js"
-    ></script>
-
+<%@ include file="../template/header.jsp"%>
 <script>
 	function ordercheck(){
 		if(confirm("결제할까요?")){
-			return true;
+			//1) 수취인명 2글자 이상
+		    let border_name = document.getElementById("border_name").value;//작성자 가져오기
+		    border_name = border_name.trim();
+		    if(border_name.length < 2){
+		        alert("수취인명은 2글자 이상 입력해주세요");
+		        document.getElementById("border_name").focus(); //작성자칸에 커서 생성
+		        return false;//전송하지 않음
+		    }//if end
+
+		    //2) 전화번호 숫자 8자 이상
+		    let border_phone = document.getElementById("border_phone").value;//제목 가져오기
+		    border_phone = border_phone.trim();
+		    if(border_phone.length < 8 || isNaN(passwd)){
+		        alert("수취인 휴대폰번호를 올바르게 입력해 주세요");
+		        document.getElementById("border_phone").focus(); //커서 생성
+		        return false;//전송하지 않음
+		    }//if end
+
+		    //3) 주소 빈값없이
+		    let border_postno = document.getElementById("border_postno").value;//내용 가져오기
+		    border_postno = border_postno.trim();
+		    if(border_postno.length < 1){
+		        alert("주소를 입력해 주세요");
+		        document.getElementById("border_postno").focus(); //내용칸에 커서 생성
+		        return false;//전송하지 않음
+		    }//if end
+
+		   return true;
 		}else{
 			return false;
-			
-		}//if end
+		}//if end 
 	}//ordercheck() end
+	
+/* 	
+	//주문서공란체크
+function orderCheck(){
+    //1) 수취인명 2글자 이상
+    let border_name = document.getElementById("border_name").value;//작성자 가져오기
+    border_name = border_name.trim();
+    if(border_name.length < 2){
+        alert("수취인명은 2글자 이상 입력해주세요");
+        document.getElementById("border_name").focus(); //작성자칸에 커서 생성
+        return false;//전송하지 않음
+    }//if end
+
+    //2) 전화번호 숫자 8자 이상
+    let border_phone = document.getElementById("border_phone").value;//제목 가져오기
+    border_phone = border_phone.trim();
+    if(border_phone.length < 8 || isNaN(passwd)){
+        alert("수취인 휴대폰번호를 올바르게 입력해 주세요");
+        document.getElementById("border_phone").focus(); //커서 생성
+        return false;//전송하지 않음
+    }//if end
+
+    //3) 주소 빈값없이
+    let border_postno = document.getElementById("border_postno").value;//내용 가져오기
+    border_postno = border_postno.trim();
+    if(border_postno.length < 1){
+        alert("주소를 입력해 주세요");
+        document.getElementById("border_postno").focus(); //내용칸에 커서 생성
+        return false;//전송하지 않음
+    }//if end
+
+   return true;
+}//orderCheck() end */
 
 	
 	function book_Price(){//책 수량 수정에 따른 결제금액 변경
@@ -125,7 +150,6 @@
 
 </head>
 <body>
-
 	<form id="orderForm" name="orderForm" method="post" action="insert" onsubmit="return ordercheck()">
 	
 	<section class="order-form m-4">
@@ -155,7 +179,7 @@
                   </div>
                   <div class="col-12">
                       <div class="form-outline">
-                          <input type="text" name="border_phone" id="border_phone" class="form-control order-form-input" required/>
+                          <input type="number" name="border_phone" id="border_phone" class="form-control order-form-input" required/>
                       </div>
                   </div>
               </div>
@@ -290,7 +314,7 @@
                       </div>
                   </div>
                   <br><br>
-                  <input type="submit" value=" 결제하기" onclick="location.href='/border/msgView'">
+                  <input type="submit" value=" 결제하기" >
               </div>
               </div>
 	          

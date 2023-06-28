@@ -7,25 +7,12 @@
 
 <!DOCTYPE html>
 <head>
-    <title>Team3 - BookStore</title>
-    <script src="/js/jquery-3.6.4.min.js"></script>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="/css/tiny-slider.css">
-    <link rel="stylesheet" href="/css/aos.css">
-    <link rel="stylesheet" href="/css/flatpickr.min.css">
-    <link rel="stylesheet" href="/css/glightbox.min.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/header.css" />
-    <link rel="stylesheet" href="/css/section.css" />
-    <link rel="stylesheet" href="/css/signup.css" />
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-	<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Team3 - BookStore</title>
+    <%--<link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/style.css">--%>
     <link rel="stylesheet" href="/css/section.css" />
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
@@ -34,7 +21,6 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css"/>
     <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
     <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
-    
 	<script>
 	var dropdownTimeout;
 	
@@ -97,10 +83,14 @@
         </ul>
       </div>
       <!-- search bar -->
-      <div class="search_bar">
-        <input class="search" type="search" size="57" />
-        <input class="search-btn" type="submit" value="Search" />
-      </div>
+
+          <form action="/book/search">
+              <div class="search_bar">
+                <input class="search" type="text" size="57" value="${book_name}"/>
+                <input class="search-btn" type="submit" value="search" />
+              </div>
+          </form>
+
       <div class="icon-wrap">
         <!-- cart icon -->
         <div>

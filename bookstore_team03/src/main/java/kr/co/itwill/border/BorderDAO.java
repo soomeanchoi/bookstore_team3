@@ -20,12 +20,6 @@ public class BorderDAO {
 		System.out.println("----BorderDAO()객체생성");
 	}//end
 	
-	//카트수량 업데이트
-	public int cartUpdate(List<Map<String, Object>> cartlist) {
-		System.out.println("cartlist" + cartlist);
-		return sqlSession.update("border.cartUpdate", cartlist);
-	}//cartUpdate() end
-	
 	//기본배송지 가져오기
 	public HashMap<String, Object> deliveryAdd(String s_id){	
 		return sqlSession.selectOne("border.deliveryAdd", s_id);
@@ -81,5 +75,28 @@ public class BorderDAO {
 	public void cartdelete(String s_id) {
 		sqlSession.delete("border.cartdelete", s_id);
 	}//cartdelete() end
+	
+	
+	///////페이징관련
+	//페이징관련 총 글개수 가져오기
+	public int totalRecord(String s_id) {
+		return sqlSession.selectOne("border.totalRecord", s_id);
+	}//totalRecord() end
+	
+	//페이징관련 시작/끝레코드 가져오기
+	public List<HashMap<String, Object>> paginglist(HashMap<String, Object> map){	
+		return sqlSession.selectList("border.paginglist", map);
+	}//listBoard() end
+	/*
+	//주문내역 조회
+	public List<BorderDTO> borderlist(String s_id) {
+		return sqlSession.selectList("border.borderlist", s_id);
+	}//borderlist() end
+	*/	
+	
+	//주문상세조회
+	public List<HashMap<String, Object>> orderlistDetail(String border_no) {
+		return sqlSession.selectList("border.orderlistDetail", border_no);
+	}//orderlistDetail() end
 	
 }//class end

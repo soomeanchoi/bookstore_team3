@@ -14,9 +14,6 @@
 
 
 <script>
-
-
-
 	/*책검색
 	$("#keyword").keyup(function(){
 		//alert("test");
@@ -57,7 +54,7 @@
 	<tr>
 	    <th>bbti</th>
 	    <td style="text-align: left">
-	         <input type="text" name="bbti_no" id="bbti_no" value="${userinfo.bbti_no}" readonly>
+	         <input type="text" name="p.bbti_name" id="bbti_name" value="${userinfo.p.bbti_name}" readonly>
 	    </td>
 	</tr>
 	<tr>

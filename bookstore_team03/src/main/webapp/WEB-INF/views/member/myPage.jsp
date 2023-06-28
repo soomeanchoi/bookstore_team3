@@ -69,21 +69,34 @@
 	      	<div class="profile-thumb_box_no_img">
 	      		<div class="profile-thumb">
 	      		<!-- <button onclick="location.href='/profile/profileForm';" class="profile_btn"> -->
-	      		<a href="#">
+	      		
 	      		<div class="profile_img">
-	      		<img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
-	      		</a>
+	      		<c:choose>
+				    <c:when test="${not empty plist}">
+				        <c:set var="profile" value="${plist[0]}" />
+				        <img src="/storage/${profile_imgname}">
+				    </c:when>
+				    <c:otherwise>
+				        <c:set var="link" value="http://localhost:9095/profile/profileForm" />
+				        <!-- 사진이 없는 경우에 대한 처리 -->
+				        <img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
+				    </c:otherwise>
+				</c:choose>
+	      		
 	      		</div>
+	      		
 	      		</div>
-	      		<a href="http://localhost:9095/profile/profileForm">
-	      		<img src="/storage/pencil.png" height="35" width="35" style="position: relative; top: 20px; left: -20px;">
-	      		</a>
+	      		<a href="${not empty plist ? 'http://localhost:9095/profile/profileModify' : 'http://localhost:9095/profile/profileForm'}">
+				    <img src="/storage/pencil.png" height="40" width="40">
+				</a>
+
+	      		
 	      	</div>	
-	      	
+	      	<input type="button" value="로그아웃" onclick="location.href='logout';" style="margin-left: 100px;">
 	      		<div class="profile-name-box">
 	      			<span class="name">${member_name }</span>
 	      		</div>
-	      		<input type="button" value="로그아웃" onclick="location.href='logout';">
+	      		
 	      		 <h6><span>${member_name }</span>님의 bbti</h6>
             <div>
             <div>${mybbti }</div>
@@ -150,13 +163,12 @@
         	 
             
             
-          <div style="margin-top: 10px;">   
-		    <div>1 : 1 문의
+          <div>   
+		    <div>1 : 1 문의</div>
 		    <input type="button" value="버튼" onclick="location.href='myPageMail';">
           </div>
-          </div>
            
-          <div class="logout">
+         <div class="logout">
 	      	<br><br>
 		    <input type="button" value="회원정보수정" onclick="location.href='modify';">
 			<input type="button" value="회원탈퇴" onclick="location.href='deleteView';">
@@ -300,14 +312,24 @@
 				    <tbody>
 				        <c:forEach var="order" items="${myorder}">
 				            <tr>
-				                <td>주문번호</td>
-				                <td>${order.border_no}</td>
+				            	<td>
+				            	<script>
+								    var orderDate = new Date("${order.border_date}");
+								    var formattedDate = orderDate.toLocaleDateString();
+								    document.write(formattedDate);
+								</script><br>
+								${order.border_no}
+				            	</td>
+				                <td></td>
+				                
+				                <td>책제목${book_name }</td>
+				                
 				                <td>상품정보</td>
-				                <td>조인해서 가져와야할듯</td>
-				                <td>가격</td>
+				                <td>조인해서</td>
+				                <td></td>
 				                <td>${order.border_price}</td>
 				                <td>배송상태</td>
-				                <td>이것도</td>
+				                <td></td>
 				            </tr>
 				        </c:forEach>
 				    </tbody>
@@ -327,9 +349,10 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-				        <c:forEach var="review" items="${myreview}">
+				        
 				            <tr>
-				                <td>책제목</td>
+				            	
+				                <c:forEach var="review" items="${myreview}">
 				                <td>${review.isbn}</td>
 				                <td>내용</td>
 				                <td>${review.review_content}</td>
@@ -337,8 +360,9 @@
 				                <td>${review.review_score}</td>
 				                <td>날짜</td>
 				                <td>${review.review_date}</td>
+				               
 				            </tr>
-				        </c:forEach>
+				 	</c:forEach>        
 				    </tbody>
 				</table>
 		            

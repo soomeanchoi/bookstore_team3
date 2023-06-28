@@ -24,6 +24,7 @@
   <script src="/js/jquery.cookie.js"></script>
 </head>
 <body>
+<form name="bbtifrm" id="bbtifrm" method="post" action="bbti">
   <div class="container">
     <section id="main" class="mx-auto my-5 py-5 px-3">
       <h1 class="pt-5">BBTI 테스트로 알아보는 나의 추천 책</h1>
@@ -50,20 +51,22 @@
 
       </div>
     </section>
-    <section id="result">
+    <section id="result" class="mx-auto my-5 py-5 px-3">
       <h1>당신의 결과는?1</h1>
       <div class="resultName"></div>
+      <input type="hidden" class="bbti" id="bbti" name="bbti" value=""/>
       <div id="resultImg" class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
 
       </div>
       <div class="resultDesc">
 
       </div>
-      <button type="button">공유하기</button>
+      <button type="submit" class="buttonStyle mt-3 py-2 px-3">공유하기</button>
 
     </section>
     <script src = "/js/bbtiStart.js"></script>
 
   </div>
+</form>
 </body>
 </html>

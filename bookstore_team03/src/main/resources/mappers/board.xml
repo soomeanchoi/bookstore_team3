@@ -8,18 +8,19 @@
 <mapper namespace="board">
 
 	<select id="list" resultType="java.util.HashMap">
-		SELECT board_no, isbn, profile_name, p.bbti_no, board_title, board_date, board_read, board_good
+		SELECT board_no, isbn, profile_name, p.bbti_name, board_title, board_date, board_read, board_good
 		FROM (board b 
 		     join profile p on b.member_id = p.member_id) 
 		ORDER BY board_date desc
 	</select>
 	
-	<!-- 페이징 총 페이지수 -->
+	<!-- 총 게시글수 -->
 	<select id="totalRecord" resultType="int">
 		SELECT COUNT(board_no) 
 		FROM board
 	</select>
 	
+	<!-- 페이징: 전체게시글 -->
 	<select id="paginglist" resultType="java.util.HashMap">
 		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
 		FROM profile p
@@ -27,37 +28,57 @@
 		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
 		BY board_no) rc
 		ON b.board_no = rc.bno
-		ORDER BY b.board_date ASC
+		ORDER BY b.board_date desc
+		LIMIT #{end} OFFSET #{start}
+	</select>
+
+	<!-- 검색된 총게시글수 -->
+<!--  <select id="totalRecord" resultType="int">
+		SELECT COUNT(board_no) 
+		FROM board
+		WHERE #{category} LIKE '%'||#{keyWord}||'%'
+	</select>-->	
+	
+	<!-- 게시글 검색 -->
+	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
+		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
+		FROM profile p
+		JOIN board b ON b.member_id = p.member_id
+		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
+		BY board_no) rc
+		ON b.board_no = rc.bno
+		ORDER BY b.board_date desc
 		LIMIT #{end} OFFSET #{start}
 	</select>
 	
+	<!-- 게시글 상세보기 -->
 	<select id="detail" parameterType="int" resultType="java.util.HashMap">
-		SELECT b.member_id, board_no, isbn, profile_name, p.bbti_no, board_title, board_content, board_date, board_read, board_good
+		SELECT b.member_id, board_no, isbn, profile_name, p.bbti_name, board_title, board_content, board_date, board_read, board_good
 		FROM (board b 
 		     join profile p on b.member_id = p.member_id) 
 		WHERE board_no=#{board_no}
 	</select>
-	
+	<!-- 
 	<select id="search" parameterType="String" resultType="java.util.List">
 		SELECT isbn, book_name, book_pub, b.book_writerno, writer_name, book_pubdate, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname
 		FROM (book b join writer w on b.book_writerno = w.writer_no)
 		WHERE book_name like '%'|| #{keyword} ||'%'
 	</select>
-	
+	 -->
 	<select id="bookinfo" parameterType="String" resultType="java.util.HashMap">
 		SELECT isbn, book_name, book_pub, b.book_writerno, writer_name, book_pubdate, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
 		FROM (book b join writer w on b.book_writerno = w.writer_no)
 		WHERE isbn=#{isbn}
 	</select>
 	
-	<!-- 글 조회수 -->
+
 	<update id="board_read" parameterType="int">
 		UPDATE board
 		SET board_read = board_read + 1
 		WHERE board_no = #{board_no}
 	</update>
 	
-	<!-- 좋아요 -->
+
 	<update id="board_good" parameterType="int">
 		UPDATE board
 		SET board_good = board_good + 1
@@ -65,7 +86,7 @@
 	</update>
 	
 	<select id="userinfo" parameterType="String" resultType="java.util.HashMap">
-		SELECT m.member_id, profile_name, p.bbti_no
+		SELECT m.member_id, profile_name, p.bbti_name
 		FROM (member m 
 		     join profile p on m.member_id = p.member_id) 
 		WHERE m.member_id=#{s_id}
@@ -73,8 +94,8 @@
 	
 	<insert id="write" parameterType="kr.co.itwill.board.BoardDTO">
 		INSERT INTO itwill.board
-		(isbn, member_id, bbti_no, board_title, board_content, board_date, board_read, board_good)
-		VALUES(#{isbn}, #{member_id}, #{bbti_no}, #{board_title}, #{board_content}, current_timestamp(), 0, 0)
+		(isbn, member_id, bbti_name, board_title, board_content, board_date, board_read, board_good)
+		VALUES(#{isbn}, #{member_id}, #{bbti_name}, #{board_title}, #{board_content}, current_timestamp(), 0, 0)
 	</insert>
 	
 	<delete id="delete" parameterType="int">
@@ -84,7 +105,7 @@
 	
 	<update id="update" parameterType="kr.co.itwill.board.BoardDTO">
 		UPDATE itwill.board
-		SET isbn=#{isbn}, bbti_no=#{bbti_no}, board_title=#{board_title}, board_content=#{board_content}, board_date=current_timestamp(), board_read=0, board_good=0
+		SET isbn=#{isbn}, bbti_name=#{bbti_name}, board_title=#{board_title}, board_content=#{board_content}, board_date=current_timestamp(), board_read=0, board_good=0
 		WHERE board_no=#{board_no}
 	</update>
 	
