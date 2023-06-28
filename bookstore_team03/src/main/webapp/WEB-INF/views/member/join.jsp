@@ -452,7 +452,8 @@
       </div>
     </section>
     </form>
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+    
+  <%@ include file="../template/footer.jsp" %>  
   </body>
 <script src="js/script.js"></script>
 <script>
