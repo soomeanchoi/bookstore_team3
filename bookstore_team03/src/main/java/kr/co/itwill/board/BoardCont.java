@@ -108,6 +108,7 @@ public class BoardCont {
 		return mav;
 	}//boardForm end
 	
+	//게시글작성
 	@RequestMapping("/write")
     public String write(@ModelAttribute BoardDTO dto) {
 		int cnt = boardDao.write(dto);
@@ -119,25 +120,13 @@ public class BoardCont {
 		return "redirect:/board/boardForm";
     }//write() end
 	
-	///////////책검색////////////////////////////////////////////
-		
-	/*
-	 @RequestMapping("/booksend")
-	@ResponseBody
-	public String bookSend(HttpServletRequest req) {
-		//요청한 정보 가져오기
-		int bookIndex=Integer.parseInt(req.getParameter("book"));
-		
-	    String img[]= {"spring.jpg","android.jpg","jquery.jpg","jsmasterbook.jpg"};
-	    
-	    return img[bookIndex]; //응답메세지
-	}//bookSend() end
-	*/	///////////////////////////////////////////////////////////////////////////////
 
 	@RequestMapping("/search")    //defaultValue : 후행하는 매개변수의 기본값 설정(여기서는 빈값)
 	 public ModelAndView search(@RequestParam(value="pageNum", defaultValue="1") int pageNum
-			 				   ,@RequestParam(defaultValue = "") String keyWord
-			 				   ,@RequestParam String category) {
+			 				   ,@RequestParam(value="keyWord", defaultValue = "") String keyWord
+			 				   ,@RequestParam(value="category") String category) {
+		
+		System.out.println(keyWord);
 		//페이징관련
 		int pageSize=5;
 		int totalRecord=0;
@@ -155,6 +144,7 @@ public class BoardCont {
 		//보여줄 글개수
 		int end = pageSize;
 		
+		//검색정보 map에 넣기
 		HashMap<String, Object> map = new HashMap<>();
 		map.put("category", category);
 	    map.put("keyWord", keyWord);
@@ -176,6 +166,10 @@ public class BoardCont {
 		//검색결과리스트
 		mav.addObject("list", boardDao.search(map));
 		
+		//검색된 단어 보내기
+		mav.addObject("keyWord", keyWord);
+		System.out.println(keyWord);
+		System.out.println("검색결과리스트" + boardDao.search(map));
 		return mav;
 	}//search() end
 		 

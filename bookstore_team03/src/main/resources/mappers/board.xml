@@ -33,11 +33,11 @@
 	</select>
 
 	<!-- 검색된 총게시글수 -->
-<!--  <select id="totalRecord" resultType="int">
+ 	<select id="stotalRecord" resultType="int">
 		SELECT COUNT(board_no) 
 		FROM board
-		WHERE #{category} LIKE '%'||#{keyWord}||'%'
-	</select>-->	
+		WHERE #{category} LIKE concat('%', #{keyWord}, '%')
+	</select>	
 	
 	<!-- 게시글 검색 -->
 	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
@@ -47,6 +47,7 @@
 		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
 		BY board_no) rc
 		ON b.board_no = rc.bno
+		WHERE #{category} like concat('%', #{keyWord}, '%')
 		ORDER BY b.board_date desc
 		LIMIT #{end} OFFSET #{start}
 	</select>

@@ -52,14 +52,13 @@
 		<!-- 검색시작 -->
 		<tr>
 			<td colspan="4"  style='text-align:center; height: 50px;'>
-				<form action="list.jsp" onsubmit="return searchCheck()">
+				<form action="search" method="post">
 					<select name="category" id="category">
-						<option value="board_title or board_content">제목+내용</option>
 						<option value="board_title">제목</option>
 						<option value="board_content">내용</option>
 						<option value="isbn">도서</option>
 					</select>
-					<input type="text" name="keyword" id="keyword">
+					<input type="text" name="keyword" id="keyword" value="${keyword}">
 					<input type="submit" value="검색">
 				</form>
 			</td>
