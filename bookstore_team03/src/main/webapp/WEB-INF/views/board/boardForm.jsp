@@ -49,12 +49,12 @@
 	
 <form method="post" action="write" >
 <input type="hidden" name="member_id" id="member_id" value="${userinfo.member_id}">
-<input type="hidden" name="bbti_no" id="bbti_no" value="${userinfo.bbti_no}">
+<%-- <input type="hidden" name="bbti_no" id="bbti_no" value="${userinfo.bbti_no}"> --%>
 	<table class="table">
 	<tr>
 	    <th>bbti</th>
 	    <td style="text-align: left">
-	         <input type="text" name="p.bbti_name" id="bbti_name" value="${userinfo.p.bbti_name}" readonly>
+	         <input type="text" name="bbti_name" id="bbti_name" value="${userinfo.bbti_name}" readonly>
 	    </td>
 	</tr>
 	<tr>
