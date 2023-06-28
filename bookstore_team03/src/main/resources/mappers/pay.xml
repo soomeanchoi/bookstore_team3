@@ -29,6 +29,11 @@
 		WHERE border_no = #{border_no}
 	</delete>
 
+	<insert id="insert" parameterType="java.util.Map">
+		INSERT INTO pay (border_no, pay_state, pay_descount, pay_point)
+		VALUE (#{border_no}, 1, #{border_usepoint}, #{pay_point})
+	</insert>
+
 
 
 </mapper>     

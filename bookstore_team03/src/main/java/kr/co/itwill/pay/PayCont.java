@@ -108,7 +108,30 @@ public class PayCont {
             //border 칼럼들을 가져옴
             List<Map<String, Object>> data = payDAO.selectData(borderNo);
 
+            //데이터를 넘겨줄 Map 생성
+            Map<String, Object> map = new HashMap<>();
+
             //pay 에 필요한 정보들
+
+            String border_no = (String) data.get(0).get("border_no");
+            String member_id = (String) data.get(0).get("member_id");
+            int border_usepoint = (int) data.get(0).get("border_usepoint");
+            int border_price = (int) data.get(0).get("border_price");
+            int pay_point = border_price/10;
+
+            map.put("border_no", border_no);
+            map.put("border_usepoint", border_usepoint);
+            map.put("pay_point", pay_point);
+            map.put("member_id", member_id);
+
+            payDAO.payInsert(map);
+            //포인트 지급
+            payDAO.payPointPlus(map);
+            //사용한 포인트 회수
+            payDAO.payPointMinus(map);
+
+
+
 
 
         //Cnt = 0 이면 결제 실패 -> order_list 와 border 삭제
