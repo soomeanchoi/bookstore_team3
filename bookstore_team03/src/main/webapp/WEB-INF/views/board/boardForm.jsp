@@ -1,14 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>  
   
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
 <title>board write</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -49,12 +41,12 @@
 	
 <form method="post" action="write" >
 <input type="hidden" name="member_id" id="member_id" value="${userinfo.member_id}">
-<input type="hidden" name="bbti_no" id="bbti_no" value="${userinfo.bbti_no}">
+<%-- <input type="hidden" name="bbti_no" id="bbti_no" value="${userinfo.bbti_no}"> --%>
 	<table class="table">
 	<tr>
 	    <th>bbti</th>
 	    <td style="text-align: left">
-	         <input type="text" name="p.bbti_name" id="bbti_name" value="${userinfo.p.bbti_name}" readonly>
+	         <input type="text" name="bbti_name" id="bbti_name" value="${userinfo.bbti_name}" readonly>
 	    </td>
 	</tr>
 	<tr>

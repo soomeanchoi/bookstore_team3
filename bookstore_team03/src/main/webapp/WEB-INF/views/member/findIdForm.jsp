@@ -152,7 +152,7 @@
 							</div>
 							<br><br><br><br>
 							<div class="form-group">
-								<button type="button" id='checkEmail' class="id-pw-btn">찾기</button>
+								<button type="button" id='findBtn' class="id-pw-btn" onclick="location.href='login';">찾기</button>
 								<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 							</div>
 							</div>
@@ -162,7 +162,7 @@
 		</form>	
 		<%@ include file="../template/footer.jsp" %>
 		</section>
-		
+<%@ include file="../template/footer.jsp" %>  		
 </body>
 <script>
 //체크 버튼에 따라 아이디/비밀번호 기능이 달라진다
@@ -228,5 +228,28 @@ modal.addEventListener("click", e => {
 })
 
 
+</script>
+<script>
+	$(function(){
+		$("#findBtn").click(function(){
+			
+			$.ajax({
+				url : "/mail",
+				type : "POST",
+				data : {
+					member_name : $("#member_name2").val(),
+					member_id : $("#member_id").val()
+					
+				},
+				success : function(result) {
+					/* alert(result); */
+
+				},error:function(xhr, status, error){
+	                alert("비밀번호찾기에러입니다");
+	                console.error(status, error);
+	            }
+			})
+		});
+	})
 </script>
 </html>

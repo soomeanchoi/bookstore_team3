@@ -113,7 +113,9 @@
             아이디
             ${member_id}
             </div>
-            <div>나의 포인트 조회</div>
+            <div>나의 포인트 조회
+            <input type="button" value="조회" onclick="location.href='/point/list';">
+            </div>
             <div>
             자기소개
             ${profile_intro}
@@ -143,9 +145,9 @@
 	      				</a>
 	      			</li>
 	      			<li class="info_item" style="margin-left: 45px">
-	      				<a href="http://localhost:9095/cart/list">
+	      				<a href="http://localhost:9095/board/list">
 	      				<img src="/storage/neighbor.png" height="38" width="50">
-	      					<!-- <span class="title">장바구니</span> -->
+	      					<!-- <span class="title">커뮤니티</span> -->
 	      					<span class="val"></span>
 	      				</a>
 	      			</li>
@@ -164,8 +166,9 @@
             
             
           <div>   
-		    <div>1 : 1 문의</div>
-		    <input type="button" value="버튼" onclick="location.href='myPageMail';">
+		    <div>1 : 1 문의
+		    <input type="button" value="메일" onclick="location.href='myPageMail';">
+		    </div>
           </div>
            
          <div class="logout">
@@ -413,13 +416,13 @@
           
           <div class="bbti">
 	            <h3><div class="my_bbti_title">BBTI 활동내역</div></h3>
-	         	<h6><a href='/research/list'>더보기 ></a></h6>
+	         	<h6><a href='/board/list'>더보기 ></a></h6>
 	            <div>글제목</div>
 	            <div>글내용</div>
 	      </div>
 
         </div>
-        <%@ include file="../template/footer.jsp" %>
+     <%--    <%@ include file="../template/footer.jsp" %> --%>
       </div>	
     </div>  
     

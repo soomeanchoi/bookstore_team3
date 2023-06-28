@@ -62,7 +62,7 @@
 	</select>
 	
 	<select id="findPw" resultType="String">
-		SELECT nvl(member_id, 0) FROM member WHERE member_id=#{member_id} AND member_phone=#{member_phone}
+		SELECT nvl(member_pw, 0) FROM member WHERE member_name=#{member_name} AND member_id=#{member_id}
 	</select>
 	
 	<update id="updatePw">

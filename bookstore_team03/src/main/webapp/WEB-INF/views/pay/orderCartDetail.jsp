@@ -28,7 +28,7 @@
         let border_add2;
 
         $.ajax({
-            url: "/pay/detail",
+            url: "/pay/detailCart",
             type: "POST",
             data: { borderNo: borderNo },
             success: function(response) {
@@ -72,7 +72,7 @@
                         cnt = 1;
                         alert(msg);
                         $.ajax({
-                            url: "/pay/result",
+                            url: "/pay/resultCart",
                             type: "POST",
                             data: {cnt : cnt, borderNo : borderNo},
                             success: function (response) {
@@ -89,7 +89,7 @@
                         cnt = 0;
                         alert(msg);
                         $.ajax({
-                            url: "/pay/result",
+                            url: "/pay/resultCart",
                             type: "POST",
                             data: {cnt : cnt, borderNo : borderNo},
                             success: function (response) {
