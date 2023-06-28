@@ -99,6 +99,7 @@
                                 console.error("AJAX 요청 실패:", status, error);
                             }//error end
                         })
+                        location.href = "/"
                     }
                 });//IMP function end
             },//success
