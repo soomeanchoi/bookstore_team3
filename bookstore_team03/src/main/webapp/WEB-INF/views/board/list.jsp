@@ -26,8 +26,6 @@ $(document).ready(function(){
 });
 
 function bbtiTab(bbti){//bbti별 게시글 가져오기
-	var pageNum = document.getElementById("pageNum").value;
-	alert(pageNum);
 	var params = { bbti: bbti };
 	 $.ajax({
 	 	url:'/board/list'	//요청명령어
@@ -43,7 +41,7 @@ function bbtiTab(bbti){//bbti별 게시글 가져오기
 			//}//if end
 		}//success end
 	}); //ajax() end 
-}//bbtiTab() 둥
+}//bbtiTab() end
 </script>
 
 </head>
