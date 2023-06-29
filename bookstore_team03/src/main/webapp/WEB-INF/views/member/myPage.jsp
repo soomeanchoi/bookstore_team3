@@ -74,7 +74,9 @@
 	      		<c:choose>
 				    <c:when test="${not empty plist}">
 				        <c:set var="profile" value="${plist[0]}" />
-				        <img src="/storage/${profile_imgname}">
+				        <div class="rounded-image">
+				        <img src="/storage/${profile_imgname}" style="height: 150px; width: 150px;">
+				    	</div>
 				    </c:when>
 				    <c:otherwise>
 				        <c:set var="link" value="http://localhost:9095/profile/profileForm" />
@@ -87,7 +89,7 @@
 	      		
 	      		</div>
 	      		<a href="${not empty plist ? 'http://localhost:9095/profile/profileModify' : 'http://localhost:9095/profile/profileForm'}">
-				    <img src="/storage/pencil.png" height="40" width="40">
+				    <img src="/storage/pencil.png" height="40" width="40" style="margin-top: 90px;">
 				</a>
 
 	      		
@@ -313,7 +315,7 @@
 				        </tr>
 				    </thead>
 				    <tbody>
-				        <c:forEach var="order" items="${myorder}">
+				        <c:forEach var="order" items="${myorder}" varStatus="vs">
 				            <tr>
 				            	<td>
 				            	<script>
@@ -324,17 +326,22 @@
 								${order.border_no}
 				            	</td>
 				                <td></td>
-				                
-				                <td>책제목${book_name }</td>
-				                
+				                 <c:forEach var="book" items="${book}" varStatus="vs">
+				                <td>책제목${book.book_name }</td>
+				                <td><img src="/storage/${book_imgname}" style="height: 150px; width: 150px;"></td>
+				                </c:forEach>
 				                <td>상품정보</td>
 				                <td>조인해서</td>
 				                <td></td>
 				                <td>${order.border_price}</td>
 				                <td>배송상태</td>
 				                <td></td>
-				            </tr>
+				           <!-- 테이블 한줄에 5칸씩 -->
+			    		<c:if test="${vs.count mod 5==0}">
+			                </tr> <tr>
+			            </c:if>
 				        </c:forEach>
+				        </tr>
 				    </tbody>
 				</table>
 		    	</div>
@@ -363,9 +370,9 @@
 				                <td>${review.review_score}</td>
 				                <td>날짜</td>
 				                <td>${review.review_date}</td>
-				               
-				            </tr>
-				 	</c:forEach>        
+				            
+				 	</c:forEach>   
+				 	</tr>     
 				    </tbody>
 				</table>
 		            
@@ -416,7 +423,19 @@
           
           <div class="bbti">
 	            <h3><div class="my_bbti_title">BBTI 활동내역</div></h3>
-	         	<h6><a href='/board/list'>더보기 ></a></h6>
+	            <c:choose>
+				    <c:when test="${p.bbti_no != null}">
+				       <%--  <c:set var="profile" value="${plist[0]}" /> --%>
+				       <h6><a href='/board/list'>더보기 ></a></h6>
+				    </c:when>
+				    <c:otherwise>
+				       <h6><a href='/research/list'>더보기 ></a></h6>
+				       
+				    </c:otherwise>
+				</c:choose>
+	            
+	            
+	         	<!-- <h6><a href='/board/list'>더보기 ></a></h6> -->
 	            <div>글제목</div>
 	            <div>글내용</div>
 	      </div>

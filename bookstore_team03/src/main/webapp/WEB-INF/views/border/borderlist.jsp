@@ -53,7 +53,18 @@
 				<td>
 					<div class="d-flex flex row">
 						<div class="d-flex flex-row align-items-center qty">
-							<input type="button" value="주문취소" onclick="orderCancel('${row.border_no}')">
+							<c:choose>
+							<c:when test="${row.pay_witdstate eq null}">
+								<input type="button" value="주문취소" onclick="orderCancel('${row.border_no}')">
+							</c:when>
+							<c:when test="${row.pay_witdstate eq 0}">
+								<p>취소처리중</p>
+							</c:when>
+							<c:when test="${row.pay_witdstate eq 1}">
+								<p>취소완료</p>
+							</c:when>
+							</c:choose>
+							<%-- <input type="button" value="주문취소" onclick="orderCancel('${row.border_no}')"> --%>
 						</div>
 					</div>
 				</td>

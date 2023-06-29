@@ -95,8 +95,9 @@
 	
 	<!-- 페이징 주문내역조회 -->
 	<select id="paginglist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT border_no, member_id, border_price, border_date
-		FROM itwill.border
+		SELECT b.border_no, member_id, border_price, border_date, pay_witdstate
+		FROM 
+		(itwill.border b join pay p on b.border_no = p.border_no)
 		WHERE member_id=#{s_id}
 		ORDER BY border_date DESC
 		LIMIT #{end} OFFSET #{start}

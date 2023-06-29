@@ -62,12 +62,6 @@ public class BoardDAO {
 		return sqlSession.selectOne("board.bookinfo", isbn);
 	}//bookinfo() end
 	
-	
-	//책검색
-	/*public List<String> search(String keyword){
-		return sqlSession.selectList(keyword);
-	}//search() end
-	*/	
 	//게시글 조회수
 	public void board_read(int board_no) {
 		sqlSession.update("board.board_read", board_no);
@@ -83,10 +77,22 @@ public class BoardDAO {
 		return sqlSession.selectOne("board.userinfo", s_id);
 	}//userinfo() end
 	
+	//게시글작성
 	public int write(BoardDTO dto) {
 		return sqlSession.insert("board.write", dto);
 	}//write() end
 	
+	//글작성 도서검색 결과수
+	public int wtotalRecord(HashMap<String, Object> map) {
+		return sqlSession.selectOne("board.wtotalRecord", map);
+	}//totalRecord() end
+	
+	//글작성 도서검색 결과
+	public List<HashMap<String, Object>> wsearch(HashMap<String, Object> map){
+		return sqlSession.selectList("board.wsearch", map);
+	}//wsearch() end
+	
+	//게시글삭제
 	public int delete(int board_no) {
 		return sqlSession.delete("board.delete", board_no);
 	}//delete() end

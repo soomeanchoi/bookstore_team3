@@ -35,7 +35,7 @@
 	<!-- 검색된 총게시글수 -->
 	<select id="stotalRecord" parameterType="java.util.HashMap" resultType="int">
 		SELECT COUNT(board_no)
-		FROM board
+		FROM (board join book on board.isbn = book.isbn)
 		WHERE board_no > 0
 		<if test="category == 'title_content' and keyword!=''">            
              AND board_title like CONCAT('%',#{keyWord},'%') OR board_content like CONCAT('%',#{keyWord},'%')
@@ -46,21 +46,20 @@
         <if test="category == 'board_content' and keyWord!=''">           
              AND board_content like CONCAT('%',#{keyWord},'%')
         </if>
-        <if test="category == 'isbn'  and keyWord!=''">            
-             AND isbn like CONCAT('%',#{keyWord},'%') 
+        <if test="category == 'book_name' and keyWord!=''">            
+             AND book_name like CONCAT('%',#{keyWord},'%') 
         </if>
 	</select>
 	
 	<!-- 게시글 검색 -->
-	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
-		FROM profile p
-		JOIN board b ON b.member_id = p.member_id
-		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
-		BY board_no) rc
-		ON b.board_no = rc.bno
-		<!-- WHERE #{category} like concat('%',#{keyWord},'%') -->
-		WHERE board_no > 0
+	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">		
+		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt, book.book_name 
+		FROM 
+		((profile p JOIN board b ON b.member_id = p.member_id)
+		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP BY board_no) rc
+		ON b.board_no = rc.bno)
+		JOIN book ON b.isbn=book.isbn 
+		WHERE b.board_no > 0
 		<if test="category == 'title_content' and keyword!=''">            
              AND board_title like CONCAT('%',#{keyWord},'%') OR board_content like CONCAT('%',#{keyWord},'%')
         </if>
@@ -70,8 +69,8 @@
         <if test="category == 'board_content' and keyWord!=''">           
              AND board_content like CONCAT('%',#{keyWord},'%')
         </if>
-        <if test="category == 'isbn'  and keyWord!=''">            
-             AND isbn like CONCAT('%',#{keyWord},'%') 
+        <if test="category == 'book_name' and keyWord!=''">            
+             AND book_name like CONCAT('%',#{keyWord},'%') 
         </if>
 		ORDER BY b.board_date 
 		LIMIT #{end} OFFSET #{start}
@@ -85,26 +84,28 @@
 		WHERE board_no=#{board_no}
 	</select>
 	
+	<!-- 게시글상세 도서정보 불러오기 -->
 	<select id="bookinfo" parameterType="String" resultType="java.util.HashMap">
 		SELECT isbn, book_name, book_pub, b.book_writerno, writer_name, book_pubdate, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
 		FROM (book b join writer w on b.book_writerno = w.writer_no)
 		WHERE isbn=#{isbn}
 	</select>
 	
-
+	<!-- 조회수 -->
 	<update id="board_read" parameterType="int">
 		UPDATE board
 		SET board_read = board_read + 1
 		WHERE board_no = #{board_no}
 	</update>
 	
-
+	<!-- 좋아요수 -->
 	<update id="board_good" parameterType="int">
 		UPDATE board
 		SET board_good = board_good + 1
 		WHERE board_no = #{board_no}
 	</update>
 	
+	<!-- 글상세에 글작성자 정보 -->
 	<select id="userinfo" parameterType="String" resultType="java.util.HashMap">
 		SELECT m.member_id, profile_name, p.bbti_name
 		FROM (member m 
@@ -112,17 +113,48 @@
 		WHERE m.member_id=#{s_id}
 	</select>
 	
+	<!-- 글작성 -->
 	<insert id="write" parameterType="kr.co.itwill.board.BoardDTO">
 		INSERT INTO itwill.board
 		(isbn, member_id, bbti_name, board_title, board_content, board_date, board_read, board_good)
 		VALUES(#{isbn}, #{member_id}, #{bbti_no}, #{board_title}, #{board_content}, current_timestamp(), 0, 0)
 	</insert>
 	
+	<!-- 글작성시 도서검색 수 -->
+	<select id="wtotalRecord" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(isbn)
+		FROM book
+		WHERE isbn > 0
+        <if test="category == 'book_writer' and keyWord!=''">           
+             AND book_writer like CONCAT('%',#{keyWord},'%')
+        </if>
+        <if test="category == 'book_name' and keyWord!=''">            
+             AND book_name like CONCAT('%',#{keyWord},'%') 
+        </if>
+	</select>
+	
+	<!-- 글작성시 도서검색결과 -->
+	<select id="wsearch" parameterType="java.util.HashMap" resultType="java.util.HashMap">		
+		SELECT *
+		FROM book
+		WHERE isbn > 0
+		 <if test="category == 'book_writer' and keyWord!=''">           
+             AND book_writer like CONCAT('%',#{keyWord},'%')
+        </if>
+        <if test="category == 'book_name' and keyWord!=''">            
+             AND book_name like CONCAT('%',#{keyWord},'%') 
+        </if>
+		ORDER BY book_count
+		LIMIT #{end} OFFSET #{start}
+	</select>
+	
+	<!-- 글삭제 -->
 	<delete id="delete" parameterType="int">
 		DELETE FROM board
 		WHERE board_no=#{board_no} 
 	</delete>
 	
+	<!-- 글수정 -->
 	<update id="update" parameterType="kr.co.itwill.board.BoardDTO">
 		UPDATE itwill.board
 		SET isbn=#{isbn}, bbti_name=#{bbti_name}, board_title=#{board_title}, board_content=#{board_content}, board_date=current_timestamp(), board_read=0, board_good=0

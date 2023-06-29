@@ -102,14 +102,12 @@
 	</select>
 	
 	<select id="book" resultType="java.util.Map" parameterType="String">
-			SELECT book_name, book_imgname
-			FROM book b 
-			LEFT JOIN orderlist o 
-			ON b.isbn = o.isbn 
-			JOIN border b2 
-			ON o.border_no = b2.border_no 
-			JOIN `member` m 
-			ON b2.member_id = #{member_id};
+			SELECT book_name , book_imgname 
+			FROM book
+			INNER JOIN orderlist o ON book.isbn = o.isbn
+			RIGHT JOIN border b ON b.border_no = o.border_no
+			WHERE book.isbn IS NOT NULL AND o.orderlist_no IS NOT NULL AND b.border_no IS NOT NULL
+			AND b.member_id = #{member_id};
 	</select>
 	
 </mapper>     
