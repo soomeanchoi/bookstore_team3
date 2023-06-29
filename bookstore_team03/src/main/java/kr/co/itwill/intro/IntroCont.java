@@ -17,7 +17,6 @@ public class IntroCont {
 
     @RequestMapping("/")
     public ModelAndView intro() {
-
         ModelAndView mav=new ModelAndView();
         mav.setViewName("index");
         mav.addObject("bestList", introDao.bestList());

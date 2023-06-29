@@ -80,6 +80,10 @@ public class BookDAO {
         return sqlSession.selectList("book.search", "%" + book_name + "%");
     }//search() end
 
+    public List<Map<String, Object>> writerSearch(String writer_name) {
+        return sqlSession.selectList("book.writerSearch", "%" + writer_name + "%");
+    }//search() end
+
     public Map<String, Object> detail(String isbn) {
         return sqlSession.selectOne("book.detail", isbn);
     }//detail() end

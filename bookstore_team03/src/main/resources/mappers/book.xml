@@ -103,8 +103,16 @@
 	<select id="search" parameterType="String" resultType="java.util.Map">
 		select *
 		from book
-		where book_name LIKE #{keyword}
+		where book_name
+	  	LIKE #{keyword}
 		order by book_name
+	</select>
+
+	<select id="writerSearch" parameterType="String" resultType="java.util.Map">
+		select *
+		from writer
+		where writer_name LIKE #{keyword}
+		order by writer_name
 	</select>
 
 	<select id="detail" resultType="java.util.Map" parameterType="String">
@@ -176,7 +184,7 @@
 									 on aa.isbn=bb.isbn
 			  where member_id='kgukid38@naver.com') dd
 			 on AA.isbn=dd.isbn
--- 		where book_mainname= ${main}
+		where book_mainname= #{main}
 		ORDER BY book_count desc
 		LIMIT #{start}, 10;
 	</select>

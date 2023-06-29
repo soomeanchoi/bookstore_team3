@@ -67,17 +67,20 @@ public class BookCont {
 
     }//insert() end
 
-//    @RequestMapping("/bestList")
-//    public ModelAndView bestList() {
-//        ModelAndView mav=new ModelAndView();
-//        mav.setViewName("book/bestList");
-//        mav.addObject("list", bookDao.list());
-//        mav.addObject("bestList", bookDao.bestList());
-//        return mav;
-//    }//list() end
+    @RequestMapping("/bookList")
+    public ModelAndView bookList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("book/bookList");
+        mav.addObject("totalList", bookDao.totalList());
+        mav.addObject("bestList", bookDao.bestList());
+        return mav;
+    }//list() end
 
     @RequestMapping("/bestList")
     public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
+        String s_id="kgukid38@naver.com";
+        map.put("member_id", s_id);
+
         ModelAndView mav=new ModelAndView();
 
         int totalCount = bookDao.bookCount();
@@ -105,6 +108,7 @@ public class BookCont {
         mav.addObject("list", list);
 
         mav.addObject("bestList", bookDao.bestList());
+
         return mav;
     }//list() end
 
@@ -231,7 +235,10 @@ public class BookCont {
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/searchList");
         mav.addObject("totalList", bookDao.search(book_name));
-        mav.addObject("book_name", book_name); //검색어
+        mav.addObject("search_word", book_name); //검색어
+        mav.addObject("writerList", bookDao.writerSearch(book_name));
+
+        System.out.println(mav.toString());
         return mav;
     }//search() end
 
@@ -259,11 +266,11 @@ public class BookCont {
         return mav;
     }//detail() end
 
-    @RequestMapping("/detail2/{isbn}")
-    public ModelAndView detail2(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
+    @RequestMapping("/bookUpdate/{isbn}")
+    public ModelAndView bookUpdate(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
         ModelAndView mav = new ModelAndView();
         ReviewDTO review=new ReviewDTO();
-        mav.setViewName("book/detail2");
+        mav.setViewName("book/bookUpdate");
         mav.addObject("book", bookDao.detail(isbn));
         bookDao.count(isbn);
         mav.addObject("score",bookDao.reviewScore(isbn));

@@ -109,11 +109,6 @@
      
 	<div class="section">
 
-		<form action="search">
-			<input type="text" name="book_name" value="${book_name}">
-			<input type="submit" value="검색">
-		</form>
-
 		<div><hr>
 			<br><br></div>
 		<div class="container">
@@ -144,11 +139,15 @@
 				</div>
 				</c:forEach>
 
-
 			</div> <%-- div-section end --%>
-
 			</div>	
 		</div>		
+	</div>
+
+	<div>
+		<c:forEach var="row" items="${writerList}" varStatus="vs">
+			${row.writer_name}
+		</c:forEach>
 	</div>
 
 		<!-- Preloader -->

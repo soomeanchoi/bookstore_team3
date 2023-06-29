@@ -92,18 +92,24 @@
     <!-- menu icon end -->
     <div class="bbti-menu">
         <ul class="b-menu-li">
-            <li><a href="/book/bestList">Best</a></li>
+            <li><a href="/book/bestList2">Best</a></li>
             <li><a href="">Event</a></li>
             <li><a href="http://localhost:9095/research/list">B-BTI</a></li>
         </ul>
     </div>
+
     <!-- search bar -->
     <div class="search_bar">
-        <form action="/book/search">
-            <input class="search" type="text" size="57" value="${book_name}" name="book_name" />
+        <form action="/book/search" method="post">
+            <input class="search" type="text" size="57"  name="book_name" id="book_name"/>
             <input class="search-btn" type="submit" value="Search" />
         </form>
+<%--        <form action="/writer/search">--%>
+<%--            <input class="search" type="text" size="57" value="${writer_name}" name="writer_name" />--%>
+<%--            <input type="submit" value="검색">--%>
+<%--        </form>--%>
     </div>
+
     <div class="icon-wrap">
         <!-- cart icon -->
         <div>

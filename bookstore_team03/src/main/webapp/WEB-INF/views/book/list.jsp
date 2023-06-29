@@ -115,26 +115,40 @@
 		function book_choice(isbn){
 			// alert();
 			if(confirm("찜 하시겠습니까?")){
-				document.bookfrm.action="/choice/insert";
-				document.bookfrm.submit();
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "/choice/insert");
+
+				var isbnInput = document.createElement("input");
+				isbnInput.setAttribute("type", "hidden");
+				isbnInput.setAttribute("name", "isbn");
+				isbnInput.setAttribute("value", isbn);
+
+				form.appendChild(isbnInput);
+
+				document.body.appendChild(form);
+				form.submit();
 			}//if end
 		}//book_choice() end
 
 		function book_choiceCancle(isbn) {
 			if(confirm("찜 취소 하시겠습니까?")){
-				document.bookfrm.action="/choice/del";
-				document.bookfrm.submit();
+				var form = document.createElement("form");
+				form.setAttribute("method", "post");
+				form.setAttribute("action", "/choice/del");
+
+				var isbnInput = document.createElement("input");
+				isbnInput.setAttribute("type", "hidden");
+				isbnInput.setAttribute("name", "isbn");
+				isbnInput.setAttribute("value", isbn);
+
+				form.appendChild(isbnInput);
+
+				document.body.appendChild(form);
+				form.submit();
 			}
 		}
 
-		function handleOnChange(e) {
-			// 선택된 데이터 가져오기
-			const value = e.value;
-
-			// 데이터 출력
-			document.getElementById('result').innerText
-					= value;
-		}
 
 	</script>
 
@@ -146,18 +160,22 @@
 
 	<div class="section">
 
-		<select name="language" onchange="handleOnChange(this)">
-			<option value="korean">한국어</option>
-			<option value="english">영어</option>
-			<option value="chinese">중국어</option>
-			<option value="spanish">스페인어</option>
-		</select>
-		<div id='result'></div>
+		<form action="search" id="search" name="search">
+			<div class="search-div">
+				<h4>제목</h4>
+				<select name="search-name" id="search-name">
+					<option value="writer_name">작가</option>
+					<option value="book_name">책이름</option>
+				</select>
+			</div>
+		</form>
+		<input type="text" name="search_content" id="search_content" placeholder="내용을 입력해 주세요">
+		<button type="button" name="searchBtn" id="searchBtn">검색</button>
 
-	<form action="search">
-		<input type="text" name="book_name" value="${book_name}">
-		<input type="submit" value="검색">
-	</form>
+<%--	<form action="search">--%>
+<%--		<input type="text" name="book_name" value="${book_name}">--%>
+<%--		<input type="submit" value="검색">--%>
+<%--	</form>--%>
 
 
 	<div class="container">
@@ -193,7 +211,7 @@
 	<br><br>
 
 		<div class="container">
-			<form name="bookfrm" id="bookfrm">
+
 			<div class="row align-items-stretch">
 				<c:forEach items="${list}" var="row" varStatus="vs">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
@@ -217,11 +235,9 @@
 												</button>
 											</c:when>
 											<c:otherwise>
-												<form>
 												<button onclick="book_choice(${row.isbn})">
 													<img src="/storage/heart3.png" class="choice-img">
 												</button>
-												</form>
 											</c:otherwise>
 										</c:choose>
 									</div>
@@ -234,7 +250,7 @@
 						</c:choose>
 				</div>
 				</c:forEach>
-				</form>
+
 			<hr>
 			</div>
 		</div> <%-- container end --%>

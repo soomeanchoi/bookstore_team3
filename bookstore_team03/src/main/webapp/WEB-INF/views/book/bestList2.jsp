@@ -259,6 +259,14 @@
             <a href="javascript:goToPageMain('만화');"><li class="tab-link" data-tab="tab-2">만화</li></a>
         </ul>
     </div>
+    <div>
+        <p>
+            <span><a href="javascript:goToPageMain('만화');">최신순</a></span>
+            <span><a href="javascript:goToPageMain('book_price');">낮은가격</a></span>
+            <span><a href="javascript:goToPageMain('book_price desc');">높은가격순</a></span>
+            <span><a href="javascript:goToPageMain('book_count desc');">조회순</a></span>
+        </p>
+    </div>
 
     <div>
     <table>

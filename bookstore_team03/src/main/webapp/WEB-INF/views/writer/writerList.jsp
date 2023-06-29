@@ -43,13 +43,16 @@
 <section>
     <h3>작가</h3>
 
+    <p>
+        <button type="button" onclick="location.href='/writer/write'">등록</button>
+        <button type="button" onclick="location.href='/writer/list'">리스트</button>
+    </p>
 
     <form action="search">
         <input type="text" name="writer_name" value="${writer_name}">
         <input type="submit" value="검색">
     </form>
 
-<%--    <img src="/storage/yanggija.jpeg">--%>
     <br>
     <table>
     <tr>
@@ -67,6 +70,7 @@
                 <a href="detail/${row.writer_no}">[${row.writer_name}] ${row.writer_birth}</a>
                 <br>
                 ${row.book_pub} ・ ${row.book_pubdate}
+
                     <hr>
                 <c:if test="${vs.count mod 1==0}">
                     <tr></tr>
@@ -76,8 +80,6 @@
     </tr>
     </table>
 
-
-</section>
-<%@ include file="../template/footer.jsp" %>
 </body>
+</section>
 </html>
