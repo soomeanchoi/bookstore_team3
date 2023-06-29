@@ -82,7 +82,8 @@
 			FROM review r 
 			LEFT JOIN profile p 
 			ON r.profile_no = p.profile_no 
-			WHERE p.profile_no = 19;
+			WHERE p.profile_no = #{profile_no};
+			<!-- 추후 member_id로 변경예정 -->
 	</select>
 	
 	<!-- 

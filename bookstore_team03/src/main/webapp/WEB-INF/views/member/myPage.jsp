@@ -122,12 +122,12 @@
             자기소개
             ${profile_intro}
             </div>
-            <div>
+            <%-- <div>
             좋아하는 태그<br>
             <c:forEach var="tag" items="${mytag}">
 			  ${tag.tag_name}
 			</c:forEach>
-            </div>
+            </div> --%>
           </div>
 	      		
 	      		<div class="profile-info-box">
@@ -326,7 +326,7 @@
 								${order.border_no}
 				            	</td>
 				                <td></td>
-				                 <c:forEach var="book" items="${book}" varStatus="vs">
+				                 <c:forEach var="book" items="${book}">
 				                <td>책제목${book.book_name }</td>
 				                <td><img src="/storage/${book_imgname}" style="height: 150px; width: 150px;"></td>
 				                </c:forEach>
