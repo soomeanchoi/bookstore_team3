@@ -35,7 +35,7 @@
 	<!-- 검색된 총게시글수 -->
 	<select id="stotalRecord" parameterType="java.util.HashMap" resultType="int">
 		SELECT COUNT(board_no)
-		FROM board
+		FROM (board join book on board.isbn = book.isbn)
 		WHERE board_no > 0
 		<if test="category == 'title_content' and keyword!=''">            
              AND board_title like CONCAT('%',#{keyWord},'%') OR board_content like CONCAT('%',#{keyWord},'%')
@@ -46,21 +46,20 @@
         <if test="category == 'board_content' and keyWord!=''">           
              AND board_content like CONCAT('%',#{keyWord},'%')
         </if>
-        <if test="category == 'isbn'  and keyWord!=''">            
-             AND isbn like CONCAT('%',#{keyWord},'%') 
+        <if test="category == 'book_name' and keyWord!=''">            
+             AND book_name like CONCAT('%',#{keyWord},'%') 
         </if>
 	</select>
 	
 	<!-- 게시글 검색 -->
-	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
-		FROM profile p
-		JOIN board b ON b.member_id = p.member_id
-		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
-		BY board_no) rc
-		ON b.board_no = rc.bno
-		<!-- WHERE #{category} like concat('%',#{keyWord},'%') -->
-		WHERE board_no > 0
+	<select id="search" parameterType="java.util.HashMap" resultType="java.util.HashMap">		
+		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt, book.book_name 
+		FROM 
+		((profile p JOIN board b ON b.member_id = p.member_id)
+		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP BY board_no) rc
+		ON b.board_no = rc.bno)
+		JOIN book ON b.isbn=book.isbn 
+		WHERE b.board_no > 0
 		<if test="category == 'title_content' and keyword!=''">            
              AND board_title like CONCAT('%',#{keyWord},'%') OR board_content like CONCAT('%',#{keyWord},'%')
         </if>
@@ -70,8 +69,8 @@
         <if test="category == 'board_content' and keyWord!=''">           
              AND board_content like CONCAT('%',#{keyWord},'%')
         </if>
-        <if test="category == 'isbn'  and keyWord!=''">            
-             AND isbn like CONCAT('%',#{keyWord},'%') 
+        <if test="category == 'book_name' and keyWord!=''">            
+             AND book_name like CONCAT('%',#{keyWord},'%') 
         </if>
 		ORDER BY b.board_date 
 		LIMIT #{end} OFFSET #{start}

@@ -1,43 +1,61 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-  
-<title>board write</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <%@ include file="../template/header.jsp"%>
+ 
+<title>board write</title><!-- 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+<link rel="stylesheet" href="/css/modal.css" />
 
-
-<script>
-	/*책검색
-	$("#keyword").keyup(function(){
-		//alert("test");
-		
-		if($("#keyword").val()==""){ //검색어가 존재하지 않으면
-			$("#panel").hide();      //출력결과 숨기기	
-		}//if end
-		
-		let params=$("#search").serialize();
-		
-		$.post("searchproc", params, responseProc);			
-		
-	});//keyup() end
-	
-	
-	function responseProc(data) {
-		//alert(data);
-		
-	}//responseProc() end */
-</script>	
 </head>
+<!-- <script>
+	const modal = document.getElementById("modal");
+	const openModalBtn = document.getElementById("open-modal");
+	const closeModalBtn = document.getElementById("close-modal");
+	// 모달창 열기
+	openModalBtn.addEventListener("click", () => {
+	  modal.style.display = "block";
+	  document.body.style.overflow = "hidden"; // 스크롤바 제거 
+	});
+	// 모달창 닫기
+	closeModalBtn.addEventListener("click", () => {
+	  modal.style.display = "none";
+	  document.body.style.overflow = "auto"; // 스크롤바 보이기
+	}); 
+</script>	 -->
 <body>
-<!-- 
-<form name="search" id="search">
-  <input type="text" name="keyword" id="keyword">
-  <input type="button" value="검색"> 
-</form>	                     
-	                       
-검색 결과 출력
-	<div id="panel" style="display:none"></div>	                                                                     
-	myscript.js
-	 -->
+	<!-- 검색시작 -->
+		<div id="modal">
+		<div class="modal-content">
+		<form action="writeSearch" method="post">
+			<select name="category" id="category">
+				<option value="book_name">도서제목</option>
+				<option value="book_writer">저자</option>
+			</select>
+			<input type="text" name="keyWord" id="keyWord" value="${keyWord}">
+			<input type="submit" value="검색">
+		</form>
+			<button id="close-modal">닫기</button>
+		</div>
+		</div>
+	<!-- 검색끝 -->	
+	
+	<script>
+		document.addEventListener("DOMContentLoaded", () => {
+			const modal = document.getElementById("modal");
+			const openModalBtn = document.getElementById("open-modal");
+			const closeModalBtn = document.getElementById("close-modal");
+			// 모달창 열기
+			openModalBtn.addEventListener("click", () => {
+				modal.style.display = "block";
+				document.body.style.overflow = "hidden"; // 스크롤바 제거 
+			});
+			// 모달창 닫기
+			closeModalBtn.addEventListener("click", () => {
+				modal.style.display = "none";
+				document.body.style.overflow = "auto"; // 스크롤바 보이기
+			});
+		});
+	</script>
 	
 <form method="post" action="write" >
 <input type="hidden" name="member_id" id="member_id" value="${userinfo.member_id}">
@@ -66,8 +84,8 @@
 	    <th>책</th>
 	    <td style="text-align: left">
 	    	<input type="text" name="isbn" id="isbn" >
-	    	 ${search}
 	    	
+	    	<input type="button" value="책검색" name="open-modal" id="open-modal">
 	    </td>
 	</tr>
 	

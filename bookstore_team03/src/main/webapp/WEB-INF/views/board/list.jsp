@@ -162,7 +162,7 @@ $(document).ready(function(){
 						<option value="title_content">제목+내용</option>
 						<option value="board_title">제목</option>
 						<option value="board_content">내용</option>
-						<option value="isbn">도서</option>
+						<option value="book_name">도서</option>
 					</select>
 					<input type="text" name="keyWord" id="keyWord" value="${keyWord}">
 					<input type="submit" value="검색">
