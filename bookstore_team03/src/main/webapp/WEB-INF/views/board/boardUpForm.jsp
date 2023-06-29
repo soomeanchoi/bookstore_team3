@@ -6,26 +6,6 @@
 <title>커뮤니티</title>
 <script src="/js/jquery-3.6.4.min.js"></script>
 
-<link rel="stylesheet" href="/css/reset.css" />
-<link rel="stylesheet" href="/css/board.css" />
-<link rel="stylesheet" href="/css/style.css" />
-<link rel="stylesheet" href="/css/header.css" />
-  <link rel="stylesheet" href="/css/section.css" />
-
-<link rel="stylesheet" href="/css/signup.css" />
-<!-- Latest compiled and minified CSS -->
-<!-- Latest compiled JavaScript -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-
-<link rel="stylesheet"
-	href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css" />
-<link rel="stylesheet"
-	href="https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css" />
-<link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css" />
-<!-- <script type="text/javascript"
-	src="http://code.jquery.com/jquery-latest.js"></script> -->
-  
   <script>
   	function boardupdate(){
   		if(confirm("수정하시겠습니까?")){
@@ -33,9 +13,7 @@
   		}else{
   			return false;
   		}//if end 		
-  		
   	}//boardupdate() end
-  
   </script>
 </head>
 

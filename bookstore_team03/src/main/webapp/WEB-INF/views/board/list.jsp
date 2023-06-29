@@ -8,16 +8,44 @@
 <script>
 $(document).ready(function(){
 	
+	//탭이 클릭되면
 	$('ul.tabs li').click(function(){
+		//tab_id를 클릭된 탭아이디로 변경
 		var tab_id = $(this).attr('data-tab');
-
+		
+		//기존탭 current지우기
 		$('ul.tabs li').removeClass('current');
 		$('.tab-content').removeClass('current');
-
+		
+		//클릭된탭 current추가하여 노출
 		$(this).addClass('current');
 		$("#"+tab_id).addClass('current');
+		
+		//클릭된탭의 bbti정보 넘기기
 	})
 });
+
+function bbtiTab(bbti){//bbti별 게시글 가져오기
+	 var params = {
+			 		pageNum: "some value",
+			        bbti: bbti
+		   		 };
+	
+	 $.ajax({
+	 	url:'/board/list'	//요청명령어
+	 	,type:'post'
+	 	,data:params		//요청정보, 게시판 탭정보
+	 	,error:function(error){
+	 		alert(error);
+	 	}//error end
+		,success:function(data){
+			alert("탭변경");
+			//if(data ==1){//댓글 등록이 성공했다면
+			
+			//}//if end
+		}//success end
+	}); //ajax() end 
+}//bbtiTab() 둥
 </script>
 
 </head>
@@ -36,25 +64,27 @@ $(document).ready(function(){
 		<div class="container">
 			<!-- 탭 메뉴 상단 시작 -->
 			<ul class="tabs">
-				<li class="tab-link current" data-tab="tab-1">esf</li>
-				<li class="tab-link" data-tab="tab-2">enf</li>
-				<li class="tab-link" data-tab="tab-3">est</li>
-				<li class="tab-link" data-tab="tab-4">ent</li>
-				<li class="tab-link" data-tab="tab-5">isf</li>
-				<li class="tab-link" data-tab="tab-6">inf</li>
-				<li class="tab-link" data-tab="tab-7">ist</li>
-				<li class="tab-link" data-tab="tab-8">int</li>
+				<li class="tab-link current" data-tab="tab-1" data-value="esf" onclick="bbtiTab(this.getAttribute('data-value'))">esf</li>
+				<li class="tab-link" data-tab="tab-2" data-value="enf" onclick="bbtiTab(this.getAttribute('data-value'))">enf</li>
+				<li class="tab-link" data-tab="tab-3" data-value="est" onclick="bbtiTab(this.getAttribute('data-value'))">est</li>
+				<li class="tab-link" data-tab="tab-4" data-value="ent" onclick="bbtiTab(this.getAttribute('data-value'))">ent</li>
+				<li class="tab-link" data-tab="tab-5" data-value="isf" onclick="bbtiTab(this.getAttribute('data-value'))">isf</li>
+				<li class="tab-link" data-tab="tab-6" data-value="inf" onclick="bbtiTab(this.getAttribute('data-value'))">inf</li>
+				<li class="tab-link" data-tab="tab-7" data-value="ist" onclick="bbtiTab(this.getAttribute('data-value'))">ist</li>
+				<li class="tab-link" data-tab="tab-8" data-value="int" onclick="bbtiTab(this.getAttribute('data-value'))">int</li>
 			</ul>
 	<!-- 탭 메뉴 상단 끝 -->
-	<!-- 탭 메뉴 내용 시작 -->
-	<div id="tab-1" class="tab-content current">
-		<h1>탭 메뉴 1 내용입니다.</h1>
-		<c:if test="${requestScope.count==0}">
+	
+	<!-- 탭 메뉴 내용 반복시작 -->
+	<c:forEach var="i" begin="1" end="8" varStatus="status">
+	<div id="tab-${i}" class="tab-content current">
+		<h1>탭 메뉴 ${i} 내용입니다.</h1>
+		<c:if test="${requestScope.count==0}"> <!-- 게시판에 글 없을 경우 -->
 		<div class="table-responsive">
 	 	<table><tr><td>게시판에 글 없음</td></tr></table>
 	 	</div>
 		 </c:if>
-		<c:if test="${requestScope.count!=0}">
+		<c:if test="${requestScope.count!=0}"><!-- 게시판에 글 있을 경우 -->
 		<div class="table-responsive">
 		<table class="table">
 			<thead class="thead-light">
@@ -80,43 +110,60 @@ $(document).ready(function(){
 			</c:forEach>			
 			</tbody>
 		</table>
+		<div>
+			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+		    	 <a href="list?pageNum=${i}"> ${i} </a>
+		    </c:forEach>
+		</div>
 		</div>
 	</c:if>
-			</div>
-			<div id="tab-2" class="tab-content">
-				<h1>탭 메뉴 2 내용입니다.</h1>
-				<p>.되지 아니하는 한 그 효력을 지속한다.</p>
-
-				<p>정떠한이 의하여 새로운 기관이 설치될 때까지 존속하며 그 직무를 행한다.</p>
-			</div>
-			<div id="tab-3" class="tab-content">
-				<h1>탭 메뉴 3 내용입니다.</h1>
-				<p>대한민국은 국제평화의 유지에 노력소급입법에 의하여 참정권의 제한을 받거나 재산권을 박탈당하지 아니한다.</p>
-			</div>
-			
-			<div id="tab-4" class="tab-content">
-				<h1>탭 메뉴 3 내용입니다.</h1>
-				<p></p>
-			</div>
-			<div id="tab-5" class="tab-content">
-				<h1>탭 메뉴 3 내용입니다.</h1>
-				<p></p>
-			</div>
-			<div id="tab-6" class="tab-content">
-				<h1>탭 메뉴 3 내용입니다.</h1>
-				<p></p>
-			</div>
-			<div id="tab-7" class="tab-content">
-				<h1>탭 메뉴 3 내용입니다.</h1>
-				<p></p>
-			</div>
-			<div id="tab-8" class="tab-content">
-				<h1>탭 메뉴 3 내용입니다.</h1>
-				<p></p>
-			</div>
-			<!-- 탭 메뉴 내용 끝 -->
+	</div>	
+	</c:forEach>
+	<!-- 탭 메뉴 내용 반복끝 -->
+	
+	<div id="tab-1" class="tab-content current">
+		<h1>탭 메뉴 1 내용입니다.</h1>
+		<c:if test="${requestScope.count==0}"> <!-- 게시판에 글 없을 경우 -->
+		<div class="table-responsive">
+	 	<table><tr><td>게시판에 글 없음</td></tr></table>
+	 	</div>
+		 </c:if>
+		<c:if test="${requestScope.count!=0}"><!-- 게시판에 글 있을 경우 -->
+		<div class="table-responsive">
+		<table class="table">
+			<thead class="thead-light">
+			<tr>
+				<th scope="col">작성자</th>
+				<th scope="col">제목</th>
+				<th scope="col">조회수</th>
+				<th scope="col">좋아요</th>
+				<th scope="col">작성일</th>
+			</tr>
+			</thead>
+			<tbody class="customtable">		    	
+		    	<c:forEach items="${list}" var="row" begin="0" end="${totalRecord}" varStatus="status">
+		    	<input type="hidden" name="status" value="${status.index}">
+		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
+		    	<tr>
+	    		<td id="profile_name" class="profile_name">${row.profile_name}</td>
+	    		<td id="board_title" class="board_title"><a href="detail/${row.board_no}">${row.board_title}</a>[${row.replycnt}]</td>
+	    		<td id="board_read" class="board_read">${row.board_read}</td>
+	    		<td id="board_good" class="board_good">${row.board_good}</td>
+	    		<td id="board_date" class="board_date">${row.board_date}</td>
+	    		</tr>
+			</c:forEach>			
+			</tbody>
+		</table>
+		<div>
+			<%-- <c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+		    	 <a href="list?pageNum=${i}"> ${i} </a>
+		    </c:forEach> --%>
 		</div>
-
+		</div>
+	</c:if>
+</div>
+		</div>
+<%-- 
 	<c:if test="${requestScope.count==0}">
 	 	<table><tr><td>게시판에 글 없음</td></tr></table>
 	 </c:if>
@@ -143,17 +190,10 @@ $(document).ready(function(){
 	    		<td id="board_good" class="board_good">${row.board_good}</td>
 	    		<td id="board_date" class="board_date">${row.board_date}</td>
 	    		</tr>
-			</c:forEach>	
-		
-		<!-- <tr>
-			<td colspan="4"  style='text-align:center; height: 50px;'>
-				
-			</td>
-		</tr> -->
-		
+			</c:forEach>			
 			</tbody>
 		</table>
-		</div>
+		</div> --%>
 		
 		<!-- 검색시작 -->
 		<div>
@@ -170,11 +210,11 @@ $(document).ready(function(){
 		</div>
 		<!-- 검색끝 -->		
 		
-		<div>
+		<%-- <div>
 			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
 		    	 <a href="list?pageNum=${i}"> ${i} </a>
 		    </c:forEach>
-		</div>
+		</div> --%>
 		<div>
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>

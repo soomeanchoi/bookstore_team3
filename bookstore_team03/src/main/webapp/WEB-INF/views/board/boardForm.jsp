@@ -7,21 +7,7 @@
 <link rel="stylesheet" href="/css/modal.css" />
 
 </head>
-<!-- <script>
-	const modal = document.getElementById("modal");
-	const openModalBtn = document.getElementById("open-modal");
-	const closeModalBtn = document.getElementById("close-modal");
-	// 모달창 열기
-	openModalBtn.addEventListener("click", () => {
-	  modal.style.display = "block";
-	  document.body.style.overflow = "hidden"; // 스크롤바 제거 
-	});
-	// 모달창 닫기
-	closeModalBtn.addEventListener("click", () => {
-	  modal.style.display = "none";
-	  document.body.style.overflow = "auto"; // 스크롤바 보이기
-	}); 
-</script>	 -->
+
 <body>
 	<!-- 검색시작 -->
 		<div id="modal">
@@ -34,6 +20,11 @@
 			<input type="text" name="keyWord" id="keyWord" value="${keyWord}">
 			<input type="submit" value="검색">
 		</form>
+		<div>
+			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+		    	<!-- 모달페이징링크수정요 --> <a href="list?pageNum=${i}"> ${i} </a>
+		    </c:forEach>
+		</div>
 			<button id="close-modal">닫기</button>
 		</div>
 		</div>
