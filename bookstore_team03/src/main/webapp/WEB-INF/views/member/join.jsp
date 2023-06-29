@@ -42,12 +42,13 @@
 		<tr>
 			<th>아이디</th>
 			<td>
-				<input type="text" name="member_id" id="member_id" maxlength="50">
+				<input type="text" name="member_id" id="member_id" maxlength="50" placeholder="사용 가능한 이메일을 입력해주세요.">
 				<!-- <button class="idCheck_btn" onclick="idCheck()"></button> -->
 				<input type="button" value="이메일 중복체크" onclick="idCheck()">
 				<br><br>
 				<span class="id_ok" style="display: none; color: green;" >사용 가능한 이메일입니다.</span>
  				<span class="id_already" style="display: none; color: red;">이미 사용 중인 이메일입니다.</span>
+				<sapn class="mail_input_box_warn"></sapn>
 			</td>
 		</tr>
 		<tr>
@@ -60,8 +61,8 @@
 		<tr>
 			<th>비밀번호</th>
 			<td>
-				<input type="password" name="member_pw" id="member_pw" maxlength="10" required><br><br>
-				
+				<input type="password" name="member_pw" id="member_pw" maxlength="10" placeholder="영문,숫자,특수문자 조합하여 8자~16자" required><br><br>
+				<span id="pwdcheck_blank1"></span>
 			</td>
 		</tr> 
 		<tr>
@@ -514,5 +515,77 @@ function idCheck(){
             }
         });
     });
-</script>​
+</script>
+<script>
+$("#member_pw").blur(function() {
+	 	let pwdCheck= /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
+	 	
+	 	if ($("#password").val() == "") {
+	         $("#pwdcheck_blank1").css("color", "red");
+	         $("#pwdcheck_blank1").text("필수정보예요.");
+	         password = false;
+	      }	
+	      else if (!pwdCheck.test($("#password").val())) {
+		  	 $("#pwdcheck_blank1").css("color", "red");
+		     $("#pwdcheck_blank1").text("비밀번호는 영문+숫자+특수문자 조합하여 8~16자리를 입력해주세요.");
+		     password = false;
+	      }else {
+	    	  $("#pwdcheck_blank1").css("color", "blue");
+			  $("#pwdcheck_blank1").text("");
+			  password = true;
+	      }
+	 	
+	 
+	 });
+</script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // 회원가입 폼 제출 시 실행되는 함수
+            $('#memfrm').submit(function(event) {
+                event.preventDefault(); // 기본 제출 동작을 막음
+
+                // AJAX 요청
+                $.ajax({
+                    type: 'POST', // 요청 메서드 (GET, POST 등)
+                    url: 'join.jsp', // 처리할 JSP 페이지의 URL
+                    data: $(this).serialize(), // 폼 데이터 직렬화하여 전송
+                    success: function(response) {
+                        // 서버 응답이 성공적으로 돌아왔을 때 실행되는 함수
+                        alert('회원가입이 성공적으로 완료되었습니다.');
+                    },
+                    error: function() {
+                        // 서버 요청이 실패했을 때 실행되는 함수
+                        alert('회원가입 중 오류가 발생했습니다.');
+                    }
+                });
+            });
+        });
+    </script>
+ <script>
+        function mailFormCheck(member_id) {
+            var form = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i;
+            return form.test(member_id);
+        }
+
+        window.addEventListener('DOMContentLoaded', function() {
+            var emailInput = document.getElementById('member_id');
+            var isEmailValidated = false;
+
+            emailInput.addEventListener('blur', function() {
+                var emailValue = emailInput.value.trim();
+                var isValid = mailFormCheck(emailValue);
+
+                if (!isValid && !isEmailValidated) {
+                    alert('유효한 이메일 주소를 입력해주세요.');
+                    emailInput.focus();
+                    isEmailValidated = true;
+                }
+            });
+
+            emailInput.addEventListener('input', function() {
+                isEmailValidated = false;
+            });
+        });
+    </script>​
 </html>
