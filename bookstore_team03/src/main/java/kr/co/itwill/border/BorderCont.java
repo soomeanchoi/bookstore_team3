@@ -195,11 +195,11 @@ public class BorderCont {
 			result = borderDao.orderlistInsert(orderlist);
 			System.out.println("orderlist행추가결과: " + result);
 
-			if(result!=0) {//주문상세내역에 추가된 내역이 있다면
+			/*if(result!=0) {//주문상세내역에 추가된 내역이 있다면
 				//장바구니 목록이 주문상세내역으로 이동된 후(결제완료) 장바구니 비우기
 				borderDao.cartdelete(s_id);
 			}//if end
-
+			*/
 			mav.addObject("msg", "주문이 완료되었습니다");
 			mav.addObject("border_no", border_no);
 			mav.setViewName("/pay/orderCartDetail");  // /WEB-INF/views/border/msgView.jsp
