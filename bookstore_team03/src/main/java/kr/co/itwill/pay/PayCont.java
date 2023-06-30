@@ -96,7 +96,7 @@ public class PayCont {
     }//detailAjaxRequset() end
 
     @PostMapping("/result")
-    public String resultAjaxRequest(@RequestParam("cnt") int cnt, @RequestParam("borderNo") String borderNo){
+    public ResponseEntity<String> resultAjaxRequest(@RequestParam("cnt") int cnt, @RequestParam("borderNo") String borderNo){
 
         System.out.println("cnt = " + cnt);
         System.out.println("borderNo = " + borderNo);
@@ -133,21 +133,24 @@ public class PayCont {
 
 
 
+            return ResponseEntity.ok("결제 성공");
 
         //Cnt = 0 이면 결제 실패 -> order_list 와 border 삭제
         }else if (cnt ==0){
 
             payDAO.payFail_border(borderNo);
             payDAO.payFail_orderlist(borderNo);
+            return ResponseEntity.ok("결제 실패");
 
         }else{
             System.out.println("오류 : 값을 찾을 수 없음");
+            return ResponseEntity.badRequest().body("잘못된 요청입니다.");
         }
 
 
 
 
-        return "redirect:/member/myPage";
+
     }//resultAjaxRequest() end
 
     @PostMapping("/detailCart")

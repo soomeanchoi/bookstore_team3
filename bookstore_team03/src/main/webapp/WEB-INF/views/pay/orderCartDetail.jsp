@@ -6,7 +6,7 @@
 
 
 <%--    끝     --%>
-<%@ include file="../template/footer.jsp" %>
+
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
 
@@ -99,7 +99,7 @@
                                 console.error("AJAX 요청 실패:", status, error);
                             }//error end
                         })
-                        location.href = "/"
+                        location.href = "/cart/list"
                     }
                 });//IMP function end
             },//success
