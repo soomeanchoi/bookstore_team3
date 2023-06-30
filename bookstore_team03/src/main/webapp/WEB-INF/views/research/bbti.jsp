@@ -61,7 +61,7 @@
       <div class="resultDesc">
 
       </div>
-      <button type="submit" class="buttonStyle mt-3 py-2 px-3">공유하기</button>
+      <button type="submit" class="buttonStyle mt-3 py-2 px-3">확인</button>
 
     </section>
     <script src = "/js/bbtiStart.js"></script>
