@@ -30,9 +30,9 @@
 <%--    시작    --%>
 <section class="mail" style="padding-left: 380px;">
 <h1><div class="mail-title">1:1 문의하기</div></h1>
-<form name="mailfrm" id="mailfrm" method="post" action="insert" onsubmit="return ()">
+<form name="mailfrm" id="mailfrm" method="post" onsubmit="return ()" action="/mail/inquity">
 <div class="tbl_row_wrap" id="inquiryForm" data-kbbfn="form-group" data-kbbfn-depend="submodule.CsInquiryModule">
-        
+       <div style="display: none">String member_id = </div> 
     <table class="tbl_row" style="margin: auto;">
         <colgroup>
             <col style="width: 160px;">
@@ -60,7 +60,7 @@
                                 <div class="valid_check w_full">
                                     <div class="form_sel_multi">
                                         <div class="form_sel" style="width: 397px;">
-                                            <select data-kbbfn-field="문의 유형을 선택해 주세요." id="InquiryQuestList" title="문의유형 분류"><option value="-1" selected="selected">문의 유형을 선택해 주세요.</option><option value="000">배송/수령예정일안내</option><option value="001">주문/결제</option><option value="003">반품/교환/환불</option><option value="004">도서/상품정보</option><option value="005">회원정보서비스</option><option value="006">웹사이트 이용 관련</option><option value="007">시스템불편사항</option><option value="013">고객제안/친절불친절</option><option value="014">파본/상품불량신고</option><option value="939">대량구매</option></select><span tabindex="0" id="InquiryQuestList-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="InquiryQuestList-menu" aria-haspopup="true" title="문의유형 분류" class="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-closed ui-corner-all" aria-activedescendant="ui-id-23" aria-labelledby="ui-id-20" aria-disabled="false"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text"></span></span>
+                                            <select data-kbbfn-field="문의 유형을 선택해 주세요." id="InquiryQuestList" name="InquiryQuestList" title="문의유형 분류"><option value="-1" selected="selected">문의 유형을 선택해 주세요.</option><option value="000">배송/수령예정일안내</option><option value="001">주문/결제</option><option value="003">반품/교환/환불</option><option value="004">도서/상품정보</option><option value="005">회원정보서비스</option><option value="006">웹사이트 이용 관련</option><option value="007">시스템불편사항</option><option value="013">고객제안/친절불친절</option><option value="014">파본/상품불량신고</option><option value="939">대량구매</option></select><span tabindex="0" id="InquiryQuestList-button" role="combobox" aria-expanded="false" aria-autocomplete="list" aria-owns="InquiryQuestList-menu" aria-haspopup="true" title="문의유형 분류" class="ui-selectmenu-button ui-button ui-widget ui-selectmenu-button-closed ui-corner-all" aria-activedescendant="ui-id-23" aria-labelledby="ui-id-20" aria-disabled="false"><span class="ui-selectmenu-icon ui-icon ui-icon-triangle-1-s"></span><span class="ui-selectmenu-text"></span></span>
                                         </div>
                                         
                                     </div>
@@ -139,7 +139,7 @@
                             <div class="valid_check">
                                 <!-- 수정 220518 w_full 삭제 -->
                                 <!-- 수정 220422 타이틀 수정 -->
-                                <input data-kbbfn-field="" id="mail_subject" type="text" class="form_ip w_full" title="제목 입력" placeholder="제목을 입력해 주세요." required="" maxlength="30">
+                                <input data-kbbfn-field="" id="mail_subject" name= "mail_subject" type="text" class="form_ip w_full" title="제목 입력" placeholder="제목을 입력해 주세요." required="" maxlength="30">
                                 <span class="valid_desc"></span>
                             </div>
                         </div>    
@@ -147,7 +147,7 @@
                             <div class="valid_check">
                                 <!-- byte_check_wrap -->
                                 <div class="byte_check_wrap_w_full" style="height: 100px;">
-                                    <textarea data-kbbfn-field="" id="mail_Content" class="mail_Content" title="문의 내용 입력" placeholder="빠른 답변을 위해 10자 이상의 문의 내용을 입력해 주세요." maxlength="500" style="height: 800px;" required=""></textarea>
+                                    <textarea data-kbbfn-field="" id="mail_Content" name="mail_Content" class="mail_Content" title="문의 내용 입력" placeholder="빠른 답변을 위해 10자 이상의 문의 내용을 입력해 주세요." maxlength="500" style="height: 800px;" required=""></textarea>
                                     <!-- 수정 220422 placeholder 마침표 추가, 타이틀 수정, style attr 추가 -->
                                     <div class="byte_check_footer">
                                         
@@ -174,9 +174,8 @@
 </div>
 
 		  <div class="mail_btn_group" style="text-align: center;">
-            <input class="id-pw-btn" type="button" value="취소" onclick="location.href='myPage';"/>
-            &nbsp; &nbsp;
-            <input type="submit" value="주문접수">
+            <button type="submit" class="mail-btn" onclick="location.href='myPage';">문의하기</button>
+			<button type="button" onclick="history.go(-1);" class="mail-btn">취소</button>
           </div> 
 
 </form>

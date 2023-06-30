@@ -245,7 +245,7 @@ modal.addEventListener("click", e => {
 					/* alert(result); */
 
 				},error:function(xhr, status, error){
-	                alert("비밀번호찾기에러입니다");
+	                alert("비밀번호 찾기 에러입니다");
 	                console.error(status, error);
 	            }
 			})

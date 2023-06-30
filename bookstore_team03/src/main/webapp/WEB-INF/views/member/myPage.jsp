@@ -12,6 +12,10 @@
     <meta charset="UTF-8" />
  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <title>Team3 - BookStore</title>
     <link rel="stylesheet" href="/css/reset.css" />
     <link rel="stylesheet" href="/css/style.css" />
@@ -146,9 +150,16 @@
 	      					<span class="val"></span>
 	      				</a>
 	      			</li>
-	      			<li class="info_item" style="margin-left: 45px">
+	      			<li class="info_item" style="margin-left: 8px; margin-bottom: 30px;">
+	      				<a href="http://localhost:9095/research/list">
+	      				<img src="/storage/test.png" height="45" width="50">
+	      					<!-- <span class="title">테스트</span> -->
+	      					<span class="val"></span>
+	      				</a>
+	      			</li>
+	      			<li class="info_item" style="margin-left: 25px">
 	      				<a href="http://localhost:9095/board/list">
-	      				<img src="/storage/neighbor.png" height="38" width="50">
+	      				<img src="/storage/neighbor.png" height="35" width="45">
 	      					<!-- <span class="title">커뮤니티</span> -->
 	      					<span class="val"></span>
 	      				</a>
@@ -167,7 +178,7 @@
         	 
             
             
-          <div>   
+          <div style="margin-top: 10px;">   
 		    <div>1 : 1 문의
 		    <input type="button" value="메일" onclick="location.href='myPageMail';">
 		    </div>
@@ -234,78 +245,11 @@
 		    		
 		    	<!-- -----------------주문내역 테이블 추가 -->
 		    	<div class="carousel_down">
-		    	<h3><div class="tbl_name" style="margin-top: 40px; margin-left: 30px;">최근 주문</div></h3>
-		    	<h6 style="margin-left: 33px;"><a href='/border/borderlist'>더보기 ></a></h6>
+		    	<h3><div class="tbl_name" style="margin-top: 40px;">최근 주문</div></h3>
+		    	<h6><a href='/border/borderlist'>더보기 ></a></h6>
 		    	<div class="tbl_prod_wrap_type_myroom" style="margin-top: 20px;">
-		    	<%-- <table class="book_tbl">
-		    		<colgroup>
-			    		<col style="width: 130px;">
-			    		<col>
-			    		<col style="width: 160px;">
-			    		<col style="width: 130px;">
-		    		</colgroup>
-		    		<thead class="hidden">
-		    			<tr>
-		    				<th scope="col">주문정보</th>
-		    				<th scope="col">상품정보</th>
-		    				<th scope="col">금액</th>
-		    				<th scope="col">배송정보</th>
-		    			</tr>
-		    		</thead>
-		    		<tbody>
-		    			<tr>
-		    				<td class="order_info">
-		    					<span class="date">날짜 데이터</span>
-		    					<a class="licnk" href="#" alt="주문번호 누르면 주문 상세 페이지로"></a>
-		    				</td>
-		    				<td class="book">
-		    					<div class="book_area_horizontal">
-			    					<div class="book_thumb_size">
-			    						<a herf="#">책 디테일 페이지</a>	
-			    					<span class="img_box">
-			    						<img alt="책이름" src="#">
-			    					</span>
-			    					</a>
-		    					</div>
-		    				<div class="info_box">
-		    					<a class="book_info" href="#">
-		    					<span class="book_multi_count">
-			    					<span class="book_name">도서 이름<(대분류는?)</span>
-			    					<span class="book_count">{}외 1건</span>
-		    					</span>
-		    					</a>
-		    				<ul class="book_option_list">
-		    					<li class="option_item">
-		    						<span class="text">수량 : </span>
-		    						<span class="val">{ }</span>
-		    					</li>	
-		    				</ul>
-		    				</div>
-		    				</div>
-		    				</td>
-		    				<td>
-		    				<span class="price">
-		    					<span class="val">{가격}</span>
-		    					<span class="unit">{원}</span>
-		    				</span>
-		    				</td>
-		    				<td>
-		    				<div class="delivery_info">
-		    					<span class="delivery_state">{반품완료/취소완료/배송완료}</span>
-		    				</div>
-		    				</td>
-		    			</tr>
-		    			<!-- 한 칸 완 성 -->
-		    			<tr>
-		    				<td class="order_info"></td>
-		    				<td class="book"></td>
-		    				<td></td>
-		    				<td></td>
-		    			</tr>
-		    			
-		    		</tbody>		
-		    	</table> --%>
-		    	<table class="book_tbl">
+		    	
+		    	<table class="table table-hover">
 				    <thead>
 				        <tr>
 				            <th scope="col">주문번호</th>
@@ -315,6 +259,14 @@
 				        </tr>
 				    </thead>
 				    <tbody>
+				    
+				   					<c:choose>
+								    <c:when test="${empty myorder}">
+								       <%--  <c:set var="profile" value="${plist[0]}" /> --%>
+								       <td colspan="4"> 최근 주문하신 상품이 없습니다. </td>
+								    </c:when>
+								    <c:otherwise>
+				    
 				        <c:forEach var="order" items="${myorder}" varStatus="vs">
 				            <tr>
 				            	<td>
@@ -327,10 +279,8 @@
 				            	</td>
 				                <td></td>
 				                 <c:forEach var="book" items="${book}">
-				                <td>책제목${book.book_name }</td>
+				                <td>${book.book_name }</td>
 				                </c:forEach>
-				                <td>상품정보</td>
-				                <td>조인해서</td>
 				                <td></td>
 				                <td>${order.border_price}</td>
 				                <td>배송상태</td>
@@ -341,41 +291,46 @@
 			            </c:if>
 				        </c:forEach>
 				        </tr>
+				        
+				        </c:otherwise>
+						</c:choose>
 				    </tbody>
 				</table>
 		    	</div>
 		    	
 		    	
-		    	<div class="my_review">
-		    	<h3><div class="my_review_title">내가 작성한 리뷰</div></h3>
-		    	<table class="review_tbl">
-				    <thead>
-				        <tr>
-				            <th scope="col">isbn(책 사진)</th>
-				            <th scope="col">별점</th>
-				            <th scope="col">내용</th>
-				            <th scope="col">쓴 날짜</th>
-				        </tr>
-				    </thead>
-				    <tbody>
-				        
-				            <tr>
-				            	
-				                <c:forEach var="review" items="${myreview}">
-				                <td>${review.isbn}</td>
-				                <td>내용</td>
-				                <td>${review.review_content}</td>
-				                <td>별점</td>
-				                <td>${review.review_score}</td>
-				                <td>날짜</td>
-				                <td>${review.review_date}</td>
-				            
-				 	</c:forEach>   
-				 	</tr>     
-				    </tbody>
-				</table>
-		            
-		       </div>
+		    	<div class="my_review" style="margin-right: 60px;">
+					    <h3><div class="my_review_title">내가 작성한 리뷰</div></h3>
+					    <table class="table table-hover">
+					        <thead>
+					            <tr>
+					                <th scope="col">isbn(책 사진)</th>
+					                <th scope="col">별점</th>
+					                <th scope="col">내용</th>
+					                <th scope="col">쓴 날짜</th>
+					            </tr>
+					        </thead>
+					        <tbody>
+					            <c:choose>
+					                <c:when test="${myreview == null or empty myreview}">
+					                    <tr>
+					                        <td colspan="4">최근 작성하신 리뷰가 없습니다.</td>
+					                    </tr>
+					                </c:when>
+					                <c:otherwise>
+					                    <c:forEach var="review" items="${myreview}">
+					                        <tr>
+					                            <td>${review.isbn}</td>
+					                            <td>${review.review_score}</td>
+					                            <td>${review.review_content}</td>
+					                            <td>${review.review_date}</td>
+					                        </tr>
+					                    </c:forEach>
+					                </c:otherwise>
+					            </c:choose>
+					        </tbody>
+					    </table>
+					</div>
 		       </div>
 		       
 	          
@@ -422,25 +377,60 @@
           
           <div class="bbti">
 	            <h3><div class="my_bbti_title">BBTI 활동내역</div></h3>
+	            <table class="table table-hover">
+					        <thead>
+					            <tr>
+					                <th scope="col">bbti</th>
+					                <th scope="col">제목</th>
+					                <th scope="col">내용</th>
+					                <th scope="col">쓴 날짜</th>
+					            </tr>
+					        </thead>
+					        <tbody>
 	            <c:choose>
 				    <c:when test="${p.bbti_no != null}">
 				       <%--  <c:set var="profile" value="${plist[0]}" /> --%>
-				       <h6><a href='/board/list'>더보기 ></a></h6>
+				       <h6 style="margin-bottom: 16px;"><a href='/board/list'>더보기 ></a></h6>
 				    </c:when>
 				    <c:otherwise>
-				       <h6><a href='/research/list'>더보기 ></a></h6>
-				       
+				       <h6 style="margin-bottom: 16px;"><a href="#" id="more-link">더보기 ></a></h6>
+			            <script>
+			                // 클릭 이벤트 처리
+			                document.getElementById('more-link').addEventListener('click', function() {
+			                    // JavaScript를 사용하여 alert 호출
+			                    alert("테스트를 먼저 진행해주세요.");
+			                });
+			            </script>
 				    </c:otherwise>
 				</c:choose>
 	            
+					            <c:choose>
+					                <c:when test="${myboard == null or empty myboard}">
+					                    <tr>
+					                        <td colspan="4">최근 활동하신 내역이 없습니다.</td>
+					                    </tr>
+					                </c:when>
+					                <c:otherwise>
+					                    <c:forEach var="myboard" items="${myboard}">
+					                        <tr>
+					                            <td>${myboard.isbn}</td>
+					                            <td>${myboard.board_title}</td>
+					                            <td>${myboard.board_content}</td>
+					                            <td>${myboard.board_date}</td>
+					                        </tr>
+					                    </c:forEach>
+					                </c:otherwise>
+					            </c:choose>
+					        </tbody>
+					    </table>
 	            
 	         	<!-- <h6><a href='/board/list'>더보기 ></a></h6> -->
-	            <div>글제목</div>
-	            <div>글내용</div>
+	            <!-- <div>글제목</div>
+	            <div>글내용</div> -->
 	      </div>
-
+<%@ include file="../template/footer.jsp" %>
         </div>
-     <%--    <%@ include file="../template/footer.jsp" %> --%>
+    
       </div>	
     </div>  
     

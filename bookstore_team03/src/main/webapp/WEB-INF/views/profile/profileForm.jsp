@@ -30,10 +30,10 @@
     ></script>
   </head>
 <body>
-<section style="padding: 50px;">
+<section>
 	<h1><div class="profilefrm-title">프로필 등록</div></h1>
 	<form name="profilefrm" id="profilefrm" method="post" action="insert" enctype="multipart/form-data">
-	    <table class="table" style="margin-top: 0px;">
+	    <table class="table">
 	    <tr>
 	        <th>프로필 사진</th>
 	        <td> <input type="file" id="profile_img" name="profile_img"><br><br></td>

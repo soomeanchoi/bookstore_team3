@@ -37,3 +37,11 @@
 	margin-top:130px;
 	margin-right:50px;
 }
+
+.mail-btn {
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    color: #fff;
+    background-color: #808080;
+} 

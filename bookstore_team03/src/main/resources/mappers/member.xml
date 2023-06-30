@@ -111,6 +111,12 @@
 			AND b.member_id = #{member_id};
 	</select>
 	
+	<select id="myboard" resultType="java.util.Map" parameterType="String">
+			SELECT isbn, bbti_name, board_title, board_content, board_date
+			FROM board
+			WHERE member_id = #{member_id}
+	</select>
+	
 </mapper>     
 
 

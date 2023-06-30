@@ -1,5 +1,10 @@
 package kr.co.itwill.mail;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,20 +41,26 @@ public class mailCont {
 		
 		mailService.sendMail(member_id, passwd);
 	}
-	/*
-	@PostMapping("/member/findpw")
-    @ResponseBody
-    public String findPw(@RequestParam("member_name") String member_name, @RequestParam("member_id") String member_id) {
-        // 회원 정보와 이메일 주소를 이용하여 비밀번호 찾기 로직 수행
-
-        // 비밀번호를 이메일로 전송
-        String toAddress = "tnals5870@naver.com"; // 수신자 이메일 주소
-        String subject = "비밀번호 찾기 결과";
-        String message = "비밀번호는 " + memberDto.getMember_pw() + "입니다."; // 실제 비밀번호 값으로 변경
-
-        sendEmail(toAddress, subject, message); // sendEmail() 메서드 호출
-
-        return "이메일이 성공적으로 전송되었습니다.";
-    }
-*/
+	
+	
+	@PostMapping("/mail/inquity")
+	public String inquityMail(@RequestParam Map<String, Object>map, HttpSession session) {
+		
+		System.out.println("---------------------------------------");
+		
+		String s_id = (String) session.getAttribute("member_id");
+		System.out.println(s_id);
+		System.out.println(map.toString());
+	
+		
+		map.put("member_id", s_id);
+		
+		
+		mailService.sendInquityMail(map);
+		
+		return "redirect:/member/myPage";
+	}
+	
+	
+	
 }
