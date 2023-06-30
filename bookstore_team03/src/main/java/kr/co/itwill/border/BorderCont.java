@@ -234,6 +234,9 @@ public class BorderCont {
 
 		if((double)totalRecord % (double)totalPage == 0 ) {
 			totalPage = totalRecord / pageSize;
+			if(totalPage == 0) {
+				totalPage =1;
+			}//if end
 		}else {
 			totalPage = totalRecord / pageSize +1;
 		}//if end
@@ -300,7 +303,6 @@ public class BorderCont {
 		else {
 			return "실패하였습니다";
 		}
-
 	}
 
 

@@ -3,6 +3,7 @@ package kr.co.itwill.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,7 +32,7 @@ public class BoardCont {
 	@Autowired
 	BoardDAO boardDao;
 
-	
+	/*
 	//페이징 있음
 	@RequestMapping("/list")
 	public ModelAndView list(@RequestParam(value="pageNum", defaultValue="1") int pageNum) {
@@ -47,6 +48,9 @@ public class BoardCont {
 	
 	if((double)totalRecord % (double)totalPage == 0 ) {
 		totalPage = totalRecord / pageSize;
+		if(totalPage == 0) {
+					totalPage =1;
+				}//if end
 	}else {
 		totalPage = totalRecord / pageSize +1;
 	}//if end
@@ -68,47 +72,268 @@ public class BoardCont {
 	
 	return mav;
 	}//list end
-	
-	/*
+	*/
+
 	//페이징+탭반영
 	@RequestMapping("/list")
-	public void list(@RequestParam(value="pageNum", defaultValue="1") int pageNum
+	public Map<String, Object> list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, HttpServletRequest req) {
+		Map<String, Object> map = new HashMap<>();
+		//클릭된 탭의 bbti_name
+		String bbti_name = req.getParameter("bbti_name");
+
+		//페이징
+		//총 게시글개수
+		int pageSize = 5;
+		int totalRecord = 0;
+		int totalPage = 1;
+
+		/*//리턴할 mav 객체생성
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/list");*/
+
+		if (bbti_name == null) {//만약 bbti_name값 입력이 없으면, 전체글 띄우기
+			//총 게시글개수
+			totalRecord = boardDao.totalRecord();
+			//System.out.println("유형별총게시글개수: " + totalRecord);
+
+			//게시글 총페이지수
+			if ((double) totalRecord % (double) totalPage == 0) {
+				totalPage = totalRecord / pageSize;
+				if (totalPage == 0) {
+					totalPage = 1;
+				} //if end
+			} else {
+				totalPage = totalRecord / pageSize + 1;
+				//System.out.println("totalPage:"+totalPage);
+			} //if end
+
+			int start = (pageNum - 1) * pageSize;
+			int end = pageSize;
+
+			//리턴할 mav 객체생성
+			//ModelAndView mav = new ModelAndView();
+			/*mav.setViewName("board/list");*/
+
+			//총 게시글
+			map.put("totalRecord", totalRecord);
+
+			//1~5개의 게시글 불러오기
+			map.put("list", boardDao.paginglist(start, end));
+
+			//총 페이지수
+			map.put("totalPage", totalPage);
+			//System.out.println("mav : " + mav);
+			return map;
+
+		} else { //bbti_name값 입력 있으면 해당 유형 글 띄우기
+			//총 게시글개수
+			System.out.println("bbti_name: " + bbti_name);
+			totalRecord = boardDao.btotalRecord(bbti_name);
+			//System.out.println("유형별총게시글개수: " + totalRecord);
+			if ((double) totalRecord % (double) totalPage == 0) {
+				totalPage = totalRecord / pageSize;
+				if (totalPage == 0) {
+					totalPage = 1;
+				} //if end
+			} else {
+				totalPage = totalRecord / pageSize + 1;
+			} //if end
+
+			int start = (pageNum - 1) * pageSize;
+			int end = pageSize;
+
+			//리턴할 mav 객체생성
+			//ModelAndView mav = new ModelAndView();
+			//				mav.setViewName("board/list");
+
+			//총 게시글
+			map.put("totalRecord", totalRecord);
+
+			//1~5개의 게시글 불러오기
+			map.put("list", boardDao.bpaginglist(start, end, bbti_name));
+
+			//총 페이지수
+			map.put("totalPage", totalPage);
+			System.out.println("map : " + map);
+
+			return map;
+		} //if end
+
+	}//list end
+	
+	@RequestMapping("/listtab")
+	@ResponseBody
+	public Map<String, Object> listtab(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, HttpServletRequest req) {
+		Map<String, Object> map = new HashMap<>();
+		//클릭된 탭의 bbti_name
+		String bbti_name = req.getParameter("bbti_name");
+
+		
+		//페이징
+		//총 게시글개수
+		int pageSize = 5;
+		int totalRecord = 0;
+		int totalPage = 1;
+
+		/*//리턴할 mav 객체생성
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("board/list");*/
+
+		if (bbti_name == null) {//만약 bbti_name값 입력이 없으면, 전체글 띄우기
+			//총 게시글개수
+			totalRecord = boardDao.totalRecord();
+			//System.out.println("유형별총게시글개수: " + totalRecord);
+
+			//게시글 총페이지수
+			if ((double) totalRecord % (double) totalPage == 0) {
+				totalPage = totalRecord / pageSize;
+				if (totalPage == 0) {
+					totalPage = 1;
+				} //if end
+			} else {
+				totalPage = totalRecord / pageSize + 1;
+				//System.out.println("totalPage:"+totalPage);
+			} //if end
+
+			int start = (pageNum - 1) * pageSize;
+			int end = pageSize;
+
+			//리턴할 mav 객체생성
+			//ModelAndView mav = new ModelAndView();
+			/*mav.setViewName("board/list");*/
+
+			//총 게시글
+			map.put("totalRecord", totalRecord);
+
+			//1~5개의 게시글 불러오기
+			map.put("list", boardDao.paginglist(start, end));
+
+			//총 페이지수
+			map.put("totalPage", totalPage);
+			//System.out.println("mav : " + mav);
+			return map;
+
+		} else { //bbti_name값 입력 있으면 해당 유형 글 띄우기
+			//총 게시글개수
+			System.out.println("bbti_name: " + bbti_name);
+			totalRecord = boardDao.btotalRecord(bbti_name);
+			//System.out.println("유형별총게시글개수: " + totalRecord);
+			if ((double) totalRecord % (double) totalPage == 0) {
+				totalPage = totalRecord / pageSize;
+				if (totalPage == 0) {
+					totalPage = 1;
+				} //if end
+			} else {
+				totalPage = totalRecord / pageSize + 1;
+			} //if end
+
+			int start = (pageNum - 1) * pageSize;
+			int end = pageSize;
+
+			//리턴할 mav 객체생성
+			//ModelAndView mav = new ModelAndView();
+			//				mav.setViewName("board/list");
+
+			//총 게시글
+			map.put("totalRecord", totalRecord);
+
+			//1~5개의 게시글 불러오기
+			map.put("list", boardDao.bpaginglist(start, end, bbti_name));
+
+			//총 페이지수
+			map.put("totalPage", totalPage);
+			System.out.println("map : " + map);
+
+			return map;
+		} //if end
+
+	}//listtab end
+
+	/*@RequestMapping("/list")
+	public ModelAndView list(@RequestParam(value="pageNum", defaultValue="1") int pageNum
 							,HttpServletRequest req) {
 		
-		System.out.println(req.getParameter(""));
-		
-		
+			//클릭된 탭의 bbti_name
+			String bbti_name = req.getParameter("bbti_name");
+			
 			//페이징
 			//총 게시글개수
 			int pageSize=5;
 			int totalRecord=0;
 			int totalPage=1;
-				
-			//총 게시글개수
-			totalRecord = boardDao.totalRecord();
 			
-			if((double)totalRecord % (double)totalPage == 0 ) {
-				totalPage = totalRecord / pageSize;
-			}else {
-				totalPage = totalRecord / pageSize +1;
-			}//if end
-			
-			int start = (pageNum -1) * pageSize;
-			int end = pageSize;
-			
+			//리턴할 mav 객체생성
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("board/list");
 			
-		    //총 게시글
-		    mav.addObject("totalRecord",  totalRecord);
-		    
-		    //1~5개의 게시글 불러오기
-			mav.addObject("list", boardDao.paginglist(start, end));
-			
-			//총 페이지수
-			mav.addObject("totalPage", totalPage);
-			
-			return mav;
+			if(bbti_name==null) {//만약 bbti_name값 입력이 없으면, 전체글 띄우기
+				//총 게시글개수
+				totalRecord = boardDao.totalRecord();
+				//System.out.println("유형별총게시글개수: " + totalRecord);
+				
+				//게시글 총페이지수
+				if((double)totalRecord % (double)totalPage == 0 ) {
+					totalPage = totalRecord / pageSize;
+					if(totalPage == 0) {
+						totalPage =1;
+					}//if end
+				}else {
+					totalPage = totalRecord / pageSize +1;
+					//System.out.println("totalPage:"+totalPage);
+				}//if end
+				
+				int start = (pageNum -1) * pageSize;
+				int end = pageSize;
+				
+				//리턴할 mav 객체생성
+				ModelAndView mav = new ModelAndView();
+				mav.setViewName("board/list");
+				
+			    //총 게시글
+			    mav.addObject("totalRecord", totalRecord);
+			    
+			    //1~5개의 게시글 불러오기
+				mav.addObject("list", boardDao.paginglist(start, end));
+				
+				//총 페이지수
+				mav.addObject("totalPage", totalPage);
+				//System.out.println("mav : " + mav);
+				return mav;
+				
+			}else { //bbti_name값 입력 있으면 해당 유형 글 띄우기
+				//총 게시글개수
+				System.out.println("bbti_name: "+bbti_name);
+				totalRecord = boardDao.btotalRecord(bbti_name);
+				//System.out.println("유형별총게시글개수: " + totalRecord);
+				if((double)totalRecord % (double)totalPage == 0 ) {
+					totalPage = totalRecord / pageSize;
+					if(totalPage == 0) {
+						totalPage =1;
+					}//if end
+				}else {
+					totalPage = totalRecord / pageSize +1;
+				}//if end
+				
+				int start = (pageNum -1) * pageSize;
+				int end = pageSize;
+				
+				//리턴할 mav 객체생성
+				ModelAndView mav = new ModelAndView();
+	//				mav.setViewName("board/list");
+				
+			    //총 게시글
+			    mav.addObject("totalRecord",  totalRecord);
+			    
+			    //1~5개의 게시글 불러오기
+				mav.addObject("list", boardDao.bpaginglist(start, end, bbti_name));
+				
+				//총 페이지수
+				mav.addObject("totalPage", totalPage);
+				System.out.println("mav : " + mav);
+				
+				return mav;
+			}//if end
+				
 	}//list end
 	*/
 
@@ -174,6 +399,9 @@ public class BoardCont {
 		//페이지개수
 		if ((double) totalRecord % (double) totalPage == 0) {
 			totalPage = totalRecord / pageSize;
+			if (totalPage == 0) {
+				totalPage = 1;
+			} //if end
 		} else {
 			totalPage = totalRecord / pageSize + 1;
 		} //if end
@@ -225,6 +453,9 @@ public class BoardCont {
 		//페이지개수
 		if ((double) totalRecord % (double) totalPage == 0) {
 			totalPage = totalRecord / pageSize;
+			if (totalPage == 0) {
+				totalPage = 1;
+			} //if end
 		} else {
 			totalPage = totalRecord / pageSize + 1;
 		} //if end

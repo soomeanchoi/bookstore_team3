@@ -2,6 +2,8 @@ package kr.co.itwill.reply;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,14 +25,14 @@ public class ReplyCont {
     
     @RequestMapping("/insert")
     @ResponseBody
-    public int replyInsert(@RequestParam int board_no, @RequestParam String reply_content) throws Exception {
+    public int replyInsert(@RequestParam int board_no, @RequestParam String reply_content, HttpSession session) throws Exception {
     	
     	ReplyDTO reply=new ReplyDTO();
     	reply.setBoard_no(board_no);
     	reply.setReply_content(reply_content);
     	
-    	//String s_id = session.getAttribute("s_id"); 
-    	String s_id = "kgukid38@naver.com";
+    	String s_id = (String)session.getAttribute("s_id"); 
+    	//String s_id = "kgukid38@naver.com";
         
     	reply.setMember_id(s_id); 
     	
@@ -42,9 +44,7 @@ public class ReplyCont {
     @RequestMapping("/list")
     @ResponseBody
     public List<ReplyDTO> replyList(@RequestParam int board_no) throws Exception {
-    	
         return replyDao.replylist(board_no);
-        
     }//replyList() end
     
     

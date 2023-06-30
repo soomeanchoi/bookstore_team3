@@ -9,43 +9,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-/* $(document).ready(function(){
-	
-	//탭이 클릭되면
-	$('ul.tabs li').click(function(){
-		//tab_id를 클릭된 탭아이디로 변경
-		var tab_id = $(this).attr('data-tab');
-		
-		//기존탭 current와 내용지우기
-		$('ul.tabs li').removeClass('current');
-		$('.tab-content').removeClass('current').empty();
-		
-		//클릭된탭 current추가하여 노출
-		$(this).addClass('current');
-		$("#"+tab_id).addClass('current');
-		
-	})
-});
-*/
-
-
-
 function bbtiTab(bbti_name){//bbti별 게시글 가져오기
-	var params = "bbti_name="+bbti_name
-	var list;
+	var params = { bbti_name: bbti_name };
+	
+	//$('.container.tab-pane.active').empty();
 	
 	 $.ajax({
-	 	url:'/board/listtab'	//요청명령어
+	 	url:'/board/list'	//요청명령어
 	 	,type:'post'
 	 	,data:params		//요청정보, 게시판 탭정보
 	 	,error:function(error){
 	 		alert(error);
 	 	}//error end
 		,success:function(data){
-			console.log(data);
-			total = data.totalPage;			
-			alert(total);
-						
+			alert("탭변경");
+			//if(data ==1){//댓글 등록이 성공했다면
+			
+			//}//if end
 		}//success end
 	}); //ajax() end 
 }//bbtiTab() end 
@@ -53,13 +33,14 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 
 </head>
 <body>
+
 <div class="container mt-3">
   <h2>Toggleable Tabs</h2>
   <br>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-bs-toggle="tab" href="#home" data-value=" " onclick="bbtiTab(this.getAttribute('data-value'))">전체글</a>
+      <a class="nav-link active" data-bs-toggle="tab" href="#home" data-value=" " href="list">전체글</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="tab" href="#menu1" data-value="esf" onclick="bbtiTab(this.getAttribute('data-value'))">esf</a>

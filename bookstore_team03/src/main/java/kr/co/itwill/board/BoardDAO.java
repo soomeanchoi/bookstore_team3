@@ -32,7 +32,6 @@ public class BoardDAO {
 		HashMap<String, Integer> map = new HashMap<>();
 		map.put("start", start);
 		map.put("end", end);
-		
 		return sqlSession.selectList("board.paginglist", map);
 	}//listBoard() end
 	
@@ -40,6 +39,21 @@ public class BoardDAO {
 	public int replylist(int board_no){
 		return sqlSession.selectOne("board.replylist", board_no);
 	}//replylist() end
+	
+	//bbti 페이징 : 총 글개수
+	public int btotalRecord(String bbti_name) {
+		return sqlSession.selectOne("board.btotalRecord", bbti_name);
+	}//totalRecord() end
+	
+	//bbti 페이징 : 총 게시글
+	public List<HashMap<String, Object>> bpaginglist(int start, int end, String bbti_name){
+		HashMap<String, Object> map = new HashMap<>();
+		map.put("start", start);
+		map.put("end", end);
+		map.put("bbti_name", bbti_name);
+		
+		return sqlSession.selectList("board.bpaginglist", map);
+	}//listBoard() end
 	
 	//페이징 : 검색된 총글개수
 	public int stotalRecord(HashMap<String, Object> map) {
