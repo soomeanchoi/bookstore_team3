@@ -91,11 +91,9 @@
 			<button type="button" onclick="location.href='/board/list'">글목록</button>
 		
 			<c:if test="${s_id eq detail.member_id}">
-			<button type="button" class="edit-btn" onclick="location.href='/board/boardUpForm/${detail.board_no}'">수정</button>
-			<button type="button" class="delete-btn" onclick="location.href='/board/delete/${detail.board_no}'">삭제</button>
+				<button type="button" class="edit-btn" onclick="location.href='/board/boardUpForm/${detail.board_no}'">수정</button>
+				<button type="button" class="delete-btn" onclick="location.href='/board/delete/${detail.board_no}'">삭제</button>
 			</c:if>
-			<%-- <a href="delete/${detail.board_no}" 
-				onclick="return confirm('삭제하시겠습니까?')">삭제</a> --%>
 			</div>
 		</form>
 		</div>
@@ -154,6 +152,8 @@
 		
 		function replyList() {
 			//alert("댓글 목록 함수 호출");
+			let s_id='${s_id}';
+			
 			$.ajax({
 				  url:'/reply/list'
 				, type:'get'
@@ -164,9 +164,11 @@
 			    		
 			    		a += '<div class="replyArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
 			    		a += '     <div class="replyInfo' + value.reply_no + '">';
-			    		a += '          댓글번호:' + value.reply_no + ' / 작성자:' + value.member_id + " " + value.reply_date;			    		
+			    		a += '          작성자:' + value.member_id + " " + value.reply_date;
+			   if(s_id === value.member_id){
 			    		a += '          <a href="javascript:replyUpdate(' + value.reply_no + ',\'' + value.reply_content + '\')">[수정]</a>';
 			    		a += '          <a href="javascript:replyDelete(' + value.reply_no + ')">[삭제]</a>';
+			   }//if end
 			    		a += '     </div>';
 			    		a += '     <div class="replyContent' + value.reply_no + '">';			    		
 			    		a += '          <p>내용:' + value.reply_content + "</p>";

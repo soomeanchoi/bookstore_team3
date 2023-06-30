@@ -235,7 +235,7 @@
 		    	<!-- -----------------주문내역 테이블 추가 -->
 		    	<div class="carousel_down">
 		    	<h3><div class="tbl_name" style="margin-top: 40px; margin-left: 30px;">최근 주문</div></h3>
-		    	<h6 style="margin-left: 33px;"><a href='/border/list'>더보기 ></a></h6>
+		    	<h6 style="margin-left: 33px;"><a href='/border/borderlist'>더보기 ></a></h6>
 		    	<div class="tbl_prod_wrap_type_myroom" style="margin-top: 20px;">
 		    	<%-- <table class="book_tbl">
 		    		<colgroup>
@@ -328,7 +328,6 @@
 				                <td></td>
 				                 <c:forEach var="book" items="${book}">
 				                <td>책제목${book.book_name }</td>
-				                <td><img src="/storage/${book_imgname}" style="height: 150px; width: 150px;"></td>
 				                </c:forEach>
 				                <td>상품정보</td>
 				                <td>조인해서</td>

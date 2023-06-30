@@ -14,36 +14,10 @@
 	}//order() end 
 
 	function cbook_Price(cart_no, cart_qty) {//책 수량 수정에 따른 결제금액 변경
-		 var book_price = document.getElementById("book_price").value;
+		var book_price = document.getElementById("book_price"+cart_no).innerText;
 		var cartsize = document.getElementById("cartsize").value;
-		
-		alert(document.getElementById('"booktot_Price'+cart_no+'"').value);
-		 //document.getElementById("booktot_Price"+cart_no).value= book_price * cart_qty; */
-		 /*
-		
-		document.getElementById("booktot_Price").value = booktot_Price 
-		 for(var i = 0; i < cart_qty.length ; i++){
-			var booktot_Price = cart_qty[i] * book_price[i].value
-			document.getElementById("booktot_Price").value = booktot_Price;
-			alert(document.getElementById("booktot_Price").value);
-		 }//for end 
-			
-			alert("카트1총가격: "+booktot_Price[0].value);
 		 
-		var book_price = Number(document.getElementById("book_price").value);
-		alert(eval(cart_qty*book_price));
-		document.getElementById("booktot_Price").value=eval(cart_qty*book_price);
-		alert(document.getElementById("booktot_Price"));
-		 for (var i = 0; i < cart_qty.length; i++) {
-			cnt = Number(cart_qty.item(i).value);
-			price = Number(book_price.item(i).value);
-			booktot_Price.item(i).innerText = cnt * price;
-		}//for end  
-		*/
-		//----------------------------------------------------------------------------
-		
-		//alert(cart_no);  카트번호
-		//alert(cart_qty); 카트수량
+		document.getElementById("booktot_Price"+cart_no).value= book_price * cart_qty;
 		let params="cart_no=" + cart_no + "&cart_qty=" + cart_qty;
 		
 		$.ajax({
@@ -130,7 +104,7 @@
                 </td>
                 <td class="align-middle">
                 <input type="hidden" id="book_price" name="book_price" value="${row.book_price}">
-                  <p style="font-weight: 500;" >${row.book_price}</p>
+                  <p style="font-weight: 500;" id="book_price${row.cart_no}" >${row.book_price}</p>
                 </td>
                 
                 <td class="align-middle">
@@ -138,7 +112,7 @@
                 <p style="font-weight: 500;" >${row.book_price}</p> --%>
                 <div>
                 	<%-- <input type="hidden" id="booktot_price" name="booktot_price" value="${row.book_price}"> --%>
-					<input type="text"	id="booktot_Price${row.cart_no}" class="booktot_Price${row.cart_no}" value="${row.book_price * row.cart_qty}" style="border:0">				
+					<input type="text"	id="booktot_Price${row.cart_no}" class="booktot_Price${row.cart_no}" value="${row.book_price*row.cart_qty}" style="border:0">				
 				</div>
 				</td>
 				

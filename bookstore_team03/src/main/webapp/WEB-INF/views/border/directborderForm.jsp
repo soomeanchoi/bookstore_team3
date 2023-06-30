@@ -109,7 +109,7 @@
                   </div>
                   <div class="col-12">
                       <div class="form-outline">
-                          <input type="text" name="border_phone" id="border_phone" class="form-control order-form-input" required/>
+                          <input type="number" name="border_phone" id="border_phone" class="form-control order-form-input" required/>
                       </div>
                   </div>
               </div>
@@ -135,14 +135,14 @@
                   
                  <div class="col-sm-6 mt-2 pe-sm-2">
                       <div class="form-outline">
-                          <input type="text" name="border_postno" id="border_postno" value="${deliveryAdd.deliv_postno}" class="form-control order-form-input" placeholder="우편번호"  required/>
+                          <input type="text" name="border_postno" id="border_postno" value="${deliveryAdd.deliv_postno}" class="form-control order-form-input" placeholder="우편번호"  readonly required/>
                       </div>
                   </div>
 	              
                  
                   <div class="col-12 mt-2">
                       <div class="form-outline">
-                          <input type="text" name="border_add1" id="border_add1" value="${deliveryAdd.deliv_add1}" class="form-control order-form-input" placeholder="주소" required/>
+                          <input type="text" name="border_add1" id="border_add1" value="${deliveryAdd.deliv_add1}" class="form-control order-form-input" placeholder="주소"  readonly required/>
                       </div>
                   </div>
                   

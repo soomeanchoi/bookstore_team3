@@ -20,7 +20,7 @@ ul.tabs li.current{
 }
 
 .tab-content{
-  display: none;
+  	display: none;
 	background: #e0e0e0;
 	padding: 12px;
 }
