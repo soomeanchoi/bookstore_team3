@@ -91,6 +91,7 @@
 			<th>이름</th>
 			<td>
 				<input type="text" name="member_name" id="member_name" maxlength="5" required><br><br>
+				<div class="check_font" id="name_check"></div>
 			</td>
 		</tr> 
 		<tr>
@@ -447,7 +448,7 @@
       <span>예</span>
       <br><br><br>
       <div>
-        <input type="submit" value="회원가입">
+        <input type="submit" value="회원가입" onclick="location.href='/profile/profileForm';">
         <input type="button" value="취소" onclick="location.href='login';">
       </div>
       </div>
@@ -520,12 +521,12 @@ function idCheck(){
 $("#member_pw").blur(function() {
 	 	let pwdCheck= /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/;
 	 	
-	 	if ($("#password").val() == "") {
+	 	if ($("#member_pw").val() == "") {
 	         $("#pwdcheck_blank1").css("color", "red");
-	         $("#pwdcheck_blank1").text("필수정보예요.");
+	         $("#pwdcheck_blank1").text("비밀번호를 입력해주세요.");
 	         password = false;
 	      }	
-	      else if (!pwdCheck.test($("#password").val())) {
+	      else if (!pwdCheck.test($("#member_pw").val())) {
 		  	 $("#pwdcheck_blank1").css("color", "red");
 		     $("#pwdcheck_blank1").text("비밀번호는 영문+숫자+특수문자 조합하여 8~16자리를 입력해주세요.");
 		     password = false;
@@ -548,7 +549,7 @@ $("#member_pw").blur(function() {
                 // AJAX 요청
                 $.ajax({
                     type: 'POST', // 요청 메서드 (GET, POST 등)
-                    url: 'join.jsp', // 처리할 JSP 페이지의 URL
+                    url: 'insert', // 처리할 JSP 페이지의 URL
                     data: $(this).serialize(), // 폼 데이터 직렬화하여 전송
                     success: function(response) {
                         // 서버 응답이 성공적으로 돌아왔을 때 실행되는 함수
@@ -587,5 +588,6 @@ $("#member_pw").blur(function() {
                 isEmailValidated = false;
             });
         });
-    </script>​
+    </script>
+​
 </html>

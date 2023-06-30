@@ -43,6 +43,10 @@ public class MemberDAO {
     	return sqlSession.delete("member.delete", dto);
     }
     
+    public int deleteProfile(MemberDTO dto) {
+    	return sqlSession.delete("profile.delete", dto);
+    }
+    
     public int idCheck(String member_id) {
     	return sqlSession.selectOne("member.idCheck" , member_id);
     }
@@ -88,5 +92,9 @@ public class MemberDAO {
 	
 	public List<MemberDTO> bookname(String member_id) {
 		return sqlSession.selectList("member.book" , member_id);
+	}
+	
+	public List<MemberDTO> myboard(String member_id) {
+		return sqlSession.selectList("member.myboard" , member_id);
 	}
 }

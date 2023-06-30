@@ -1,6 +1,7 @@
 package kr.co.itwill.mail;
 
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Authenticator;
@@ -12,12 +13,14 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import kr.co.itwill.member.MemberDAO;
 import kr.co.itwill.member.MemberDTO;
@@ -51,11 +54,45 @@ public class MailService {
 		
 		javaMailSender.send(simpleMessage);
 		
-		
-		
-		
+			
 	}
 	
+		public String sendInquityMail(@RequestParam Map<String,Object> map) {
+		
+		
+		//수신대상자
+		ArrayList<String> toUserList = new ArrayList<>();
+		
+		String subject = (String) map.get("mail_subject");
+		String inquityNum = (String) map.get("InquiryQuestList");
+		String content = (String) map.get("mail_Content");
+		String member_id = (String) map.get("member_id");
+		
+		toUserList.add("suminchoi0123@gmail.com"); //받을 주소
+		
+		int toUserSize = toUserList.size();
+		
+		SimpleMailMessage simpleMessage = new SimpleMailMessage();
+		
+		simpleMessage.setTo((String[]) toUserList.toArray(new String[toUserSize])); //수신자 설정
+		
+		simpleMessage.setSubject(subject);
+		
+		String totalContent = "";
+		totalContent += "문의번호 : " + inquityNum + "입니다\n";
+		totalContent += "문의내용 : " + content + "입니다\n";
+		totalContent += "문의한 유저 : " + member_id + "입니다\n";
+		
+		simpleMessage.setText(totalContent);
+
+		
+		javaMailSender.send(simpleMessage);
+		
+		return "redirect:/member/myPage";
+	}
+	
+	
+
 	
 	/*
 	 * public void sendEmail(String toAddress, String subject, String messageText) {

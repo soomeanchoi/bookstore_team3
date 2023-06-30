@@ -247,23 +247,26 @@ td {
 }
 .my_review_title {
 	font-family: 'HANAMDAUM';
+	margin-top: 100px;
+	margin-bottom: 20px;
 }
 .my_bbti_title {
 	font-family: 'HANAMDAUM';
 }
-.my_review{
+/* .my_review{
 	margin-left: 32px;
-}
+} */
 
 .bbti {
 	margin-left: 450px;
+	margin-bottom: 400px;
 }
 
 .carousel_down {
 	margin-left: 50px;
 }
 .bbti_wrap {
-	margin-left: 50px;
+	margin-left: 20px;
 }
 
 .li info_item {
@@ -274,8 +277,9 @@ li {
 }
 ul {
     list-style:none;
-}
+} 
 .profile-info-box ul {
 	padding-left:0;
 	height: 150px;
 }
+

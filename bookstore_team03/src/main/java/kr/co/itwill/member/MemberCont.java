@@ -104,10 +104,9 @@ public class MemberCont<ReviewDTO> {
 		 
 		 memberDao.insert(dto);
 		 
-		 return "redirect:/member/login";
+		 return "redirect:/profile/profileForm";
 	 }
 
-	 
 	//아이디 중복체크
 	@RequestMapping("/idCheck")
 	@ResponseBody 
@@ -235,8 +234,10 @@ public class MemberCont<ReviewDTO> {
 	    //review
 	    mav.addObject("myreview", memberDao.reviewlist(member_id));
 	    //책 사진
-	   // mav.addObject("book_img", memberDao.bookimg());
+	    // mav.addObject("book_img", memberDao.bookimg());
 	    mav.addObject("book", memberDao.bookname(member_id));
+	    
+	    mav.addObject("myboard", memberDao.myboard(member_id));
 	    
 	    mav.setViewName("member/myPage");
 		return mav;
@@ -306,7 +307,11 @@ public class MemberCont<ReviewDTO> {
 			return "redirect:/member/deleteView";
 		}else {
 			
+			// 비밀번호가 일치하는 경우
+			rttr.addFlashAttribute("confirmDelete", true);
+			
 			memberDao.delete(dto);
+			memberDao.deleteProfile(dto);
 			session.invalidate();
 		}
 		
@@ -450,9 +455,12 @@ public class MemberCont<ReviewDTO> {
 		
 			// 비밀번호 찾기 위한 메일 보내는 페이지로 이동
 			@RequestMapping("/myPageMail")
-			public ModelAndView myPageMail() {
+			public ModelAndView myPageMail(HttpSession session) {
+				String s_id = (String) session.getAttribute("member_id");
 				ModelAndView mav=new ModelAndView();
 				mav.setViewName("member/myPageMail");
+				mav.addObject("s_id", s_id);
+				
 				return mav;
 			}
 			

@@ -33,7 +33,7 @@
 
     <section>
     <h1><div class="find-title">회원 탈퇴</div></h1>
-		<form method="post" action="deleteProc" name="deletefrm" id="deletefrm" onclick="return memberdelete()">
+		<form method="post" action="deleteProc" name="deletefrm" id="deletefrm" onclick="return confirmDelete()">
 			<table class="table" style="margin: auto;">
 			<tr>
 			<th style="text-align: left">아이디</th>
@@ -45,6 +45,11 @@
 			<th style="text-align: left">비밀번호</th>
 			<td style="text-align: left">
 				<input type="password" name="member_pw" id="member_pw" size="15" maxlength="15" required>
+				<div>
+					<c:if test="${msg == false}">
+						<p id="password-error" style="color: red;">비밀번호가 일치하지 않습니다.</p>
+					</c:if>
+				</div>
 			</td>
 			</tr>
 			</table>
@@ -52,24 +57,20 @@
 		
 		<br><br><br><br>
 		<div style="text-align: center">
-			<button type="submit" class="id-pw-btn">회원탈퇴</button>
+			<button type="submit" class="id-pw-btn" id="delete-button">회원탈퇴</button>
 			<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 		</div>
 		<br>
-		<div>
-			<c:if test="${msg == false}">
-				<p style="text-align: center; color: red;">비밀번호가 일치하지 않습니다.</p>
-			</c:if>
-		</div>
+		
 		</form>
 	</section>	
 	<%@ include file="../template/footer.jsp" %>
+
 </body>
 <script>
-function memberdelet() {
-	if(window.confirm("탈퇴하시겠습니까?")){
-	location.href="/member/login";
-	}
-}
+<% Boolean confirmDelete = (Boolean) request.getAttribute("confirmDelete");
+if (confirmDelete != null && confirmDelete) { %>
+ alert("탈퇴하시겠습니까?\n탈퇴 시 계정은 삭제되며 복구되지 않습니다.");
+<% } %>
 </script>
 </html>
