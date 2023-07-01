@@ -100,4 +100,6 @@ public class MemberDAO {
 	public int profileinsert(String member_id) {
 		return sqlSession.insert("member.profileinsert", member_id);
 	}
+	
+	
 }

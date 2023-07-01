@@ -76,17 +76,24 @@
 	      		
 	      		<div class="profile_img">
 	      		<c:choose>
-				    <c:when test="${not empty plist}">
+				    <%-- <c:when test="${not empty plist}">
 				        <c:set var="profile" value="${plist[0]}" />
 				        <div class="rounded-image">
 				        <img src="/storage/${profile_imgname}" style="height: 150px; width: 150px;">
 				    	</div>
+				    </c:when> --%>
+				     <c:when test="${profile_imgname != null}">
+				        <!-- 프로필 사진이 있는 경우에 대한 처리 -->
+				       
+						<div class="rounded-image">
+				        <img src="/storage/${profile_imgname}" style="height: 150px; width: 150px;">
+				    	</div>
 				    </c:when>
-				    <c:otherwise>
+				    <c:when test="${profile_imgname == null}">
 				        <c:set var="link" value="http://localhost:9095/profile/profileForm" />
-				        <!-- 사진이 없는 경우에 대한 처리 -->
+				        <!-- 프로필 사진이 없는 경우에 대한 처리 -->
 				        <img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
-				    </c:otherwise>
+				    </c:when>
 				</c:choose>
 	      		
 	      		</div>
@@ -202,7 +209,7 @@
 		    	<article class="oreder_list">
 		    		
 		    		<!-- 캐러셀 시작 -->
-		    		<div class="container">
+		    		<div class="container2">
 					  <div class="slide-container">
 					    <div class="slide-image">
 					        <img src="https://contents.kyobobook.co.kr/sih/fit-in/458x0/pdt/9791190299770.jpg" alt="">
