@@ -31,11 +31,10 @@ public class ReplyCont {
     	reply.setBoard_no(board_no);
     	reply.setReply_content(reply_content);
     	
-    	String s_id = (String)session.getAttribute("s_id"); 
+    	String s_id = (String)session.getAttribute("member_id"); 
     	//String s_id = "kgukid38@naver.com";
         
     	reply.setMember_id(s_id); 
-    	
     	return replyDao.replyInsert(reply);
     }//mCommentServiceInsert() end
     
