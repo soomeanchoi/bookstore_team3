@@ -23,6 +23,12 @@ public class WriterDAO {
 
     }//list() end
 
+    public List<Map<String, Object>> totalList() {
+
+        return sqlSession.selectList("writer.totalList");
+
+    }//list() end
+
     public void insert(Map<String, Object> map) {
 
         sqlSession.insert("writer.insert", map);

@@ -7,7 +7,13 @@
 <mapper namespace="writer">
 
     <select id="list" resultType="java.util.Map">
-        SELECT writer_no, writer_name, writer_birth, writer_place, writer_imgname, writer_imgsize, writer_info
+        SELECT *
+        FROM writer
+        where not writer_imgname = '-'
+    </select>
+
+    <select id="totalList" resultType="java.util.Map">
+        SELECT *
         FROM writer
     </select>
 

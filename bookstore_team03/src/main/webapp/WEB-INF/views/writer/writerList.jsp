@@ -45,41 +45,45 @@
 
     <p>
         <button type="button" onclick="location.href='/writer/write'">등록</button>
-        <button type="button" onclick="location.href='/writer/list'">리스트</button>
     </p>
 
-    <form action="search">
-        <input type="text" name="writer_name" value="${writer_name}">
-        <input type="submit" value="검색">
-    </form>
 
     <br>
-    <table>
-    <tr>
-        <c:forEach items="${list}" var="row" varStatus="vs">
-            <td>
-                <c:choose>
-                    <c:when test="${row.writer_imgname != '-'}">
-                        <img src="/storage/${row.writer_imgname}" width="100px">
-                    </c:when>
-                    <c:otherwise>
-                        등록된 사진 없음 <br>
-                    </c:otherwise>
-                </c:choose>
-                <br>
-                <a href="detail/${row.writer_no}">[${row.writer_name}] ${row.writer_birth}</a>
-                <br>
-                ${row.book_pub} ・ ${row.book_pubdate}
-
-                    <hr>
-                <c:if test="${vs.count mod 1==0}">
-                    <tr></tr>
-                </c:if>
-            </td>
-        </c:forEach>
-    </tr>
-    </table>
-
-</body>
+    <div>
+        <table>
+            <tr>
+                <hr class="headline">
+                <c:forEach items="${writerList}" var="row" varStatus="vs">
+                    <td>
+                        <div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="list_img col-2">
+                                        <a href="/writer/detail/${row.writer_no}"><img src="/storage/${row.writer_imgname}" width="100px"></a>
+                                    </div>
+                                    <div class="list_info_box col-9">
+                                        <br>
+                                        <a href="/writer/detail/${row.writer_no}"><strong>${row.writer_name}</strong></a>
+                                        <br><br>
+                                        출생 : ${row.writer_birth} &nbsp&nbsp&nbsp 출생지 : ${row.writer_place} &nbsp&nbsp&nbsp 대표작 : ${row.writer_work}
+                                        <br><br>
+                                        <strong>인물소개</strong><br>
+                                        <details>
+                                                ${row.writer_info}
+                                        </details>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+                            <c:if test="${vs.count mod 1==0}">
+                                <tr></tr>
+                            </c:if>
+                        </div>
+                    </td>
+                </c:forEach>
+            </tr>
+        </table>
+    </div>
 </section>
+</body>
 </html>

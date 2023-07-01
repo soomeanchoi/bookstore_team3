@@ -352,9 +352,9 @@
 				<c:forEach items="${recentList}" var="row" varStatus="vs" end="3">
 				<div class="col-6 col-sm-6 col-md-6 col-lg-3" data-aos="fade-up" data-aos-delay="100">
 					<div class="media-entry">
-						<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">
+						<a href="/book/detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid"></a>
 						<div class="bg-white m-body">
-							<h3><a href="#">${row.book_name}</a></h3>
+							<h3><a href="/book/detail/${row.isbn}">${row.book_name}</a></h3>
 							<p>
 								<c:choose>
 									<c:when test="${fn:length(row.book_content) > 100}">
@@ -366,10 +366,6 @@
 								</c:choose>
 							</p>
 
-							<a href="single.html" class="more d-flex align-items-center float-start">
-								<span class="label">Read More</span>
-								<span class="arrow"><span class="icon-keyboard_arrow_right"></span></span>
-							</a>
 						</div>
 					</div>
 				</div>

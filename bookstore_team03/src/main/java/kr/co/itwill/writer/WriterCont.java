@@ -66,6 +66,14 @@ public class WriterCont {
         return mav;
     }//list() end
 
+    @RequestMapping("/writerList")
+    public ModelAndView totalList() {
+        ModelAndView mav=new ModelAndView();
+        mav.setViewName("writer/writerList");
+        mav.addObject("writerList", writerDao.totalList());
+        return mav;
+    }//list() end
+
     @RequestMapping("/search")
     public ModelAndView search(@RequestParam(defaultValue = "") String writer_name) {
         ModelAndView mav=new ModelAndView();

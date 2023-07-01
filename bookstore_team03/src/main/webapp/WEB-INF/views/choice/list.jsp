@@ -40,7 +40,6 @@
 <body>
     <section>
         <h2>찜 목록</h2>
-        <img src="" alt="">
         <form name="choicefrm" id="choicefrm" method="post">
             <div class="container">
                 <div class="row" align="center">

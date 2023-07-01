@@ -1,38 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+
 <%@ include file="../template/header.jsp" %>
-
-
-<%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!doctype html>
-<html lang="ko">
+<!DOCTYPE html>
+<html>
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<meta name="author" content="Untree.co">
-	<link rel="shortcut icon" href="favicon.png">
-
-	<meta name="description" content="" />
-	<meta name="keywords" content="bootstrap, bootstrap5" />
-	
-	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Brygada+1918:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;700&display=swap" rel="stylesheet">
-
-	<link rel="stylesheet" href="fonts/icomoon/style.css">
-	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
-
-	<link rel="stylesheet" href="/css/tiny-slider.css">
-	<link rel="stylesheet" href="/css/aos.css">
-	<link rel="stylesheet" href="/css/flatpickr.min.css">
-	<link rel="stylesheet" href="/css/glightbox.min.css">
+	<meta charset="UTF-8">
+	<title>list.jsp</title>
+	<meta charset="UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Team3 - BookStore</title>
 	<link rel="stylesheet" href="/css/reset.css" />
-	<link rel="stylesheet" href="/css/style.css">
+	<link rel="stylesheet" href="/css/style.css" />
 	<link rel="stylesheet" href="/css/header.css" />
 	<link rel="stylesheet" href="/css/section.css" />
 	<link rel="stylesheet" href="/css/signup.css" />
@@ -50,127 +34,54 @@
 			src="http://code.jquery.com/jquery-latest.js"
 	></script>
 	<style>
-		button.btn.btn-light {
-			color: black;
-		}
-
-		/*body{*/
-		/*	margin-top: 100px;*/
-		/*	font-family: 'Trebuchet MS', serif;*/
-		/*	line-height: 1.6*/
-		/*}*/
-		/*.container{*/
-		/*	width: 500px;*/
-		/*	margin: 0 auto;*/
-		/*}*/
-
-
-
-		ul.tabs{
-			margin: 0px;
-			padding: 0px;
-			list-style: none;
-		}
-		ul.tabs li{
-			background: none;
-			color: #222;
-			display: inline-block;
-			padding: 10px 20px;
-			cursor: pointer;
-		}
-
-		ul.tabs li.current{
-			background: #ededed;
-			color: #222;
-		}
 
 	</style>
-	<script>
-		$(document).ready(function(){
-
-			$('ul.tabs li').click(function(){
-				var tab_id = $(this).attr('data-tab');
-
-				$('ul.tabs li').removeClass('current');
-				$('.tab-content').removeClass('current');
-
-				$(this).addClass('current');
-				$("#"+tab_id).addClass('current');
-			})
-
-		})
-	</script>
-
-
-	<title>Team3 - BookStore</title>
 </head>
-
 <body>
-     
-	<div class="section">
-
-		<div><hr>
-			<br><br></div>
-		<div class="container">
-			<div class="row align-items-stretch">
-				<c:forEach items="${totalList}" var="row" varStatus="vs">
-				<div class="col-6 col-sm-6 col-md-6 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100">
-					<div class="media-entry">
-						<c:choose>
-							<c:when test="${row.book_imgname != '-'}">
-								<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">
-								<div class="bg-white m-body">
-								<h3><a href="detail/${row.isbn}">${row.book_name}</a></h3>
-									<p>
-										<c:if test="${fn:length(row.book_content) > 100}">
-											<c:out value="${fn:substring(row.book_content,0,99)}"/>...
-										</c:if>
-									</p>
-									<div>
-									${row.book_price}원
-									</div>
-								</div>
-					</div>
-							</c:when>
-							<c:otherwise>
-								등록된 제품 없음
-							</c:otherwise>
-						</c:choose>
+<section>
+	<hr>
+	<br><br>
+	<h2>책</h2>
+	<div class="container">
+		<div class="row" align="center">
+			<c:forEach items="${totalList}" var="row" varStatus="vs">
+				<div class="col-6">
+					<a href="/book/detail/${row.isbn}">
+					<img src="/storage/${row.book_imgname}" class="choice-img" width="45%"><br>
+					<strong><font size="4px">${row.book_name}</a></font></strong><br><br>
+					${row.book_price}원
+					<br><br>
 				</div>
-				</c:forEach>
-
-			</div> <%-- div-section end --%>
-			</div>	
-		</div>		
-	</div>
-
-	<div>
-		<c:forEach var="row" items="${writerList}" varStatus="vs">
-			${row.writer_name}
-		</c:forEach>
-	</div>
-
-		<!-- Preloader -->
-<%--	<a href="write">글쓰기</a>--%>
-		<div id="overlayer"></div>
-		<div class="loader">
-			<div class="spinner-border text-primary" role="status">
-				<span class="visually-hidden">Loading...</span>
-			</div>
+			</c:forEach>
 		</div>
+	</div>
+	<hr>
+	<br><br>
+
+	<h2>작가</h2>
+	<div class="container">
+		<div class="row" align="center">
+			<c:forEach items="${writerList}" varStatus="vs" var="row">
+				<div class="col-6">
+					<img src="/storage/${row.writer_imgname}" class="choice-img" width="45%"><br>
+					<strong><font size="4px">${row.writer_name}</font></strong><br><br>
+					<br><br>
+				</div>
+				<div class="col-6" align="left">
+					<br><br><br>
+					출생 : ${row.writer_birth} &nbsp&nbsp&nbsp 출생지 : ${row.writer_place} &nbsp&nbsp&nbsp 대표작 : ${row.writer_work}
+					<br><br>
+					<strong>인물소개</strong><br>
+					<details>
+							${row.writer_info}
+					</details>
+				</div>
+			</c:forEach>
+		</div>
+	</div>
+</section>
 
 
-		<script src="/js/bootstrap.bundle.min.js"></script>
-		<script src="/js/tiny-slider.js"></script>
-		<script src="/js/aos.js"></script>
-		<script src="/js/navbar.js"></script>
-		<script src="/js/counter.js"></script>
-		<script src="/js/rellax.js"></script>
-		<script src="/js/flatpickr.js"></script>
-		<script src="/js/glightbox.min.js"></script>
-		<script src="/js/custom.js"></script>
-
-	<%@ include file="../template/footer.jsp" %>
-
-	</body>
-	</html>
+<%@ include file="../template/footer.jsp" %>
+</body>
+</html>

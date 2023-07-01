@@ -94,7 +94,16 @@
         <ul class="b-menu-li">
             <li><a href="/book/bestList">Best</a></li>
             <li><a href="">Event</a></li>
-            <li><a href="http://localhost:9095/research/list">B-BTI</a></li>
+            <li>
+                <%
+                    if(session.getAttribute("member_id")==null){
+                        out.println("<a href='http://localhost:9095/member/login'>");
+                    }else {
+                        out.println("<a href='http://localhost:9095/research/list'>");
+                    }//if end
+                %>
+                B-BTI</a>
+            </li>
         </ul>
     </div>
 
@@ -128,13 +137,14 @@
 	  </ul>
 	</div> -->
 	
-	<div class="container">                                   
+	<div class="container">
   <div class="dropdown">
     <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">관리자페이지
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
 	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
+	    <li><a href="http://localhost:9095/writer/writerList">작가관리</a></li>
 	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
 	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
     </ul>

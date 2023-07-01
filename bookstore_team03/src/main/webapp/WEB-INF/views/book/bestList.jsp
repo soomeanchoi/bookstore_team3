@@ -111,6 +111,25 @@
             text-align: right;
         }
 
+        ul.tabs{
+            margin: 0px;
+            padding: 0px;
+            list-style: none;
+        }
+
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 14px;
+            cursor: pointer;
+        }
+
+
+        hr.headline {
+            margin-top: 0px;
+        }
+
     </style>
     <script>
         jQuery(window).scroll(function() {
@@ -239,7 +258,7 @@
     <div>
     <table>
     <tr>
-        <hr>
+        <hr class="headline">
         <c:forEach items="${list}" var="row" varStatus="vs">
             <td>
                 <div>
@@ -291,7 +310,6 @@
                     <tr></tr>
                 </c:if>
                 </div>
-
             </td>
         </c:forEach>
     </tr>
