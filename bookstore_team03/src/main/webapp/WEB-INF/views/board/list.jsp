@@ -10,7 +10,6 @@
 
 <script>
 function bbtiTab(bbti_name){//bbti별 게시글 가져오기
-	alert(bbti_name);
 	var params = "bbti_name="+bbti_name
 	var list;
 	
@@ -31,7 +30,8 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 		//list의 각 항목을 html에 추가
 		for (var i = 0; i < list.length; i++) {
             var item = list[i];
-            if(list[i] == ''){
+           console.log(item.board_no);
+            if(item.board_no===null){
             	a += '<div class="table-responsive"><table><tr><td>게시판에 글 없음</td></tr></table></div>';
             }else{
             	a += '<div class="table-responsive">';
@@ -64,6 +64,21 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
         			a += '<a href="list?pageNum='+ n +'">'+ n +'</a>';	
         		}//for end
         		a += ' 	 </div>';
+        		
+        		<!-- 검색시작 -->
+        		a += ' 	 <div>';
+        		a += ' 	 	<form action="bsearch" method="post">';
+        		a += ' 	 		<select name="category" id="category">';
+        		a += ' 	 			<option value="title_content">제목+내용</option>';
+        		a += ' 	 			<option value="board_title">제목</option>';
+        		a += ' 	 			<option value="board_content">내용</option>';
+        		a += ' 			<option value="book_name">도서</option>';
+        		a += ' 		    </select>';
+        		a += ' 		<input type="text" name="keyWord" id="keyWord" value="' + item.keyWord + '">';
+        		a += ' 		<input type="submit" value="검색">';
+        		a += ' 	</form>';
+        		a += ' 	</div>';
+        		<!-- 검색끝 -->		
             }//if end
             
 		}//for end
@@ -160,19 +175,8 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 		</div>
           </c:otherwise>
      </c:choose>     
-    </div>
-    
-    <!-- 탭메뉴 반복시작 -->
-    <c:forEach var="i" begin="1" end="8">
-	<div id="menu${i}" class="container tab-pane fade">
-	
-	<div class="bboardlist" id="bboardlist"></div><!-- ajax리턴영역 종료 --> 
      
-    </div>
-	</c:forEach>
-    <!-- 탭메뉴 반복끝 -->
-  </div>
-  <!-- 검색시작 -->
+     <!-- 검색시작 -->
 		<div>
 		<form action="search" method="post">
 			<select name="category" id="category">
@@ -186,6 +190,32 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 		</form>
 		</div>
 		<!-- 검색끝 -->		
+    </div>
+    
+    
+    <!-- 탭메뉴 반복시작 -->
+    <c:forEach var="i" begin="1" end="8">
+	<div id="menu${i}" class="container tab-pane fade">
+	<div class="bboardlist" id="bboardlist"></div><!-- ajax리턴영역 종료 --> 
+     
+    </div>
+	</c:forEach>
+    <!-- 탭메뉴 반복끝 -->
+  </div>
+ <%--  <!-- 검색시작 -->
+		<div>
+		<form action="search" method="post">
+			<select name="category" id="category">
+				<option value="title_content">제목+내용</option>
+				<option value="board_title">제목</option>
+				<option value="board_content">내용</option>
+				<option value="book_name">도서</option>
+			</select>
+			<input type="text" name="keyWord" id="keyWord" value="${keyWord}">
+			<input type="submit" value="검색">
+		</form>
+		</div>
+		<!-- 검색끝 -->		 --%>
 		
 		<div>
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
