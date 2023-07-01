@@ -33,7 +33,7 @@
 
     <section>
     <h1><div class="find-title">회원 탈퇴</div></h1>
-		<form method="post" action="deleteProc" name="deletefrm" id="deletefrm" onclick="return confirmDelete()">
+		<form method="post" action="deleteProc" name="deletefrm" id="deletefrm">
 			<table class="table" style="margin: auto;">
 			<tr>
 			<th style="text-align: left">아이디</th>
@@ -57,7 +57,7 @@
 		
 		<br><br><br><br>
 		<div style="text-align: center">
-			<button type="submit" class="id-pw-btn" id="delete-button">회원탈퇴</button>
+			<button type="button" class="id-pw-btn" id="delete-button" onclick="confirmDelete()">회원탈퇴</button>
 			<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 		</div>
 		<br>
@@ -68,9 +68,14 @@
 
 </body>
 <script>
-<% Boolean confirmDelete = (Boolean) request.getAttribute("confirmDelete");
-if (confirmDelete != null && confirmDelete) { %>
- alert("탈퇴하시겠습니까?\n탈퇴 시 계정은 삭제되며 복구되지 않습니다.");
-<% } %>
+
+
+function confirmDelete(){
+	if (confirm("정말로 회원 탈퇴를 하시겠습니까?")) {
+        document.getElementById('deletefrm').submit();
+    } else {
+        
+    }
+}
 </script>
 </html>

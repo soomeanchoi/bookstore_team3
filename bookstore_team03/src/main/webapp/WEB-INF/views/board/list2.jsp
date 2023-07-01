@@ -10,22 +10,44 @@
 
 <script>
 function bbtiTab(bbti_name){//bbti별 게시글 가져오기
-	var params = { bbti_name: bbti_name };
-	
-	//$('.container.tab-pane.active').empty();
+	alert(bbti_name);
+	var params = "bbti_name="+bbti_name
+	var list;
 	
 	 $.ajax({
-	 	url:'/board/list'	//요청명령어
+	 	url:'/board/listtab'	//요청명령어
 	 	,type:'post'
 	 	,data:params		//요청정보, 게시판 탭정보
 	 	,error:function(error){
 	 		alert(error);
 	 	}//error end
 		,success:function(data){
-			alert("탭변경");
-			//if(data ==1){//댓글 등록이 성공했다면
-			
-			//}//if end
+			var totalRecord = data.totalRecord;
+			var totalPage = data.totalPage;
+			list = data.list;
+			var bboardlist = document.getElementById('bboardlist');
+			var a ='';
+		
+		//list의 각 항목을 html에 추가
+		for (var i = 0; i < list.length; i++) {
+            var item = list[i];
+           
+            a += '  <input type="hidden" id="board_no" name="board_no" class="board_no" value="' + item.board_no + '">';
+    		a += '<tr>';
+    		a += '  <td id="profile_name" class="profile_name">' + item.profile_name + '</td>';
+    		a += '  <td id="board_title" class="board_title"><a href="detail/' + item.board_no + '">' + item.board_title+'</a>';
+    	if(item.replycnt != 0){
+    		a += ' ['+item.replycnt+']</td>';
+    	}//if end
+    		a += ' <td id="board_read" class="board_read">'+item.board_read+'</td> ';
+    		a += ' <td id="board_good" class="board_good">'+item.board_good+'</td> ';
+    		a += ' <td id="board_date" class="board_date">'+item.board_date+'</td> ';
+    		a += '</tr>';
+		}//for end
+		console.log(a);
+		//bboardlist.innerHTML = a; // HTML 요소에 list 
+		 $(".bboardlist").html(a);   
+       
 		}//success end
 	}); //ajax() end 
 }//bbtiTab() end 
@@ -33,14 +55,13 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 
 </head>
 <body>
-
 <div class="container mt-3">
   <h2>Toggleable Tabs</h2>
   <br>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" data-bs-toggle="tab" href="#home" data-value=" " href="list">전체글</a>
+      <a class="nav-link active" data-bs-toggle="tab" href="#home" data-value=" " onclick="bbtiTab(this.getAttribute('data-value'))">전체글</a>
     </li>
     <li class="nav-item">
       <a class="nav-link" data-bs-toggle="tab" href="#menu1" data-value="esf" onclick="bbtiTab(this.getAttribute('data-value'))">esf</a>
@@ -61,10 +82,10 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
       <a class="nav-link" data-bs-toggle="tab" href="#menu6" data-value="inf" onclick="bbtiTab(this.getAttribute('data-value'))">inf</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#menu5" data-value="ist" onclick="bbtiTab(this.getAttribute('data-value'))">ist</a>
+      <a class="nav-link" data-bs-toggle="tab" href="#menu7" data-value="ist" onclick="bbtiTab(this.getAttribute('data-value'))">ist</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" data-bs-toggle="tab" href="#menu6" data-value="int" onclick="bbtiTab(this.getAttribute('data-value'))">int</a>
+      <a class="nav-link" data-bs-toggle="tab" href="#menu8" data-value="int" onclick="bbtiTab(this.getAttribute('data-value'))">int</a>
     </li>
 	</ul>
 
@@ -74,15 +95,16 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     <div id="home" class="container tab-pane active"><br>       
 		<h1>탭 메뉴 0 내용입니다.</h1>
 		<h1>${totalRecord}</h1>
-		<h1>${requestScope.count}</h1>
-		<c:if test="${requestScope.count==0}"> <!-- 게시판에 글 없을 경우 -->
-		<div class="table-responsive">
-	 	<table><tr><td>게시판에 글 없음</td></tr></table>
-	 	</div>
-		 </c:if>
-		<c:if test="${requestScope.count!=0}"><!-- 게시판에 글 있을 경우 -->
-		<div class="table-responsive">
-		<table class="table">
+		
+	 <c:choose>
+       <c:when test="${fn:length(list) eq 0}"><!-- 게시판에 글 없을때 -->
+          <div class="table-responsive">
+             <table><tr><td>게시판에 글 없음</td></tr></table> 
+          </div>   
+	   </c:when>
+       <c:otherwise><!-- 게시판에 글 있을 때 -->
+         <div class="table-responsive">
+		  <table class="table">
 			<thead class="thead-light">
 			<tr>
 				<th scope="col">작성자</th>
@@ -110,12 +132,13 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 			</tbody>
 		</table>
 		<div>
-			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
+			<%-- <c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
 		    	 <a href="list?pageNum=${i}"> ${i} </a>
-		    </c:forEach>
+		    </c:forEach> --%>
 		</div>
 		</div>
-	</c:if>      
+          </c:otherwise>
+     </c:choose>     
     </div>
     
     <!-- 탭메뉴 반복시작 -->
@@ -123,15 +146,16 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	<div id="menu${i}" class="container tab-pane fade">
 		<h1>탭 메뉴 ${i} 내용입니다.</h1>
 		<h1>${totalRecord}</h1>
-		
-		<c:if test="${requestScope.count==0}"> <!-- 게시판에 글 없을 경우 -->
-		<div class="table-responsive">
-	 	<table><tr><td>게시판에 글 없음</td></tr></table>
-	 	</div>
-		 </c:if>
-		<c:if test="${requestScope.count!=0}"><!-- 게시판에 글 있을 경우 -->
-		<div class="table-responsive">
-		<table class="table">
+	<div class="bboardlist" id="bboardlist">
+	 <c:choose>
+       <c:when test="${fn:length(list) eq 0}"><!-- 게시판에 글 없을때 -->
+          <div class="table-responsive">
+             <table><tr><td>게시판에 글 없음</td></tr></table> 
+          </div>   
+	   </c:when>
+       <c:otherwise><!-- 게시판에 글 있을 때 -->
+         <div class="table-responsive">
+		  <table class="table">
 			<thead class="thead-light">
 			<tr>
 				<th scope="col">작성자</th>
@@ -141,8 +165,8 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 				<th scope="col">작성일</th>
 			</tr>
 			</thead>
-			<tbody class="customtable">		    	
-		    	<c:forEach items="${list}" var="row" begin="0" end="${totalRecord}" varStatus="status">
+			<tbody class="bboardlist" id="bboardlist">		    	
+		    	<%-- <c:forEach items="${list}" var="row" begin="0" end="${totalRecord}" varStatus="status">
 		    	<input type="hidden" name="status" value="${status.index}">
 		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
 		    	<tr>
@@ -155,17 +179,19 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	    		<td id="board_good" class="board_good">${row.board_good}</td>
 	    		<td id="board_date" class="board_date">${row.board_date}</td>
 	    		</tr>
-			</c:forEach>			
+			</c:forEach>	 --%>		
 			</tbody>
 		</table>
-		<div>
+		<%-- <div>
 			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
 		    	 <a href="list?pageNum=${i}"> ${i} </a>
 		    </c:forEach>
+		</div> --%>
 		</div>
-		</div>
-	</c:if>
-	</div>	
+          </c:otherwise>
+     </c:choose>    
+     </div><!-- ajax리턴영역 종료 --> 
+    </div>
 	</c:forEach>
     <!-- 탭메뉴 반복끝 -->
   </div>

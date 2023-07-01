@@ -462,6 +462,7 @@
                 , success:function(data){
                     let a=''; //출력할 결과값
                     $.each(data, function(key, value){
+                        var s_id = '<%=(String)session.getAttribute("s_id")%>';
 
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
@@ -474,11 +475,6 @@
                             ' / 평점:' + value.review_score + '점' +
                             ' / 등록일: ' + value.review_date;
                         }
-
-                        // if(session.getAttribute("member_id")==value.member_id){
-                        // a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
-                        // a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
-                        // }
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
                         a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
                         a += '	</div>';

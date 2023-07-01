@@ -100,10 +100,10 @@
 	      	</div>	
 	      	<input type="button" value="로그아웃" onclick="location.href='logout';" style="margin-left: 100px;">
 	      		<div class="profile-name-box">
-	      			<span class="name">${member_name }</span>
+	      			<span class="name">${member_name}</span>
 	      		</div>
 	      		
-	      		 <h6><span>${member_name }</span>님의 bbti</h6>
+	      		 <h6><span>${member_name}</span>님의 bbti</h6>
             <div>
             <div>${mybbti }</div>
             </div>
@@ -151,7 +151,7 @@
 	      				</a>
 	      			</li>
 	      			<li class="info_item" style="margin-left: 8px; margin-bottom: 30px;">
-	      				<a href="http://localhost:9095/research/list">
+	      				<a href="http://localhost:9095/research/bbtiQuiz">
 	      				<img src="/storage/test.png" height="45" width="50">
 	      					<!-- <span class="title">테스트</span> -->
 	      					<span class="val"></span>
@@ -183,6 +183,12 @@
 		    <input type="button" value="메일" onclick="location.href='myPageMail';">
 		    </div>
           </div>
+           
+          <div style="margin-top: 10px;">   
+		    <div>배송지 등록
+		    <input type="button" value="등록" onclick="location.href='/deliveryAdd/list';">
+		    </div>
+          </div> 
            
          <div class="logout">
 	      	<br><br>
@@ -269,22 +275,25 @@
 				    
 				        <c:forEach var="order" items="${myorder}" varStatus="vs">
 				            <tr>
+				            	<td>주문번호</td>
 				            	<td>
-				            	<script>
-								    var orderDate = new Date("${order.border_date}");
-								    var formattedDate = orderDate.toLocaleDateString();
-								    document.write(formattedDate);
-								</script><br>
+				            	
 								${order.border_no}
 				            	</td>
 				                <td></td>
-				                 <c:forEach var="book" items="${book}">
+				                 <%-- <c:forEach var="book" items="${book}">
 				                <td>${book.book_name }</td>
-				                </c:forEach>
-				                <td></td>
+				                </c:forEach> --%>
+				                <td>가격</td>
 				                <td>${order.border_price}</td>
-				                <td>배송상태</td>
-				                <td></td>
+				                <td>주문일자</td>
+				                <td>
+				                <script>
+								    var orderDate = new Date("${order.border_date}");
+								    var formattedDate = orderDate.toLocaleDateString();
+								    document.write(formattedDate);
+								</script>
+				                </td>
 				           <!-- 테이블 한줄에 5칸씩 -->
 			    		<c:if test="${vs.count mod 5==0}">
 			                </tr> <tr>
@@ -393,14 +402,14 @@
 				       <h6 style="margin-bottom: 16px;"><a href='/board/list'>더보기 ></a></h6>
 				    </c:when>
 				    <c:otherwise>
-				       <h6 style="margin-bottom: 16px;"><a href="#" id="more-link">더보기 ></a></h6>
-			            <script>
+				       <h6 style="margin-bottom: 16px;"><a href="/board/list">더보기 ></a></h6>
+			            <!-- <script>
 			                // 클릭 이벤트 처리
 			                document.getElementById('more-link').addEventListener('click', function() {
 			                    // JavaScript를 사용하여 alert 호출
 			                    alert("테스트를 먼저 진행해주세요.");
 			                });
-			            </script>
+			            </script> -->
 				    </c:otherwise>
 				</c:choose>
 	            

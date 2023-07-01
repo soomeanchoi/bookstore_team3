@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -91,20 +92,22 @@ public class MemberCont<ReviewDTO> {
 	
 
 	 @RequestMapping("/insert")
-	 public String insert(@ModelAttribute MemberDTO dto) {
+	 public ResponseEntity<String> insert(@ModelAttribute MemberDTO dto) {
 		 //MemberDTO member = new MemberDTO();
 		 //member.setMember_id(null);
 		 
-		 dto.getMember_id();
+		 String member_id = dto.getMember_id();
 		 dto.getMember_pw();
 		 dto.getMember_name();
 		 dto.getMember_birth();
 		 dto.getMember_gender();
 		 dto.getMember_phone();
 		 
-		 memberDao.insert(dto);
 		 
-		 return "redirect:/profile/profileForm";
+		 memberDao.insert(dto);
+		 memberDao.profileinsert(member_id);
+		 
+		 return ResponseEntity.ok("가입완료");
 	 }
 
 	//아이디 중복체크
@@ -488,6 +491,9 @@ public class MemberCont<ReviewDTO> {
 		        return "location.href='mail'";
 		    }
     
+		
+			
+			
 }//class end
 	
 	
