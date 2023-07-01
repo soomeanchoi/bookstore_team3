@@ -43,6 +43,10 @@ public class IntroDAO {
         return sqlSession.selectList("intro.recentList");
     }//todayWriter() end
 
+    public List<Map<String, Object>> profile() {
+        return sqlSession.selectList("intro.profile");
+    }
+
 
 
 }

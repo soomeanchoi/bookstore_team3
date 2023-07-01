@@ -14,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
@@ -68,21 +69,111 @@ public class BookCont {
     }//insert() end
 
     @RequestMapping("/bookList")
-    public ModelAndView bookList() {
+    public ModelAndView bookList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/bookList");
+//        mav.addObject("s_id", s_id);
         mav.addObject("totalList", bookDao.totalList());
         mav.addObject("bestList", bookDao.bestList());
         return mav;
     }//list() end
 
+//    @RequestMapping("/bestList")
+//    public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page,
+//                                 Map<String, Object> map, HttpSession session) {
+//
+//        String s_id = (String) session.getAttribute("member_id");
+//
+//        ModelAndView mav=new ModelAndView();
+//
+//        int totalCount = bookDao.bookCount();
+//        int pageSize = 10;
+//        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+//
+//        int start = ((page - 1) * pageSize) ;
+//        int end = page * pageSize;
+//
+//        int cnt = bookDao.choiceTable(map);
+//        if (cnt == 1){
+//            mav.addObject("cnt", cnt);
+//        }else if (cnt == 0){
+//            mav.addObject("cnt", cnt);
+//        }else {
+//            mav.addObject("cnt", cnt);
+//        }
+//
+//        System.out.println(s_id);
+//        System.out.println(cnt);
+//
+//        System.out.println(map.toString());
+//
+//        List<Map<String, Object>> list = bookDao.bestMainPage(start, end);
+//
+//        mav.setViewName("book/bestList");
+//        mav.addObject("s_id", s_id);
+//        mav.addObject("bookPrice", main);
+//        mav.addObject("totalPage", totalPage);
+//        mav.addObject("currentPage", page);
+//        mav.addObject("list", list);
+//        mav.addObject("bestList", bookDao.bestList());
+//
+//        return mav;
+//    }//list() end
+
     @RequestMapping("/bestList")
-    public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
-        String s_id="kgukid38@naver.com";
-        map.put("member_id", s_id);
+    public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page,
+                                 Map<String, Object> map, HttpSession session) {
+
+        String s_id = (String) session.getAttribute("member_id");
 
         ModelAndView mav=new ModelAndView();
 
+        int totalCount = bookDao.bookCount();
+        int pageSize = 10;
+        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
+
+        int start = ((page - 1) * pageSize) ;
+        int end = page * pageSize;
+
+        map.put("member_id", s_id);
+
+        int cnt = bookDao.choiceTable(map);
+        if (cnt == 1){
+            mav.addObject("cnt", cnt);
+        }else if (cnt == 0){
+            mav.addObject("cnt", cnt);
+        }else {
+            mav.addObject("cnt", cnt);
+        }
+
+        System.out.println(s_id);
+        System.out.println(cnt);
+
+        System.out.println(map.toString());
+
+        List<Map<String, Object>> list = bookDao.bestMainPage(start, end);
+
+        mav.setViewName("book/bestList");
+        mav.addObject("s_id", s_id);
+        mav.addObject("bookPrice", main);
+        mav.addObject("totalPage", totalPage);
+        mav.addObject("currentPage", page);
+        mav.addObject("list", list);
+//        mav.addObject("bestList", bookDao.bestList());
+
+        return mav;
+    }//list() end
+
+    @RequestMapping("/bestList2")
+    public ModelAndView bestList2(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page,
+                                  Map<String, Object> map, HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
+        ModelAndView mav=new ModelAndView();
+
+//        int totalCount = bookDao.bookCount2(count);
         int totalCount = bookDao.bookCount();
         int pageSize = 10;
         int totalPage = (int) Math.ceil((double) totalCount / pageSize);
@@ -101,21 +192,23 @@ public class BookCont {
 
         List<Map<String, Object>> list = bookDao.bestMain(start, end, main);
 
-        mav.setViewName("book/bestList");
+        mav.setViewName("book/bestList2");
+        mav.addObject("s_id", s_id);
         mav.addObject("bookPrice", main);
         mav.addObject("totalPage", totalPage);
         mav.addObject("currentPage", page);
         mav.addObject("list", list);
 
-        mav.addObject("bestList", bookDao.bestList());
+//        mav.addObject("bestList", bookDao.bestList());
 
         return mav;
     }//list() end
 
     @RequestMapping("/list")
-    public ModelAndView list(@RequestParam(defaultValue = "book_price") String sort, @RequestParam(defaultValue = "1") int page, Map<String, Object> map) {
-        String s_id="kgukid38@naver.com";
-        map.put("member_id", s_id);
+    public ModelAndView list(@RequestParam(defaultValue = "book_price") String sort, @RequestParam(defaultValue = "1") int page
+                            , Map<String, Object> map, HttpSession session) {
+
+        String s_id = (String) session.getAttribute("member_id");
 
         ModelAndView mav=new ModelAndView();
 
@@ -138,11 +231,11 @@ public class BookCont {
         List<Map<String, Object>> list = bookDao.listPaging(start, end, sort);
 
         mav.setViewName("book/list");
+        mav.addObject("s_id", s_id);
         mav.addObject("bookPrice", sort);
         mav.addObject("totalPage", totalPage);
         mav.addObject("currentPage", page);
         mav.addObject("list", list);
-//        mav.addObject("list", bookDao.list());
         mav.addObject("totalList", bookDao.totalList());
         mav.addObject("choiceTable", bookDao.choiceTable(map));
 
@@ -150,81 +243,111 @@ public class BookCont {
     }//list() end@RequestMapping("/list")
 
     @RequestMapping("/novelList")
-    public ModelAndView novelList() {
+    public ModelAndView novelList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/novelList");
+        mav.addObject("s_id", s_id);
         mav.addObject("novelList", bookDao.novelList());
         return mav;
     }//list() end
 
 
     @RequestMapping("/comicList")
-    public ModelAndView comicList() {
+    public ModelAndView comicList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/comicList");
+        mav.addObject("s_id", s_id);
         mav.addObject("comicList", bookDao.comicList());
         return mav;
     }//list() end
 
     @RequestMapping("/poemList")
-    public ModelAndView poemList() {
+    public ModelAndView poemList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/poemList");
+        mav.addObject("s_id", s_id);
         mav.addObject("poemList", bookDao.poemList());
         return mav;
     }//list() end
 
     @RequestMapping("/humanismList")
-    public ModelAndView humanismList() {
+    public ModelAndView humanismList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/humanismList");
+        mav.addObject("s_id", s_id);
         mav.addObject("humanismList", bookDao.humanismList());
         return mav;
     }//list() end
 
     @RequestMapping("/techList")
-    public ModelAndView techList() {
+    public ModelAndView techList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/techList");
+        mav.addObject("s_id", s_id);
         mav.addObject("techList", bookDao.techList());
         return mav;
     }//list() end
 
     @RequestMapping("/socialList")
-    public ModelAndView socialList() {
+    public ModelAndView socialList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/socialList");
+        mav.addObject("s_id", s_id);
         mav.addObject("socialList", bookDao.socialList());
         return mav;
     }//list() end
 
     @RequestMapping("/selfList")
-    public ModelAndView selfList() {
+    public ModelAndView selfList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/selfList");
+        mav.addObject("s_id", s_id);
         mav.addObject("selfList", bookDao.selfList());
         return mav;
     }//list() end
 
     @RequestMapping("/itList")
-    public ModelAndView itList() {
+    public ModelAndView itList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/itList");
+        mav.addObject("s_id", s_id);
         mav.addObject("itList", bookDao.itList());
         return mav;
     }//list() end
 
     @RequestMapping("/testList")
-    public ModelAndView testList() {
+    public ModelAndView testList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("book/testList");
+        mav.addObject("s_id", s_id);
         mav.addObject("testList", bookDao.testList());
         return mav;
     }//list() end
 
     @RequestMapping("/historyList")
-    public ModelAndView historyList() {
+    public ModelAndView historyList(HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
+
         ModelAndView mav=new ModelAndView();
+        mav.addObject("s_id", s_id);
         mav.setViewName("book/historyList");
         mav.addObject("historyList", bookDao.historyList());
         return mav;
@@ -243,8 +366,11 @@ public class BookCont {
     }//search() end
 
     @RequestMapping("/detail/{isbn}")
-    public ModelAndView detail(@PathVariable String isbn, @ModelAttribute ReviewDTO dto, Map<String ,Object> map) {
-        String s_id="kgukid38@naver.com";
+    public ModelAndView detail(@PathVariable String isbn, @ModelAttribute ReviewDTO dto, Map<String ,Object> map
+                                , HttpSession session) {
+
+        String s_id = (String) session.getAttribute("member_id");
+
         map.put("isbn", isbn);
         map.put("member_id", s_id);
 
@@ -254,6 +380,7 @@ public class BookCont {
         bookDao.count(isbn);
         mav.addObject("score", bookDao.reviewScore(isbn));
         mav.addObject("reviewCount", bookDao.reviewCount(dto));
+        mav.addObject("s_id", s_id);
 
         int cnt = bookDao.choiceTable(map);
         if (cnt == 1){
@@ -263,13 +390,21 @@ public class BookCont {
         }else {
             mav.addObject("cnt", cnt);
         }
+
+        int rev = bookDao.reviewTable(map);
+        if(rev==1){
+            mav.addObject("rev", rev);
+        }else if (rev==0){
+            mav.addObject("rev", rev);
+        }
+
         return mav;
     }//detail() end
 
     @RequestMapping("/bookUpdate/{isbn}")
     public ModelAndView bookUpdate(@PathVariable String isbn, @ModelAttribute ReviewDTO dto) {
         ModelAndView mav = new ModelAndView();
-        ReviewDTO review=new ReviewDTO();
+
         mav.setViewName("book/bookUpdate");
         mav.addObject("book", bookDao.detail(isbn));
         bookDao.count(isbn);
@@ -327,7 +462,7 @@ public class BookCont {
             map.put("book_imgname", filename);
             map.put("book_imgsize", filesize);
             bookDao.update(map);
-            return "redirect:/book/list";
+            return "redirect:/book/bookList";
 
         }//update() end
 

@@ -160,17 +160,6 @@
 
 	<div class="section">
 
-		<form action="search" id="search" name="search">
-			<div class="search-div">
-				<h4>제목</h4>
-				<select name="search-name" id="search-name">
-					<option value="writer_name">작가</option>
-					<option value="book_name">책이름</option>
-				</select>
-			</div>
-		</form>
-		<input type="text" name="search_content" id="search_content" placeholder="내용을 입력해 주세요">
-		<button type="button" name="searchBtn" id="searchBtn">검색</button>
 
 <%--	<form action="search">--%>
 <%--		<input type="text" name="book_name" value="${book_name}">--%>
@@ -218,7 +207,7 @@
 					<div class="media-entry">
 						<c:choose>
 							<c:when test="${row.book_imgname != '-'}">
-								<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">
+							<a href="detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid"></a>
 								<div class="bg-white m-body">
 								<h3><a href="detail/${row.isbn}">${row.book_name}</a></h3>
 									<p>
@@ -228,18 +217,18 @@
 									</p>
 									<div>
 										${row.book_price}원
-										<c:choose>
-											<c:when test="${row.choice == 1}">
-												<button onclick="book_choiceCancle(${row.isbn})">
-													<img src="/storage/heart4.png" class="choice-img">
-												</button>
-											</c:when>
-											<c:otherwise>
-												<button onclick="book_choice(${row.isbn})">
-													<img src="/storage/heart3.png" class="choice-img">
-												</button>
-											</c:otherwise>
-										</c:choose>
+<%--										<c:choose>--%>
+<%--											<c:when test="${row.choice == 1}">--%>
+<%--												<button onclick="book_choiceCancle(${row.isbn})">--%>
+<%--													<img src="/storage/heart4.png" class="choice-img">--%>
+<%--												</button>--%>
+<%--											</c:when>--%>
+<%--											<c:otherwise>--%>
+<%--												<button onclick="book_choice(${row.isbn})">--%>
+<%--													<img src="/storage/heart3.png" class="choice-img">--%>
+<%--												</button>--%>
+<%--											</c:otherwise>--%>
+<%--										</c:choose>--%>
 									</div>
 								</div>
 					</div> <%-- media-entry end--%>

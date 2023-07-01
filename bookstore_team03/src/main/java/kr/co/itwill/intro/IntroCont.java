@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class IntroCont {
 
@@ -16,15 +18,21 @@ public class IntroCont {
     IntroDAO introDao;
 
     @RequestMapping("/")
-    public ModelAndView intro() {
+    public ModelAndView intro(HttpSession session) {
+        String s_id=(String)session.getAttribute("member_id");
+
+
         ModelAndView mav=new ModelAndView();
         mav.setViewName("index");
+        mav.addObject("s_id", s_id);
         mav.addObject("bestList", introDao.bestList());
         mav.addObject("todayList", introDao.todayList());
         mav.addObject("todayWriter", introDao.todayWriter());
         mav.addObject("reviewList", introDao.reviewList());
         mav.addObject("recentReview", introDao.recentReview());
         mav.addObject("recentList", introDao.recentList());
+        mav.addObject("profile", introDao.profile());
+
         return mav;
 
     }//list() end

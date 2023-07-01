@@ -92,7 +92,7 @@
     <!-- menu icon end -->
     <div class="bbti-menu">
         <ul class="b-menu-li">
-            <li><a href="/book/bestList2">Best</a></li>
+            <li><a href="/book/bestList">Best</a></li>
             <li><a href="">Event</a></li>
             <li><a href="http://localhost:9095/research/list">B-BTI</a></li>
         </ul>
@@ -134,7 +134,7 @@
     <span class="caret"></span></button>
     <ul class="dropdown-menu">
       <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
-	    <li><a href="http://localhost:9095/book/">상품관리</a></li>
+	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
 	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
 	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
     </ul>

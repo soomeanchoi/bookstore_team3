@@ -161,6 +161,11 @@
             }//if end
         }//dirOrder() end
 
+        function logincheck(){
+            alert("로그인이 필요합니다")
+            document.bookfrm.action="/member/login";
+        }
+
     </script>
 </head>
 <body>
@@ -186,19 +191,32 @@
 
              <div class="col-6">
                 <h3>${book.book_name}</h3>
+                 ${s_id}
                  <div class="choice-button">
                      <c:choose>
                          <c:when test="${cnt == 1}">
+                             <c:if test="${not empty s_id}">
                              <button onclick="book_choiceCancle()">
-                                     <%--                         <input type="button" onclick="book_choiceCancle()">--%>
                                  <img src="/storage/heart4.png" class="choice-img">
                              </button>
+                             </c:if>
+                             <c:if test="${empty s_id}">
+                             <button onclick="logincheck()">
+                                 <img src="/storage/heart4.png" class="choice-img">
+                             </button>
+                             </c:if>
                          </c:when>
                          <c:otherwise>
-                             <button onclick="book_choice()">
-                                     <%--                             <input type="button" value="찜하기" onclick="book_choice()">--%>
-                                 <img src="/storage/heart3.png" class="choice-img">
-                             </button>
+                             <c:if test="${not empty s_id}">
+                                 <button onclick="book_choiceCancle()">
+                                     <img src="/storage/heart3.png" class="choice-img">
+                                 </button>
+                             </c:if>
+                             <c:if test="${empty s_id}">
+                                 <button onclick="logincheck()">
+                                     <img src="/storage/heart3.png" class="choice-img">
+                                 </button>
+                             </c:if>
                          </c:otherwise>
                      </c:choose>
                  </div><br>
@@ -214,9 +232,6 @@
 <%--                     <fmt:formatDate value="${ymd}" pattern="dd" />--%>
 <%--                 </div>--%>
                  <div>
-                     배송비 : 3000원 (30,000원 이상 구매시 무료)
-                 </div><br>
-                 <div>
                      ISBN : ${isbn}
                  </div><br>
                  <div>
@@ -228,8 +243,14 @@
                  <hr>
                  <br><br>
                  <div>
-                     <button onclick="dirOrder()" class="buy">구매하기</button>
-                     <button onclick="product_cart()" class="cart">장바구니</button>
+                     <c:if test="${not empty s_id}">
+                         <button onclick="dirOrder()" class="buy">구매하기</button>
+                         <button onclick="product_cart()" class="cart">장바구니</button>
+                     </c:if>
+                     <c:if test="${empty s_id}">
+                         <button onclick="logincheck()" class="buy">구매하기</button>
+                         <button onclick="logincheck()" class="cart">장바구니</button>
+                     </c:if>
                  </div>
              </div>
          </div>
@@ -382,7 +403,14 @@
             <%-- 상품번호 --%>
             <input type="hidden" name="isbn" value="${book.isbn}">
             <textarea name="review_content" id="review_content" rows="3" cols="100" placeholder="내용을 입력해 주세요"></textarea>
-            <button type="button" name="reviewInsertBtn" id="reviewInsertBtn">리뷰등록</button>
+                <c:choose>
+                    <c:when test="${rev == 1}">
+                        <button type="button" onclick="alert('이미 등록된 리뷰가 존재합니다')">리뷰등록</button>
+                    </c:when>
+                    <c:otherwise>
+                        <button type="button" name="reviewInsertBtn" id="reviewInsertBtn">리뷰등록</button>
+                    </c:otherwise>
+                </c:choose>
 
 
     <div>
@@ -397,8 +425,14 @@
 
         //등록 클릭했을때
         $("#reviewInsertBtn").click(function() {
-            let insertData=$("#reviewInsertForm").serialize();
-            reviewInsert(insertData); //리뷰등록 함수 호출
+
+            if (${s_id ==null}) {
+                alert("로그인이 필요합니다")
+                location.href="/member/login";
+            }else {
+                let insertData = $("#reviewInsertForm").serialize();
+                reviewInsert(insertData); //리뷰등록 함수 호출
+            }
 
         })//click() end
 
@@ -428,13 +462,19 @@
                 , success:function(data){
                     let a=''; //출력할 결과값
                     $.each(data, function(key, value){
+                        var s_id = '<%=(String)session.getAttribute("s_id")%>';
 
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
-                        a += '		댓글번호:' + value.review_no + 
-                        	 ' / 작성자:  <a href="/profile/detail/' + value.profile_no + '">' + value.profile_no + '</a>' + 
-                        	 ' / 평점:' + value.review_score + 
-                        	 ' ' + value.review_date;
+                        if(value.member_id != null){
+                        a += '  작성자:  <a href="/profile/detail/' + value.member_id + '">' + value.member_id + '</a>' +
+                        	 ' / 평점:' + value.review_score + '점' +
+                        	 ' / 등록일: ' + value.review_date + s_id;
+                        }else{
+                        a += '  작성자:'   + ' 비회원 '   +
+                            ' / 평점:' + value.review_score + '점' +
+                            ' / 등록일: ' + value.review_date;
+                        }
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
                         a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
                         a += '	</div>';

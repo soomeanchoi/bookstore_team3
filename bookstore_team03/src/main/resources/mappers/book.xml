@@ -121,6 +121,7 @@
 						  on AA.book_writerno=BB.writer_no
 		where isbn=#{isbn}
 	</select>
+
 	
 	<select id="filename" resultType="String" parameterType="String">
         SELECT book_imgname
@@ -141,7 +142,7 @@
 		  ,book_pubdate=#{book_pubdate}, book_page=#{book_page}
 		  ,tag_no1=#{tag_no1}, book_mainname=#{book_mainname}
 		  ,book_subname=#{book_subname}, book_content=#{book_content}
-		  ,book_imgname=#{book_imgname}, book_imgsize=#{book_imgsize}
+		  ,book_imgname=#{book_imgname}, book_imgsize=#{book_imgsize}, bbti_name=#{bbti_name}
 		where isbn=#{isbn}
 	</update>
 
@@ -152,7 +153,7 @@
 	</update>
 
 	<select id="score" resultType="double" parameterType="String">
-		select ifnull(sum(review_score)/count(*), 0)
+		select ifnull(round(sum(review_score)/count(*),1), 0)
 		from review
 		where isbn=#{isbn}
 	</select>
@@ -189,8 +190,30 @@
 		LIMIT #{start}, 10;
 	</select>
 
+	<select id="bestMainPage" resultType="java.util.Map">
+		select *, case when choice_no is null then 0
+					   when choice_no is not null then 1
+			end as choice
+		from book AA left join writer BB
+							   on AA.book_writerno=BB.writer_no left join
+			 (select aa.book_name,bb.isbn,bb.member_id, choice_no
+			  from book aa left join choice bb
+									 on aa.isbn=bb.isbn
+			  where member_id='kgukid38@naver.com') dd
+			 on AA.isbn=dd.isbn
+		ORDER BY book_count desc
+			LIMIT #{start}, 10;
+	</select>
+
 	<select id="listCount" resultType="int">
-		SELECT COUNT(*) FROM book;
+		SELECT COUNT(*)
+		FROM book;
+	</select>
+
+	<select id="listCount2" resultType="int" parameterType="String">
+		SELECT COUNT(*)
+		FROM book;
+		where book_mainname=#{count}
 	</select>
 
 	<select id="choiceTable" resultType="int" parameterType="java.util.Map">
@@ -199,7 +222,11 @@
 		where member_id=#{member_id} and isbn=#{isbn}
 	</select>
 
-
+	<select id="reviewTable" resultType="int" parameterType="java.util.Map">
+		select count(*)
+		from review
+		where member_id=#{member_id} and isbn=#{isbn}
+	</select>
 
 </mapper>     
 

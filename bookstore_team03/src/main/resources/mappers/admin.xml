@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+<!DOCTYPE mapper   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
      "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <!-- admin.xml -->
@@ -10,10 +10,10 @@
 			SELECT  member_id, member_birth, member_gender, member_name, member_pw, member_phone, member_jointype, member_type, member_rejoin, member_joindate
 	        FROM member
 	</select>
-		
+
 	<select id="droplist" resultType="kr.co.itwill.dropmem.DropMemberDTO" parameterType="String">
 			SELECT member_name, member_birth, member_phone, dropmem_date
 	        FROM dropmember
-	</select>	
-	
+	</select>
+
 </mapper>

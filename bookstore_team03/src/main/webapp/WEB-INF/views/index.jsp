@@ -51,6 +51,12 @@
 			display: block;
 		}
 	</style>
+	<script>
+		function logincheck(){
+			alert("로그인이 필요합니다")
+			location.href="/member/login";
+		}
+	</script>
 
 	<title>Team3 - BookStore</title>
 </head>
@@ -85,7 +91,6 @@
 						</div>
 						<div class="image-stack__item image-stack__item--top" data-aos="fade-up" data-aos-delay="100"  data-rellax-percentage="0.5">
 							<img src="/storage/danakka.png" alt="Image" class="img-fluid">
-							작가
 						</div>
 					</div>
 				</div>
@@ -128,7 +133,14 @@
 					<div class="heading-content" data-aos="fade-up">
 						<h2>MY <span class="d-block">BBTI</span></h2>
 						<p>BBTI에 맞는 책 추천입니다</p>
-						<p class="my-4" data-aos="fade-up" data-aos-delay="300"><a href="#" class="btn btn-primary">BBTI 검사하기</a></p>
+						<p class="my-4" data-aos="fade-up" data-aos-delay="300">
+							<c:if test="${not empty s_id}">
+								<a href="/research/bbtiQuiz" class="btn btn-primary">BBTI 검사하기</a>
+							</c:if>
+							<c:if test="${empty s_id}">
+								<button onclick="logincheck()" class="btn btn-primary">BBTI 검사하기</button>
+							</c:if>
+						</p>
 					</div>
 				</div>
 				<div class="col-lg-9">
@@ -208,11 +220,13 @@
 				<c:forEach items="${bestList}" var="row" varStatus="vs" end="7">
 				<div class="destination">
 					${vs.count}위
+					<a href="/book/detail/${row.isbn}">
 					<div class="thumb">
 						<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid">
 					</div>
+					</a>
 					<div class="mt-4">
-						<h3><a href="#">${row.book_name}</a></h3>
+						<h3><a href="/book/detail/${row.isbn}">${row.book_name}</a></h3>
 						<c:choose>
 							<c:when test="${fn:length(row.book_content) > 100}">
 								<div>
@@ -239,10 +253,8 @@
 				<c:forEach items="${todayWriter}" var="row" varStatus="vs">
 					<c:if test="${vs.first}">
 					<div class="col-lg-5 mb-4 mb-lg-0 order-lg-2" data-aos="fade-up">
-<%--						<img src="/storage/${row.writer_imgname}" alt="Image" class="img-fluid">--%>
-						${row.writer_imgname}
+						<img src="/storage/${row.writer_imgname}" alt="Image" class="img-fluid">
 						<br>
-						${row.writer_name}
 					</div>
 					<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
 					<h2 class="heading mb-4">오늘의 작가</h2>
@@ -322,7 +334,7 @@
 				</div>
 				</c:forEach>
 			</div>
-		</div>&ndash;%&gt;
+		</div>
 
 
 

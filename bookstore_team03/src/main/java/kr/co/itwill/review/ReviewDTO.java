@@ -8,6 +8,7 @@ public class ReviewDTO {
     private String review_content;
     private String review_date;
     private int review_score;
+    private String member_id;
 
     public ReviewDTO() {};
 
@@ -59,6 +60,14 @@ public class ReviewDTO {
         this.review_score = review_score;
     }
 
+    public String getMember_id() {
+        return member_id;
+    }
+
+    public void setMember_id(String member_id) {
+        this.member_id = member_id;
+    }
+
     @Override
     public String toString() {
         return "ReviewDTO{" +
@@ -66,8 +75,9 @@ public class ReviewDTO {
                 ", profile_no=" + profile_no +
                 ", isbn='" + isbn + '\'' +
                 ", review_content='" + review_content + '\'' +
-                ", review_date=" + review_date +
+                ", review_date='" + review_date + '\'' +
                 ", review_score=" + review_score +
+                ", member_id='" + member_id + '\'' +
                 '}';
     }
 

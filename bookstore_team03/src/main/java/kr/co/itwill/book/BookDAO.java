@@ -128,12 +128,27 @@ public class BookDAO {
         return sqlSession.selectList("book.bestMain", params);
     }
 
+    public List<Map<String, Object>> bestMainPage(int start, int end) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("start", start);
+        params.put("end", end);
+        return sqlSession.selectList("book.bestMainPage", params);
+    }
+
     public int bookCount() {
         return sqlSession.selectOne("book.listCount");
     }
 
+    public int bookCount2(String count) {
+        return sqlSession.selectOne("book.listCount2", count);
+    }
+
     public int choiceTable(Map<String, Object> map) {
         return sqlSession.selectOne("book.choiceTable", map);
+    }
+
+    public int reviewTable(Map<String, Object> map) {
+        return sqlSession.selectOne("book.reviewTable", map);
     }
 
 }//class end
