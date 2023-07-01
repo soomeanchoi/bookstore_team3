@@ -310,10 +310,11 @@ public class BoardCont {
 	
 	//유형탭+검색
 	@RequestMapping("/bsearch")
-	@RequestBody
+	@ResponseBody
 	public Map<String, Object> bsearch(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 										@RequestParam(value = "keyWord", defaultValue = "") String keyWord,
-										@RequestParam(value = "category") String category) {
+										@RequestParam(value = "category") String category
+										, HttpServletRequest req) {
 		Map<String, Object> bmap = new HashMap<>();
 		//페이징관련
 		int pageSize = 5;
@@ -344,7 +345,7 @@ public class BoardCont {
 		map.put("end", end);
 
 		//총 검색 게시글개수
-		totalRecord = boardDao.stotalRecord(map);
+		totalRecord = boardDao.bstotalRecord(map);
 
 		//검색된 모든 게시글 수 보내기
 		bmap.put("totalRecord", totalRecord);
@@ -353,7 +354,7 @@ public class BoardCont {
 		bmap.put("totalPage", totalPage);
 
 		//검색결과리스트
-		bmap.put("list", boardDao.search(map));
+		bmap.put("list", boardDao.bsearch(map));
 
 		//검색된 단어 보내기
 		bmap.put("keyWord", keyWord);

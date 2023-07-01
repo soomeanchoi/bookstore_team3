@@ -60,9 +60,19 @@ public class BoardDAO {
 		return sqlSession.selectOne("board.stotalRecord", map);
 	}//totalRecord() end
 	
+	//탭-페이징 : 검색된 총글개수
+	public int bstotalRecord(HashMap<String, Object> map) {
+		return sqlSession.selectOne("board.bstotalRecord", map);
+	}//totalRecord() end
+	
 	//게시글 검색
 	public List<HashMap<String, Object>> search(HashMap<String, Object> map){
 		return sqlSession.selectList("board.search", map);
+	}//search() end
+	
+	//탭-게시글 검색
+	public List<HashMap<String, Object>> bsearch(HashMap<String, Object> map){
+		return sqlSession.selectList("board.bsearch", map);
 	}//search() end
 	
 	//게시글 상세보기
