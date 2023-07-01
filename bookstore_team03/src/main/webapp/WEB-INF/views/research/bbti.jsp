@@ -52,7 +52,7 @@
       </div>
     </section>
     <section id="result" class="mx-auto my-5 py-5 px-3">
-      <h1>당신의 결과는?1</h1>
+      <h1>당신의 결과는?</h1>
       <div class="resultName"></div>
       <input type="hidden" class="bbti" id="bbti" name="bbti" value=""/>
       <div id="resultImg" class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">

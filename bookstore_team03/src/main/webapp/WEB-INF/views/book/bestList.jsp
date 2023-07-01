@@ -43,11 +43,6 @@
       src="http://code.jquery.com/jquery-latest.js"
     ></script>
     <style>
-        button.btn.btn-light {
-            border-radius: 20px;
-            background-color: #dde0e3;
-        }
-
         #chase {
             width:100px;
             overflow:hidden;
@@ -65,10 +60,6 @@
             text-align:center;
         }
 
-        .sidebar {
-            left: 15px;
-            position: absolute;
-        }
 
         section {
             width: 100%;
@@ -163,8 +154,8 @@
             }//if end
         }//dirOrder() end
 
-        function goToPageMain(pageNum) {
-            var url = 'bestList?main=' + pageNum;
+        function goToPageMain(count) {
+            var url = 'bestList2?main=' + count;
             window.location.href = url;
         }
 
@@ -215,21 +206,6 @@
 
 <body>
 <section>
-    <div class="sidebar">
-        <ul>
-            <li><a href="#"><h4>소설</h4></a></li>
-            <li><a href="#">소설1</a></li>
-            <li><a href="#">소설2</a></li>
-            <li><a href="#">소설3</a></li>
-            <li><a href="#">소설4</a></li>
-            <li><a href="#">소설5</a></li>
-            <li><a href="#">소설6</a></li>
-            <li><a href="#">소설7</a></li>
-            <li><a href="#">소설8</a></li>
-            <li><a href="#">소설9</a></li>
-            <li><a href="#">소설10</a></li>
-        </ul>
-    </div>
 
     <h3>베스트 셀러</h3>
     <%--<form action="search">
@@ -280,18 +256,18 @@
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
                                         <div class="choice-button">
-                                    <c:choose>
-                                        <c:when test="${row.choice == 1}">
-                                            <button onclick="book_choiceCancle(${row.isbn})">
-                                                <img src="/storage/heart4.png" class="choice-img">
-                                            </button>
-                                        </c:when>
-                                        <c:otherwise>
-                                                <button onclick="book_choice(${row.isbn})">
-                                                    <img src="/storage/heart3.png" class="choice-img">
-                                                </button>
-                                        </c:otherwise>
-                                    </c:choose>
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="${row.choice == 1}">--%>
+<%--                                            <button onclick="book_choiceCancle(${row.isbn})">--%>
+<%--                                                <img src="/storage/heart4.png" class="choice-img">--%>
+<%--                                            </button>--%>
+<%--                                        </c:when>--%>
+<%--                                        <c:otherwise>--%>
+<%--                                                <button onclick="book_choice(${row.isbn})">--%>
+<%--                                                    <img src="/storage/heart3.png" class="choice-img">--%>
+<%--                                                </button>--%>
+<%--                                        </c:otherwise>--%>
+<%--                                    </c:choose>--%>
                                 </div>
                                     </span><br>
                                 <div>

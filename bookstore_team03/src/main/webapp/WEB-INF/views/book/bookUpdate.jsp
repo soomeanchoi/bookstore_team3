@@ -57,21 +57,6 @@
             }//if end
         }//book_delete() end
 
-        function book_choice(){
-            // alert();
-            if(confirm("찜 하시겠습니까?")){
-                document.bookfrm.action="/choice/insert";
-                document.bookfrm.submit();
-            }//if end
-        }//book_choice() end
-
-        function book_choiceCancle() {
-            if(confirm("찜 취소 하시겠습니까?")){
-                document.bookfrm.action="/choice/del";
-                document.bookfrm.submit();
-            }
-        }
-
     </script>
 
 </head>
@@ -141,7 +126,20 @@
             </tr>
             <tr>
                 <td>bbti</td>
-                <td><input type="text" name="bbti" value="bbti"></td>
+                <td>
+                    <input type="text" value="${book.bbti_name}" readonly>
+                    <select name="bbti_name" id="bbti_name">
+                        <option selected>선택</option>
+                        <option value="ist">ist</option>
+                        <option value="enf">enf</option>
+                        <option value="isf">isf</option>
+                        <option value="int">int</option>
+                        <option value="inf">inf</option>
+                        <option value="ent">ent</option>
+                        <option value="est">est</option>
+                        <option value="esf">esf</option>
+                    </select>
+                </td>
             </tr>
             <tr>
                 <td>책 설명</td>
@@ -160,18 +158,8 @@
 
             <tr>
                 <td colspan="2" align="center">
-<%--                <input type="hidden" name="isbn" value="${book.isbn}">--%>
-                    <input type="hidden" name="">
                     <input type="button" value="수정" onclick="book_update()">
                     <input type="button" value="삭제" onclick="book_delete()">
-                    <c:choose>
-                        <c:when test="${cnt == 1}">
-                            <input type="button" value="찜취소" onclick="book_choiceCancle()">
-                        </c:when>
-                        <c:otherwise>
-                            <input type="button" value="찜하기" onclick="book_choice()">
-                        </c:otherwise>
-                    </c:choose>
                 </td>
             </tr>
         </table>
@@ -179,35 +167,35 @@
     <hr>
 
     <%--  리뷰  --%>
-    <div>
-        <label for="review_content">리뷰</label>
-        <form name="reviewInsertForm" id="reviewInsertForm">
-            <div class="review_score_div">
-                평점 :
-                <select name="review_score" id="review_score">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5" selected>5</option>
-                </select>
-            </div>
+<%--    <div>--%>
+<%--        <label for="review_content">리뷰</label>--%>
+<%--        <form name="reviewInsertForm" id="reviewInsertForm">--%>
+<%--            <div class="review_score_div">--%>
+<%--                평점 :--%>
+<%--                <select name="review_score" id="review_score">--%>
+<%--                    <option value="1">1</option>--%>
+<%--                    <option value="2">2</option>--%>
+<%--                    <option value="3">3</option>--%>
+<%--                    <option value="4">4</option>--%>
+<%--                    <option value="5" selected>5</option>--%>
+<%--                </select>--%>
+<%--            </div>--%>
 
-            <%-- 상품번호 --%>
-            <div>
-                <input type="hidden" name="isbn" value="${book.isbn}">
-                <input type="text" name="review_content" id="review_content" placeholder="내용을 입력해 주세요">
-                <c:choose>
-                    <c:when test="${rev == 0}">
-                        <button type="button" onclick="alert('이미 등록된 리뷰가 존재합니다')">리뷰등록</button>
-                    </c:when>
-                    <c:otherwise>
-                        <button type="button" name="reviewInsertBtn" id="reviewInsertBtn">리뷰등록</button>
-                    </c:otherwise>
-                </c:choose>
-            </div>
-        </form>
-    </div>
+<%--            &lt;%&ndash; 상품번호 &ndash;%&gt;--%>
+<%--            <div>--%>
+<%--                <input type="hidden" name="isbn" value="${book.isbn}">--%>
+<%--                <input type="text" name="review_content" id="review_content" placeholder="내용을 입력해 주세요">--%>
+<%--                <c:choose>--%>
+<%--                    <c:when test="${rev == 0}">--%>
+<%--                        <button type="button" onclick="alert('이미 등록된 리뷰가 존재합니다')">리뷰등록</button>--%>
+<%--                    </c:when>--%>
+<%--                    <c:otherwise>--%>
+<%--                        <button type="button" name="reviewInsertBtn" id="reviewInsertBtn">리뷰등록</button>--%>
+<%--                    </c:otherwise>--%>
+<%--                </c:choose>--%>
+<%--            </div>--%>
+<%--        </form>--%>
+<%--    </div>--%>
 
     <div>
         <%-- 리뷰목록 --%>
@@ -256,7 +244,7 @@
                     let a=''; //출력할 결과값
                     $.each(data, function(key, value){
 
-                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray; margin-bottom:15px;">'
+                        a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
                         a += '		댓글번호:' + value.review_no + ' / 작성자:' + value.member_id + ' / 평점:' + value.review_score + ' / 등록일: ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';

@@ -7,12 +7,12 @@
 <mapper namespace="review">
 
     <insert id="insert" parameterType="kr.co.itwill.review.ReviewDTO">
-        INSERT INTO review(profile_no, isbn, review_content, review_score)
-        VALUES (#{profile_no}, #{isbn}, #{review_content}, #{review_score})
+        INSERT INTO review(member_id, isbn, review_content, review_score)
+        VALUES (#{member_id}, #{isbn}, #{review_content}, #{review_score})
     </insert>
 
     <select id="list" resultType="kr.co.itwill.review.ReviewDTO" parameterType="String">
-        SELECT review_no, profile_no, isbn, review_content, review_date, review_score
+        SELECT review_no, profile_no, isbn, review_content, review_date, review_score, member_id
         FROM review
         WHERE isbn=#{isbn}
         ORDER BY review_date

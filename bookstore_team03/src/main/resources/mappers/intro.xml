@@ -27,6 +27,7 @@
 	<select id="todayWriter" resultType="java.util.Map">
 		select writer_no, writer_name, writer_work, writer_birth, writer_place, writer_imgoriname, writer_imgname, writer_imgpath, writer_imgsize, writer_info
 		from writer
+		where writer_info is not null and writer_info != ' '
 		order by rand();
 	</select>
 
@@ -37,11 +38,16 @@
 
 	<select id="recentReview" resultType="java.util.Map">
 		select book_name,DD.isbn,profile_name,review_score,review_content,review_date, member_id, book_imgname, book_content
-		from (select isbn,profile_name,review_score,review_content,review_date,member_id
+		from (select isbn,profile_name,review_score,review_content,review_date,AA.member_id
 			  from profile AA join review BB
-								   on AA.profile_no = BB.profile_no) CC join book DD
+								   on AA.member_id = BB.member_id) CC join book DD
 																			 on CC.isbn=DD.isbn
 		order by review_date
 	</select>
-	
+
+	<select id="profile" resultType="java.util.Map">
+		select *
+		from profile
+	</select>
+
 </mapper>

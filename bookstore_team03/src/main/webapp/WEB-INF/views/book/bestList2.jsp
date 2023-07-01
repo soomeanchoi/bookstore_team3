@@ -164,7 +164,7 @@
         }//dirOrder() end
 
         function goToPageMain(pageNum) {
-            var url = 'bestList?main=' + pageNum;
+            var url = 'bestList2?main=' + pageNum;
             window.location.href = url;
         }
 
@@ -215,21 +215,6 @@
 
 <body>
 <section>
-    <div class="sidebar">
-        <ul>
-            <li><a href="#"><h4>소설</h4></a></li>
-            <li><a href="#">소설1</a></li>
-            <li><a href="#">소설2</a></li>
-            <li><a href="#">소설3</a></li>
-            <li><a href="#">소설4</a></li>
-            <li><a href="#">소설5</a></li>
-            <li><a href="#">소설6</a></li>
-            <li><a href="#">소설7</a></li>
-            <li><a href="#">소설8</a></li>
-            <li><a href="#">소설9</a></li>
-            <li><a href="#">소설10</a></li>
-        </ul>
-    </div>
 
     <h3>베스트 셀러</h3>
     <%--<form action="search">
@@ -259,14 +244,6 @@
             <a href="javascript:goToPageMain('만화');"><li class="tab-link" data-tab="tab-2">만화</li></a>
         </ul>
     </div>
-    <div>
-        <p>
-            <span><a href="javascript:goToPageMain('만화');">최신순</a></span>
-            <span><a href="javascript:goToPageMain('book_price');">낮은가격</a></span>
-            <span><a href="javascript:goToPageMain('book_price desc');">높은가격순</a></span>
-            <span><a href="javascript:goToPageMain('book_count desc');">조회순</a></span>
-        </p>
-    </div>
 
     <div>
     <table>
@@ -288,18 +265,18 @@
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
                                         <div class="choice-button">
-                                    <c:choose>
-                                        <c:when test="${row.choice == 1}">
-                                            <button onclick="book_choiceCancle(${row.isbn})">
-                                                <img src="/storage/heart4.png" class="choice-img">
-                                            </button>
-                                        </c:when>
-                                        <c:otherwise>
-                                                <button onclick="book_choice(${row.isbn})">
-                                                    <img src="/storage/heart3.png" class="choice-img">
-                                                </button>
-                                        </c:otherwise>
-                                    </c:choose>
+<%--                                    <c:choose>--%>
+<%--                                        <c:when test="${row.choice == 1}">--%>
+<%--                                            <button onclick="book_choiceCancle(${row.isbn})">--%>
+<%--                                                <img src="/storage/heart4.png" class="choice-img">--%>
+<%--                                            </button>--%>
+<%--                                        </c:when>--%>
+<%--                                        <c:otherwise>--%>
+<%--                                                <button onclick="book_choice(${row.isbn})">--%>
+<%--                                                    <img src="/storage/heart3.png" class="choice-img">--%>
+<%--                                                </button>--%>
+<%--                                        </c:otherwise>--%>
+<%--                                    </c:choose>--%>
                                 </div>
                                     </span><br>
                                 <div>
@@ -330,37 +307,6 @@
     </table>
     </div>
 
-    <div class="paging" style="text-align: center; margin-top: 30px">
-        <c:set var="currentPage" value="${page}" />
-        <c:set var="startPage" value="${currentPage - 5}" />
-        <c:if test="${startPage lt 1}">
-            <c:set var="startPage" value="1" />
-        </c:if>
-
-        <c:set var="endPage" value="${currentPage + 5}" />
-        <c:if test="${endPage gt totalPage}">
-            <c:set var="endPage" value="${totalPage}" />
-        </c:if>
-
-        <a href="#" onclick="goToPage(1)">처음</a>
-        <c:if test="${currentPage gt 1}">  <%-- gt : > --%>
-            <a href="#" onclick="goToPage(${currentPage - 1})">이전</a>
-        </c:if>
-        <c:forEach begin="${startPage}" end="${endPage}" var="pageNum">
-            <c:choose>
-                <c:when test="${pageNum eq currentPage}"> <%-- eq : == --%>
-                    <a href="#" class="active">${pageNum}</a>
-                </c:when>
-                <c:otherwise>
-                    <a href="#" onclick="goToPage(${pageNum})">&nbsp&nbsp${pageNum}&nbsp&nbsp</a>
-                </c:otherwise>
-            </c:choose>
-        </c:forEach>
-        <c:if test="${currentPage lt totalPage}">       <%-- lt : < --%>
-            <a href="#" onclick="goToPage(${currentPage + 1})">다음</a>
-        </c:if>
-        <a href="#" onclick="goToPage(${totalPage})">끝</a>
-    </div>
 
 </section>
 

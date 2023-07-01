@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -22,15 +23,20 @@ public class ReviewCont {
 
     @RequestMapping("/insert")
     @ResponseBody
-    public int mReviewServiceInsert(@RequestParam String isbn, @RequestParam String review_content, @RequestParam int review_score) throws Exception {
+    public int mReviewServiceInsert(@RequestParam String isbn, @RequestParam String review_content, @RequestParam int review_score
+                                    , HttpSession session) throws Exception {
+        String s_id=(String)session.getAttribute("member_id");
+        session.getAttribute(s_id);
         ReviewDTO review=new ReviewDTO();
         review.setIsbn(isbn);
         review.setReview_content(review_content);
         review.setReview_score(review_score);
+        review.setMember_id(s_id);
 
         //로그인 기능을 구현했거나 따로 댓글 작성자를 입력받는 폼이 있다면 입력 받아온 값으로 사용하면 된다.
         //->session.getAttribute() 활용
-        review.setProfile_no(1);
+//        review.setProfile_no(1);
+        System.out.println(s_id);
 
         return reviewDao.reviewInsert(review);
     }//mReviewServiceInsert() end

@@ -86,7 +86,8 @@
 	
 	<!-- bbti유형별 게시글-->
 	<select id="bpaginglist" parameterType="java.util.HashMap" resultType="java.util.HashMap">
-		SELECT p.*, b.*, COALESCE(rc.replycnt, 0) AS replycnt
+		SELECT p.profile_no, p.member_id, p.profile_name, p.profile_imgname, p.profile_imgoriname, p.profile_imgpath, p.profile_imgsize
+			   , b.*, COALESCE(rc.replycnt, 0) AS replycnt 
 		FROM profile p
 		JOIN board b ON b.member_id = p.member_id
 		LEFT JOIN (SELECT COUNT(reply_no) replycnt, board_no bno FROM reply GROUP
