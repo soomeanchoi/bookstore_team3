@@ -24,7 +24,6 @@
 		<input type="hidden" id="s_id" name="s_id" value="${s_id}">
 			<div class="col-sm-6 mt-2 ps-sm-0">
                 <div class="form-outline">
-                	<input type="button" value="아이디확인" onclick="idcheck()">
 					<input type="button" id="good" name="good" value="좋아요" onclick="location.href='/board/good/${detail.board_no}'">
 					<input type="text" id="form10" class="form-control order-form-input" value="${detail.board_good}" disabled/>
 			    </div>

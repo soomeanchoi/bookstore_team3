@@ -57,8 +57,7 @@
             </thead>
             
             <tbody>
-            <%-- <tr><td>${fn:length(list)}</td></tr> --%>
-              <!-- 장바구니품목반복 -->
+            
               <c:choose>
 	          <c:when test="${fn:length(list) eq 0}">
 	              <tr><td> 장바구니 상품 없음</td></tr>    
