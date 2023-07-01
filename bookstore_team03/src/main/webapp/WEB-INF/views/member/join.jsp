@@ -35,7 +35,7 @@
 	<section>
       <h1><div class="join-title">회원가입</div></h1>
      
-		<form name="memfrm" id="memfrm" method="post" action="insert" onsubmit="return send()"><!-- myscript.js -->
+		<form name="memfrm" id="memfrm" method="post"  onsubmit="return send()"><!-- myscript.js -->
 		<br><br><br><br>
 		<table style="margin: auto;">
 		<!-- <table class="table" style="margin: auto;"> -->
@@ -448,7 +448,7 @@
       <span>예</span>
       <br><br><br>
       <div>
-        <input type="submit" value="회원가입" onclick="location.href='/profile/profileForm';">
+        <input type="submit" value="회원가입">
         <input type="button" value="취소" onclick="location.href='login';">
       </div>
       </div>
@@ -554,6 +554,7 @@ $("#member_pw").blur(function() {
                     success: function(response) {
                         // 서버 응답이 성공적으로 돌아왔을 때 실행되는 함수
                         alert('회원가입이 성공적으로 완료되었습니다.');
+                        location.href = "/member/login";
                     },
                     error: function() {
                         // 서버 요청이 실패했을 때 실행되는 함수

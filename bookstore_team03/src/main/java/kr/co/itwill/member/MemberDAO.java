@@ -97,4 +97,7 @@ public class MemberDAO {
 	public List<MemberDTO> myboard(String member_id) {
 		return sqlSession.selectList("member.myboard" , member_id);
 	}
+	public int profileinsert(String member_id) {
+		return sqlSession.insert("member.profileinsert", member_id);
+	}
 }

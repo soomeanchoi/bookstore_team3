@@ -152,7 +152,7 @@
 							</div>
 							<br><br><br><br>
 							<div class="form-group">
-								<button type="button" id='findBtn' class="id-pw-btn" onclick="location.href='login';">찾기</button>
+								<button type="button" id='findBtn' class="id-pw-btn">찾기</button>
 								<button type="button" onclick="history.go(-1);" class="id-pw-btn">취소</button>
 							</div>
 							</div>
@@ -243,6 +243,9 @@ modal.addEventListener("click", e => {
 				},
 				success : function(result) {
 					/* alert(result); */
+					
+					alert("발송되었습니다.");
+					location.href='login';
 
 				},error:function(xhr, status, error){
 	                alert("비밀번호 찾기 에러입니다");

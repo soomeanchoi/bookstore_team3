@@ -432,7 +432,7 @@
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
                         a += '	<div class="commentInfo' + value.review_no + '">';
                         a += '		댓글번호:' + value.review_no + 
-                        	 ' / 작성자:  <a href="/profile/detail/' + value.profile_no + '">' + value.profile_no + '</a>' + 
+                        	 ' / 작성자:'  + value.profile_no +   
                         	 ' / 평점:' + value.review_score + 
                         	 ' ' + value.review_date;
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
