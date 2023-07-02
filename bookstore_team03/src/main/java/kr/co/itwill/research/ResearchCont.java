@@ -7,6 +7,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.*;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/research")
 public class ResearchCont {
@@ -333,16 +335,16 @@ public class ResearchCont {
     }
 
     @RequestMapping("/bbti")
-    public String bbti(@RequestParam("bbti") String bbti){
+    public String bbti(@RequestParam("bbti") String bbti, HttpSession session){
 
-        String s_id = "kgukid38@naver.com";
+        String member_id = (String)session.getAttribute("member_id");
 
 
         System.out.println("bbti = " + bbti);
 
         Map<String, Object> map = new HashMap<>();
 
-        map.put("s_id", s_id);
+        map.put("s_id", member_id);
         map.put("bbti", bbti);
 
         researchDAO.bbtiUpdate(map);

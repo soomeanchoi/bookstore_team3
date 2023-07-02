@@ -56,14 +56,15 @@
 				        <!-- 프로필 사진이 있는 경우에 대한 처리 -->
 				       
 						<div class="rounded-image">
-				        <img src="/storage/${profile_imgname}" style="height: 150px; width: 150px;">
+				        <img src="/storage/${profile_imgname}" style="height: 100px; width: 100px;">
 				    	</div>
 				    </c:when>
-				    <c:when test="${profile_imgname == null}">
+				    <c:when test="${profile_imgname == null || profile_imgname == '-'}">
 				        <c:set var="link" value="http://localhost:9095/profile/profileForm" />
 				        <!-- 프로필 사진이 없는 경우에 대한 처리 -->
 				        <img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
 				    </c:when>
+				    
 				</c:choose>
 	      		
 	      		</div>
@@ -80,9 +81,9 @@
 	      			<span class="name">${member_name}</span>
 	      		</div>
 	      		
-	      		 <h6><span>${member_name}</span>님의 bbti</h6>
+	      		 <h6><span>${member_name}</span>님의 ${mybbti_name[0].bbti_name}</h6>
             <div>
-            <div>${mybbti }</div>
+           <%--  <div>${mybbti }</div> --%>
             </div>
           	
           <div>
