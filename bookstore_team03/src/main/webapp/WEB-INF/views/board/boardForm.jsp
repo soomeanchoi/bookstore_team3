@@ -50,51 +50,79 @@
 	
 <form method="post" action="write" >
 <input type="hidden" name="member_id" id="member_id" value="${userinfo.member_id}">
-<%-- <input type="hidden" name="bbti_no" id="bbti_no" value="${userinfo.bbti_no}"> --%>
-	<table class="table">
-	<tr>
-	    <th>bbti</th>
-	    <td style="text-align: left">
-	         <input type="text" name="bbti_name" id="bbti_name" value="${userinfo.bbti_name}" readonly>
-	    </td>
-	</tr>
-	<tr>
-	    <th>작성자</th>
-	    <td style="text-align: left">
-	         <input type="text" name="profile_name" id="profile_name" value="${userinfo.profile_name}" readonly>
-	    </td>
-	</tr>
-	<tr>
-	    <th>제목</th>
-	    <td style="text-align: left">
-	    	<input type="text" name="board_title" id="board_title" required>
-	    </td>
-	</tr>
+
+<main class="mt-5 pt-5">
+	<div class="container-fluid px-4">
+		<h1 class="mt-4">게시글 작성</h1>
+	<div class="card mb-4">
+		<div class="card-body">
+		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">
+		<input type="hidden" id="isbn" name="isbn" value="${detail.isbn}">
+		<input type="hidden" id="s_id" name="s_id" value="${s_id}">
+		
+		
+<div class="container mt-3">          
+  <table class="table table-bordered" style="text-align:center;">
+    <thead class="table-secondary">
+      <tr>
+        <th>bbti</th>
+        <th>작성자</th>
+        <th colspan="3">제목</th>
+                
+        
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>
+      	${userinfo.bbti_name}
+	         <input type="hidden" name="bbti_name" id="bbti_name" value="${userinfo.bbti_name}">      	
+      	</td>
+        <td>
+        ${userinfo.profile_name}
+	         <input type="hidden" name="profile_name" id="profile_name" value="${userinfo.profile_name}">
+        </td>
+        <td colspan="3">
+        <input type="text" name="board_title" id="board_title" style="width:500px" required>
+        </td>
+       
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+		
+<div class="container mt-3">          
+  <table class="table table-bordered" >
+    <thead style="text-align:center;" class="table-secondary">
+      <tr>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+       <td>
+          <div style="width: 100%; height: 100%;">
+            <textarea name="board_content" style="width: 100%; height: 100%;"></textarea>
+          </div>
+        </td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
 	
-	<tr>
-	    <th>책</th>
-	    <td style="text-align: left">
-	    	<input type="text" name="isbn" id="isbn" >
-	    	
-	    	<input type="button" value="책검색" name="open-modal" id="open-modal">
-	    </td>
-	</tr>
-	
-	<tr>
-	    <th>내용</th>
-	    <td style="text-align: left">
-	    	<textarea name="board_content" id="board_content" required></textarea>
-	    </td>
-	</tr>
-	
-	<tr>
-	    <td colspan="2">
-	    	  <input type="submit" value="글 등록" class="btn btn-success">
-	    	  <input type="reset"  value="취소"      class="btn btn-danger">
-	    </td>
-	</tr>	
-	</table>
+	<div class="mb-3 d-flex">
+	<button type="button" class="btn btn-warning" onclick="location.href='/board/list'">글목록</button>
+	<input type="submit" value="글 등록" class="btn btn-dark ms-auto">
+	    	  <input type="reset"  value="취소" class="btn btn-dark">
+	</div>
+	</div>
+	</div>
+	</div>
+	</main>
 </form>
+
 
 
 </body>

@@ -6,17 +6,12 @@
 */ -->
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 		 pageEncoding="UTF-8"%>
-<%@taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn"  uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <%@ include file="template/header.jsp" %>
 
 <!doctype html>
 <html lang="ko">
 <head>
-	<!-- Required meta tags -->
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
 	
 	<meta name="author" content="Untree.co">
 	<link rel="shortcut icon" href="favicon.png">
@@ -31,15 +26,6 @@
 	<link rel="stylesheet" href="fonts/icomoon/style.css">
 	<link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
 
-	<link rel="stylesheet" href="css/tiny-slider.css">
-	<link rel="stylesheet" href="css/aos.css">
-	<link rel="stylesheet" href="css/flatpickr.min.css">
-	<link rel="stylesheet" href="css/glightbox.min.css">
-<%--	<link rel="stylesheet" href="css/reset.css" />--%>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="stylesheet" href="css/header.css" />
-	<link rel="stylesheet" href="css/section.css" />
-	<link rel="stylesheet" href="css/signup.css" />
 	<style>
 		ol, ul {
 			list-style: none;
@@ -71,7 +57,7 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-start">
 				<div class="col-lg-5">
-					<h1 class="heading" data-aos="fade-up">3조 팀프로젝트</h1>
+					<h1 class="heading" data-aos="fade-up">3조 서점</h1>
 					<p class="mb-5" data-aos="fade-up"></p>
 				</div>
 			</div>

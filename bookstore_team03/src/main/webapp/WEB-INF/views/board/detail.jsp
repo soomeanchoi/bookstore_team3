@@ -15,57 +15,41 @@
 
 <main class="mt-5 pt-5">
 	<div class="container-fluid px-4">
-		<h1 class="mt-4">Board</h1>
+		<h1 class="mt-4">게시글 상세보기</h1>
 	<div class="card mb-4">
 		<div class="card-body">
 		<form id ="boardfrm" name="boardfrm" >
 		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">
 		<input type="hidden" id="isbn" name="isbn" value="${detail.isbn}">
 		<input type="hidden" id="s_id" name="s_id" value="${s_id}">
-			<div class="col-sm-6 mt-2 ps-sm-0">
-                <div class="form-outline">
-					<input type="button" id="good" name="good" value="좋아요" onclick="location.href='/board/good/${detail.board_no}'">
-					<input type="text" id="form10" class="form-control order-form-input" value="${detail.board_good}" disabled/>
-			    </div>
-            </div>
-			
-			<div class="col-sm-6 mt-2 ps-sm-0">
-                <div class="form-outline">
-                 <label id="border_price" class="form-label" for="form10">작성자 bbti</label>
-                 <input type="text" id="form10" class="form-control order-form-input" value="${detail.p.bbti_name}" disabled/>
-                </div>
-            </div>
-			
-            <div class="col-sm-6 mt-2 ps-sm-0">
-                <div class="form-outline">
-                 <label id="border_price" class="form-label" for="form10">작성자</label>
-                 <input type="text" id="form10" class="form-control order-form-input" value="${detail.profile_name}" disabled/>
-                </div>
-            </div>
-            
-            <div class="col-sm-6 mt-2 ps-sm-0">
-                <div class="form-outline">
-                 <label id="board_title" class="form-label" for="form10">제목</label>
-                 <input type="text" id="board_title" name="board_title" class="form-control order-form-input" value="${detail.board_title}" disabled/>
-                </div>
-            </div>
-			
-			<div class="mb-3">
-				<label for="board_date" class="form-label">작성일</label> <input
-					type="text" class="form-control" id="board_date" name="board_date"
-					value="${detail.board_date}" disabled>
-			</div>
-			<div class="mb-3">
-				<label for="board_read" class="form-label">조회수</label> <input
-					type="text" class="form-control" id="board_read" name="board_read"
-					value="${detail.board_read}" disabled>
-			</div>
-			<div class="mb-3">
-				<label for="board_good" class="form-label">좋아요</label> <input
-					type="text" class="form-control" id="board_good" name="board_good"
-					value="${detail.board_good}" disabled>
-			</div>
-					
+		
+		
+<div class="container mt-3">          
+  <table class="table table-bordered" style="text-align:center;">
+    <thead class="table-secondary">
+      <tr>
+        <th>bbti</th>
+        <th>작성자</th>
+        <th colspan="3">제목</th>
+        <th>등록일</th>
+        <th>조회수</th>
+        <th><input type="button" id="good" name="good" value="좋아요" onclick="location.href='/board/good/${detail.board_no}'"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>${detail.p.bbti_name}</td>
+        <td>${detail.profile_name}</td>
+        <td colspan="3">${detail.board_title}</td>
+        <td>${detail.board_date}</td>
+        <td>${detail.board_read}</td>
+        <td>${detail.board_good}</td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+					<%-- 
 				<c:choose>
 		             <c:when test="${bookinfo.book_imgname != '-'}">
 		             <div><img src="/storage/${bookinfo.book_imgname}" width="120px;" alt="Book"></div>
@@ -78,27 +62,41 @@
 		             <c:otherwise>
 		                 등록된 도서 없음 <br>
 		             </c:otherwise>
-        		</c:choose>	
+        		</c:choose>	 --%>
 			</div>
-			
-			<div class="mb-3">
-				<label for="board_content" class="form-label">내용</label>
-				<textarea class="form-control" id="board_content" name="board_content"
-					disabled>${detail.board_content}</textarea>
-			</div>
-			<div class="mb-3">
-			<button type="button" onclick="location.href='/board/list'">글목록</button>
+				
+<div class="container mt-3">          
+  <table class="table table-bordered" >
+    <thead style="text-align:center;" class="table-secondary">
+      <tr>
+        <th>내용</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+      	<td>${detail.board_content}</td>
+      </tr>
+     
+    </tbody>
+  </table>
+</div>
+			<div class="mb-3 d-flex">
+			<div style="width: 30px;"></div>
+			<button type="button" class="btn btn-warning" onclick="location.href='/board/list'">글목록</button>
 		
 			<c:if test="${s_id eq detail.member_id}">
-				<button type="button" class="edit-btn" onclick="location.href='/board/boardUpForm/${detail.board_no}'">수정</button>
-				<button type="button" class="delete-btn" onclick="location.href='/board/delete/${detail.board_no}'">삭제</button>
+				<button type="button" class="btn btn-dark ms-auto" onclick="location.href='/board/boardUpForm/${detail.board_no}'">수정</button>
+				<div style="width: 10px;"></div>
+				<button type="button" class="btn btn-dark" onclick="location.href='/board/delete/${detail.board_no}'">삭제</button>
+				<div style="width: 30px;"></div>
 			</c:if>
 			</div>
 		</form>
 		</div>
 	</div>
 	<!-- 댓글 -->
-	<div>
+	
+	<div class="container mt-3">
 		<label for="reply_content">댓글</label>
 		<form name="replyInsertForm" id="replyInsertForm">
 			<div>
@@ -110,7 +108,7 @@
 		</form>
 	</div>	
 	
-	<div>
+	<div class="container mt-3">
 		<!-- 댓글목록 -->
 		<div class="replyList"></div>
 	</div>
@@ -173,6 +171,7 @@
 			    		a += '          <p>내용:' + value.reply_content + "</p>";
 			    		a += '     </div>';			    		
 			    		a += '</div>';
+			    		
 			    	});//each() end
 			    	
 			    	$(".replyList").html(a);		

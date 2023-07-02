@@ -23,7 +23,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap" rel="stylesheet">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css'>
     <link rel='stylesheet' href='https://cdn-uicons.flaticon.com/uicons-solid-rounded/css/uicons-solid-rounded.css'>
     <link rel="stylesheet" href="https://use.typekit.net/cwn0ytd.css">
@@ -98,13 +98,23 @@
             <input class="search" type="text" size="57"  name="book_name" id="book_name"/>
             <input class="search-btn" type="submit" value="Search" />
         </form>
-<%--        <form action="/writer/search">--%>
-<%--            <input class="search" type="text" size="57" value="${writer_name}" name="writer_name" />--%>
-<%--            <input type="submit" value="검색">--%>
-<%--        </form>--%>
     </div>
+    
+     <div class="icon-wrap">
+   <c:if test="${sessionScope.login_id eq 123}">
+	<div class="container">                                   
+	  <div class="dropdown">
+	    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">관리자페이지</button>
+	    <ul class="dropdown-menu">
+	      <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
+		    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
+		    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
+		    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
+	    </ul>
+	  </div>
+	 </div>
+  </c:if>
 
-    <div class="icon-wrap">
         <!-- cart icon -->
         <div>
             <!-- <a href="mycart.html"> -->

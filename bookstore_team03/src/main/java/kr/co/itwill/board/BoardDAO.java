@@ -67,6 +67,7 @@ public class BoardDAO {
 	
 	//게시글 검색
 	public List<HashMap<String, Object>> search(HashMap<String, Object> map){
+		System.out.println("dao map: " + map);
 		return sqlSession.selectList("board.search", map);
 	}//search() end
 	

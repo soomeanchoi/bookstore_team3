@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-//메인병합확인용
+
 @Controller
 @RequestMapping("/board")
 public class BoardCont {
@@ -45,8 +45,6 @@ public class BoardCont {
 		int totalRecord = 0;
 		int totalPage = 1;
 
-		/*if (bbti_name == null) {//처음 페이지 접속시(bbti_name값 입력이 없으면), 전체글 띄우기
-		*/			//총 게시글개수
 			totalRecord = boardDao.totalRecord();
 			//System.out.println("유형별총게시글개수: " + totalRecord);
 
@@ -117,12 +115,12 @@ public class BoardCont {
 
 			//총 페이지수
 			map.put("totalPage", totalPage);
-			//System.out.println("mav : " + mav);
+			
 			return map;
 
 		} else { //bbti_name값 입력 있으면 해당 유형 글 띄우기
 			//총 게시글개수
-			System.out.println("bbti_name: " + bbti_name);
+			//System.out.println("bbti_name: " + bbti_name);
 			totalRecord = boardDao.btotalRecord(bbti_name);
 			//System.out.println("유형별총게시글개수: " + totalRecord);
 			if ((double) totalRecord % (double) totalPage == 0) {
@@ -145,7 +143,7 @@ public class BoardCont {
 
 			//총 페이지수
 			map.put("totalPage", totalPage);
-			System.out.println("map : " + map);
+			//System.out.println("map : " + map);
 
 			return map;
 		} //if end
@@ -305,6 +303,7 @@ public class BoardCont {
 
 		//검색된 단어 보내기
 		mav.addObject("keyWord", keyWord);
+		System.out.println("전체글검색결과:"+mav);
 		return mav;
 	}//search() end
 	

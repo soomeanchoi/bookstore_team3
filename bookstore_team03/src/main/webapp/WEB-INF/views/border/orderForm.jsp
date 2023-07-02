@@ -87,29 +87,7 @@
 			document.getElementById("chavepoint").value = havepoint - usepoint;
 		}//if end
 		
-		/*  if(border_price < usepoint){
-			//결제금액보다 많은 포인트 사용시도 시 
-			alert("총 금액보다 많이 사용할 수 없습니다");
-			//사용포인트의 값을 0으로 변경
-			usepoint = 0;
-			document.getElementById("border_usepoint").value = usepoint;
-			
-			//결제금액초기화
-			document.getElementById("border_price").value = border_oprice;
-			
-			//가진포인트 초기화
-			document.getElementById("chavepoint").value = havepoint;
-			
-			//적립예정포인트 초기화
-			document.getElementById("addpoint").value = parseInt(border_oprice/10);
-		}else{
-			var wkOprice = border_oprice - usepoint;
-			document.getElementById("border_price").value = wkOprice;
-			var wkAddpoint = parseInt((border_oprice - usepoint)/10);
-			document.getElementById("addpoint").value = wkAddpoint
-			var chavepoint = havepoint - usepoint;
-			document.getElementById("chavepoint").value = chavepoint;
-		}//if end     */
+		
 	}//pointuse() end
 	
 </script>
@@ -119,7 +97,7 @@
 	<form id="orderForm" name="orderForm" method="post" action="insert" onsubmit="return ordercheck()">
 	
 	<section class="order-form m-4">
-	  <div class="container pt-4">
+	  <div class="container pt-4" style="background-color:white; border-radius:10px;">
 	      <div class="row">
 	          <div class="col-12 px-4">
 	              <h1>주문하기</h1>
@@ -169,7 +147,7 @@
                   
                   <div class="col-12">
                   
-                 <div class="col-sm-6 mt-2 pe-sm-2">
+                 <div class="col-5">
                       <div class="form-outline">
                           <input type="text" name="border_postno" id="border_postno" value="${deliveryAdd.deliv_postno}" class="form-control order-form-input" placeholder="우편번호"  required/>
                       </div>
@@ -272,10 +250,10 @@
                       </div>
                   </div>
                   <hr>
-                  <div class="col-sm-6 mt-2 ps-sm-0">
-                      <div class="form-outline">
+                  <div class="col-12 mt-2 ps-sm-0">
+                      <div class="form-outline" >
                       	<input type="hidden" id="border_oprice" name="border_oprice" value="${border_price}">
-                        <input type="text" id="border_price" name="border_price" class="form-control order-form-input" value="${border_price}"/>
+                        <input type="text" style="text-align:right" id="border_price" name="border_price" class="form-control order-form-input" value="${border_price}"/>
                         <label class="form-label" for="form10">총 결제금액</label>
                       </div>
                   </div>

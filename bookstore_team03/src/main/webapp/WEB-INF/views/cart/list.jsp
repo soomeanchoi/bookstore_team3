@@ -40,18 +40,20 @@
 <form id="cartfrm" name="cartfrm" method="post">
 	<!-- 카트 템플릿1 -->
 	<section class="h-100 h-custom">
+	<div style="background-color:white; border-radius:10px;">
   <div class="container h-100 py-5">
     <div class="row d-flex justify-content-center align-items-center h-100">
       <div class="col">
-
         <div class="table-responsive">
         <input type="hidden" id="cartsize" name="cartsize" value="${fn:length(list)}">
-          <table class="table">
-            <thead>
+          <table class="table" style="text-align:center;">
+            <thead class="table-success">
               <tr>
-                <th scope="col" class="h5">상품</th>
+                <th scope="col">상품</th>
+                <th scope="col">제목</th>
                 <th scope="col">수량</th>
                 <th scope="col">가격</th>
+                <th scope="col">총액수</th>
                 <th scope="col">&nbsp</th>
               </tr>
             </thead>
@@ -60,7 +62,7 @@
             
               <c:choose>
 	          <c:when test="${fn:length(list) eq 0}">
-	              <tr><td> 장바구니 상품 없음</td></tr>    
+	              <tr><td colspan="4" style="text-align: center;"> 장바구니 상품 없음</td></tr>    
 			  </c:when>
 			  
 	          <c:otherwise>
@@ -76,21 +78,20 @@
 	                       등록된 제품 없음 <br>
 	           		   </c:otherwise>
                		</c:choose>
-            
-                    <div class="flex-column ms-4">
-                      <p class="mb-2">${row.book_name}</p>
-                     <!--  <p class="mb-0">Daniel Kahneman</p> -->
-                    </div>
-                  </div>
-                </th>
+               		</div>
+         
+                <td class="align-middle" style="text-align:center;">
+                  <p style="font-weight: 500;" class="d-flex justify-content-center">${row.book_name}</p>
+                </td>
+                    
                 
                 <td class="align-middle">
-                  <div class="d-flex flex-row">
+                  <div class="d-flex flex-row justify-content-center">
                    
-					<div class="d-flex flex-row align-items-center qty">
+					<div class="d-flex flex-row align-items-center qty" style="vertical-align:middle">
 						<i class="fa fa-minus text-danger"></i> 
 						<input type="hidden" id="cart_no" name="cart_no" value="${row.cart_no}">
-						<select id="cart_qty" name="cart_qty" onchange="cbook_Price(${row.cart_no}, this.value)"> <!-- oninput="book_Price()" -->
+						<select id="cart_qty" name="cart_qty" onchange="cbook_Price(${row.cart_no}, this.value)"  class="mx-auto"> <!-- oninput="book_Price()" -->
 							<option value="${row.cart_qty}" selected>${row.cart_qty}</option>
 							<option value="1">1</option>
 							<option value="2">2</option>
@@ -101,17 +102,14 @@
 					</div>
                   </div>
                 </td>
-                <td class="align-middle">
+                <td class="align-middle" style="text-align:center;">
                 <input type="hidden" id="book_price" name="book_price" value="${row.book_price}">
-                  <p style="font-weight: 500;" id="book_price${row.cart_no}" >${row.book_price}</p>
+                  <p style="font-weight: 500;" id="book_price${row.cart_no}" class="d-flex justify-content-center">${row.book_price}</p>
                 </td>
                 
-                <td class="align-middle">
-                <%-- 
-                <p style="font-weight: 500;" >${row.book_price}</p> --%>
-                <div>
-                	<%-- <input type="hidden" id="booktot_price" name="booktot_price" value="${row.book_price}"> --%>
-					<input type="text"	id="booktot_Price${row.cart_no}" class="booktot_Price${row.cart_no}" value="${row.book_price*row.cart_qty}" style="border:0">				
+                <td class="align-middle" style="text-align:center;">
+                <div class="text-center">
+					<input type="text" id="booktot_Price${row.cart_no}" class="booktot_Price${row.cart_no}" value="${row.book_price*row.cart_qty}" style="border:0">				
 				</div>
 				</td>
 				
@@ -132,15 +130,16 @@
         </div>
         
 		<div class="d-flex flex-row align-items-center mt-3 p-2 bg-white rounded">
-			<div class="buttonDiv1">
+			<div class="buttonDiv1 d-flex justify-content-between">
 			<c:choose>
               <c:when test="${fn:length(list) eq 0}">
                 <input type="button" class="btn btn-warning btn-block btn-lg ml-2 pay-button"
 				value="계속쇼핑하기" onclick="location.href='/book/list'">
               </c:when>
               <c:otherwise>
-                <button class="btn btn-warning btn-block btn-lg ml-2 pay-button" type="button" 
+                <button class="btn btn-warning btn-block btn-lg ml-2 mr-2 pay-button" type="button" 
               	onclick="order()">주문하기</button>
+              	<div style="width: 30px;"></div>
 			    <input type="button" class="btn btn-warning btn-block btn-lg ml-2 pay-button"
 				value="계속쇼핑하기" onclick="location.href='/book/list'">
               </c:otherwise>
@@ -150,7 +149,7 @@
 	</div>
 	</div>
 </div>
-
+</div>
 </section>
 </form>
 

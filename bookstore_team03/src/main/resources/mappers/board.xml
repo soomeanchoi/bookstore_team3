@@ -118,7 +118,7 @@
         <if test="category == 'book_name' and keyWord!=''">            
              AND book_name like CONCAT('%',#{keyWord},'%') 
         </if>
-        AND bbti_name = #{bbti_name}
+        AND board.bbti_name = #{bbti_name}
 	</select>
 	
 	<!-- 검색 ; bbti유형별 게시글-->
