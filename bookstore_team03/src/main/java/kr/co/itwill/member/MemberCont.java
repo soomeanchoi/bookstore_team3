@@ -242,6 +242,8 @@ public class MemberCont<ReviewDTO> {
 	    
 	    mav.addObject("myboard", memberDao.myboard(member_id));
 	    
+	    mav.addObject("mybbti_name", memberDao.mybbti(member_id));
+	    
 	    mav.setViewName("member/myPage");
 		return mav;
 	}
