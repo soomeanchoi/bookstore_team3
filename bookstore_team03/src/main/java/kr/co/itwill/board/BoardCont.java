@@ -49,7 +49,7 @@ public class BoardCont {
 			//System.out.println("유형별총게시글개수: " + totalRecord);
 
 			//게시글 총페이지수
-			if ((double) totalRecord % (double) totalPage == 0) {
+			if ((double) totalRecord % (double) pageSize == 0) {
 				totalPage = totalRecord / pageSize;
 				if (totalPage == 0) {
 					totalPage = 1;
@@ -94,7 +94,7 @@ public class BoardCont {
 			//System.out.println("유형별총게시글개수: " + totalRecord);
 
 			//게시글 총페이지수
-			if ((double) totalRecord % (double) totalPage == 0) {
+			if ((double) totalRecord % (double) pageSize == 0) {
 				totalPage = totalRecord / pageSize;
 				if (totalPage == 0) {
 					totalPage = 1;
@@ -123,7 +123,7 @@ public class BoardCont {
 			//System.out.println("bbti_name: " + bbti_name);
 			totalRecord = boardDao.btotalRecord(bbti_name);
 			//System.out.println("유형별총게시글개수: " + totalRecord);
-			if ((double) totalRecord % (double) totalPage == 0) {
+			if ((double) totalRecord % (double) pageSize == 0) {
 				totalPage = totalRecord / pageSize;
 				if (totalPage == 0) {
 					totalPage = 1;
@@ -210,7 +210,7 @@ public class BoardCont {
 		int totalPage = 1;
 
 		//페이지개수
-		if ((double) totalRecord % (double) totalPage == 0) {
+		if ((double) totalRecord % (double) pageSize == 0) {
 			totalPage = totalRecord / pageSize;
 			if (totalPage == 0) {
 				totalPage = 1;
@@ -264,7 +264,7 @@ public class BoardCont {
 		int totalPage = 1;
 
 		//페이지개수
-		if ((double) totalRecord % (double) totalPage == 0) {
+		if ((double) totalRecord % (double) pageSize == 0) {
 			totalPage = totalRecord / pageSize;
 			if (totalPage == 0) {
 				totalPage = 1;
@@ -321,7 +321,7 @@ public class BoardCont {
 		int totalPage = 1;
 
 		//페이지개수
-		if ((double) totalRecord % (double) totalPage == 0) {
+		if ((double) totalRecord % (double) pageSize == 0) {
 			totalPage = totalRecord / pageSize;
 			if (totalPage == 0) {
 				totalPage = 1;

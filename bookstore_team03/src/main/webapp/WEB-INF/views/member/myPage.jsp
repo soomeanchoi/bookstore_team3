@@ -28,8 +28,20 @@
 
 
     <div class="contents_inner">
-    
-    
+    <c:if test="${login_id eq '123' }">
+<div class="container">
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="color:black">관리자페이지</button>
+    <ul class="dropdown-menu">
+      <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
+	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
+	    <li><a href="http://localhost:9095/writer/writerList">작가관리</a></li>
+	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
+	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
+    </ul>
+  </div>
+</div>
+    </c:if>
     
     <aside class="aside_wrap">
          <!-- <img src="/storage/profilelogo.png" width="180" height="180"><br> -->

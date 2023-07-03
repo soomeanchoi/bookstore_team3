@@ -161,7 +161,6 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
   <!-- 탭메뉴 첫번째페이지 -->
   <div class="tab-content">
     <div id="home" class="container tab-pane active"><br>       
-		<p>${totalPage}</p>
 	 <c:choose>
        <c:when test="${fn:length(list) eq 0}"><!-- 게시판에 글 없을때 -->
           <div class="table-responsive">
