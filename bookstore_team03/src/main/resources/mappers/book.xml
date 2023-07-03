@@ -43,7 +43,7 @@
 	<select id="socialList" resultType="kr.co.itwill.book.BookDTO">
 		select *
 		from book
-		where book_mainname='정치/시회'
+		where book_mainname='정치/사회'
 	</select>
 
 	<select id="selfList" resultType="kr.co.itwill.book.BookDTO">
