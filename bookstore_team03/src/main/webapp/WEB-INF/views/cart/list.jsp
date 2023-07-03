@@ -150,10 +150,12 @@
 	</div>
 </div>
 </div>
+<div style="height:30px;"></div>
 </section>
 </form>
 
 <%--    끝     --%>
+
 <%@ include file="../template/footer.jsp" %>
 </body>
 </html>

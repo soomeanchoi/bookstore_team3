@@ -94,7 +94,7 @@
 			<div>
 				<!-- 부모글번호 -->
 				<input type="hidden" name="board_no" id="board_no" value="${detail.board_no}">
-				<input type="text" name="reply_content" id="reply_content" placeholder="내용을 입력해 주세요">
+				<textarea class="form-control" name="reply_content" id="reply_content" placeholder="내용을 입력해 주세요"></textarea>
 				<button type="button" name="replyInsertBtn" id="replyInsertBtn">댓글등록</button>
 			</div>
 		</form>
@@ -160,7 +160,7 @@
 			   }//if end
 			    		a += '     </div>';
 			    		a += '     <div class="replyContent' + value.reply_no + '">';			    		
-			    		a += '          <p>내용:' + value.reply_content + "</p>";
+			    		a += '          <p>' + value.reply_content + "</p>";
 			    		a += '     </div>';			    		
 			    		a += '</div>';
 			    		
@@ -175,7 +175,7 @@
 		function replyUpdate(reply_no, reply_content) {
 			let a='';
 			a += '<div class="input-group">';
-			a += '    <input type="text" value="' + reply_content + '" id="reply_content_' + reply_no + '">';
+			a += '    <textarea class="form-control" value="' + reply_content + '" id="reply_content_' + reply_no + '"></textarea>';
 			a += '    <button type="button" onclick="replyUpdateProc(' + reply_no + ')">수정</button>';
 			a += '</div>';
 			$(".replyContent" + reply_no).html(a);
@@ -218,5 +218,7 @@
         });//ready() end
 		
 	</script>
+	<div style="height:30px;"></div>
+	<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

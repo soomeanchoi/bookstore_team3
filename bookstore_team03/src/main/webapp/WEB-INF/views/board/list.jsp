@@ -42,7 +42,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
                a += '  	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="' + item.board_no + '">';
         		a += '		 <tr>';
         		a += '  		<td id="profile_name" class="profile_name">' + item.profile_name + '</td>';
-        		a += '  		<td id="board_title" class="board_title"><a href="detail/' + item.board_no + '">' + item.board_title+'</a>';
+        		a += '  		<td id="board_title" class="board_title" style="text-align:left;"><a href="detail/' + item.board_no + '">' + item.board_title+'</a>';
 	        	if(item.replycnt != 0){
 	        		a += ' ['+item.replycnt+']</td>';
 	        	}//if end
@@ -161,10 +161,11 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
           </div>   
 	   </c:when>
        <c:otherwise><!-- 게시판에 글 있을 때 -->
-         <div class="table-responsive">
-		  <table class="table">
+         <div class="table-responsive"  style="text-align:center;">
+		  <table class="table"">
 			<thead class="thead-light">
 			<tr>
+				<th scope="col">작성자 bbti</th>
 				<th scope="col">작성자</th>
 				<th scope="col">제목</th>
 				<th scope="col">조회수</th>
@@ -177,8 +178,9 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 		    	<input type="hidden" name="status" value="${status.index}">
 		    	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="${row.board_no}">
 		    	<tr>
+		    	<td id="bbti_name" class="bbti_name">${row.bbti_name}</td>
 	    		<td id="profile_name" class="profile_name">${row.profile_name}</td>
-	    		<td id="board_title" class="board_title"><a href="detail/${row.board_no}">${row.board_title}</a>
+	    		<td id="board_title" class="board_title" style="text-align:left;"><a href="detail/${row.board_no}">${row.board_title}</a>
 	    		<c:if test="${row.replycnt ne 0}">
 	    		[${row.replycnt}]
 	    		</c:if></td>
@@ -241,7 +243,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	<div id="menu${i}" class="container tab-pane fade" style="height:600px">
 	<!-- 이하 bbti탭내용 -->
 	<div class="table-responsive">
-	<table class="table">
+	<table class="table" style="text-align:center;">
 		<thead class="thead-light">
 			<tr>
 			<th scope="col">작성자</th>
@@ -275,6 +277,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 
 	
 </div>
-
+<div style="height:30px;"></div>
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

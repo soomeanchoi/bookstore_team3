@@ -87,6 +87,8 @@
 	
 </div> <!-- class="container mt-3" end --> 
 </section>
+
+<div style="height:30px;"></div>
 <%@ include file="../template/footer.jsp" %>
 </body>
 </html>

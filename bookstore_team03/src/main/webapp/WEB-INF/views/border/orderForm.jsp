@@ -354,5 +354,7 @@
     </script>
 <!--  DAUM 우편번호 API 종료 -->
 
+<div style="height:30px;"></div>
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

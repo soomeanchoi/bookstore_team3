@@ -216,7 +216,7 @@
              </div>
              <br><br>
              <input type="submit" value="결제하기">
-             
+              <div style="height:30px;"></div>
          </div>
          </div>
 	          
@@ -224,6 +224,7 @@
 	  </div>
 	  </div>
 	  </div>
+	  <div style="height:30px;"></div>
     </section>
 	
 	</form>
@@ -313,6 +314,8 @@
 <!--  DAUM 우편번호 API 종료 -->
 
 <%--    끝     --%>
+
+
 <%@ include file="../template/footer.jsp" %>
 </body>
 </html>

@@ -123,5 +123,8 @@
 		}
 	}
 </script>
+
+<div style="height:30px;"></div>
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>
