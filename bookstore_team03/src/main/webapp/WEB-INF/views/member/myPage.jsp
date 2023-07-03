@@ -78,10 +78,10 @@
 	      	</div>	
 	      	<input type="button" value="로그아웃" onclick="location.href='logout';" style="margin-left: 100px;">
 	      		<div class="profile-name-box">
-	      			<span class="name">${member_name}</span>
+	      			<%-- <span class="name">${member_name}</span> --%>
 	      		</div>
 	      		
-	      		 <h6><span>${member_name}</span>님의 ${mybbti_name[0].bbti_name}</h6>
+	      		<span>${member_name}</span>님의 BBTI : ${mybbti_name[0].bbti_name}
             <div>
            <%--  <div>${mybbti }</div> --%>
             </div>
