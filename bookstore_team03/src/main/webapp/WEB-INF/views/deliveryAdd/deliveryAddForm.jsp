@@ -20,10 +20,12 @@
 
 <body>
 <div class="container mt-3">
-	<h3>배송지 추가</h3>
+<br>
+	<h3 style="text-align:center;">배송지 추가</h3>
+	<br>
 <hr>
 <form name="deliveryAddForm" id="deliveryAddForm" method="post" action="insert" onsubmit="return nullcheck()">
-	<table border='1' class="type01">
+	<table  class="table table-hover" style="text-align:center;">
 	<tr>
 		<th>우편번호</th>
 		<td style="text-align:left">
@@ -49,10 +51,10 @@
 	
 	<br>
 	<div>
-		<input type="submit" value="배송지등록">
-		<input type="reset" value="취소">
-		<input type="button" value="배송지목록으로" onclick="location.href='/deliveryAdd/list'">
+		<input type="submit" class="btn btn-warning" value="배송지등록">
+		<input type="button" class="btn btn-warning" value="배송지목록으로" onclick="location.href='/deliveryAdd/list'">
 	</div>
+	<div style="height:20px;"></div>
 </form>
 </div> <!-- class="container mt-3" end --> 
 
