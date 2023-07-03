@@ -102,6 +102,9 @@
         <input type="text" name="book_name" value="${book_name}">
         <input type="submit" value="검색">
     </form>--%>
+    <p>
+        <button type="button" onclick="location.href='/book/write'">리스트</button>
+    </p>
 
 
     <form name="bookfrm" id="bookfrm">

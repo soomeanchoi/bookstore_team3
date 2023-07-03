@@ -148,10 +148,6 @@ public class BookCont {
             mav.addObject("cnt", cnt);
         }
 
-        System.out.println(s_id);
-        System.out.println(cnt);
-
-        System.out.println(map.toString());
 
         List<Map<String, Object>> list = bookDao.bestMainPage(start, end);
 
@@ -361,7 +357,6 @@ public class BookCont {
         mav.addObject("search_word", book_name); //검색어
         mav.addObject("writerList", bookDao.writerSearch(book_name));
 
-        System.out.println(mav.toString());
         return mav;
     }//search() end
 

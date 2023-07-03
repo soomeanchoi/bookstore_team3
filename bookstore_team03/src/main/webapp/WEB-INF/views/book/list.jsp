@@ -283,7 +283,7 @@
 
 
 
-<%--		<a href="write">글쓰기</a>--%>
+		<a href="write">글쓰기</a>
 		<!-- Preloader -->
 		<div id="overlayer"></div>
 		<div class="loader">

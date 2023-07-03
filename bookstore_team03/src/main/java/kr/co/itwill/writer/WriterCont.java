@@ -53,7 +53,7 @@ public class WriterCont {
 
         writerDao.insert(map);
 
-        return "redirect:/writer/list";
+        return "redirect:/writer/writerList";
 
     }//insert() end
 
@@ -109,7 +109,7 @@ public class WriterCont {
 
         writerDao.delete(writer_no);
 
-        return "redirect:/writer/list";
+        return "redirect:/writer/writerList";
 
     }//delete() end
 
@@ -140,7 +140,7 @@ public class WriterCont {
         map.put("writer_imgname", filename);
         map.put("writer_imgsize", filesize);
         writerDao.update(map);
-        return "redirect:/writer/list";
+        return "redirect:/writer/writerList";
 
     }//update() end
 
