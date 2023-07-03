@@ -57,7 +57,7 @@
 		<div class="container">
 			<div class="row align-items-center justify-content-start">
 				<div class="col-lg-5">
-					<h1 class="heading" data-aos="fade-up">3조 서점</h1>
+					<h1 class="heading" data-aos="fade-up">WookMin BookStore</h1>
 					<p class="mb-5" data-aos="fade-up"></p>
 				</div>
 			</div>
