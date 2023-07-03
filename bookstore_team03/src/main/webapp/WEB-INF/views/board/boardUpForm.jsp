@@ -24,7 +24,7 @@
 	<div class="card mb-4">
 		<div class="card-body">
 		<form name="updatefrm" id="updatefrm" action="update" method="post" onsubmit="return ordercheck()">
-		<input type="hidden" id="bbti_no" name="bbti_no" value="${detail.bbti_no}">
+		<input type="hidden" id="bbti_name" name="bbti_name" value="${detail.bbti_name}">
 		<input type="hidden" id="board_read" name="board_read" value="${detail.board_read}">
 		<input type="hidden" id="board_good" name="board_good" value="${detail.board_good}">
 		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">

@@ -73,22 +73,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
         			a += '</ul>';
         		}//for end
         		a += ' 	 </div>';
-        		a += '</div>'; 
-        		
-        		/* <!-- 검색시작 -->
-        		a += ' 	 <div>';
-        		a += ' 	 	<form action="bsearch" method="post">';
-        		a += ' 	 		<select name="category" id="category">';
-        		a += ' 	 			<option value="title_content">제목+내용</option>';
-        		a += ' 	 			<option value="board_title">제목</option>';
-        		a += ' 	 			<option value="board_content">내용</option>';
-        		a += ' 			<option value="book_name">도서</option>';
-        		a += ' 		    </select>';
-        		a += ' 		<input type="text" name="keyWord" id="keyWord" value="' + '">';
-        		a += ' 		<input type="submit" value="검색">';
-        		a += ' 	</form>';
-        		a += ' 	</div>'; */
-        		
+        		a += '</div>';       		
  
         		a += ' 	 <div class="container">';
         		a += ' 	  <div class="row height d-flex justify-content-center align-items-center">';
@@ -131,7 +116,22 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 
 </head>
 <body>
-<div class="container mt-3">
+	
+<div class="container mt-12">
+<br>
+
+<c:if test="${bbti_name ne null}">
+		<div>
+		<input type="button" class="btn btn-warning" value="글쓰기" onclick="location.href='/board/boardForm'">
+		</div>
+	</c:if>	
+		
+	<c:if test="${bbti_name eq null}">
+		<div>
+		<input type="button" class="btn btn-warning" value="글쓰기" onclick="bbtiNull()">
+		</div>
+	</c:if>	
+
   <br>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -221,11 +221,11 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 
 <div class="container">
     <div class="row height d-flex justify-content-center align-items-center">
-        <div class="col-md-8">
+        <div class="col-md-6">
             <div class="search">
                 <form action="search" method="post" style="margin:auto;">
                     <div class="row align-items-center">
-                        <div class="col-md-4">
+                        <div class="col-md-5">
                             <select class="form-select" name="category" id="category" style="width:150px; margin:auto;">
                                 <option value="title_content">제목+내용</option>
                                 <option value="board_title">제목</option>
@@ -236,7 +236,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
                         <div class="col-md-6">
                             <input type="text" class="form-control" style="margin:auto" type="text" name="keyWord" id="keyWord" value="${keyWord}">
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <button class="btn btn-primary">검색</button>
                         </div>
                     </div>
@@ -246,23 +246,6 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     </div>
 </div>
    
-     
-     <!-- 검색시작 -->
-    
-		<%-- <div class="search_bar" style="margin:auto;">
-		<form action="search" method="post" style="margin:auto;">
-		    <select class="form-select" name="category" id="category" style="width:150px; margin:auto">
-		      <option value="title_content">제목+내용</option>
-				<option value="board_title">제목</option>
-				<option value="board_content">내용</option>
-				<option value="book_name">도서</option>
-		    </select>
-		
-			<input class="search" style="margin:auto" type="text" name="keyWord" id="keyWord" value="${keyWord}">
-			<input type="submit" value="검색">
-		</form>
-		</div> --%>
-		<!-- 검색끝 -->		
     </div>
     
     
@@ -277,17 +260,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     <!-- 탭메뉴 반복끝 -->
   </div>		
   <br>
-  	<c:if test="${bbti_name ne null}">
-		<div>
-		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
-		</div>
-	</c:if>	
-		
-	<c:if test="${bbti_name eq null}">
-		<div>
-		<input type="button" value="글쓰기" onclick="bbtiNull()">
-		</div>
-	</c:if>	
+  
 	
 </div>
 

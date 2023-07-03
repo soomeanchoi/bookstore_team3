@@ -9,44 +9,6 @@
 </head>
 
 <body>
-	<!-- 검색시작 -->
-		<div id="modal">
-		<div class="modal-content">
-		<form action="writeSearch" method="post">
-			<select name="category" id="category">
-				<option value="book_name">도서제목</option>
-				<option value="book_writer">저자</option>
-			</select>
-			<input type="text" name="keyWord" id="keyWord" value="${keyWord}">
-			<input type="submit" value="검색">
-		</form>
-		<div>
-			<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
-		    	<!-- 모달페이징링크수정요 --> <a href="list?pageNum=${i}"> ${i} </a>
-		    </c:forEach>
-		</div>
-			<button id="close-modal">닫기</button>
-		</div>
-		</div>
-	<!-- 검색끝 -->	
-	
-	<script>
-		document.addEventListener("DOMContentLoaded", () => {
-			const modal = document.getElementById("modal");
-			const openModalBtn = document.getElementById("open-modal");
-			const closeModalBtn = document.getElementById("close-modal");
-			// 모달창 열기
-			openModalBtn.addEventListener("click", () => {
-				modal.style.display = "block";
-				document.body.style.overflow = "hidden"; // 스크롤바 제거 
-			});
-			// 모달창 닫기
-			closeModalBtn.addEventListener("click", () => {
-				modal.style.display = "none";
-				document.body.style.overflow = "auto"; // 스크롤바 보이기
-			});
-		});
-	</script>
 	
 <form method="post" action="write" >
 <input type="hidden" name="member_id" id="member_id" value="${userinfo.member_id}">
@@ -56,9 +18,9 @@
 		<h1 class="mt-4">게시글 작성</h1>
 	<div class="card mb-4">
 		<div class="card-body">
-		<input type="hidden" id="member_id" name="member_id" value="${detail.member_id}">
+		<%-- <input type="hidden" id="member_id" name="member_id" value="${detail.member_id}"> --%>
 		<input type="hidden" id="isbn" name="isbn" value="${detail.isbn}">
-		<input type="hidden" id="s_id" name="s_id" value="${s_id}">
+		<%-- <input type="hidden" id="s_id" name="s_id" value="${s_id}"> --%>
 		
 		
 <div class="container mt-3">          
