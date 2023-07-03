@@ -1,15 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@taglib prefix="c" 	uri="http://java.sun.com/jsp/jstl/core" %>
-<%@taglib prefix="fn" 	uri="http://java.sun.com/jsp/jstl/functions" %>
-<%@taglib prefix="fmt" 	uri="http://java.sun.com/jsp/jstl/fmt" %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>list.jsp</title>
-<script src="/js/jquery-3.6.4.min.js"></script>
+<%@ include file="../template/header.jsp" %> 
 	
 <script>
 	function deliveryAddcnt(){
@@ -26,15 +17,17 @@
 </head>
 
 <body>
-<div class="container mt-3">
+<section>
+<div class="container mt-3" style="background-color:white; border-radius:10px;">
+	<br>
 	<h3>배송지 목록</h3>
-<hr>
+	<br>
 	<input type="hidden" id="deliveryAddcnt" name="deliveryAddcnt" value="${fn:length(list)}">
 	등록 배송지개수 : ${fn:length(list)} / 3
-<br><br>
-	<table border='1' class="type01">
+
+	<table class="table table-hover">
 	<thead>
-	<tr>
+	<tr class="warning">
 		<th>우편번호</th>
 		<th>주소</th>
 		<th>상세주소</th>
@@ -66,5 +59,7 @@
 	
 	
 </div> <!-- class="container mt-3" end --> 
+</section>
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>
