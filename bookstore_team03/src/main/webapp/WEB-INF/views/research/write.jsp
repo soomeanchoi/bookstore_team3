@@ -39,7 +39,7 @@
 <section style="height: 500px;">
 		<h1><div class="bbti-title" style="margin-bottom: 50px;">BBTI 관리</div></h1>
 		<div style="text-align: right;">
-        <label for="choice"> 추가할 성향 선택 </label>
+        <label for="choice" style="margin-bottom: 50px;"> 추가할 성향 선택 </label>
         
         <select id="choice" name="choice" onchange="changeForm()" style="margin-top: 10px;">
             <option> 선택 </option>
@@ -71,38 +71,38 @@
                     // I / E TEST 폼 내용
                     formContent.innerHTML += `
                 <label for="research_q">I / E 질문 내용:</label>
-                <input type="text" id="research_q" name="research_q">
+                <input type="text" id="research_q" name="research_q" style="margin-bottom: 10px;">
 
                 <br>
 
                 <input type="hidden" id="research_a1" name="research_a1" value="i">
                 <label for="research_a1text">I 답변:</label>
-                <input type="text" id="research_a1text" name="research_a1text">
+                <input type="text" id="research_a1text" name="research_a1text" style="margin-bottom: 10px;">
 
 
                 <br>
                 <input type="hidden" id="research_a2" name="research_a2" value="e">
                 <label for="research_a2text">E 답변:</label>
-                <input type="text" id="research_a2text" name="research_a2text">
+                <input type="text" id="research_a2text" name="research_a2text" style="margin-bottom: 10px;">
 
             `;
                 } else if (choice === "sn") {
                     // S / N TEST 폼 내용
                     formContent.innerHTML += `
                 <label for="research_q">S / N 질문 내용:</label>
-                <input type="text" id="research_q" name="research_q">
+                <input type="text" id="research_q" name="research_q" style="margin-bottom: 10px;">
 
                 <br>
 
                 <input type="hidden" id="research_a1" name="research_a1" value="s">
                 <label for="research_a1text">S 답변:</label>
-                <input type="text" id="research_a1text" name="research_a1text">
+                <input type="text" id="research_a1text" name="research_a1text" style="margin-bottom: 10px;">
 
                 <br>
 
                 <input type="hidden" id="research_a2" name="research_a2" value="n">
                 <label for="research_a2text">N 답변:</label>
-                <input type="text" id="research_a2text" name="research_a2text">
+                <input type="text" id="research_a2text" name="research_a2text" style="margin-bottom: 10px;">
 
 
             `;
@@ -110,19 +110,19 @@
                     // T / F TEST 폼 내용
                     formContent.innerHTML += `
                 <label for="research_q">T / F 질문 내용:</label>
-                <input type="text" id="research_q" name="research_q">
+                <input type="text" id="research_q" name="research_q" style="margin-bottom: 10px;">
 
                 <br>
 
                 <input type="hidden" id="research_a1" name="research_a1" value="t">
                 <label for="research_a1text">T 답변:</label>
-                <input type="text" id="research_a1text" name="research_a1text">
+                <input type="text" id="research_a1text" name="research_a1text" style="margin-bottom: 10px;">
 
                 <br>
 
                 <input type="hidden" id="research_a2" name="research_a2" value="f">
                 <label for="research_a2text">F 답변:</label>
-                <input type="text" id="research_a2text" name="research_a2text">
+                <input type="text" id="research_a2text" name="research_a2text" style="margin-bottom: 10px;">
 
 
             `;
