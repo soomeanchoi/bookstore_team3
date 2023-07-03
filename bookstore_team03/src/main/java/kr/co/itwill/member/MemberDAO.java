@@ -101,5 +101,7 @@ public class MemberDAO {
 		return sqlSession.insert("member.profileinsert", member_id);
 	}
 	
-	
+	public List<MemberDTO> mybbti(String member_id) {
+		return sqlSession.selectList("member.mybbti" , member_id);
+	}
 }

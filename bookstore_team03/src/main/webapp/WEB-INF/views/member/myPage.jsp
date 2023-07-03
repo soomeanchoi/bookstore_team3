@@ -5,7 +5,7 @@
 
     <link rel="stylesheet" href="/css/mypage.css" />
     <link rel="stylesheet" href="/css/carousel.css" />
-  
+  	
     <script src="/js/mypage.js"></script>
     <script src="https://unpkg.com/embla-carousel/embla-carousel.umd.js"></script><!--  캐러셀 -->
   </head>
@@ -28,8 +28,20 @@
 
 
     <div class="contents_inner">
-    
-    
+    <c:if test="${login_id eq '123' }">
+<div class="container">
+  <div class="dropdown">
+    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown" style="color:black">관리자페이지</button>
+    <ul class="dropdown-menu">
+      <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
+	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
+	    <li><a href="http://localhost:9095/writer/writerList">작가관리</a></li>
+	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
+	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
+    </ul>
+  </div>
+</div>
+    </c:if>
     
     <aside class="aside_wrap">
          <!-- <img src="/storage/profilelogo.png" width="180" height="180"><br> -->
@@ -56,14 +68,15 @@
 				        <!-- 프로필 사진이 있는 경우에 대한 처리 -->
 				       
 						<div class="rounded-image">
-				        <img src="/storage/${profile_imgname}" style="height: 150px; width: 150px;">
+				        <img src="/storage/${profile_imgname}" style="height: 100px; width: 100px;">
 				    	</div>
 				    </c:when>
-				    <c:when test="${profile_imgname == null}">
+				    <c:when test="${profile_imgname == null || profile_imgname == '-'}">
 				        <c:set var="link" value="http://localhost:9095/profile/profileForm" />
 				        <!-- 프로필 사진이 없는 경우에 대한 처리 -->
 				        <img src="https://contents.kyobobook.co.kr/resources/fo/images/common/ink/img_no_profile@2x.png"/>
 				    </c:when>
+				    
 				</c:choose>
 	      		
 	      		</div>
@@ -77,12 +90,12 @@
 	      	</div>	
 	      	<input type="button" value="로그아웃" onclick="location.href='logout';" style="margin-left: 100px;">
 	      		<div class="profile-name-box">
-	      			<span class="name">${member_name}</span>
+	      			<%-- <span class="name">${member_name}</span> --%>
 	      		</div>
 	      		
-	      		 <h6><span>${member_name}</span>님의 bbti</h6>
+	      		<span>${member_name}</span>님의 BBTI : ${mybbti_name[0].bbti_name}
             <div>
-            <div>${mybbti }</div>
+           <%--  <div>${mybbti }</div> --%>
             </div>
           	
           <div>

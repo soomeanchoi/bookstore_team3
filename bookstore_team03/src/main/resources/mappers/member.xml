@@ -123,6 +123,12 @@
 			VALUES(#{member_id}, #{member_id})
 	</insert>
 	
+	<select id="mybbti" resultType="java.util.Map" parameterType="String">
+			SELECT bbti_name
+			FROM profile
+			WHERE member_id = #{member_id}
+	</select>
+	
 </mapper>     
 
 

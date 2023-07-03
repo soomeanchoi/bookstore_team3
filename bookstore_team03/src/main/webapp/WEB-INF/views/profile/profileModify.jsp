@@ -30,7 +30,7 @@
     ></script>
   </head>
 <body>
-<section style="padding: 50px;">
+<section style="height: 600px;">
 	<h1><div class="profilefrm-title">프로필 수정</div></h1>
 	<form name="profilefrm" id="profilefrm" method="post" action="update" enctype="multipart/form-data">
 	    <table class="table" style="margin-top: 0px;">
@@ -49,14 +49,18 @@
 	    <tr>
 	        <td colspan="2" align="center">
 	            <input type="submit" value="프로필 수정" class="submit-btn"> 
-	            <input class="id-pw-btn" type="button" value="취소" onclick="location.href='/member/myPage';"/>
+	            <input class="submit-btn" type="button" value="취소" onclick="location.href='/member/myPage';"/>
 	        </td>
-	    </tr>    
+	    </tr>       		
 	    </table>  
+	    		<!-- <div style="text-align: right;">
+	    		<input class="submit-btn" type="button" value="삭제" onclick="deleteProfile()"/>
+	       		</div> -->
 	</form>
 	
 </section>
-<br><br><br><br><br>	
+	
 <%@ include file="../template/footer.jsp" %>
 </body>
+
 </html>
