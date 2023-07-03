@@ -5,13 +5,12 @@
 
 
 <section>
-<div class="container mt-3">
+<div class="container mt-3" style="background-color:white; border-radius:10px;">
        
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>주문번호</th>
-        <td>${border_no}</td>
+        <th colspan="4">주문번호 : ${border_no}</th>
       </tr>
       <tr>
         <th>상품</th>
@@ -76,17 +75,19 @@
   </table>
   
   <div>
-  <input type="button" value="주문내역으로">
-  <input type="button" value="쇼핑하기">
+  <input type="button" class="btn btn-warning" value="주문내역으로">
+  <input type="button" class="btn btn-warning" value="쇼핑하기">
+  <div style="height:30px;"></div>
   </div>
 </div>
+<div style="height:30px;"></div>
 </section>
 
 
 
 <%--    끝     --%>
 
-<div style="height:30px;"></div>
+
 <%@ include file="../template/footer.jsp" %>
 </body>
 </html>

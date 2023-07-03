@@ -214,9 +214,9 @@
                      <label class="form-label" for="form10">총 결제금액</label>
                  </div>
              </div>
-             <br><br>
-             <input type="submit" value="결제하기">
-              <div style="height:30px;"></div>
+             <div style="height:30px;"></div>
+                  <input type="submit" style="font-size:20px;" value=" 결제하기" >
+                  <div style="height:30px;"></div>
          </div>
          </div>
 	          
