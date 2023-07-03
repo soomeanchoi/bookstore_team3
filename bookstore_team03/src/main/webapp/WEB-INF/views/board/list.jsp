@@ -37,21 +37,9 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
             var item = list[i];
            console.log(item.board_no);
             if(item.board_no===null){
-            	a += '<div class="table-responsive"><table><tr><td>게시판에 글 없음</td></tr></table></div>';
-            }else{
-            	a += '<div class="table-responsive">';
-                a += '  <table class="table">';
-                a += '	 <thead class="thead-light">';
-                a += '		<tr>';
-                a += '			<th scope="col">작성자</th>';
-                a += '			<th scope="col">제목</th>';
-                a += '			<th scope="col">조회수</th>';
-                a += '			<th scope="col">좋아요</th>';
-                a += '			<th scope="col">작성일</th>';
-                a += '		</tr>';
-                a += '		</thead>';
-                a += '		<tbody>';
-                a += '  	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="' + item.board_no + '">';
+            	a += '<tr><td>게시판에 글 없음</td></tr>';
+            }else{               
+               a += '  	 <input type="hidden" id="board_no" name="board_no" class="board_no" value="' + item.board_no + '">';
         		a += '		 <tr>';
         		a += '  		<td id="profile_name" class="profile_name">' + item.profile_name + '</td>';
         		a += '  		<td id="board_title" class="board_title"><a href="detail/' + item.board_no + '">' + item.board_title+'</a>';
@@ -63,18 +51,19 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
                  var orderDate = new Date(item.board_date);
                  var formattedDate = orderDate.toLocaleDateString();
         		a += ' 			<td id="board_date" class="board_date">'+formattedDate+'</td> ';
-        		a += '		</tr>';
-        		a += ' 	   </tbody>';
-        		a += ' 	 </table>';
-        		a += ' 	 <div>';
+        		a += '		</tr>'; 
+        		
+        		
+        		
+        		/* a += ' 	 <div>';
         		for(var n=1 ; n <= totalPage ; n++){
         			a += '<ul class="pagination justify-content-center">';
         			a += '<li class="page-item"><a class="page-link" <a href="list?pageNum='+ n +'">'+ n +'</a></li>';
         			a += '</ul>';
         		}//for end
-        		a += ' 	 </div>';
-        		a += '</div>';       		
- 
+        		a += ' 	 </div>'; */
+        		//a += '</div>';       		
+ /* 
         		a += ' 	 <div class="container">';
         		a += ' 	  <div class="row height d-flex justify-content-center align-items-center">';
         		a += ' 	   <div class="col-md-8">';
@@ -100,13 +89,13 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
         		a += '            </div>';
         		a += '        </div>';
         		a += '    </div>';
-        		
+        		 */
         		<!-- 검색끝 -->		
             }//if end
             
 		}//for end
 		console.log(a);
-		//bboardlist.innerHTML = a; // HTML 요소에 list 
+		
 		 $(".bboardlist").html(a);   
        
 		}//success end
@@ -253,11 +242,30 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     <c:forEach var="i" begin="1" end="8">
     
 	<div id="menu${i}" class="container tab-pane fade" style="height:600px">
-	<div class="bboardlist" id="bboardlist"></div><!-- ajax리턴영역 종료 --> 
-     
-    </div>
+	<!-- 이하 bbti탭내용 -->
+	<div class="table-responsive">
+	<table class="table">
+		<thead class="thead-light">
+			<tr>
+			<th scope="col">작성자</th>
+			<th scope="col">제목</th>
+			<th scope="col">조회수</th>
+			<th scope="col">좋아요</th>
+			<th scope="col">작성일</th>
+			</tr>
+		</thead>
+	<!-- ajax리턴영역시작 <tbody>부터-->
+	<tbody class="bboardlist" id="bboardlist">
+	
+	</tbody>
+	<!-- ajax리턴영역 종료 --> 
+     </table> 
+	</div>     
+  </div>
+    <!-- bbti탭내용 끝-->
 	</c:forEach>
     <!-- 탭메뉴 반복끝 -->
+   
   </div>		
   <br>
   
