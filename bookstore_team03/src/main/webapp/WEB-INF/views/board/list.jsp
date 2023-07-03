@@ -84,7 +84,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 		b += ' 		<input type="text"  style="margin:auto" class="form-control" name="keyWord" id="keyWord" value="' + '">';
 		b += '     </div>';
 		b += '                        <div class="col-md-1">';
-		b += '                            <button class="btn btn-primary">검색</button>';
+		b += '                            <button class="btn btn-warning">Q</button>';
 		b += '                        </div>';
 		b += '                    </div>';
 		b += '                </form>';
@@ -105,19 +105,19 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	
 <div class="container mt-12">
 <br>
-
+<div style="text-align: left;">
 <c:if test="${bbti_name ne null}">
 		<div>
-		<input type="button" class="btn btn-warning" value="글쓰기" onclick="location.href='/board/boardForm'">
+		<input type="button" style="width:200px; font-size:20px;" class="btn btn-warning" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>
 	</c:if>	
 		
 	<c:if test="${bbti_name eq null}">
 		<div>
-		<input type="button" class="btn btn-warning" value="글쓰기" onclick="bbtiNull()">
+		<input type="button" style="width:200px; font-size:20px;" class="btn btn-warning" value="글쓰기" onclick="bbtiNull()">
 		</div>
 	</c:if>	
-
+</div>
   <br>
   <!-- Nav tabs -->
   <ul class="nav nav-tabs" role="tablist">
@@ -223,7 +223,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
                             <input type="text" class="form-control" style="margin:auto" type="text" name="keyWord" id="keyWord" value="${keyWord}">
                         </div>
                         <div class="col-md-1">
-                            <button class="btn btn-primary">검색</button>
+                            <button class="btn btn-warning">Q</button>
                         </div>
                     </div>
                 </form>
@@ -270,10 +270,9 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     <!-- 탭메뉴 반복끝 -->
    
    
-   
   </div><!-- tep내용끝 -->	
   <br>
-  
+
 	
 </div>
 

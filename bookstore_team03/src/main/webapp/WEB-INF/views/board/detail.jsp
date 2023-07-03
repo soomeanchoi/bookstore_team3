@@ -38,32 +38,24 @@
     </thead>
     <tbody>
       <tr>
-      	<td>${detail.p.bbti_name}</td>
+      	<td>${detail.bbti_name}</td>
         <td>${detail.profile_name}</td>
         <td colspan="3">${detail.board_title}</td>
-        <td>${detail.board_date}</td>
+        <td>
+         <script>
+            var orderDate = new Date("${detail.board_date}");
+            var formattedDate = orderDate.toLocaleDateString();
+            document.write(formattedDate);
+         </script></td>
+        
         <td>${detail.board_read}</td>
         <td>${detail.board_good}</td>
       </tr>
      
     </tbody>
   </table>
+</div>	
 </div>
-					<%-- 
-				<c:choose>
-		             <c:when test="${bookinfo.book_imgname != '-'}">
-		             <div><img src="/storage/${bookinfo.book_imgname}" width="120px;" alt="Book"></div>
-		                 ${bookinfo.book_name}&nbsp|&nbsp${bookinfo.writer_name}
-		                 <br>
-		                 ${bookinfo.book_mainname}-${bookinfo.book_subname}
-		                 <br>
-		                 ${bookinfo.book_pubdate}
-		             </c:when>
-		             <c:otherwise>
-		                 등록된 도서 없음 <br>
-		             </c:otherwise>
-        		</c:choose>	 --%>
-			</div>
 				
 <div class="container mt-3">          
   <table class="table table-bordered" >
@@ -81,7 +73,7 @@
   </table>
 </div>
 			<div class="mb-3 d-flex">
-			<div style="width: 30px;"></div>
+			<div style="width: 50px;"></div>
 			<button type="button" class="btn btn-warning" onclick="location.href='/board/list'">글목록</button>
 		
 			<c:if test="${s_id eq detail.member_id}">

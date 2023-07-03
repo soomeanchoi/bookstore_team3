@@ -41,11 +41,11 @@
 <section>
 <div class="container mt-3" style="background-color:white; border-radius:10px;">
 	<br>
-	<h3>배송지 목록</h3>
+	<h3 style="text-align:center;">배송지 목록</h3>
 	<br>
 	<input type="hidden" id="deliveryAddcnt" name="deliveryAddcnt" value="${fn:length(list)}">
-	등록 배송지개수 : ${fn:length(list)} / 3
-	<table class="table table-hover">
+	<p style="text-align:right;">등록 배송지개수 : ${fn:length(list)} / 3</p>
+	<table class="table table-hover" style="text-align:center;">
 	<thead>
 	<tr class="warning">
 		<th>우편번호</th>
@@ -80,8 +80,9 @@
 	</table>
 	
 	<br>
-	<input type="button" value="배송지추가" onclick="deliveryAddcnt()">
-	<input type="button" value="계속쇼핑하기" onclick="location.href='/book/list'">
+	<input type="button" value="배송지추가" class="btn btn-warning" onclick="deliveryAddcnt()">
+	<input type="button" value="계속쇼핑하기" class="btn btn-warning" onclick="location.href='/book/list'">
+	<div style="height:20px;"></div>
 	
 	
 </div> <!-- class="container mt-3" end --> 
