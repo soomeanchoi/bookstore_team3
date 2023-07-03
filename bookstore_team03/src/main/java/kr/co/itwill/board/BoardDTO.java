@@ -5,7 +5,8 @@ public class BoardDTO {
 	private int board_no; 
 	private String isbn; 
 	private String member_id; 
-    private int bbti_no; 
+    private int bbti_no;
+    private String bbti_name;
     private String board_title; 
     private String board_content; 
     private String board_date; 
@@ -46,6 +47,14 @@ public class BoardDTO {
 
 	public void setBbti_no(int bbti_no) {
 		this.bbti_no = bbti_no;
+	}
+
+	public String getBbti_name() {
+		return bbti_name;
+	}
+
+	public void setBbti_name(String bbti_name) {
+		this.bbti_name = bbti_name;
 	}
 
 	public String getBoard_title() {
@@ -91,9 +100,8 @@ public class BoardDTO {
 	@Override
 	public String toString() {
 		return "BoardDTO [board_no=" + board_no + ", isbn=" + isbn + ", member_id=" + member_id + ", bbti_no=" + bbti_no
-				+ ", board_title=" + board_title + ", board_content=" + board_content + ", board_date=" + board_date
-				+ ", board_read=" + board_read + ", board_good=" + board_good + "]";
+				+ ", bbti_name=" + bbti_name + ", board_title=" + board_title + ", board_content=" + board_content
+				+ ", board_date=" + board_date + ", board_read=" + board_read + ", board_good=" + board_good + "]";
 	}
-    
-    
+
 }//class end

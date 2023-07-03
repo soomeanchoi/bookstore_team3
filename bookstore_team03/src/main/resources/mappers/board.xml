@@ -197,7 +197,7 @@
 	<insert id="write" parameterType="kr.co.itwill.board.BoardDTO">
 		INSERT INTO itwill.board
 		(isbn, member_id, bbti_name, board_title, board_content, board_date, board_read, board_good)
-		VALUES(#{isbn}, #{member_id}, #{bbti_no}, #{board_title}, #{board_content}, current_timestamp(), 0, 0)
+		VALUES(#{isbn}, #{member_id}, #{bbti_name}, #{board_title}, #{board_content}, current_timestamp(), 0, 0)
 	</insert>
 	
 	<!-- 글작성시 도서검색 수 -->

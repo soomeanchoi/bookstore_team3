@@ -214,16 +214,7 @@ public class BorderCont {
 			, @RequestParam(value="pageNum", defaultValue="1") int pageNum) {
 		String s_id = (String)session.getAttribute("member_id");
 		//String s_id = "kgukid38@naver.com";
-        /*
-			List<BorderDTO> borderlist = new ArrayList<>();
-			borderlist = borderDao.borderlist(s_id);
-			
-			ModelAndView mav=new ModelAndView();
-			mav.setViewName("/border/borderlist");
-			mav.addObject("list", borderlist);
-		
-		return mav;*/
-		/////////////////////////////////////
+        
 		//페이징
 		//총 주문내역개수
 		int pageSize=5;
