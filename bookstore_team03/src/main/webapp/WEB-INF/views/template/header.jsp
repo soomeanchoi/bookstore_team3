@@ -123,36 +123,6 @@
 	
 	
     <div class="icon-wrap">
-    
-    <!-- 관리자페이지버튼 -->
-	<%-- <c:if test='${s_id eq "kgukid38@naver.com"}'> --%>
-	<!-- <div class="dropdown">
-	  <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
-	    관리자페이지
-	  </button>
-	  <ul class="dropdown-menu">
-	    <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
-	    <li><a href="http://localhost:9095/book/">상품관리</a></li>
-	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
-	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
-	  </ul>
-	</div> -->
-	
-	<div class="container">
-  <div class="dropdown">
-   <!--  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">관리자페이지 -->
-    <!-- <span class="caret"></span></button> -->
-    <ul class="dropdown-menu">
-      <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
-	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
-	    <li><a href="http://localhost:9095/writer/writerList">작가관리</a></li>
-	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
-	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
-    </ul>
-  </div>
-</div>
-	<%-- </c:if> --%>
-	
         <!-- cart icon -->
         <div>
             <!-- <a href="mycart.html"> -->
