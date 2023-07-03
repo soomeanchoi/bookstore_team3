@@ -5,13 +5,40 @@
   Time: 5:11 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ include file="../template/header.jsp" %> 
 <html>
 <head>
     <title>Write</title>
+     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Team3 - BookStore</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/section.css" />
 </head>
+<style>
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+.bbti-title {
+	font-family: 'HANAMDAUM';
+}
+</style>
 <body>
-
+<section style="height: 500px;">
+		<h1><div class="bbti-title" style="margin-bottom: 50px;">BBTI 관리</div></h1>
+		<div style="text-align: right;">
         <label for="choice"> 추가할 성향 선택 </label>
         <select id="choice" name="choice" onchange="changeForm()">
             <option> 선택 </option>
@@ -27,7 +54,8 @@
             </div>
             <input type="submit" value="Submit">
         </form>
-
+		</div>
+		
         <script>
             function changeForm() {
                 let choice = document.getElementById("choice").value;
@@ -159,5 +187,8 @@
             }
 
         </script>
+        </section>
+<%@ include file="../template/footer.jsp" %>        
 </body>
+
 </html>

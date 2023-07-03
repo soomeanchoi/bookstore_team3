@@ -6,15 +6,42 @@
   Time: 4:34 PM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+         pageEncoding="UTF-8"%>
+<%@ include file="../template/header.jsp" %> 
 <html>
 <head>
     <title>Update</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>Team3 - BookStore</title>
+    <link rel="stylesheet" href="/css/reset.css" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/header.css" />
+    <link rel="stylesheet" href="/css/section.css" />
 </head>
+<style>
+@font-face {
+    font-family: 'HANAMDAUM';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2304-2@1.0/HANAMDAUM.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+}
+.point-title {
+	font-family: 'HANAMDAUM';
+}
+</style>
 <body>
+<section style="height: 500px;">
+<h1><div class="point-title" style="margin-bottom: 50px;">BBTI 설문 수정</div></h1>
 <form name="updatefrm" id="updatefrm" method="post" action="updatedo" onsubmit="return updateCheck()">
     <c:forEach items="${oneList}" var="list">
-        <table border="1">
+        <table border="1" class="table table-hover">
             <th>문제</th>
             <th>기존유형1</th>
             <th>변경할유형1</th>
@@ -152,6 +179,8 @@
 
     }
 </script>
+</section>
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>
 
