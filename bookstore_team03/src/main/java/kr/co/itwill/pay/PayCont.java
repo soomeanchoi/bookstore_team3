@@ -15,6 +15,7 @@ import java.util.Map;
 import kr.co.itwill.border.BorderDTO;
 import kr.co.itwill.border.BorderDAO;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/pay")
@@ -277,5 +278,68 @@ public class PayCont {
     }//resultAjaxRequest() end
 
 
+    @RequestMapping("cancel")
+    public ModelAndView orderCancel (){
+        ModelAndView mav = new ModelAndView();
+
+        List<Map<String, Object>> list = new ArrayList<>();
+        List<Map<String, Object>> list2 = new ArrayList<>();
+
+        list = payDAO.cancelList();
+        list2 = payDAO.cancelendList();
+
+//        System.out.println("list = " + list);
+        System.out.println("list2 = " + list2);
+
+        mav.addObject("list", list);
+        mav.addObject("list2", list2);
+        mav.setViewName("pay/orderCancel");
+        return mav;
+    }
+
+    @RequestMapping("cancelResult")
+    public String cancelResult(@RequestParam Map<String, Object> map){
+
+        //데이터 확인
+        System.out.println("map = " + map.toString());
+
+        String border_no = (String) map.get("border_no");
+        //주문번호의 아이디 확인
+        String member_id = payDAO.findID(border_no);
+        System.out.println("member_id = " + member_id);
+
+        int pay_point = Integer.parseInt((String) map.get("pay_point"));
+        int pay_descount = Integer.parseInt((String) map.get("pay_descount"));
+
+        //데이터를 담아줄 map 생성
+        Map<String, Object> data = new HashMap<>();
+        data.put("member_id", member_id);
+        data.put("border_no", border_no);
+        data.put("pay_point", pay_point);
+        data.put("pay_descount", pay_descount);
+
+        //지급한 포인트 회수
+        payDAO.cancelPoint(data);
+
+        //사용한 포인트 지급
+        if (pay_descount != 0){
+            payDAO.cancelDescount(data);
+        }
+
+        //pay삼태 업데이트
+        payDAO.cancelUpdate(border_no);
+
+        return "redirect:/pay/cancel";
+    }
+
+    @RequestMapping("giveBack")
+    public String giveBack(@RequestParam Map<String, Object> map){
+
+        String border_no = (String) map.get("border_no");
+
+        payDAO.giveback(border_no);
+
+        return "redirect:/pay/cancel";
+    }
 
 }

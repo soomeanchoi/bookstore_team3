@@ -47,6 +47,10 @@ public class IntroDAO {
         return sqlSession.selectList("intro.profile");
     }
 
+    public List<Map<String, Object>> bbti(String member_id) {
+        return sqlSession.selectList("intro.bbti", member_id);
+    }
+
 
 
 }

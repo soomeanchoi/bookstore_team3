@@ -23,7 +23,7 @@
         from (select book_writerno, book_name, book_imgname, choice_no
               from book join choice
                              on book.isbn=choice.isbn
-              where member_id='kgukid38@naver.com') AA join writer
+              where member_id=#{member_id}) AA join writer
                                                             on AA.book_writerno=writer.writer_no
     </select>
 

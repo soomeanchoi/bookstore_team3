@@ -88,6 +88,10 @@ public class BookDAO {
         return sqlSession.selectOne("book.detail", isbn);
     }//detail() end
 
+    public Map<String, Object> bookUpdate(String isbn) {
+        return sqlSession.selectOne("book.bookUpdate", isbn);
+    }//detail() end
+
     public int reviewCount(ReviewDTO dto) {
         return sqlSession.selectOne("book.reviewCount", dto);
     }

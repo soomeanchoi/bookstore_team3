@@ -49,6 +49,44 @@
 		WHERE member_id = #{member_id}
 	</delete>
 
+	<select id="cancelList" resultType="java.util.Map">
+		SELECT border_no, pay_state, pay_date, pay_descount, pay_point, pay_witddate, pay_witdcancledate, pay_witdprice, pay_witdstate
+		FROM pay
+		WHERE pay_witdstate = 0
+		ORDER BY pay_witddate DESC
+	</select>
+
+	<select id="cancelendList" resultType="java.util.Map">
+		SELECT border_no, pay_state, pay_date, pay_descount, pay_point, pay_witddate, pay_witdcancledate, pay_witdprice, pay_witdstate
+		FROM pay
+		WHERE pay_witdstate = 1
+		ORDER BY pay_witddate DESC
+	</select>
+
+	<select id="findID" resultType="String" parameterType="String">
+		SELECT member_id
+		FROM border
+		WHERE border_no = #{border_no}
+	</select>
+
+	<insert id="cancelPoint" parameterType="java.util.Map">
+		INSERT INTO point (member_id, point_change, border_no) VALUE (#{member_id}, -#{pay_point} , #{border_no})
+	</insert>
+
+	<insert id="cancelDescount" parameterType="java.util.Map">
+		INSERT INTO point (member_id, point_change, border_no) VALUE (#{member_id}, #{pay_descount} , #{border_no})
+	</insert>
+
+	<update id="cancelUpdate" parameterType="String">
+		UPDATE pay SET pay_witdcancledate = NOW(), pay_witdstate = 1
+		WHERE border_no = #{border_no}
+	</update>
+
+	<update id="giveback" parameterType="String">
+		UPDATE pay SET pay_witdstate = 2
+		WHERE border_no = #{border_no}
+	</update>
+
 
 
 

@@ -73,16 +73,16 @@
 						<div <%--class="image-stack__item image-stack__item--bottom" data-aos="fade-up"  --%>>
 							<c:forEach items="${todayList}" var="row" varStatus="vs">
 							<c:if test="${vs.first}">
-							<img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid rellax">
+							<img src="/storage/${row.book_imgname}" alt="Image" <%--class="img-fluid rellax"--%>>
 						</div>
-						<div class="image-stack__item image-stack__item--top" data-aos="fade-up" data-aos-delay="100"  data-rellax-percentage="0.5">
-							<img src="/storage/danakka.png" alt="Image" class="img-fluid">
-						</div>
+<%--						<div class="image-stack__item image-stack__item--top" data-aos="fade-up" data-aos-delay="100"  data-rellax-percentage="0.5">--%>
+<%--							<img src="/storage/danakka.png" alt="Image" class="img-fluid">--%>
+<%--						</div>--%>
 					</div>
 				</div>
 				<div class="col-lg-4 order-lg-1">
 					<div>
-								<h2 class="heading mb-3" data-aos="fade-up" data-aos-delay="100">오늘의 책</h2>
+								<h2 class="heading mb-3" data-aos="fade-up" data-aos-delay="100">이런 책 어때요?</h2>
 
 								<p data-aos="fade-up" data-aos-delay="200">${row.book_name}</p>
 
@@ -118,12 +118,14 @@
 				<div class="col-lg-3 mb-4 mb-lg-0">
 					<div class="heading-content" data-aos="fade-up">
 						<h2>MY <span class="d-block">BBTI</span></h2>
-						<p>BBTI에 맞는 책 추천입니다</p>
-						<p class="my-4" data-aos="fade-up" data-aos-delay="300">
 							<c:if test="${not empty s_id}">
-								<a href="/research/bbtiQuiz" class="btn btn-primary">BBTI 검사하기</a>
+								<p>${s_id}님의 BBTI유형의 책은?</p>
+								<p class="my-4" data-aos="fade-up" data-aos-delay="300">
+<%--								<a href="/research/bbtiQuiz" class="btn btn-primary">BBTI 검사하기</a>--%>
 							</c:if>
 							<c:if test="${empty s_id}">
+								<p>BBTI정보가 없습니다</p>
+								<p class="my-4" data-aos="fade-up" data-aos-delay="300">
 								<button onclick="logincheck()" class="btn btn-primary">BBTI 검사하기</button>
 							</c:if>
 						</p>
@@ -131,50 +133,65 @@
 				</div>
 				<div class="col-lg-9">
 					<div class="row">
-						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="100">
-							<div class="service-1">
-								<span class="icon">
-									<img src="/storage/img_v_1.jpg" alt="Image" class="img-fluid">
-								</span>
-								<div>
-									<h3>책 제목</h3>
-									<p>책 내용</p>
+						<c:if test="${not empty s_id}">
+							<c:forEach items="${bbti}" var="row" varStatus="vs" end="3">
+							<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="100">
+								<div class="service-1">
+										<a href="/book/detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid"></a>
+									<div>
+										<a href="/book/detail/${row.isbn}"><h3>${row.book_name}</h3></a>
+	<%--									<p>${row.content}</p>--%>
+									</div>
 								</div>
 							</div>
-						</div>
-						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="200">
-							<div class="service-1">
-								<span class="icon">
-									<img src="/storage/img_v_1.jpg" alt="Image" class="img-fluid">
-								</span>
-								<div>
-									<h3>책 제목</h3>
-									<p>책 내용</p>
+							</c:forEach>
+						</c:if>
+						<c:if test="${empty s_id}">
+							<c:forEach items="${bestList}" varStatus="vs" var="row" end="3">
+								<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="100">
+									<div class="service-1">
+										<a href="/book/detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid"></a>
+										<div>
+											<a href="/book/detail/${row.isbn}"><h3>${row.book_name}</h3></a>
+												<%--									<p>${row.content}</p>--%>
+										</div>
+									</div>
 								</div>
-							</div>
-						</div>
-						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="300">
-							<div class="service-1">
-								<span class="icon">
-									<img src="images/svg/03.svg" alt="Image" class="img-fluid">
-								</span>
-								<div>
-									<h3>책 제목</h3>
-									<p>책 내용</p>
-								</div>
-							</div>
-						</div>
-						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="400">
-							<div class="service-1">
-								<span class="icon">
-									<img src="images/svg/04.svg" alt="Image" class="img-fluid">
-								</span>
-								<div>
-									<h3>책 제목</h3>
-									<p>책 내용</p>
-								</div>
-							</div>
-						</div>
+							</c:forEach>
+						</c:if>
+<%--						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="200">--%>
+<%--							<div class="service-1">--%>
+<%--								<span class="icon">--%>
+<%--									<img src="/storage/img_v_1.jpg" alt="Image" class="img-fluid">--%>
+<%--								</span>--%>
+<%--								<div>--%>
+<%--									<h3>책 제목</h3>--%>
+<%--									<p>책 내용</p>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
+<%--						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="300">--%>
+<%--							<div class="service-1">--%>
+<%--								<span class="icon">--%>
+<%--									<img src="images/svg/03.svg" alt="Image" class="img-fluid">--%>
+<%--								</span>--%>
+<%--								<div>--%>
+<%--									<h3>책 제목</h3>--%>
+<%--									<p>책 내용</p>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
+<%--						<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="400">--%>
+<%--							<div class="service-1">--%>
+<%--								<span class="icon">--%>
+<%--									<img src="images/svg/04.svg" alt="Image" class="img-fluid">--%>
+<%--								</span>--%>
+<%--								<div>--%>
+<%--									<h3>책 제목</h3>--%>
+<%--									<p>책 내용</p>--%>
+<%--								</div>--%>
+<%--							</div>--%>
+<%--						</div>--%>
 					</div>
 				</div>
 
@@ -219,11 +236,11 @@
 								<c:out value="${fn:substring(row.book_content,0,99)}"/>...
 								</div>
 							</c:when>
-								<c:otherwise>
-									<div>
-										<c:out value="${row.book_content}"/>
-									</div>
-								</c:otherwise>
+							<c:otherwise>
+								<div>
+									<c:out value="${row.book_content}"/>
+								</div>
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</div>
@@ -244,9 +261,22 @@
 					</div>
 					<div class="col-lg-5" data-aos="fade-up" data-aos-delay="100">
 					<h2 class="heading mb-4">오늘의 작가</h2>
-					<p>${row.writer_info}</p>
+					<h3>${row.writer_name}</h3>
+						<c:choose>
+							<c:when test="${fn:length(row.writer_info) > 150}">
+								<div>
+									<c:out value="${fn:substring(row.writer_info,0,149)}"/> ....
+								</div>
+							</c:when>
+							<c:otherwise>
+								<div>
+									<c:out value="${row.writer_info}"/>
+								</div>
+							</c:otherwise>
+						</c:choose>
+						<br>
 						출생 :${row.writer_birth} 출생지 :${row.writer_place} 대표작 :${row.writer_work}
-					<p class="my-4" data-aos="fade-up" data-aos-delay="200"><a href="#" class="btn btn-primary">사러가기</a></p>
+					<p class="my-4" data-aos="fade-up" data-aos-delay="200"><a href="book/search?book_name=${row.writer_name}" class="btn btn-primary">자세히 보기</a></p>
 					</c:if>
 				</c:forEach>
 				</div>
