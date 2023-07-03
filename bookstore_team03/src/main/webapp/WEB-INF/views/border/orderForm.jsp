@@ -272,6 +272,8 @@
 
 
 <!--  DAUM 우편번호 API 시작 -->
+<!-- <div id="modal">
+<div class="modal-content"> -->
 <div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
   <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 </div>
@@ -352,6 +354,8 @@
         element_wrap.style.display = 'block';
     }
     </script>
+    <!-- </div>
+    </div> -->
 <!--  DAUM 우편번호 API 종료 -->
 
 </body>

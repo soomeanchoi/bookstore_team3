@@ -9,6 +9,11 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
+function bbtiNull(){
+	alert("bbti검사를 먼저 진행해 주세요");
+	window.location.href = "/research/bbtiQuiz";
+}//end
+
 function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	var params = "bbti_name="+bbti_name
 	var list;
@@ -55,7 +60,9 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	        	}//if end
         		a += ' 			<td id="board_read" class="board_read">'+item.board_read+'</td> ';
         		a += ' 			<td id="board_good" class="board_good">'+item.board_good+'</td> ';
-        		a += ' 			<td id="board_date" class="board_date">'+item.board_date+'</td> ';
+                 var orderDate = new Date(item.board_date);
+                 var formattedDate = orderDate.toLocaleDateString();
+        		a += ' 			<td id="board_date" class="board_date">'+formattedDate+'</td> ';
         		a += '		</tr>';
         		a += ' 	   </tbody>';
         		a += ' 	 </table>';
@@ -191,7 +198,12 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 	    		</c:if></td>
 	    		<td id="board_read" class="board_read">${row.board_read}</td>
 	    		<td id="board_good" class="board_good">${row.board_good}</td>
-	    		<td id="board_date" class="board_date">${row.board_date}</td>
+	    		<td id="board_date" class="board_date">
+	    		 <script>
+                    var orderDate = new Date("${row.board_date}");
+                    var formattedDate = orderDate.toLocaleDateString();
+                    document.write(formattedDate);
+                 </script></td>
 	    		</tr>
 			</c:forEach>			
 			</tbody>
@@ -265,9 +277,18 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     <!-- 탭메뉴 반복끝 -->
   </div>		
   <br>
+  	<c:if test="${bbti_name ne null}">
 		<div>
 		<input type="button" value="글쓰기" onclick="location.href='/board/boardForm'">
 		</div>
+	</c:if>	
+		
+	<c:if test="${bbti_name eq null}">
+		<div>
+		<input type="button" value="글쓰기" onclick="bbtiNull()">
+		</div>
+	</c:if>	
+	
 </div>
 
 </body>
