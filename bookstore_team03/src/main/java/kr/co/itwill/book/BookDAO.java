@@ -116,26 +116,29 @@ public class BookDAO {
         return sqlSession.selectOne("book.score", isbn);
     }//reviewScore() end
 
-    public List<Map<String, Object>> listPaging(int start, int end, String sort) {
+    public List<Map<String, Object>> listPaging(int start, int end, String sort, String member_id) {
         Map<String, Object> params = new HashMap<>();
         params.put("start", start);
+        params.put("member_id", member_id);
         params.put("end", end);
         params.put("sort", sort);
         return sqlSession.selectList("book.listPaging", params);
     }
 
-    public List<Map<String, Object>> bestMain(int start, int end, String main) {
+    public List<Map<String, Object>> bestMain(int start, int end, String main, String member_id) {
         Map<String, Object> params = new HashMap<>();
         params.put("start", start);
         params.put("end", end);
         params.put("main", main);
+        params.put("member_id", member_id);
         return sqlSession.selectList("book.bestMain", params);
     }
 
-    public List<Map<String, Object>> bestMainPage(int start, int end) {
+    public List<Map<String, Object>> bestMainPage(int start, int end, String member_id) {
         Map<String, Object> params = new HashMap<>();
         params.put("start", start);
         params.put("end", end);
+        params.put("member_id", member_id);
         return sqlSession.selectList("book.bestMainPage", params);
     }
 
@@ -143,8 +146,8 @@ public class BookDAO {
         return sqlSession.selectOne("book.listCount");
     }
 
-    public int bookCount2(String count) {
-        return sqlSession.selectOne("book.listCount2", count);
+    public int bookCount2(String main) {
+        return sqlSession.selectOne("book.listCount2", main);
     }
 
     public int choiceTable(Map<String, Object> map) {

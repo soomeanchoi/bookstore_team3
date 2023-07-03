@@ -220,6 +220,11 @@
             }
         }
 
+        function logincheck(){
+            alert("로그인이 필요합니다")
+            location.href="/member/login";
+        }
+
     </script>
   </head>    
 
@@ -227,17 +232,6 @@
 <section>
 
     <h3>베스트 셀러</h3>
-    <%--<form action="search">
-        <input type="text" name="book_name" value="${book_name}">
-        <input type="submit" value="검색">
-    </form>--%>
-    <div class="banner">
-        <div id="chase">
-            <%--               <img src="/storage/danakka.png" id="chaseImg"/>--%>
-            <div id="chaseBar">event</div>
-            <div id="chaseBar">bbti</div>
-        </div>
-    </div>
 
     <div class="container">
         <ul class="tabs">
@@ -275,18 +269,32 @@
                                     <span>
                                         ${row.writer_name} ・ ${row.book_pub} ・ ${row.book_pubdate}
                                         <div class="choice-button">
-<%--                                    <c:choose>--%>
-<%--                                        <c:when test="${row.choice == 1}">--%>
-<%--                                            <button onclick="book_choiceCancle(${row.isbn})">--%>
-<%--                                                <img src="/storage/heart4.png" class="choice-img">--%>
-<%--                                            </button>--%>
-<%--                                        </c:when>--%>
-<%--                                        <c:otherwise>--%>
-<%--                                                <button onclick="book_choice(${row.isbn})">--%>
-<%--                                                    <img src="/storage/heart3.png" class="choice-img">--%>
-<%--                                                </button>--%>
-<%--                                        </c:otherwise>--%>
-<%--                                    </c:choose>--%>
+                                   <c:choose>
+                                       <c:when test="${row.choice == 1}">
+                                           <c:if test="${not empty s_id}">
+													<button onclick="book_choiceCancle(${row.isbn})">
+														<img src="/storage/heart4.png" class="choice-img">
+													</button>
+                                           </c:if>
+                                           <c:if test="${empty s_id}">
+													<button onclick="logincheck()">
+														<img src="/storage/heart4.png" class="choice-img">
+													</button>
+                                           </c:if>
+                                       </c:when>
+                                       <c:otherwise>
+                                           <c:if test="${not empty s_id}">
+													<button onclick="book_choice(${row.isbn})">
+														<img src="/storage/heart3.png" class="choice-img">
+													</button>
+                                           </c:if>
+                                           <c:if test="${empty s_id}">
+													<button onclick="logincheck()">
+														<img src="/storage/heart3.png" class="choice-img">
+													</button>
+                                           </c:if>
+                                       </c:otherwise>
+                                   </c:choose>
                                 </div>
                                     </span><br>
                                 <div>

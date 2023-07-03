@@ -80,47 +80,6 @@ public class BookCont {
         return mav;
     }//list() end
 
-//    @RequestMapping("/bestList")
-//    public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page,
-//                                 Map<String, Object> map, HttpSession session) {
-//
-//        String s_id = (String) session.getAttribute("member_id");
-//
-//        ModelAndView mav=new ModelAndView();
-//
-//        int totalCount = bookDao.bookCount();
-//        int pageSize = 10;
-//        int totalPage = (int) Math.ceil((double) totalCount / pageSize);
-//
-//        int start = ((page - 1) * pageSize) ;
-//        int end = page * pageSize;
-//
-//        int cnt = bookDao.choiceTable(map);
-//        if (cnt == 1){
-//            mav.addObject("cnt", cnt);
-//        }else if (cnt == 0){
-//            mav.addObject("cnt", cnt);
-//        }else {
-//            mav.addObject("cnt", cnt);
-//        }
-//
-//        System.out.println(s_id);
-//        System.out.println(cnt);
-//
-//        System.out.println(map.toString());
-//
-//        List<Map<String, Object>> list = bookDao.bestMainPage(start, end);
-//
-//        mav.setViewName("book/bestList");
-//        mav.addObject("s_id", s_id);
-//        mav.addObject("bookPrice", main);
-//        mav.addObject("totalPage", totalPage);
-//        mav.addObject("currentPage", page);
-//        mav.addObject("list", list);
-//        mav.addObject("bestList", bookDao.bestList());
-//
-//        return mav;
-//    }//list() end
 
     @RequestMapping("/bestList")
     public ModelAndView bestList(@RequestParam(defaultValue = "") String main, @RequestParam(defaultValue = "1") int page,
@@ -137,8 +96,6 @@ public class BookCont {
         int start = ((page - 1) * pageSize) ;
         int end = page * pageSize;
 
-        map.put("member_id", s_id);
-
         int cnt = bookDao.choiceTable(map);
         if (cnt == 1){
             mav.addObject("cnt", cnt);
@@ -149,7 +106,7 @@ public class BookCont {
         }
 
 
-        List<Map<String, Object>> list = bookDao.bestMainPage(start, end);
+        List<Map<String, Object>> list = bookDao.bestMainPage(start, end, s_id);
 
         mav.setViewName("book/bestList");
         mav.addObject("s_id", s_id);
@@ -157,6 +114,7 @@ public class BookCont {
         mav.addObject("totalPage", totalPage);
         mav.addObject("currentPage", page);
         mav.addObject("list", list);
+        mav.addObject("choiceTable", bookDao.choiceTable(map));
 //        mav.addObject("bestList", bookDao.bestList());
 
         return mav;
@@ -169,8 +127,7 @@ public class BookCont {
 
         ModelAndView mav=new ModelAndView();
 
-//        int totalCount = bookDao.bookCount2(count);
-        int totalCount = bookDao.bookCount();
+        int totalCount = bookDao.bookCount2(main);
         int pageSize = 10;
         int totalPage = (int) Math.ceil((double) totalCount / pageSize);
 
@@ -186,7 +143,7 @@ public class BookCont {
             mav.addObject("cnt", cnt);
         }
 
-        List<Map<String, Object>> list = bookDao.bestMain(start, end, main);
+        List<Map<String, Object>> list = bookDao.bestMain(start, end, main, s_id);
 
         mav.setViewName("book/bestList2");
         mav.addObject("s_id", s_id);
@@ -194,7 +151,7 @@ public class BookCont {
         mav.addObject("totalPage", totalPage);
         mav.addObject("currentPage", page);
         mav.addObject("list", list);
-
+        mav.addObject("choiceTable", bookDao.choiceTable(map));
 //        mav.addObject("bestList", bookDao.bestList());
 
         return mav;
@@ -209,7 +166,7 @@ public class BookCont {
         ModelAndView mav=new ModelAndView();
 
         int totalCount = bookDao.bookCount();
-        int pageSize = 10;
+        int pageSize = 20;
         int totalPage = (int) Math.ceil((double) totalCount / pageSize);
 
         int start = ((page - 1) * pageSize) ;
@@ -224,7 +181,7 @@ public class BookCont {
             mav.addObject("cnt", cnt);
         }
 
-        List<Map<String, Object>> list = bookDao.listPaging(start, end, sort);
+        List<Map<String, Object>> list = bookDao.listPaging(start, end, sort, s_id);
 
         mav.setViewName("book/list");
         mav.addObject("s_id", s_id);
@@ -236,7 +193,7 @@ public class BookCont {
         mav.addObject("choiceTable", bookDao.choiceTable(map));
 
         return mav;
-    }//list() end@RequestMapping("/list")
+    }//list() end
 
     @RequestMapping("/novelList")
     public ModelAndView novelList(HttpSession session) {

@@ -85,6 +85,11 @@
 			margin-left: 8%;
 		}
 
+		button.choiceBtn {
+			position: absolute;
+			right: 20px;
+		}
+
 	</style>
 	<script>
 		$(document).ready(function(){
@@ -147,6 +152,11 @@
 				document.body.appendChild(form);
 				form.submit();
 			}
+		}
+
+		function logincheck(){
+			alert("로그인이 필요합니다")
+			location.href="/member/login";
 		}
 
 
@@ -217,18 +227,32 @@
 									</p>
 									<div>
 										${row.book_price}원
-<%--										<c:choose>--%>
-<%--											<c:when test="${row.choice == 1}">--%>
-<%--												<button onclick="book_choiceCancle(${row.isbn})">--%>
-<%--													<img src="/storage/heart4.png" class="choice-img">--%>
-<%--												</button>--%>
-<%--											</c:when>--%>
-<%--											<c:otherwise>--%>
-<%--												<button onclick="book_choice(${row.isbn})">--%>
-<%--													<img src="/storage/heart3.png" class="choice-img">--%>
-<%--												</button>--%>
-<%--											</c:otherwise>--%>
-<%--										</c:choose>--%>
+										<c:choose>
+											<c:when test="${row.choice == 1}">
+												<c:if test="${not empty s_id}">
+													<button onclick="book_choiceCancle(${row.isbn})" class="choiceBtn">
+														<img src="/storage/heart4.png" class="choice-img">
+													</button>
+												</c:if>
+												<c:if test="${empty s_id}">
+													<button onclick="logincheck()" class="choiceBtn">
+														<img src="/storage/heart4.png" class="choice-img">
+													</button>
+												</c:if>
+											</c:when>
+											<c:otherwise>
+												<c:if test="${not empty s_id}">
+													<button onclick="book_choice(${row.isbn})" class="choiceBtn">
+														<img src="/storage/heart3.png" class="choice-img">
+													</button>
+												</c:if>
+												<c:if test="${empty s_id}">
+													<button onclick="logincheck()" class="choiceBtn">
+														<img src="/storage/heart3.png" class="choice-img">
+													</button>
+												</c:if>
+											</c:otherwise>
+										</c:choose>
 									</div>
 								</div>
 					</div> <%-- media-entry end--%>
@@ -283,7 +307,7 @@
 
 
 
-		<a href="write">글쓰기</a>
+<%--		<a href="write">글쓰기</a>--%>
 		<!-- Preloader -->
 		<div id="overlayer"></div>
 		<div class="loader">
