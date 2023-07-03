@@ -42,7 +42,7 @@ public class WriterCont {
             try{
                 ServletContext application=req.getSession().getServletContext();
                 String path=application.getRealPath("/storage");                //실제 경로
-                img.transferTo(new File(path + "\\" + writer_imgname));  //파일 저장
+                img.transferTo(new File(path + "/" + writer_imgname));  //파일 저장
             }catch (Exception e) {
                 e.printStackTrace(); //System.out.println();
             }
@@ -101,7 +101,7 @@ public class WriterCont {
         if(filename != null && !filename.equals("-")) {
         	ServletContext application=req.getSession().getServletContext();
 			String path=application.getRealPath("/storage");  //실제 물리적인 경로
-			File file=new File(path + "\\" + filename);
+			File file=new File(path + "/" + filename);
 			if(file.exists()) {
 				file.delete();
 			}//if end
@@ -126,7 +126,7 @@ public class WriterCont {
             try{
                 ServletContext application=req.getSession().getServletContext();
                 String path=application.getRealPath("/storage");
-                img.transferTo(new File(path + "\\" + filename));
+                img.transferTo(new File(path + "/" + filename));
             }catch (Exception e) {
                 e.printStackTrace();
             }//try end

@@ -40,10 +40,6 @@
     <form action="insert" name="bookfrm" id="bookfrm" method="post" enctype="multipart/form-data">
         <table>
             <tr>
-                <td>isbn</td>
-                <td><input type="text" name="isbn"></td>
-            </tr>
-            <tr>
                 <td>책 이름</td>
                 <td><input type="text" name="book_name"></td>
             </tr>
@@ -56,24 +52,12 @@
                 <td><input type="number" name="book_writerno"></td>
             </tr>
             <tr>
-                <td>가격</td>
-                <td><input type="number" name="book_price"></td>
-            </tr>
-            <tr>
-                <td>재고</td>
-                <td><input type="number" name="book_stock"></td>
-            </tr>
-            <tr>
                 <td>출간일</td>
                 <td><input type="text" name="book_pubdate"></td>
             </tr>
             <tr>
-                <td>쪽수</td>
-                <td><input type="number" name="book_page"></td>
-            </tr>
-            <tr>
-                <td>태그</td>
-                <td><input type="text" name="tag_no1"></td>
+                <td>가격</td>
+                <td><input type="number" name="book_price"></td>
             </tr>
             <tr>
                 <td>대분류명</td>
@@ -84,8 +68,17 @@
                 <td><input type="text" name="book_subname"></td>
             </tr>
             <tr>
+                <td>재고</td>
+                <td><input type="number" name="book_stock"></td>
+            </tr>
+            <tr>
+                <td>태그</td>
+                <td><input type="text" name="tag_no1"></td>
+            </tr>
+            <tr>
                 <td>bbti</td>
                 <td>
+                    <input type="text">
                     <select name="bbti_name" id="bbti_name">
                         <option selected>선택</option>
                         <option value="ist">ist</option>
@@ -103,6 +96,14 @@
                 <td>책 설명</td>
                 <td><textarea rows="5" cols="40" name="book_content"></textarea>
                 </td>
+            </tr>
+            <tr>
+                <td>isbn</td>
+                <td><input type="text" name="isbn"></td>
+            </tr>
+            <tr>
+                <td>쪽수</td>
+                <td><input type="number" name="book_page"></td>
             </tr>
             <tr>
                 <td>책 이미지</td>

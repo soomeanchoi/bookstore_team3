@@ -23,8 +23,9 @@ public class ChoiceCont {
 
     @RequestMapping("/insert")
     public String choiceInsert(@ModelAttribute ChoiceDTO dto, HttpSession session, @RequestParam("isbn")String isbn) throws Exception {
-        //dto.setMember_id(session.getAttribute("smember_id"));
-        dto.setMember_id("kgukid38@naver.com");
+        String s_id = (String) session.getAttribute("member_id");
+
+        dto.setMember_id(s_id);
         dto.setIsbn(isbn);
 
         System.out.println("isbn = " + isbn);
@@ -39,12 +40,11 @@ public class ChoiceCont {
 
     @RequestMapping("/list")
     public ModelAndView list(HttpSession session) {
-        //String smember_id=session.getAttribute("smember_id");
-        String smember_id="kgukid38@naver.com";
+        String s_id = (String) session.getAttribute("member_id");
 
         ModelAndView mav=new ModelAndView();
         mav.setViewName("choice/list");
-        mav.addObject("list", choiceDao.choicelist(smember_id));
+        mav.addObject("list", choiceDao.choicelist(s_id));
         return mav;
     }//list() end
 
@@ -61,10 +61,11 @@ public class ChoiceCont {
 
     @RequestMapping("/delete")
     public String delete(int choice_no, HttpSession session) {
+        String s_id = (String) session.getAttribute("member_id");
 
         HashMap<String, Object> map=new HashMap<>();
         map.put("choice_no", choice_no);
-        map.put("smember_id", "kgukid38@naver.com");
+        map.put("smember_id", s_id);
         choiceDao.choiceDelete(map);
 
         return "redirect:/choice/list";
@@ -73,11 +74,11 @@ public class ChoiceCont {
 
     @RequestMapping("/del")
     public String choiceDel(@ModelAttribute ChoiceDTO dto, HttpSession session ,@RequestParam("isbn") String isbn) throws Exception {
-//        dto.setMember_id(session.getAttribute("smember_id"));
+        String s_id = (String) session.getAttribute("member_id");
 
 //        System.out.println("isbn = " + isbn);
 
-        dto.setMember_id("kgukid38@naver.com");
+        dto.setMember_id(s_id);
         dto.setIsbn(isbn);
 //        System.out.println(dto.getIsbn());
 //        System.out.println(dto.getMember_id());

@@ -103,7 +103,7 @@
         <input type="submit" value="검색">
     </form>--%>
     <p>
-        <button type="button" onclick="location.href='/book/write'">리스트</button>
+        <button type="button" onclick="location.href='/book/write'">등록</button>
     </p>
 
 
