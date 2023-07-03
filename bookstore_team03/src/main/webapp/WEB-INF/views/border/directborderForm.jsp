@@ -23,7 +23,7 @@
 	}//book_price() end
 	
 		
-	function pointuse(){
+	 function pointuse(){
 	
 		var usepoint = document.getElementById("border_usepoint").value;
 		var border_oprice = document.getElementById("booktot_Price").innerText;//초기가격
@@ -50,7 +50,7 @@
 			document.getElementById("border_price").value = (border_oprice - usepoint);
 			document.getElementById("addpoint").value = parseInt((border_oprice - usepoint)/10);
 			document.getElementById("chavepoint").value = havepoint - usepoint;
-		}//if end
+		}//if end 
 		
 
 	}//pointuse() end
@@ -186,7 +186,7 @@
   			<div class="col-12">
                <label class="order-form-label">포인트 및 결제금액</label>
              </div>
-  	
+ 
              <div class="col-sm-6 mt-2 pe-sm-2">
                  <div class="form-outline">
                      <input type="number" name="border_usepoint" id="border_usepoint" min=0 max="${havepoint}" value=0 class="form-control order-form-input" />
@@ -216,6 +216,7 @@
              </div>
              <br><br>
              <input type="submit" value="결제하기">
+             
          </div>
          </div>
 	          

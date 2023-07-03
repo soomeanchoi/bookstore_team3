@@ -36,7 +36,8 @@ public class BoardCont {
 
 	//페이징+탭반영 (처음 게시판 들어갔을 시 출력물)
 	@RequestMapping("/list")
-	public Map<String, Object> list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum) {
+	public Map<String, Object> list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum
+									, HttpSession session) {
 		Map<String, Object> map = new HashMap<>();
 
 		//페이징
@@ -70,6 +71,10 @@ public class BoardCont {
 
 			//총 페이지수
 			map.put("totalPage", totalPage);
+			
+			//로그인한 유저의 bbti_name 가져오기
+			String s_id = (String) session.getAttribute("member_id");
+			map.put("bbti_name", boardDao.bbti_name(s_id));
 			
 			return map;
 	}//list end

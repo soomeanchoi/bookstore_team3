@@ -87,8 +87,17 @@
     <div class="bbti-menu">
         <ul class="b-menu-li">
             <li><a href="/book/bestList2">Best</a></li>
-            <li><a href="">Event</a></li>
-            <li><a href="http://localhost:9095/research/list">B-BTI</a></li>
+            <li>
+                <%
+                    if(session.getAttribute("member_id")==null){
+                        out.println("<a href='http://localhost:9095/member/login'>");
+                    }else {
+                        out.println("<a href='http://localhost:9095/research/bbtiQuiz'>");
+                    }//if end
+                %>
+                B-BTI</a>
+            </li>
+            <li><a href="/board/list">Community</a></li>
         </ul>
     </div>
 
