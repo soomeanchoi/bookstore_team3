@@ -140,8 +140,8 @@
 	
 	<div class="container">
   <div class="dropdown">
-    <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">관리자페이지
-    <span class="caret"></span></button>
+   <!--  <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">관리자페이지 -->
+    <!-- <span class="caret"></span></button> -->
     <ul class="dropdown-menu">
       <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
 	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
