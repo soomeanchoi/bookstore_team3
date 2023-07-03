@@ -70,6 +70,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 		b += ' 	   <div class="col-md-6">';
 		b += ' 	    <div class="search">';
 		b += ' 	     <form action="bsearch" method="post" style="margin:auto;">';
+		b += '	 <input type="hidden" id="bbti_name" name="bbti_name" class="bbti_name" value="' + bbti_name + '">';
 		b += ' 	      <div class="row align-items-center">';
 		b += ' 	       <div class="col-md-5">';
 		b += ' 	        <select class="form-select" name="category" id="category" style="width:150px; margin:auto;">';
