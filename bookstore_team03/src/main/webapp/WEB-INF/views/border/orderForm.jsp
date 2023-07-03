@@ -142,7 +142,7 @@
 			<div class="row mt-3 mx-4">
                   <div class="col-12">
                       <label class="order-form-label">배송지</label>
-                      <input type="button" value="우편번호찾기" onclick="openModal()">
+                      <input type="button" value="우편번호찾기"  onclick="DaumPostcode()">
                   </div>
                   
                   <div class="col-12">
@@ -272,23 +272,12 @@
 
 
 <!--  DAUM 우편번호 API 시작 -->
-<div id="modal" style="display: none; position: fixed; z-index: 9999; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.5);">
- <div id="wrap" style="border: 1px solid; width: 500px; height: 300px; margin: 5px auto; position: relative; background-color: #fff;">
-  <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer; position:absolute; right:0px; top:-1px; z-index:1" onclick="closeModal()" alt="접기 버튼">
+<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+  <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 </div>
 
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script>
-	function openModal() {
-	  var modal = document.getElementById('modal');
-	  modal.style.display = 'block';
-	}
-
-	function closeModal() {
-	  var modal = document.getElementById('modal');
-	  modal.style.display = 'none';
-	}
-
     // 우편번호 찾기 찾기 화면을 넣을 element
     var element_wrap = document.getElementById('wrap');
 
@@ -363,7 +352,6 @@
         element_wrap.style.display = 'block';
     }
     </script>
-    </div>
 <!--  DAUM 우편번호 API 종료 -->
 
 </body>
