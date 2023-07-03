@@ -42,7 +42,12 @@
 			<td>${row.deliv_add1}</td>
 			<td>${row.deliv_add2}</td>
 			<td>
-			<c:if test="${row.deliv_defaltadd eq 1 }">O</c:if>
+			<c:if test="${row.deliv_defaltadd eq 1 }">
+			<input type="radio" name="deliv_defaltadd" value="deliv_defaltadd" checked>
+			</c:if>
+			<c:if test="${row.deliv_defaltadd eq 0 }">
+			<input type="radio" name="deliv_defaltadd" value="deliv_defaltadd">
+			</c:if>
 			</td>
 			<td>
 				<input type="button" value="수정" onclick="location.href='/deliveryAdd/delivUpdateForm/${row.deliv_no}'">
