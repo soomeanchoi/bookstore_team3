@@ -78,7 +78,6 @@
             <tr>
                 <td>bbti</td>
                 <td>
-                    <input type="text">
                     <select name="bbti_name" id="bbti_name">
                         <option selected>선택</option>
                         <option value="ist">ist</option>

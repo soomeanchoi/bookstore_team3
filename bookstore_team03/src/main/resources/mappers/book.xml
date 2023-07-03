@@ -96,7 +96,7 @@
 	</select>
 
 	<insert id="insert" parameterType="java.util.Map">
-		insert into book(isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, tag_no1, book_mainname, book_subname, book_content, book_imgname, book_imgsize bbit_name)
+		insert into book(isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, tag_no1, book_mainname, book_subname, book_content, book_imgname, book_imgsize, bbti_name)
 		values (#{isbn}, #{book_name}, #{book_pub}, #{book_writerno}, #{book_price}, #{book_stock}, #{book_pubdate}, #{book_page}, #{tag_no1}, #{book_mainname}, #{book_subname}, #{book_content}, #{book_imgname}, #{book_imgsize}, #{bbti_name})
 	</insert>
 

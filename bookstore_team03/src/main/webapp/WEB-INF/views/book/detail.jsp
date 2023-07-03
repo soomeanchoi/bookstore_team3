@@ -461,6 +461,8 @@
                 , data:{'isbn' : isbn } //부모글번호
                 , success:function(data){
                     let a=''; //출력할 결과값
+                    let s_id='${s_id}';
+
                     $.each(data, function(key, value){
 
                         a += '<div class="commentArea" style="border-bottom:1px solid darkgray;">'
@@ -474,12 +476,12 @@
                             ' / 평점:' + value.review_score + '점' +
                             ' / 등록일: ' + value.review_date;
                         }
-                        if(<%=(String)session.getAttribute("s_id")%> == value.member_id){
+                        if(s_id == value.member_id){
                         a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
                         a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
                         }
-                        a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
-                        a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
+                        // a += '		<a href="javascript:reviewUpdate(' + value.review_no + ',\'' + value.review_content + '\')">[수정]</a>';
+                        // a += '		<a href="javascript:reviewDelete(' + value.review_no + ')">[삭제]</a>';
                         a += '	</div>';
                         a += '	<div class="reviewContent' + value.review_no + '">';
                         a += '		<p>내용:' + value.review_content + '</p>';

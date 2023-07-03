@@ -27,6 +27,10 @@ public class IntroDAO {
         return sqlSession.selectList("intro.todayList");
     }//todayList() end
 
+    public List<Map<String, Object>> randList() {
+        return sqlSession.selectList("intro.randList");
+    }//todayList() end
+
     public List<Map<String, Object>> todayWriter() {
         return sqlSession.selectList("intro.todayWriter");
     }//todayWriter() end

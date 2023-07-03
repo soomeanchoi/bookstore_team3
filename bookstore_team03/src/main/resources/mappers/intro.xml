@@ -24,6 +24,12 @@
 	 	order by rand();
 	</select>
 
+	<select id="randList" resultType="java.util.Map">
+		select isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, book_count, tag_no1, tag_no2, tag_no3, book_imgoriname, book_imgname, book_imgpath, book_imgsize, book_mainname, book_subname, book_content
+		from book
+		order by rand() DESC;
+	</select>
+
 	<select id="todayWriter" resultType="java.util.Map">
 		select writer_no, writer_name, writer_work, writer_birth, writer_place, writer_imgoriname, writer_imgname, writer_imgpath, writer_imgsize, writer_info
 		from writer
