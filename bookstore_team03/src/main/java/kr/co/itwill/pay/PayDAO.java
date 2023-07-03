@@ -40,4 +40,16 @@ public class PayDAO {
     public int payPointMinus(Map<String, Object> map){ return sqlSession.update("pay.pointMinus", map);}
 
     public int delCart(String member_id){return sqlSession.delete("pay.delCart", member_id);}
+
+    public List<Map<String, Object>> cancelList (){return sqlSession.selectList("pay.cancelList");}
+    public List<Map<String, Object>> cancelendList (){return sqlSession.selectList("pay.cancelendList");}
+
+    public String findID(String border_no){return sqlSession.selectOne("pay.findID", border_no);}
+
+    public int cancelPoint(Map<String, Object> map){return sqlSession.insert("pay.cancelPoint", map);}
+    public int cancelDescount(Map<String, Object> map){return sqlSession.insert("pay.cancelDescount", map);}
+
+    public int cancelUpdate(String border_no){return sqlSession.update("pay.cancelUpdate", border_no);}
+
+    public int giveback(String border_no){return sqlSession.update("pay.giveback", border_no);}
 }

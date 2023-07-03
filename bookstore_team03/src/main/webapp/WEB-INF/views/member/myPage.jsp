@@ -36,8 +36,8 @@
       <li><a href="http://localhost:9095/admin/list">회원조회</a></li>
 	    <li><a href="http://localhost:9095/book/bookList">상품관리</a></li>
 	    <li><a href="http://localhost:9095/writer/writerList">작가관리</a></li>
-	    <li><a href="http://localhost:9095/pay/">주문관리</a></li>
-	    <li><a href="http://localhost:9095/research/write">유형테스트관리</a></li>
+	    <li><a href="http://localhost:9095/pay/cancel">주문관리</a></li>
+	    <li><a href="http://localhost:9095/research/setting">유형테스트관리</a></li>
     </ul>
   </div>
 </div>

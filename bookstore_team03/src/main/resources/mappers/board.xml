@@ -7,6 +7,12 @@
 
 <mapper namespace="board">
 
+	<select id="bbti_name" parameterType="String" resultType="String">
+		SELECT bbti_name
+		FROM itwill.profile
+		WHERE member_id = #{s_id}
+	</select>
+
 	<select id="list" resultType="java.util.HashMap">
 		SELECT board_no, isbn, profile_name, p.bbti_name, board_title, board_date, board_read, board_good
 		FROM (board b 
