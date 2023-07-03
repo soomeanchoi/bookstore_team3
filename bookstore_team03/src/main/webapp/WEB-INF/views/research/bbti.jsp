@@ -29,7 +29,7 @@
     <section id="main" class="mx-auto my-5 py-5 px-3">
       <h1 class="pt-5">BBTI 테스트로 알아보는 나의 추천 책</h1>
       <div class="col-lg-6 col-md-8 col-sm-10 col-12 mx-auto">
-        <img src="/storage/bbtimain.png" alt="img" class="img-fluid">
+        <img src="/storage/bbtimain2.png" alt="img" class="img-fluid">
       </div>
       <p>
         나만의 BBTI 사이트 입니다 <br>

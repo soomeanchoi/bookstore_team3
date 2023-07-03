@@ -33,7 +33,7 @@ public class IntroCont {
         mav.addObject("recentList", introDao.recentList());
         mav.addObject("profile", introDao.profile());
         mav.addObject("bbti", introDao.bbti(s_id));
-
+        mav.addObject("randList", introDao.randList());
         return mav;
 
     }//list() end

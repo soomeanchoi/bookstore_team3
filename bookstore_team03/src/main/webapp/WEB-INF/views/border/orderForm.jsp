@@ -142,7 +142,7 @@
 			<div class="row mt-3 mx-4">
                   <div class="col-12">
                       <label class="order-form-label">배송지</label>
-                      <input type="button" value="우편번호찾기" onclick="DaumPostcode()">
+                      <input type="button" value="우편번호찾기"  onclick="DaumPostcode()">
                   </div>
                   
                   <div class="col-12">

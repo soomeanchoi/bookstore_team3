@@ -5,15 +5,17 @@
 <%--    시작    --%>
 
 <section>
-<div class="container mt-3">
-       
+<div class="container mt-3" style="background-color:white; border-radius:10px;">
+<div style="height:30px"></div>
+       <h1>주문내역</h1>
+       <div style="height:15px"></div>
   <table class="table table-hover">
     <thead>
       <tr>
         <th>주문번호</th>
         <th>주문일자</th>
         <th>가격</th>
-		  <th></th>
+		<th>주문취소상태</th>
       </tr>
     </thead>
     <tbody>
@@ -38,7 +40,12 @@
 		        <td class="align-middle">
 		          <div class="d-flex flex-row">
 					<div class="d-flex flex-row align-items-center qty">
-					<p class="mb-2">${row.border_date}</p>	
+					<p class="mb-2">
+					 <script>
+                    var orderDate = new Date("${row.border_date}");
+                    var formattedDate = orderDate.toLocaleDateString();
+                    document.write(formattedDate);
+                 </script></p>	
 					</div>
 		          </div>
 		        </td>
@@ -64,7 +71,7 @@
 								<p>취소완료</p>
 							</c:when>
 							</c:choose>
-							<%-- <input type="button" value="주문취소" onclick="orderCancel('${row.border_no}')"> --%>
+							
 						</div>
 					</div>
 				</td>

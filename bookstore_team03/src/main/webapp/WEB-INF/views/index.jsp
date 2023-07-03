@@ -147,7 +147,7 @@
 							</c:forEach>
 						</c:if>
 						<c:if test="${empty s_id}">
-							<c:forEach items="${bestList}" varStatus="vs" var="row" end="3">
+							<c:forEach items="${randList}" varStatus="vs" var="row" end="3">
 								<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="100">
 									<div class="service-1">
 										<a href="/book/detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid"></a>

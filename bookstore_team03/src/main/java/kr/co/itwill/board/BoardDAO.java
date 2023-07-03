@@ -17,6 +17,11 @@ public class BoardDAO {
 	@Autowired
 	SqlSession sqlSession;
 	
+	//로그인한 유저의 bbti_name 가져오기
+	public String bbti_name(String s_id) {
+		return sqlSession.selectOne("board.bbti_name", s_id);
+	}//bbti_name()end
+	
 	//페이징 없는 리스트
 	public List<HashMap<String, Object>> list(){
 		return sqlSession.selectList("board.list");
