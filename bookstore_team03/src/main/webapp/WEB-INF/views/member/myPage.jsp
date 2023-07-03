@@ -317,8 +317,10 @@
 					                    </tr>
 					                </c:when>
 					                <c:otherwise>
-					                    <c:forEach var="review" items="${myreview}">
-					                        <tr>
+					                    
+					                        <tr>   	
+					                        	<c:forEach var="review" items="${myreview}">
+					                        	<td>${review.book_name}</td>
 					                            <td>${review.isbn}</td>
 					                            <td>${review.review_score}</td>
 					                            <td>${review.review_content}</td>

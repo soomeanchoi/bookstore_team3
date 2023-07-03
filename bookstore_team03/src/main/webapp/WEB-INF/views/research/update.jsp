@@ -35,6 +35,13 @@
 .point-title {
 	font-family: 'HANAMDAUM';
 }
+.wide-input {
+        width: 100%;
+    }
+
+.narrow-select {
+    width: 50px;
+}
 </style>
 <body>
 <section style="height: 500px;">
@@ -45,54 +52,53 @@
             <th>문제</th>
             <th>기존유형1</th>
             <th>변경할유형1</th>
-            <th>선택지1</th>
-            <th>기존유형2</th>
-            <th>변경할유형2</th>
-            <th>선택지2</th>
+            
+            
             <tbody>
             <tr>
+            
                 <input type="hidden" id="research_no" name="research_no" value="${list.research_no}">
-                <td><input type="text" id="research_q" name="research_q" value="${list.research_q}"></td>
+                <td><input type="text" id="research_q" name="research_q" value="${list.research_q}" size=50 class="wide-input"></td>
                 <td>${list.research_a1}</td>
                 <td>
                     <c:choose>
                         <c:when test="${list.research_a1.toString() eq 'i'}">
-                            <select id="research_a1" name="research_a1">
+                            <select id="research_a1" name="research_a1" class="narrow-select">
                                 <option>선택</option>
                                 <option value="e">e</option>
                                 <option value="i">i</option>
                             </select>
                         </c:when>
                         <c:when test="${list.research_a1.toString() eq 'e'}">
-                            <select id="research_a1" name="research_a1">
+                            <select id="research_a1" name="research_a1" class="narrow-select">
                                 <option>선택</option>
                                 <option value="e">e</option>
                                 <option value="i">i</option>
                             </select>
                         </c:when>
                         <c:when test="${list.research_a1.toString() eq 's'}">
-                            <select id="research_a1" name="research_a1">
+                            <select id="research_a1" name="research_a1" class="narrow-select">
                                 <option>선택</option>
                                 <option value="s">s</option>
                                 <option value="n">n</option>
                             </select>
                         </c:when>
                         <c:when test="${list.research_a1.toString() eq 'n'}">
-                            <select id="research_a1" name="research_a1">
+                            <select id="research_a1" name="research_a1" class="narrow-select">
                                 <option>선택</option>
                                 <option value="s">s</option>
                                 <option value="n">n</option>
                             </select>
                         </c:when>
                         <c:when test="${list.research_a1.toString() eq 't'}">
-                            <select id="research_a1" name="research_a1">
+                            <select id="research_a1" name="research_a1" class="narrow-select">
                                 <option>선택</option>
                                 <option value="t">t</option>
                                 <option value="f">f</option>
                             </select>
                         </c:when>
                         <c:when test="${list.research_a1.toString() eq 'f'}">
-                            <select id="research_a1" name="research_a1">
+                            <select id="research_a1" name="research_a1" class="narrow-select">
                                 <option>선택</option>
                                 <option value="t">t</option>
                                 <option value="f">f</option>
@@ -100,7 +106,12 @@
                         </c:when>
                     </c:choose>
                 </td>
-                <td><input type="text" id="research_a1text" name="research_a1text" value="${list.research_a1text}" ></td>
+                </tr>
+                <th>선택지1</th>
+	            <th>기존유형2</th>
+	            <th>변경할유형2</th>
+                <tr>
+                <td><input type="text" id="research_a1text" name="research_a1text" value="${list.research_a1text}" size=60 class="wide-input"></td>
                 <td>${list.research_a2}</td>
                 <td>
                     <c:choose>
@@ -112,43 +123,48 @@
                         </select>
                     </c:when>
                     <c:when test="${list.research_a2.toString() eq 'e'}">
-                        <select id="research_a2" name="research_a2">
+                        <select id="research_a2" name="research_a2" class="narrow-select">
                             <option>선택</option>
                             <option value="e">e</option>
                             <option value="i">i</option>
                         </select>
                     </c:when>
                     <c:when test="${list.research_a2.toString() eq 's'}">
-                        <select id="research_a2" name="research_a2">
+                        <select id="research_a2" name="research_a2" class="narrow-select">
                             <option>선택</option>
                             <option value="s">s</option>
                             <option value="n">n</option>
                         </select>
                     </c:when>
                     <c:when test="${list.research_a2.toString() eq 'n'}">
-                        <select id="research_a2" name="research_a2">
+                        <select id="research_a2" name="research_a2" class="narrow-select">
                             <option>선택</option>
                             <option value="s">s</option>
                             <option value="n">n</option>
                         </select>
                     </c:when>
                     <c:when test="${list.research_a2.toString() eq 't'}">
-                        <select id="research_a2" name="research_a2">
+                        <select id="research_a2" name="research_a2" class="narrow-select">
                             <option>선택</option>
                             <option value="t">t</option>
                             <option value="f">f</option>
                         </select>
                     </c:when>
                     <c:when test="${list.research_a2.toString() eq 'f'}">
-                        <select id="research_a2" name="research_a2">
+                        <select id="research_a2" name="research_a2" class="narrow-select">
                             <option>선택</option>
                             <option value="t">t</option>
                             <option value="f">f</option>
                         </select>
                     </c:when>
                 </c:choose></td>
-                <td><input type="text" id="research_a2text" name="research_a2text" value="${list.research_a2text}"></td>
+                
             </tr>
+            <th>선택지2</th>
+            <tr>
+            
+            <td><input type="text" id="research_a2text" name="research_a2text" value="${list.research_a2text}" size=80 class="wide-input"></td>
+           	</tr>
             </tbody>
         </table>
     </c:forEach>

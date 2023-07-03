@@ -247,6 +247,13 @@ public class MemberCont<ReviewDTO> {
 	    //마이페이지로 세션아이디 가져가기
 	    mav.addObject("login_id", member_id);
 	    
+	   
+	    System.out.println(memberDao.reviewlist(member_id));
+	   
+	    
+	    
+	    
+	    
 	    mav.setViewName("member/myPage");
 		return mav;
 	}

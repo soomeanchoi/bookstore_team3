@@ -104,4 +104,8 @@ public class MemberDAO {
 	public List<MemberDTO> mybbti(String member_id) {
 		return sqlSession.selectList("member.mybbti" , member_id);
 	}
+	
+	
+	
+	
 }

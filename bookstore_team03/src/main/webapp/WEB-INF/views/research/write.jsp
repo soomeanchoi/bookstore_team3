@@ -40,14 +40,16 @@
 		<h1><div class="bbti-title" style="margin-bottom: 50px;">BBTI 관리</div></h1>
 		<div style="text-align: right;">
         <label for="choice"> 추가할 성향 선택 </label>
-        <select id="choice" name="choice" onchange="changeForm()">
+        
+        <select id="choice" name="choice" onchange="changeForm()" style="margin-top: 10px;">
             <option> 선택 </option>
             <option value="ie"> I / E TEST</option>
             <option value="sn"> S / N TEST</option>
             <option value="tf"> T / F TEST</option>
         </select>
-
+		<br>
         <hr>
+        <br>
         <form id="dynamicForm" name="dynamicForm" action="insert" method="post" onsubmit="return researchCheck()">
             <div id="formContent">
                 <!-- 폼 내용이 동적으로 변경될 영역 -->
