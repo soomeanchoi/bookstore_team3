@@ -31,9 +31,13 @@
 	
 	<update id="update" parameterType="kr.co.itwill.deliveryAdd.DeliveryAddDTO">
 		UPDATE itwill.deliveryadd
-		SET deliv_postno=#{deliv_postno}, deliv_add1=#{deliv_add1}, deliv_add2=#{deliv_add2}, deliv_defaltadd=0
+		SET deliv_postno=#{deliv_postno}, deliv_add1=#{deliv_add1}, deliv_add2=#{deliv_add2}
 		WHERE deliv_no=#{deliv_no}
 	</update>
 
-	
+	<update id="defupdate" parameterType="kr.co.itwill.deliveryAdd.DeliveryAddDTO">
+		UPDATE itwill.deliveryadd
+		SET deliv_defaltadd=1
+		WHERE deliv_no=#{deliv_no}
+	</update>
 </mapper>     

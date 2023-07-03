@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
+
+import kr.co.itwill.cart.CartDTO;
 
 @Controller
 @RequestMapping("/deliveryAdd")
@@ -79,5 +82,23 @@ public class DeliveryAddCont {
 		deliveryAddDao.update(dto);
 		return "redirect:/deliveryAdd/list";
 	}//update() end
-		
+	
+	//카트수정
+		@RequestMapping("/defupdate")
+		@ResponseBody
+		public int defupate(HttpSession session, HttpServletRequest req) {
+			String s_id = (String)session.getAttribute("member_id");
+			//String s_id="kgukid38@naver.com";
+			
+			int cnt=0;
+			int deliv_no = Integer.parseInt(req.getParameter("deliv_no"));
+			
+			DeliveryAddDTO dto = new DeliveryAddDTO();
+			dto.setMember_id(s_id);
+			dto.setDeliv_no(deliv_no);
+			
+			cnt = deliveryAddDao.defupdate(dto);
+
+			return cnt;
+		}//cartupate() end
 }//class end

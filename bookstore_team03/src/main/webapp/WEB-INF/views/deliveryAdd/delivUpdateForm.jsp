@@ -12,13 +12,14 @@
 
 <body>
 <div class="container mt-3">
-	<h3>배송지 수정</h3>
+<br>
+	<h3 style="text-align:center;">배송지 수정</h3>
+	<br>
 <hr>
 <form name="deliveryAddForm" id="deliveryAddForm" method="post" action="update">
-	
-	<table border='1' class="type01">
+	<input type="hidden"  name="deliv_no" id="deliv_no" value="${detail.deliv_no}">
+	<table class="table table-hover" style="text-align:center;">
 	<tr>
-		<td><input type="hidden"  name="deliv_no" id="deliv_no" value="${detail.deliv_no}"></td>
 		<th>우편번호</th>
 		<td style="text-align:left">
 		<input type="text" name="deliv_postno" id="deliv_postno" size="7" value="${detail.deliv_postno}" readonly required="required">
@@ -43,10 +44,11 @@
 	
 	<br>
 	<div>
-		<input type="button" value="배송지수정" onclick="update()">
-		<input type="reset" value="취소">
-		<input type="button" value="배송지목록으로" onclick="location.href='/deliveryAdd/list'">
+		<input type="button" class="btn btn-warning" value="배송지수정" onclick="update()">
+		<input type="button" class="btn btn-warning" value="배송지목록으로" onclick="location.href='/deliveryAdd/list'">
 	</div>
+	
+	<div style="height:20px;"></div>
 </form>
 </div> <!-- class="container mt-3" end --> 
 
@@ -133,6 +135,8 @@
     }
     </script>
 <!--  DAUM 우편번호 API 종료 -->
+
+<div style="height:30px;"></div>
 <%@ include file="../template/footer.jsp" %>
 </body>
 </html>

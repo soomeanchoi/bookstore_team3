@@ -9,9 +9,9 @@
 <div style="height:30px"></div>
        <h1>주문내역</h1>
        <div style="height:15px"></div>
-  <table class="table table-hover">
+  <table class="table table-hover" style="text-align:center;">
     <thead>
-      <tr>
+      <tr class="warning">
         <th>주문번호</th>
         <th>주문일자</th>
         <th>가격</th>
@@ -37,7 +37,7 @@
 		                </div>
 		            </th>
 		            
-		        <td class="align-middle">
+		        <td class="align-middle" >
 		          <div class="d-flex flex-row">
 					<div class="d-flex flex-row align-items-center qty">
 					<p class="mb-2">
@@ -53,7 +53,7 @@
 		        <td class="align-middle">
 		          <div class="d-flex flex-row">
 					<div class="d-flex flex-row align-items-center qty">
-					<p class="mb-2">${row.border_price}</p>	
+					<p>${row.border_price}</p>	
 					</div>
 		          </div>
 		        </td>
@@ -83,17 +83,19 @@
     </tbody>
   </table>
   
-  <div>
+  <div style="text-align:center;">
 	<c:forEach var="i" begin="1" end="${totalPage}" varStatus="status">
     	 <a href="borderlist?pageNum=${i}"> ${i} </a>
     </c:forEach>
   </div>
   
   <div>
-  <input type="button" value="프로필로" onclick="location.href='/member/myPage'">
-  <input type="button" value="쇼핑하기" onclick="location.href='/book/list'">
+  <input type="button" class="btn btn-warning" value="프로필로" onclick="location.href='/member/myPage'">
+  <input type="button" class="btn btn-warning" value="쇼핑하기" onclick="location.href='/book/list'">
   </div>
+  <div style="height:30px;"></div>
 </div>
+<div style="height:30px;"></div>
 </section>
 
 <%--    끝     --%>
@@ -123,5 +125,8 @@
 		}
 	}
 </script>
+
+
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>

@@ -204,59 +204,6 @@ public class BoardCont {
 		return "redirect:/board/boardForm";
 	}//write() end
 
-	//작성폼내 검색
-	@RequestMapping("/writeSearch")
-	public ModelAndView writeSearch(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
-			@RequestParam(value = "keyWord", defaultValue = "") String keyWord,
-			@RequestParam(value = "category") String category) {
-		//페이징관련
-		int pageSize = 5;
-		int totalRecord = 0;
-		int totalPage = 1;
-
-		//페이지개수
-		if ((double) totalRecord % (double) pageSize == 0) {
-			totalPage = totalRecord / pageSize;
-			if (totalPage == 0) {
-				totalPage = 1;
-			} //if end
-		} else {
-			totalPage = totalRecord / pageSize + 1;
-		} //if end
-
-		//최상단글순서
-		int start = (pageNum - 1) * pageSize;
-
-		//보여줄 글개수
-		int end = pageSize;
-
-		//검색정보 map에 넣기
-		HashMap<String, Object> map = new HashMap<>();
-		map.put("category", category);
-		map.put("keyWord", keyWord);
-		map.put("start", start);
-		map.put("end", end);
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("board/boardForm");
-
-		//총 검색 게시글개수
-		totalRecord = boardDao.wtotalRecord(map);
-
-		//검색된 모든 게시글 수 보내기
-		mav.addObject("totalRecord", totalRecord);
-
-		//총 페이지수
-		mav.addObject("totalPage", totalPage);
-
-		//검색결과리스트
-		mav.addObject("wlist", boardDao.wsearch(map));
-
-		//검색된 단어 보내기
-		mav.addObject("keyWord", keyWord);
-		return mav;
-	}//writeSearch() end
-
 	//게시글검색
 	@RequestMapping("/search")
 	public ModelAndView search(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
@@ -318,7 +265,8 @@ public class BoardCont {
 	public Map<String, Object> bsearch(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum,
 										@RequestParam(value = "keyWord", defaultValue = "") String keyWord,
 										@RequestParam(value = "category") String category
-										, HttpServletRequest req) {
+										,@RequestParam(value = "bbti_name") String bbti_name) {
+				
 		Map<String, Object> bmap = new HashMap<>();
 		//페이징관련
 		int pageSize = 5;
@@ -341,8 +289,9 @@ public class BoardCont {
 		//보여줄 글개수
 		int end = pageSize;
 
-		//검색정보 map에 넣기
+		//검색정보 및 BBTI map에 넣기
 		HashMap<String, Object> map = new HashMap<>();
+		map.put("bbti_name", bbti_name);
 		map.put("category", category);
 		map.put("keyWord", keyWord);
 		map.put("start", start);

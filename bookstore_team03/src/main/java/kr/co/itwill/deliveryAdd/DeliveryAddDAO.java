@@ -34,4 +34,8 @@ public class DeliveryAddDAO {
 		sqlSession.update("deliveryAdd.update", dto);
 	}//update() end
 	
+	public int defupdate(DeliveryAddDTO dto) {
+		return sqlSession.update("deliveryAdd.defupdate", dto);
+	}//defupdate() end
+	
 }//class end

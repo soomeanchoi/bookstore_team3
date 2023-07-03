@@ -62,7 +62,7 @@
             
               <c:choose>
 	          <c:when test="${fn:length(list) eq 0}">
-	              <tr><td colspan="4" style="text-align: center;"> 장바구니 상품 없음</td></tr>    
+	              <tr><td colspan="6" style="text-align: center;"> 장바구니 상품 없음</td></tr>    
 			  </c:when>
 			  
 	          <c:otherwise>
@@ -150,10 +150,12 @@
 	</div>
 </div>
 </div>
+<div style="height:30px;"></div>
 </section>
 </form>
 
 <%--    끝     --%>
+
 <%@ include file="../template/footer.jsp" %>
 </body>
 </html>

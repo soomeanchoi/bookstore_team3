@@ -189,9 +189,9 @@
                 <img src="/storage/${book.book_imgname}">
              </div>
 
-             <div class="col-6">
+             <div class="col-6" style="border-radius:10px; border:1px solid;">
+             <br>
                 <h3>${book.book_name}</h3>
-                 ${s_id}
                  <div class="choice-button">
                      <c:choose>
                          <c:when test="${cnt == 1}">
@@ -252,12 +252,13 @@
                          <button onclick="logincheck()" class="cart">장바구니</button>
                      </c:if>
                  </div>
+                 <br>
              </div>
          </div>
             </form>
         </div>
             <br><br>
-
+<hr>
         <div>
             <ul class="nav justify-content-end">
                 <li class="nav-item">
