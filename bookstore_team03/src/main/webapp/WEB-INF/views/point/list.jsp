@@ -88,6 +88,6 @@
         $("#minusTable").toggle();
     }
 </script>
-
+<%@ include file="../template/footer.jsp" %>
 </body>
 </html>
