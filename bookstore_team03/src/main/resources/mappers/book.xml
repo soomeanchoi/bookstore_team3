@@ -96,8 +96,8 @@
 	</select>
 
 	<insert id="insert" parameterType="java.util.Map">
-		insert into book(isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, tag_no1, book_mainname, book_subname, book_content, book_imgname, book_imgsize)
-		values (#{isbn}, #{book_name}, #{book_pub}, #{book_writerno}, #{book_price}, #{book_stock}, #{book_pubdate}, #{book_page}, #{tag_no1}, #{book_mainname}, #{book_subname}, #{book_content}, #{book_imgname}, #{book_imgsize})
+		insert into book(isbn, book_name, book_pub, book_writerno, book_price, book_stock, book_pubdate, book_page, tag_no1, book_mainname, book_subname, book_content, book_imgname, book_imgsize bbit_name)
+		values (#{isbn}, #{book_name}, #{book_pub}, #{book_writerno}, #{book_price}, #{book_stock}, #{book_pubdate}, #{book_page}, #{tag_no1}, #{book_mainname}, #{book_subname}, #{book_content}, #{book_imgname}, #{book_imgsize}, #{bbti_name})
 	</insert>
 
 	<select id="search" parameterType="String" resultType="java.util.Map">
@@ -119,6 +119,12 @@
 		select *
 		from book AA join writer BB
 						  on AA.book_writerno=BB.writer_no
+		where isbn=#{isbn}
+	</select>
+
+	<select id="bookUpdate" resultType="java.util.Map" parameterType="String">
+		select *
+		from book
 		where isbn=#{isbn}
 	</select>
 

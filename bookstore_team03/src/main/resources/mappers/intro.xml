@@ -50,4 +50,11 @@
 		from profile
 	</select>
 
+	<select id="bbti" parameterType="String" resultType="java.util.Map">
+		select *
+		from profile left join book
+	  	on profile.bbti_name=book.bbti_name
+		where member_id=#{member_id};
+	</select>
+
 </mapper>

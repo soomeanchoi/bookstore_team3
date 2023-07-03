@@ -53,7 +53,7 @@ public class BookCont {
             try{
                 ServletContext application=req.getSession().getServletContext();
                 String path=application.getRealPath("/storage");                //실제 경로
-                img.transferTo(new File(path + "\\" + book_imgname));  //파일 저장
+                img.transferTo(new File(path + "/" + book_imgname));  //파일 저장
             }catch (Exception e) {
                 e.printStackTrace(); //System.out.println();
             }
@@ -64,7 +64,7 @@ public class BookCont {
 
         bookDao.insert(map);
 
-        return "redirect:/book/list";
+        return "redirect:/book/bookList";
 
     }//insert() end
 
@@ -148,10 +148,6 @@ public class BookCont {
             mav.addObject("cnt", cnt);
         }
 
-        System.out.println(s_id);
-        System.out.println(cnt);
-
-        System.out.println(map.toString());
 
         List<Map<String, Object>> list = bookDao.bestMainPage(start, end);
 
@@ -361,7 +357,6 @@ public class BookCont {
         mav.addObject("search_word", book_name); //검색어
         mav.addObject("writerList", bookDao.writerSearch(book_name));
 
-        System.out.println(mav.toString());
         return mav;
     }//search() end
 
@@ -406,8 +401,7 @@ public class BookCont {
         ModelAndView mav = new ModelAndView();
 
         mav.setViewName("book/bookUpdate");
-        mav.addObject("book", bookDao.detail(isbn));
-        bookDao.count(isbn);
+        mav.addObject("book", bookDao.bookUpdate(isbn));
         mav.addObject("score",bookDao.reviewScore(isbn));
         mav.addObject("reviewCount", bookDao.reviewCount(dto));
         return mav;
@@ -423,7 +417,7 @@ public class BookCont {
         if(filename != null && !filename.equals("-")) {
             ServletContext application=req.getSession().getServletContext();
             String path=application.getRealPath("/storage");
-            File file=new File(path + "\\" + filename);
+            File file=new File(path + "/" + filename);
             if(file.exists()) {
                 file.delete();
             }//if end
@@ -431,7 +425,7 @@ public class BookCont {
 
         bookDao.delete(isbn);
 
-        return "redirect:/book/list";
+        return "redirect:/book/bookList";
 
     }//delete() end
 
@@ -448,7 +442,7 @@ public class BookCont {
             try{
                 ServletContext application=req.getSession().getServletContext();
                 String path=application.getRealPath("/storage");
-                img.transferTo(new File(path + "\\" + filename));
+                img.transferTo(new File(path + "/" + filename));
             }catch (Exception e) {
                 e.printStackTrace();
             }//try end
