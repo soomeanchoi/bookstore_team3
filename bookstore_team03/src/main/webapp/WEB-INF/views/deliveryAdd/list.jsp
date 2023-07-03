@@ -13,6 +13,27 @@
 			window.location.href='/deliveryAdd/deliveryAddForm';
 		}//if end
 	}//deliveryAddcnt()
+	
+	
+	function defupdate(deliv_no) {
+		
+		let params="deliv_no=" + deliv_no;
+		$.ajax({
+		 	url:'/deliveryAdd/defupdate'	//요청명령어
+		 	,type:'post'
+		 	,data:params		
+		 	,error:function(error){
+		 		alert(error);
+		 	}//error end
+			,success:function(data){
+				alert("기본 배송지가 변경되었습니다.");
+				//if(data ==1){//댓글 등록이 성공했다면
+				
+				//}//if end
+			}//success end
+		}); //ajax() end 
+	}//defupdate() end
+	
 </script>
 </head>
 
@@ -24,7 +45,6 @@
 	<br>
 	<input type="hidden" id="deliveryAddcnt" name="deliveryAddcnt" value="${fn:length(list)}">
 	등록 배송지개수 : ${fn:length(list)} / 3
-
 	<table class="table table-hover">
 	<thead>
 	<tr class="warning">
@@ -37,16 +57,17 @@
 	</thead>
 	<tbody>
 	<c:forEach items="${list}" var="row"> <!-- ProductCont의 list가져옴 -->
+	<input type="hidden" id="deliv_no" name="deliv_no" value="${row.deliv_no}">
 		<tr>
 			<td>${row.deliv_postno}</td>
 			<td>${row.deliv_add1}</td>
 			<td>${row.deliv_add2}</td>
 			<td>
 			<c:if test="${row.deliv_defaltadd eq 1 }">
-			<input type="radio" name="deliv_defaltadd" value="deliv_defaltadd" checked>
+			<input type="radio" name="deliv_defaltadd" value="1" checked onclick="defupdate(${row.deliv_no})">
 			</c:if>
 			<c:if test="${row.deliv_defaltadd eq 0 }">
-			<input type="radio" name="deliv_defaltadd" value="deliv_defaltadd">
+			<input type="radio" name="deliv_defaltadd" value="0" onclick="defupdate(${row.deliv_no})">
 			</c:if>
 			</td>
 			<td>
