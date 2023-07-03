@@ -52,52 +52,48 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
                  var formattedDate = orderDate.toLocaleDateString();
         		a += ' 			<td id="board_date" class="board_date">'+formattedDate+'</td> ';
         		a += '		</tr>'; 
-        		
-        		
-        		
-        		/* a += ' 	 <div>';
-        		for(var n=1 ; n <= totalPage ; n++){
-        			a += '<ul class="pagination justify-content-center">';
-        			a += '<li class="page-item"><a class="page-link" <a href="list?pageNum='+ n +'">'+ n +'</a></li>';
-        			a += '</ul>';
-        		}//for end
-        		a += ' 	 </div>'; */
-        		//a += '</div>';       		
- /* 
-        		a += ' 	 <div class="container">';
-        		a += ' 	  <div class="row height d-flex justify-content-center align-items-center">';
-        		a += ' 	   <div class="col-md-8">';
-        		a += ' 	    <div class="search">';
-        		a += ' 	     <form action="search" method="post" style="margin:auto;">';
-        		a += ' 	      <div class="row align-items-center">';
-        		a += ' 	       <div class="col-md-4">';
-        		a += ' 	        <select class="form-select" name="category" id="category" style="width:150px; margin:auto;">';
-        		a += ' 	 			<option value="title_content">제목+내용</option>';
-        		a += ' 	 			<option value="board_title">제목</option>';
-        		a += ' 	 			<option value="board_content">내용</option>';
-        		a += ' 			<option value="book_name">도서</option>';
-        		a += ' 		    </select>';
-        		a += '         </div>';
-        		a += '         <div class="col-md-6">';
-        		a += ' 		<input type="text"  style="margin:auto" class="form-control" name="keyWord" id="keyWord" value="' + '">';
-        		a += '     </div>';
-        		a += '                        <div class="col-md-2">';
-        		a += '                            <button class="btn btn-primary">검색</button>';
-        		a += '                        </div>';
-        		a += '                    </div>';
-        		a += '                </form>';
-        		a += '            </div>';
-        		a += '        </div>';
-        		a += '    </div>';
-        		 */
-        		<!-- 검색끝 -->		
             }//if end
-            
 		}//for end
-		console.log(a);
 		
-		 $(".bboardlist").html(a);   
-       
+		
+		var b='';
+		b += ' 	 <div>';
+		for(var n=1 ; n <= totalPage ; n++){
+			b += '<ul class="pagination justify-content-center">';
+			b += '<li class="page-item"><a class="page-link" <a href="list?pageNum='+ n +'">'+ n +'</a></li>';
+			b += '</ul>';
+		}//for end
+		b += ' 	 </div>';
+      		
+		b += ' 	 <div class="container">';
+		b += ' 	  <div class="row height d-flex justify-content-center align-items-center">';
+		b += ' 	   <div class="col-md-6">';
+		b += ' 	    <div class="search">';
+		b += ' 	     <form action="bsearch" method="post" style="margin:auto;">';
+		b += ' 	      <div class="row align-items-center">';
+		b += ' 	       <div class="col-md-5">';
+		b += ' 	        <select class="form-select" name="category" id="category" style="width:150px; margin:auto;">';
+		b += ' 	 			<option value="title_content">제목+내용</option>';
+		b += ' 	 			<option value="board_title">제목</option>';
+		b += ' 	 			<option value="board_content">내용</option>';
+		b += ' 			<option value="book_name">도서</option>';
+		b += ' 		    </select>';
+		b += '         </div>';
+		b += '         <div class="col-md-6">';
+		b += ' 		<input type="text"  style="margin:auto" class="form-control" name="keyWord" id="keyWord" value="' + '">';
+		b += '     </div>';
+		b += '                        <div class="col-md-1">';
+		b += '                            <button class="btn btn-primary">검색</button>';
+		b += '                        </div>';
+		b += '                    </div>';
+		b += '                </form>';
+		b += '            </div>';
+		b += '        </div>';
+		b += '    </div>';
+		<!-- 검색끝 -->		
+		
+		$(".bboardlist").html(a);   
+       	$(".bPagSear").html(b);
 		}//success end
 	}); //ajax() end 
 }//bbtiTab() end 
@@ -235,7 +231,7 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
     </div>
 </div>
    
-    </div>
+    </div><!-- 탭메뉴 첫번째페이지 끝 -->
     
     
     <!-- 탭메뉴 반복시작 -->
@@ -254,19 +250,27 @@ function bbtiTab(bbti_name){//bbti별 게시글 가져오기
 			<th scope="col">작성일</th>
 			</tr>
 		</thead>
-	<!-- ajax리턴영역시작 <tbody>부터-->
+	<!-- ajax리턴영역 a시작 <tbody>부터-->
 	<tbody class="bboardlist" id="bboardlist">
 	
 	</tbody>
-	<!-- ajax리턴영역 종료 --> 
+	<!-- ajax리턴영역 a종료 --> 
      </table> 
-	</div>     
-  </div>
+	</div>  
+	
+	<!--ajax리턴 페이징 --> 
+	<div class="bPagSear" id="bPagSear"></div>
+	  
+ 	 </div>
+  <!--ajax리턴 페이징끝 --> 
+  
     <!-- bbti탭내용 끝-->
 	</c:forEach>
     <!-- 탭메뉴 반복끝 -->
    
-  </div>		
+   
+   
+  </div><!-- tep내용끝 -->	
   <br>
   
 	
