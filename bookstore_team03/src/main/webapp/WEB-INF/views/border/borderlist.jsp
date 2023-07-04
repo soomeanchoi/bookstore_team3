@@ -70,6 +70,9 @@
 							<c:when test="${row.pay_witdstate eq 1}">
 								<p>취소완료</p>
 							</c:when>
+							<c:when test="${row.pay_witdstate eq 2}">
+								<p>취소반려</p>
+							</c:when>
 							</c:choose>
 							
 						</div>
