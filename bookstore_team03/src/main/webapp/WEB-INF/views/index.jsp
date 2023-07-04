@@ -137,7 +137,7 @@
 							<c:forEach items="${bbti}" var="row" varStatus="vs" end="3">
 							<div class="col-6 col-md-6 col-lg-3 mb-4 mb-lg-0" data-aos="fade-up"  data-aos-delay="100">
 								<div class="service-1">
-										<a href="/book/detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid"></a>
+										<a href="/book/detail/${row.isbn}"><img src="/storage/${row.book_imgname}" alt="Image" class="img-fluid" ></a>
 									<div>
 										<a href="/book/detail/${row.isbn}"><h3>${row.book_name}</h3></a>
 	<%--									<p>${row.content}</p>--%>
